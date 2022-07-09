@@ -3,13 +3,13 @@ import About from "../pages/About";
 import Login from "../pages/Login";
 import UserCollections from "../pages/UserCollections";
 import Training from "../pages/Training";
-import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
 
 export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
-  { path: "/signin", element: <SignIn />, nameNav: "" },
+  { path: "/signup", element: <SignUp />, nameNav: "" },
   { path: "/*", element: <Login />, nameNav: "" },
 ];
 export const privateRoutes = [

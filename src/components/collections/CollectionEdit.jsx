@@ -5,12 +5,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import BaseAPI from "../../API/BaseAPI";
 import WordInfo from "../words/WordInfo";
-
 import TabPills from "../UI/TabPills";
 import NewWordOne from "../words/NewWordOne";
 import NewWordFile from "../words/NewWordFile";
 import CollectionMenu from "./CollectionMenu";
-
 import CollectionRename from "./CollectionRename";
 
 const CollectionEdit = () => {
@@ -44,9 +42,7 @@ const CollectionEdit = () => {
   const wordDelete = (word) => {
     if (!window.confirm("Delete the word?")) return;
     BaseAPI.deleteWord(word.id);
-    console.log(words);
     let arr = words.filter((elem) => elem.id != word.id);
-    console.log(arr);
     setWords(arr);
   };
   const RenameWin = () => {
@@ -56,7 +52,6 @@ const CollectionEdit = () => {
   const Rename = (newName) => {
     BaseAPI.renameCollection(newName.trim(), collectionContent.id);
     setVisibleRename(false);
-    console.log(`/collections/${collectionContent.id}/${newName.trim()}`);
 
     route(`/collections/${collectionContent.id}/${newName.trim()}`);
   };

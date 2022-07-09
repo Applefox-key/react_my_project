@@ -1,9 +1,6 @@
 import React from "react";
-
 import Form from "react-bootstrap/Form";
-
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import BaseAPI from "../API/BaseAPI";
 
 const AvatarsList = ({ onChange }) => {

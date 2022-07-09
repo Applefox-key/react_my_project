@@ -1,6 +1,4 @@
-import { WordsList } from "../classes/WordsList.js";
 import { Word } from "../classes/Word.js";
-import { CollectionList } from "../classes/CollectionList.js";
 import dataBase from "./DataBase.js";
 
 const BaseAPI = {
@@ -30,7 +28,6 @@ const BaseAPI = {
     return nd;
   },
   getCollectionsAll() {
-    // return new CollectionList(this.fromLS("collectionsList"));
     return this.fromLS("collectionsList");
   },
   getCollections() {
@@ -53,7 +50,7 @@ const BaseAPI = {
     allCollections = allCollections.filter(
       (item) => numb[0].includes(item.id) || !numb[1].includes(item.id)
     );
-    return new CollectionList(allCollections);
+    return allCollections;
   },
 
   getUser() {
@@ -216,13 +213,14 @@ const BaseAPI = {
 
     let ind = wordsList.findIndex((item) => item.id == wordId);
     let word = wordsList[ind];
-    let wordObj = new WordsList([word]);
+    // let wordObj = new WordsList([word]);
+    let wordObj = new Word(word);
 
     let wordNextDate = this.newDateFormat(word.nextDate);
     if (!word.started) wordNextDate = this.newDateFormat();
     let todayDate = this.newDateFormat();
 
-    if (wordObj.sentences[0].exceededSkipsCount) {
+    if (wordObj.exceededSkipsCount) {
       //reset progress
       word.stage = 0;
       word.nextDate = todayDate;

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
-import UserProfile from "../components/UserProfile";
+import UserProfile from "../components/users/UserProfile";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
-const SignIn = () => {
+const SignUp = () => {
   const router = useNavigate();
   const { isAuth, setIsAuth } = useContext(AuthContext);
 
@@ -17,9 +17,9 @@ const SignIn = () => {
   };
   return (
     <div>
-      <UserProfile onClick={newUser} btnName="Sign in"></UserProfile>
+      <UserProfile onClick={newUser} btnName="Sign up"></UserProfile>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;

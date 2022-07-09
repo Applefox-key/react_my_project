@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import CardGroup from "react-bootstrap/CardGroup";
 
 const Login = () => {
   const router = useNavigate();
@@ -26,7 +25,6 @@ const Login = () => {
   };
 
   return (
-    // <div className="d-flex justify-content-center my-3">
     <Container style={{ width: "25rem" }}>
       <Form onSubmit={login} className="my-3">
         <MyInputGroup
@@ -43,7 +41,7 @@ const Login = () => {
           text="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* <button className="btn btn-primary">Log in</button> */}
+
         <Button type="submit" variant="primary">
           Log in
         </Button>
@@ -52,10 +50,10 @@ const Login = () => {
           type="button"
           variant="outline-primary"
           onClick={() => {
-            router("/signin");
+            router("/signup");
           }}
         >
-          Sign in
+          Sign up
         </Button>
       </Form>
     </Container>

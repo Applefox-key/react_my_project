@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import BaseAPI from "../API/BaseAPI";
 import CollectionList from "../components/collections/CollectionList";
-import UserAvatar from "../components/UserAvatar";
+import UserAvatar from "../components/users/UserAvatar";
 
 const UserCollections = () => {
   const [collectionList, setCollectionList] = useState([]);
@@ -12,6 +11,7 @@ const UserCollections = () => {
     BaseAPI.createCollection(name);
     setCollectionList(BaseAPI.getCollectionsAll());
   };
+
   useEffect(() => {
     setCollectionList(BaseAPI.getCollectionsAll());
   }, []);
@@ -19,6 +19,7 @@ const UserCollections = () => {
   return (
     <div>
       <UserAvatar />
+
       <h1 className="display-1">Collections</h1>
 
       {!collectionList ? (

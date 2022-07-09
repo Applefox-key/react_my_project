@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import BaseAPI from "../API/BaseAPI";
-import UserProfile from "../components/UserProfile";
+import UserProfile from "../components/users/UserProfile";
 
 const Profile = () => {
   const [ud, setUd] = useState();

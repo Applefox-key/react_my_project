@@ -10,7 +10,6 @@ const CollectionCard = ({ collection }) => {
 
   useEffect(() => {
     setwordsList(BaseAPI.getWordsByCollectionAll(collection.id));
-    console.log(1);
   }, []);
 
   return (
@@ -47,8 +46,3 @@ const CollectionCard = ({ collection }) => {
 };
 
 export default CollectionCard;
-// {
-//   /* <li className="list-group-item">An item</li>
-//           <li className="list-group-item">A second item</li>
-//           <li className="list-group-item">A third item</li> */
-// }
