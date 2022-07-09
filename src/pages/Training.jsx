@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BaseAPI from "../API/BaseAPI";
-import UserAvatar from "../components/UI/UserAvatar";
+import UserAvatar from "../components/UserAvatar";
 import WordList from "../components/words/WordsList";
 
 const Training = () => {

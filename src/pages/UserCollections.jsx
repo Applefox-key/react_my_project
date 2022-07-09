@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import BaseAPI from "../API/BaseAPI";
 import CollectionList from "../components/collections/CollectionList";
-import UserAvatar from "../components/UI/UserAvatar";
+import UserAvatar from "../components/UserAvatar";
 
 const UserCollections = () => {
   const [collectionList, setCollectionList] = useState([]);

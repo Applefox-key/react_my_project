@@ -1,5 +1,5 @@
 import React from "react";
-import BaseAPI from "../../API/BaseAPI";
+import BaseAPI from "../API/BaseAPI";
 import Image from "react-bootstrap/Image";
 import { useState } from "react";
 import { useEffect } from "react";
