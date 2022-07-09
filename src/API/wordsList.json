@@ -1,0 +1,20 @@
+{
+    "date":"2022-05-17",
+    "sentences":[
+        {
+            "id":1,
+            "collectionid":1,
+            "stage":7,
+            "word":"word1",
+            "sentence":"A sentence with the word1.",
+            "nextDate":"2022-05-17",
+            "history":[ {"action":"add", "date":"2022-04-20"},
+            {"action":"read by the plan", "date":"2022-04-20"},
+            {"action":"read by the plan", "date":"2022-04-21"},
+            {"action":"read by the plan", "date":"2022-04-22"},
+            {"action":"read by the plan", "date":"2022-04-23"},
+            {"action":"read by the plan", "date":"2022-04-24"},
+            {"action":"read by the plan", "date":"2022-04-25"},
+            {"action":"read by the plan", "date":"2022-04-26"}]
+        }]
+}
