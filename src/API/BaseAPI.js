@@ -61,7 +61,10 @@ const BaseAPI = {
     return user[0];
   },
   getWordListAll() {
-    return this.fromLS("wordsList");
+    let temp = this.fromLS("wordsList");
+    let words_ = temp.map((item) => new Word(item));
+    return words_;
+
     // return new WordsList(this.fromLS("wordsList"));
   },
 

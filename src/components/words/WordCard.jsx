@@ -8,18 +8,17 @@ const WordCard = ({ word, wordUpdate, wordInfo }) => {
   return (
     <>
       <Card className="my-4 " style={{ width: "90%" }}>
-        <Card.Body>
+        <div className="pb-2">
           <Card.Header className="text-lg-start" as="h5">
             {word.word}
           </Card.Header>
           <Card.Subtitle className="display-6  my-2">
             {word.sentence}
           </Card.Subtitle>
-          <hr />
           <Card.Text
-            className={hintForUser ? "mb-2 text-danger" : "mb-2 text-muted"}
+            className={overdue ? "mb-2 text-danger" : "mb-2 text-muted"}
           >
-            {overdue}
+            {hintForUser}
           </Card.Text>
           <Button variant="outline-success" onClick={(e) => wordUpdate(word)}>
             Done
@@ -27,7 +26,7 @@ const WordCard = ({ word, wordUpdate, wordInfo }) => {
           <Button variant="outline-info" onClick={(e) => wordInfo(word)}>
             Word's info
           </Button>
-        </Card.Body>
+        </div>
       </Card>
     </>
   );

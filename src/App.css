@@ -1,27 +1,37 @@
 .App {
   text-align: center;
 }
-
 .word-exit{
   transform: scale(1);
 }
-
 .word-exit-active{
   transform: scale(0.1);
+  transition: all 500ms ease-in;
+}
+.word-enter{
+  transform: scale(0.1);
+}
+.word-enter-active{
+  transform: scale(1);
   transition: all 500ms ease-in;
 }
 .modal-max{
   width:max-content;
   max-width: none!important;
 }
+
 .pointer{
   cursor: pointer;
 }
+.padding25{
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
 .input-line{
 padding-left: 25%;
 padding-right: 25%;
   display: flex;
   justify-content: center;
-  align-items: center;
- 
+  align-items: center; 
 }
