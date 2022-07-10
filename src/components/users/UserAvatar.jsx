@@ -11,11 +11,7 @@ const UserAvatar = () => {
     setAv(ud.imgu);
   });
 
-  return (
-    <div>
-      <Image rounded src={av} style={{ width: "100px" }} />
-    </div>
-  );
+  return <Image rounded src={av} style={{ width: "100px" }} />;
 };
 
 export default UserAvatar;

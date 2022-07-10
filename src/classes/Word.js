@@ -92,8 +92,6 @@ export class Word {
     if (this.alreadyRead) {
       //the text is already read
       result = [`the text has been read today`, false];
-      // document.getElementById('sentence').classList.add('read-sent');
-      // return('already read');
     }
 
     //the text is not read today
@@ -101,13 +99,10 @@ export class Word {
     //check the allert about late reading
     if (this.exceededSkipsCount) {
       result = [
-        `The number of deviations from the study plan has been exceeded. 
-        the study will be started from the beginning! Read the text twice`,
+        ` ☹ The number of deviations from the study plan has been exceeded. 
+        The study will be started from the beginning! Read the text twice`,
         true,
       ];
-      // document.getElementById('sentence').classList.add('alert-sent');
-      // document.getElementById('alertMenuText').style.opacity = '100%';
-      // return('late');
     }
     return result;
   }

@@ -18,7 +18,7 @@ const AvatarsList = ({ onChange }) => {
         onChange(e.target.getAttribute("data-url"));
       }}
     >
-      {avatarUrlList ? (
+      {avatarUrlList &&
         avatarUrlList.map((el, i) => (
           <Form.Check
             key={i}
@@ -29,10 +29,7 @@ const AvatarsList = ({ onChange }) => {
             type="radio"
             id={"inline-radio-" + (i + 1)}
           />
-        ))
-      ) : (
-        <></>
-      )}
+        ))}
     </div>
   );
 };

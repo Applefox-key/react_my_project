@@ -15,11 +15,9 @@ const CollectionMenu = ({ collectionContent, DeleteAllWords, Rename }) => {
 
   return (
     <div>
-      <div className="d-flex  justify-content-between">
-        <h1 className="display-3">{collectionContent.name}</h1>
-
-        <div className="d-flex   align-items-end">
-          <ButtonGroup aria-label="delete and renaming buttons" vertical>
+      <div className="d-flex  justify-content-start">
+        <div className="d-flex   align-items-start">
+          <ButtonGroup aria-label="delete and renaming buttons">
             <Button variant="secondary" onClick={RemoveCollection}>
               Remove collection
             </Button>
@@ -31,6 +29,7 @@ const CollectionMenu = ({ collectionContent, DeleteAllWords, Rename }) => {
             </Button>
           </ButtonGroup>
         </div>
+        <h1 className="display-3 ms-4">{collectionContent.name}</h1>
       </div>
     </div>
   );

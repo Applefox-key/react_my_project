@@ -10,75 +10,83 @@ import NewWordOne from "../words/NewWordOne";
 import NewWordFile from "../words/NewWordFile";
 import CollectionMenu from "./CollectionMenu";
 import CollectionRename from "./CollectionRename";
+import WordEdit from "../words/WordEdit";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
+  const [dataModal, setVDataModal] = useState(false);
   const collectionContent = useParams();
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [visibleRename, setVisibleRename] = useState(false);
-  const [contentModal, setContentModal] = useState("");
-
   const route = useNavigate();
+
   useEffect(() => {
     setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
   }, [collectionContent]);
-
-  const wordInfo = (word) => {
-    setVisibleModal(true);
-    setContentModal(word);
+  //modal content
+  const modalWordInfo = (word) => {
+    setVDataModal(
+      <WordInfo visible={true} setVisible={setVDataModal} word={word} />
+    );
   };
-
+  const modalRenameCollection = () => {
+    setVDataModal(
+      <CollectionRename
+        visible={true}
+        setVisible={setVDataModal}
+        collection={collectionContent}
+        onClick={Rename}
+      />
+    );
+  };
+  const modalWordEdit = (word) => {
+    setVDataModal(
+      <WordEdit
+        visible={true}
+        setVisible={setVDataModal}
+        word={word}
+        onClick={editWord}
+      />
+    );
+  };
+  //actions
   const addWord = (newWord) => {
     BaseAPI.createWord(newWord.word, newWord.sentence, collectionContent.id);
     setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
   };
-
   const addWordsFromFile = (newWordArr) => {
     if (!newWordArr) return;
     BaseAPI.createWordFromArray(newWordArr, collectionContent.id);
     setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
   };
-
   const wordDelete = (word) => {
     if (!window.confirm("Delete the word?")) return;
     BaseAPI.deleteWord(word.id);
     let arr = words.filter((elem) => elem.id != word.id);
     setWords(arr);
   };
-  const RenameWin = () => {
-    setVisibleRename(true);
-  };
-
-  const Rename = (newName) => {
-    BaseAPI.renameCollection(newName.trim(), collectionContent.id);
-    setVisibleRename(false);
-
-    route(`/collections/${collectionContent.id}/${newName.trim()}`);
-  };
-  const DeleteAllWords = () => {
+  const deleteAllWords = () => {
     if (!window.confirm("Delete all words?")) return;
     BaseAPI.deleteWordOfCollection(collectionContent.id);
     setWords([]);
   };
+  const Rename = (newName) => {
+    BaseAPI.renameCollection(newName.trim(), collectionContent.id);
+    setVDataModal(false);
+    route(`/collections/${collectionContent.id}/${newName.trim()}`);
+  };
+  const editWord = (id, newWord, newSentence) => {
+    BaseAPI.editWord(id, newWord, newSentence);
+    setVDataModal(false);
+    route(`/collections/${collectionContent.id}/${collectionContent.name}`);
+  };
   return (
-    <div>
-      <WordInfo
-        visible={visibleModal}
-        setVisible={setVisibleModal}
-        word={contentModal}
-      />
-      <CollectionRename
-        visible={visibleRename}
-        setVisible={setVisibleRename}
-        collection={collectionContent}
-        onClick={Rename}
-      />
+    <div className="mt-5">
+      {dataModal ? dataModal : <></>}
 
       <TabPills tabsArr={["Collection menu ", "Add one word", "Add from File"]}>
         <CollectionMenu
           collectionContent={collectionContent}
-          DeleteAllWords={DeleteAllWords}
-          Rename={RenameWin}
+          DeleteAllWords={deleteAllWords}
+          Rename={modalRenameCollection}
         />
         <NewWordOne addWord={addWord} />
         <NewWordFile addWords={addWordsFromFile} />
@@ -88,8 +96,11 @@ const CollectionEdit = () => {
         <MyTable
           dataArray={words}
           namesArray={["word", "sentence", "stage"]}
-          onRowClick={wordInfo}
-          btnsArray={[{ name: "Delete", callback: wordDelete }]}
+          onRowClick={modalWordInfo}
+          btnsArray={[
+            { name: "Delete", callback: wordDelete },
+            { name: "Edit", callback: modalWordEdit },
+          ]}
         />
       ) : (
         <></>

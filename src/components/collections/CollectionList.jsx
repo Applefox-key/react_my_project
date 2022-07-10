@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import CollectionCard from "./CollectionCard";
 import Button from "react-bootstrap/esm/Button";
 import MyInputGroup from "../UI/MyInputGroup";
-
+import Accordion from "react-bootstrap/Accordion";
+import UserAvatar from "../users/UserAvatar";
 const CollectionList = ({ collectionList, addNewCollection }) => {
   const [nameC, setNameC] = useState("");
 
   return (
     <div>
-      <div className="input-line">
+      <div>
         <MyInputGroup
           text="New collection name:"
           value={nameC}

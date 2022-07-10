@@ -5,29 +5,18 @@ import { useState } from "react";
 import MyTable from "../UI/table/MyTable";
 import MyModal from "../UI/MyModal";
 import { useRef } from "react";
+import { wordsFromFiles } from "../../utils/files";
 
 const NewWordFile = ({ addWords }) => {
   const [fileContent, setFileContent] = useState();
   const [visible, setVisible] = useState(false);
   const inputFileName = useRef();
-  const asf = async (f) => {
-    if (!f) return;
-    const text = await f.text();
-    console.log(text);
-    const contArr = text.split(/\r/).filter((item) => item.trim());
-    const wordArr = contArr.map((row) => {
-      let [w, s] = row.split(";");
-      return { word: w, sentence: s };
-    });
-
-    setFileContent(wordArr);
-    console.log(fileContent);
-  };
 
   const FileChange = (e) => {
     let userFile = e.target;
     const [files] = userFile.files;
-    asf(files);
+    // asf(files);
+    wordsFromFiles(files, setFileContent);
   };
 
   const ViewAndAddWords = (e) => {

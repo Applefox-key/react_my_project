@@ -3,8 +3,6 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import WordCard from "./WordCard";
 import WordInfo from "./WordInfo";
 
-// import WordInfo from "./WordInfo";
-
 const WordList = ({ list, wordUpdate }) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [contentModal, setContentModal] = useState("");

@@ -18,9 +18,10 @@ const UserCollections = () => {
 
   return (
     <div>
-      <UserAvatar />
-
-      <h1 className="display-1">Collections</h1>
+      <div className="d-flex p-2 justify-content-center">
+        <UserAvatar />
+        <h1 className="display-1">Collections</h1>
+      </div>
 
       {!collectionList ? (
         <h2>No collections</h2>

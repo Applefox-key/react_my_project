@@ -209,6 +209,16 @@ const BaseAPI = {
     // let user = usersList.filter((item) => item.sessions.includes(token));
     // return user[0];
   },
+  editWord(wordId, w, s) {
+    if (!wordId) return false;
+    let wordsList = this.fromLS("wordsList");
+    let ind = wordsList.findIndex((item) => item.id == wordId);
+    let word = wordsList[ind];
+    word.word = w;
+    word.sentence = s;
+    this.toLS("wordsList", wordsList);
+    return true;
+  },
   updateWord(wordId) {
     if (!wordId) return false;
 

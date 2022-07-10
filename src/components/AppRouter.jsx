@@ -12,7 +12,7 @@ const AppRouter = () => {
   return (
     <div>
       <MyNavbar />
-      <div style={{ marginTop: "5rem" }} />
+      <div style={{ marginTop: "2.5rem" }} />
       <Routes>
         {routesArr.map((item, i) => (
           <Route path={item.path} element={item.element} key={i} />

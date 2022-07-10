@@ -10,11 +10,13 @@ const NewWordOne = ({ addWord }) => {
     <>
       <MyInputGroup
         text="sentence"
+        placeholder="sentence"
         value={newWord.sentence}
         onChange={(e) => setNewWord({ ...newWord, sentence: e.target.value })}
       />
       <MyInputGroup
         text="new word"
+        placeholder="word"
         value={newWord.word}
         onChange={(e) => setNewWord({ ...newWord, word: e.target.value })}
       >

@@ -8,9 +8,7 @@ const MyTableHeader = ({ namesArray, btnsArray = [] }) => {
         {namesArray.map((item) => (
           <th key={item}>{item}</th>
         ))}
-        {btnsArray.map((_, i) => (
-          <th key={i}></th>
-        ))}
+        {btnsArray ? <th key="btnA"></th> : <></>}
       </tr>
     </thead>
   );

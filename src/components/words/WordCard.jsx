@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
+import Badge from "react-bootstrap/Badge";
 
 const WordCard = ({ word, wordUpdate, wordInfo }) => {
   const [hintForUser, overdue] = word.hintForReading;
@@ -20,8 +21,8 @@ const WordCard = ({ word, wordUpdate, wordInfo }) => {
           >
             {hintForUser}
           </Card.Text>
-          <Button variant="outline-success" onClick={(e) => wordUpdate(word)}>
-            Done
+          <Button variant="outline-info" onClick={(e) => wordUpdate(word)}>
+            {overdue && <Badge bg="danger">!</Badge>} has been read
           </Button>{" "}
           <Button variant="outline-info" onClick={(e) => wordInfo(word)}>
             Word's info
