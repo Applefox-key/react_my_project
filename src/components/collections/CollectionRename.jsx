@@ -1,6 +1,6 @@
 import React from "react";
 import MyModal from "../UI/MyModal";
-import MyInputGroup from "../UI/MyInputGroup";
+import MyInputGroup from "../UI/input/MyInputGroup";
 import Button from "react-bootstrap/esm/Button";
 import { useState } from "react";
 

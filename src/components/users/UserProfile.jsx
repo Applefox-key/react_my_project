@@ -1,5 +1,5 @@
 import React from "react";
-import MyInputGroup from "../UI/MyInputGroup";
+import MyInputGroup from "../UI/input/MyInputGroup";
 import AvatarsList from "../AvatarsList";
 import Button from "react-bootstrap/esm/Button";
 import { useState } from "react";

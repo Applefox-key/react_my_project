@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CollectionCard from "./CollectionCard";
 import Button from "react-bootstrap/esm/Button";
-import MyInputGroup from "../UI/MyInputGroup";
+import MyInputGroup from "../UI/input/MyInputGroup";
 const CollectionList = ({ collectionList, addNewCollection }) => {
   const [nameC, setNameC] = useState("");
 

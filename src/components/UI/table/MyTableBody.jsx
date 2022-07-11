@@ -4,19 +4,28 @@ import RowContent from "./RowContent";
 const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
   return (
     <tbody>
-      {props.dataArray.map((word, i) => (
+      {props.dataArray.map((element, i) => (
         <tr
           key={"row" + i}
           onClick={(e) => {
             e.stopPropagation();
-            onRowClick(word);
+            if (onRowClick) onRowClick(element);
           }}
         >
           <RowContent
-            word={word}
+            content={element}
             i={i}
-            btnsArray={btnsArray}
+            btnsArray={
+              props.editMode.element == element
+                ? props.editMode.btnSave
+                : btnsArray
+            }
             namesArray={props.namesArray}
+            editMode={
+              props.editMode.element == element
+                ? props.editMode
+                : { element: null }
+            }
           />
         </tr>
       ))}

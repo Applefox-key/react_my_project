@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import MyInputGroup from "../UI/MyInputGroup";
+import MyInputGroup from "../UI/input/MyInputGroup";
 import MyModal from "../UI/MyModal";
 
 const WordEdit = ({ visible, setVisible, word, onClick }) => {

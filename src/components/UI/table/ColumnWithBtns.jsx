@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/esm/Button";
 
-const ColumnWithBtns = ({ btnsArray, word }) => {
+const ColumnWithBtns = ({ btnsArray, content }) => {
   return (
     <td key="btnA">
       {btnsArray.map((btn, i) => (
@@ -10,7 +10,7 @@ const ColumnWithBtns = ({ btnsArray, word }) => {
           variant="link"
           onClick={(e) => {
             e.stopPropagation();
-            btn.callback(word);
+            btn.callback(content);
           }}
         >
           {btn.name}

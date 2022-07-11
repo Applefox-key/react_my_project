@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
-import MyInputGroup from "../components/UI/MyInputGroup";
+import MyInputGroup from "../components/UI/input/MyInputGroup";
 import { AuthContext } from "../context";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
