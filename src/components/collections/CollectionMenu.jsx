@@ -4,32 +4,40 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
 import BaseAPI from "../../API/BaseAPI";
 
-const CollectionMenu = ({ collectionContent, DeleteAllWords, Rename }) => {
+const CollectionMenu = ({ collectionContent, deleteAllWords, rename }) => {
   const router = useNavigate();
 
-  const RemoveCollection = () => {
+  const removeCollection = () => {
     if (!window.confirm("Remove this collection?")) return;
     BaseAPI.deleteColection(collectionContent.id);
     router("/collections");
   };
 
+  const back = () => {
+    router("/collections");
+  };
   return (
     <div>
-      <div className="d-flex  justify-content-start">
+      <div className="d-flex  justify-content-start flex-column">
         <div className="d-flex   align-items-start">
           <ButtonGroup aria-label="delete and renaming buttons">
-            <Button variant="secondary" onClick={RemoveCollection}>
+            <Button variant="secondary" onClick={removeCollection}>
               Remove collection
             </Button>
-            <Button variant="secondary" onClick={DeleteAllWords}>
+            <Button variant="secondary" onClick={deleteAllWords}>
               Delete all words
             </Button>
-            <Button variant="secondary" onClick={Rename}>
+            <Button variant="secondary" onClick={rename}>
               Rename collection
+            </Button>
+            <Button variant="secondary" onClick={back}>
+              {"❰ Back"}
             </Button>
           </ButtonGroup>
         </div>
-        <h1 className="display-3 ms-4">{collectionContent.name}</h1>
+        <div className="d-flex  justify-content-end">
+          <h1 className="display-4 ms-4">{collectionContent.name}</h1>
+        </div>
       </div>
     </div>
   );

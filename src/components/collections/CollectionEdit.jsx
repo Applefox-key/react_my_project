@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import BaseAPI from "../../API/BaseAPI";
 import WordInfo from "../words/WordInfo";
+import WordEdit from "../words/WordEdit";
 import TabPills from "../UI/TabPills";
 import NewWordOne from "../words/NewWordOne";
 import NewWordFile from "../words/NewWordFile";
@@ -13,12 +14,8 @@ import CollectionRename from "./CollectionRename";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
-  const [dataModal, setVDataModal] = useState(false);
-  const [editMode, setEditMode] = useState({
-    element: null,
-    col: ["name", "sentence"],
-  });
   const [editedValues, setEditedValues] = useState({});
+  const [dataModal, setVDataModal] = useState(false);
   const collectionContent = useParams();
   const route = useNavigate();
 
@@ -42,39 +39,16 @@ const CollectionEdit = () => {
       />
     );
   };
-  const modalWordEdit = (word) => {
-    const takeNewEditVal = (col, val) => {
-      let obj = {};
-      obj[col] = val;
-      let newv = { ...editedValues, ...obj };
-      setEditedValues(newv);
-      console.log(editedValues);
-    };
-    setEditMode({
-      element: word,
-      col: ["word", "sentence"],
-      callbackElement: takeNewEditVal,
-      btnSave: [
-        { name: "Save", callback: editWord },
-        {
-          name: "Cancel",
-          callback: () => {
-            route(
-              `/collections/${collectionContent.id}/${collectionContent.name}`
-            );
-          },
-        },
-      ],
-    });
 
-    // setVDataModal(
-    //   <WordEdit
-    //     visible={true}
-    //     setVisible={setVDataModal}
-    //     word={word}
-    //     onClick={editWord}
-    //   />
-    // );
+  const modalWordEdit = (word) => {
+    setVDataModal(
+      <WordEdit
+        visible={true}
+        setVisible={setVDataModal}
+        word={word}
+        onClick={editWord}
+      />
+    );
   };
   //actions
 
@@ -108,24 +82,15 @@ const CollectionEdit = () => {
   //   setVDataModal(false);
   //   route(`/collections/${collectionContent.id}/${collectionContent.name}`);
   // };
-  const editWord = () => {
-    if (editMode.element) return;
-    let id = editMode.element.id;
-    let newWord = editedValues.word ? editedValues.word : editMode.element.word;
-    let newSentence = editedValues.sentence
-      ? editedValues.sentence
-      : editMode.element.sentence;
 
-    BaseAPI.editWord(id, newWord, newSentence);
+  const editWord = (word, nw, ns) => {
+    console.log(word);
+    if (!word) return;
+    let id = word.id;
+    BaseAPI.editWord(id, nw, ns);
     setVDataModal(false);
-    setEditMode({
-      element: null,
-      col: ["name", "sentence"],
-    });
-    setEditedValues({});
     route(`/collections/${collectionContent.id}/${collectionContent.name}`);
   };
-  console.log(editMode);
 
   return (
     <div className="mt-5">
@@ -134,8 +99,8 @@ const CollectionEdit = () => {
       <TabPills tabsArr={["Collection menu ", "Add one word", "Add from File"]}>
         <CollectionMenu
           collectionContent={collectionContent}
-          DeleteAllWords={deleteAllWords}
-          Rename={modalRenameCollection}
+          deleteAllWords={deleteAllWords}
+          rename={modalRenameCollection}
         />
         <NewWordOne addWord={addWord} />
         <NewWordFile addWords={addWordsFromFile} />
@@ -145,8 +110,7 @@ const CollectionEdit = () => {
         <MyTable
           dataArray={words}
           namesArray={["word", "sentence", "stage"]}
-          onRowClick={editMode.element ? "" : modalWordInfo}
-          editMode={editMode}
+          onRowClick={modalWordInfo}
           btnsArray={[
             { name: "Edit", callback: modalWordEdit },
             { name: "Delete", callback: wordDelete },

@@ -15,8 +15,8 @@ const Login = () => {
   const [email, setEmail] = useState("test@test.test");
   const [password, setPassword] = useState(1);
 
-  const login = async (event) => {
-    let response = await BaseAPI.login(email, password);
+  const login = (event) => {
+    let response = BaseAPI.login(email, password);
     if (response.status) {
       localStorage.setItem("Auth", "true");
       setIsAuth(true);

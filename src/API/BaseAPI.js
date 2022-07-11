@@ -195,7 +195,6 @@ const BaseAPI = {
     let token = JSON.parse(localStorage.getItem("token"));
     if (!token) return undefined;
     let usersList = JSON.parse(localStorage.getItem("users"));
-    debugger;
     let num = usersList.findIndex((item) => item.sessions.includes(token));
     usersList[num] = {
       ...usersList[num],

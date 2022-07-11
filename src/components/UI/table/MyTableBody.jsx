@@ -15,17 +15,8 @@ const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
           <RowContent
             content={element}
             i={i}
-            btnsArray={
-              props.editMode.element == element
-                ? props.editMode.btnSave
-                : btnsArray
-            }
+            btnsArray={btnsArray}
             namesArray={props.namesArray}
-            editMode={
-              props.editMode.element == element
-                ? props.editMode
-                : { element: null }
-            }
           />
         </tr>
       ))}

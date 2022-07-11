@@ -25,7 +25,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
   };
 
   return (
-    <div className="d-flex ustify-content-center mt-5 px-5">
+    <div className="d-flex justify-content-center mt-5 px-5">
       <div className="mx-2">
         <Image rounded src={userDataForm.imgu} style={{ width: "250px" }} />
         <AvatarsList onChange={changeAvatar} />
@@ -62,6 +62,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
       </div>
 
       <Button
+        type="submit"
         onClick={() => {
           onClick(userDataForm);
         }}
