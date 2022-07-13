@@ -199,12 +199,19 @@ const BaseAPI = {
     if (!token) return undefined;
     let usersList = JSON.parse(localStorage.getItem("users"));
     let num = usersList.findIndex((item) => item.sessions.includes(token));
+    let img = ud.imgu;
+
+    if (img.includes("blob")) {
+      console.log(ud.imgu);
+      img = await fbHelpers.setImgToStorage(usersList[num].id, img);
+    }
+
     usersList[num] = {
       ...usersList[num],
       name: ud.name,
       email: ud.email,
       password: ud.password,
-      imgu: ud.imgu,
+      imgu: img,
     };
     await this.toLS("users", usersList);
     return true;
