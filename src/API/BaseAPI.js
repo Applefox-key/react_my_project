@@ -1,10 +1,11 @@
 import { Word } from "../classes/Word.js";
 import dataBase from "./DataBase.js";
+import * as fbHelpers from "../serverFireBaseHlp/fbHelpers";
 
 const BaseAPI = {
-  toLS(key, value) {
+  async toLS(key, value) {
     if (key != "users") {
-      let user = this.getUser();
+      let user = await this.getUser();
       if (user == undefined)
         return null; //key = key.replace("List", "ListExample");
       else key = key.replace("List", "List" + user.id);
@@ -12,13 +13,14 @@ const BaseAPI = {
     localStorage.setItem(key, JSON.stringify(value));
   },
 
-  fromLS(key) {
+  async fromLS(key) {
     if (key != "users") {
-      let user = this.getUser();
+      let user = await this.getUser();
       if (user == undefined)
         return null; //key = key.replace("List", "ListExample");
       else key = key.replace("List", "List" + user.id);
     }
+
     return JSON.parse(localStorage.getItem(key));
   },
   newDateFormat(dt = new Date()) {
@@ -27,12 +29,12 @@ const BaseAPI = {
     nd.setHours(0, 0, 0, 0);
     return nd;
   },
-  getCollectionsAll() {
-    return this.fromLS("collectionsList");
+  async getCollectionsAll() {
+    return await this.fromLS("collectionsList");
   },
-  getCollections() {
-    let allCollections = this.fromLS("collectionsList");
-    let wordsList = this.fromLS("wordsList");
+  async getCollections() {
+    let allCollections = await this.fromLS("collectionsList");
+    let wordsList = await this.fromLS("wordsList");
     let numb = wordsList.reduce(
       (numb, item) => {
         let dayToday = this.newDateFormat();
@@ -53,32 +55,32 @@ const BaseAPI = {
     return allCollections;
   },
 
-  getUser() {
+  async getUser() {
     let token = JSON.parse(localStorage.getItem("token"));
     if (!token) return undefined;
     let usersList = JSON.parse(localStorage.getItem("users"));
     let user = usersList.filter((item) => item.sessions.includes(token));
     return user[0];
   },
-  getWordListAll() {
-    let temp = this.fromLS("wordsList");
+  async getWordListAll() {
+    let temp = await this.fromLS("wordsList");
     let words_ = temp.map((item) => new Word(item));
     return words_;
 
     // return new WordsList(this.fromLS("wordsList"));
   },
 
-  getWordsByCollectionAll(colId = -1) {
+  async getWordsByCollectionAll(colId = -1) {
     if (colId == -1) return this.fromLS("wordsList");
-    var words = this.fromLS("wordsList");
+    var words = await this.fromLS("wordsList");
     words = words.filter((word) => word.collectionid == colId);
     //  words = new WordsList(words);
     let words_ = words.map((item) => new Word(item));
     return words_;
   },
 
-  getUnreadWordsByCollection(colId = -1) {
-    let temp = this.fromLS("wordsList");
+  async getUnreadWordsByCollection(colId = -1) {
+    let temp = await this.fromLS("wordsList");
 
     let wordList = temp.filter((item) => {
       if (colId != -1 && item.collectionid != colId) return false;
@@ -91,18 +93,18 @@ const BaseAPI = {
     let words = wordList.map((item) => new Word(item));
     return words;
   },
-  createCollection(nameCollect) {
-    let listC = this.fromLS("collectionsList");
+  async createCollection(nameCollect) {
+    let listC = await this.fromLS("collectionsList");
     let colId = +new Date();
     listC.push({
       id: colId,
       name: nameCollect,
     });
-    this.toLS("collectionsList", listC);
+    await this.toLS("collectionsList", listC);
     return colId;
   },
-  createWord(textW, textS, colId) {
-    let list = this.fromLS("wordsList");
+  async createWord(textW, textS, colId) {
+    let list = await this.fromLS("wordsList");
     let wId = Date.now();
     list.push({
       id: wId,
@@ -113,11 +115,11 @@ const BaseAPI = {
       nextDate: new Date(),
       history: [{ action: "add", date: new Date() }],
     });
-    this.toLS("wordsList", list);
+    await this.toLS("wordsList", list);
     return wId;
   },
-  createWordFromArray(arr, colId) {
-    let list = this.fromLS("wordsList");
+  async createWordFromArray(arr, colId) {
+    let list = await this.fromLS("wordsList");
     arr.forEach((element, i) => {
       let wId = Date.now() + i;
       list.push({
@@ -131,16 +133,16 @@ const BaseAPI = {
       });
     });
 
-    this.toLS("wordsList", list);
+    await this.toLS("wordsList", list);
     return true;
   },
-  createUser(ud) {
+  async createUser(ud) {
     let login = ud.email; //document.querySelector("#loginS").value;
     let passw = ud.password; // document.querySelector("#passwordS").value;
     let name = ud.name; //document.querySelector("#nameS").value;
     let imgu = ud.imgu; //document.querySelector("#nameS").value;
 
-    let usersList = this.fromLS("users");
+    let usersList = await this.fromLS("users");
     let user = usersList.find((item) => item.email == login);
 
     if (user !== undefined)
@@ -166,32 +168,33 @@ const BaseAPI = {
       status: true,
     };
   },
-  deleteColection(colId) {
-    let collectionList = this.getCollectionsAll();
+  async deleteColection(colId) {
+    let collectionList = await this.getCollectionsAll();
     let num = collectionList.findIndex((item) => item.id == colId);
     this.deleteWordOfCollection(colId);
     collectionList.splice(num, 1);
-    this.toLS("collectionsList", collectionList);
+    await this.toLS("collectionsList", collectionList);
   },
 
-  deleteWord(wId) {
-    let wordsList = this.fromLS("wordsList");
+  async deleteWord(wId) {
+    let wordsList = await this.fromLS("wordsList");
     let indbase = wordsList.findIndex((item) => item.id == wId);
     if (indbase != -1) wordsList.splice(indbase, 1);
-    this.toLS("wordsList", wordsList);
+    await this.toLS("wordsList", wordsList);
   },
-  deleteWordOfCollection(colId) {
-    let wordsList = this.fromLS("wordsList");
+  async deleteWordOfCollection(colId) {
+    let wordsList = await this.fromLS("wordsList");
     let indbase = wordsList.filter((item) => item.collectionid != colId);
-    this.toLS("wordsList", indbase);
+    await this.toLS("wordsList", indbase);
   },
-  renameCollection(newName, colId) {
-    let collectionList = this.getCollectionsAll();
+  async renameCollection(newName, colId) {
+    let collectionList = await this.getCollectionsAll();
     let num = collectionList.findIndex((item) => item.id == colId);
     collectionList[num] = { ...collectionList[num], name: newName };
-    this.toLS("collectionsList", collectionList);
+    await this.toLS("collectionsList", collectionList);
   },
-  updateUser(ud) {
+
+  async updateUser(ud) {
     let token = JSON.parse(localStorage.getItem("token"));
     if (!token) return undefined;
     let usersList = JSON.parse(localStorage.getItem("users"));
@@ -203,25 +206,25 @@ const BaseAPI = {
       password: ud.password,
       imgu: ud.imgu,
     };
-    this.toLS("users", usersList);
+    await this.toLS("users", usersList);
     return true;
     // let user = usersList.filter((item) => item.sessions.includes(token));
     // return user[0];
   },
-  editWord(wordId, w, s) {
+  async editWord(wordId, w, s) {
     if (!wordId) return false;
-    let wordsList = this.fromLS("wordsList");
+    let wordsList = await this.fromLS("wordsList");
     let ind = wordsList.findIndex((item) => item.id == wordId);
     let word = wordsList[ind];
     word.word = w;
     word.sentence = s;
-    this.toLS("wordsList", wordsList);
+    await this.toLS("wordsList", wordsList);
     return true;
   },
-  updateWord(wordId) {
+  async updateWord(wordId) {
     if (!wordId) return false;
 
-    let wordsList = this.fromLS("wordsList");
+    let wordsList = await this.fromLS("wordsList");
 
     let ind = wordsList.findIndex((item) => item.id == wordId);
     let word = wordsList[ind];
@@ -262,13 +265,13 @@ const BaseAPI = {
     word.nextDate = wordNextDate; //this.newDateFormat(wordNextDate);
     ++word.stage;
 
-    this.toLS("wordsList", wordsList);
+    await this.toLS("wordsList", wordsList);
     return true;
   },
-  login(login, passw) {
+  async login(login, passw) {
     // let login = document.querySelector('#login').value;
     // let passw = document.querySelector('#password').value;
-    let usersList = this.fromLS("users");
+    let usersList = await this.fromLS("users");
     let userInd = usersList.findIndex((item) => item.email == login);
     let user = usersList[userInd];
     if (user == undefined) return { status: false, error: "user is not find" };
@@ -302,6 +305,8 @@ const BaseAPI = {
   },
   getAvatarUrlList(num) {
     const avlist = JSON.parse(localStorage.getItem("avatars"));
+    console.log(avlist.entries());
+
     return avlist;
   },
 
@@ -311,8 +316,11 @@ const BaseAPI = {
         "collectionsList1",
         JSON.stringify(dataBase.collectionsList)
       );
-    if (!localStorage.getItem("avatars"))
-      localStorage.setItem("avatars", JSON.stringify(dataBase.avatars));
+    if (!localStorage.getItem("avatars")) {
+      const avList = fbHelpers.getAvatarsFromStore();
+      // localStorage.setItem("avatars", JSON.stringify(dataBase.avatars));
+      // avList.then(localStorage.setItem("avatars", JSON.stringify(avList)));
+    }
 
     if (!localStorage.getItem("wordsList1"))
       localStorage.setItem("wordsList1", JSON.stringify(dataBase.wordsList));

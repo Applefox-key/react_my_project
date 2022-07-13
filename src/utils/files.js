@@ -6,5 +6,6 @@ export const wordsFromFiles = async (file, callbackForResult) => {
     let [w, s] = row.split(";");
     return { word: w, sentence: s };
   });
+
   callbackForResult(wordArr);
 };

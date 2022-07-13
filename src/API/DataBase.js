@@ -6,7 +6,7 @@ const dataBase = {
       email: "test@test.test",
       password: 1,
       sessions: [],
-      imgu: "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av1.jpg?alt=media&token=84a3f197-55df-4989-b1d7-4bf7eb50231e",
+      imgu: "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/avatars%2Fav1.png?alt=media&token=d83bc75a-2744-49c2-b961-93c631c4351f",
     },
   ],
   user: {
@@ -298,7 +298,7 @@ const dataBase = {
     },
   ],
   avatars: [
-    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av1.jpg?alt=media&token=84a3f197-55df-4989-b1d7-4bf7eb50231e",
+    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av1.png?alt=media&token=66a857ae-e129-40f6-9cb4-83cc9eb16d37",
     "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av2.jpg?alt=media&token=f4af2c02-e974-4fe0-abb9-e61aefa079ed",
     "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av3.jpg?alt=media&token=b6c0c2c7-2f64-4625-a8f9-abfe053d58a7",
     "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av4.jpg?alt=media&token=7704c553-f7e4-4447-9309-ae13356a4526",

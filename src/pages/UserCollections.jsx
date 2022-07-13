@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 import BaseAPI from "../API/BaseAPI";
 import CollectionList from "../components/collections/CollectionList";
+import MySpinner from "../components/UI/MySpinner";
 import UserAvatar from "../components/users/UserAvatar";
+import { useQuery } from "../hooks/useQuery";
 
 const UserCollections = () => {
   const [collectionList, setCollectionList] = useState([]);
 
-  const addNewCollection = (name) => {
+  const [getCollectionList, isLoading, error] = useQuery(async () => {
+    const col = await BaseAPI.getCollectionsAll();
+    setCollectionList(col);
+  });
+
+  const addNewCollection = async (name) => {
     if (!name) return;
-    BaseAPI.createCollection(name);
-    setCollectionList(BaseAPI.getCollectionsAll());
+    await BaseAPI.createCollection(name);
+    const col = await BaseAPI.getCollectionsAll();
+    setCollectionList(col);
   };
 
   useEffect(() => {
-    setCollectionList(BaseAPI.getCollectionsAll());
+    getCollectionList();
   }, []);
 
   return (
@@ -23,8 +31,8 @@ const UserCollections = () => {
         <h1 className="display-1">Collections</h1>
       </div>
 
-      {!collectionList ? (
-        <h2>No collections</h2>
+      {isLoading ? (
+        <MySpinner />
       ) : (
         <CollectionList
           collectionList={collectionList}

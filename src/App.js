@@ -12,9 +12,11 @@ function App() {
   useEffect(() => {
     BaseAPI.createDB();
   }, []);
+
   useEffect(() => {
     if (localStorage.getItem("token")) setIsAuth(true);
   }, []);
+
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>
       <div className="App">

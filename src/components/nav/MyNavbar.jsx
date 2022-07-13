@@ -4,15 +4,17 @@ import { AuthContext } from "../../context";
 import { privateRoutes, publicRoutes } from "../../router/routes";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/esm/Container";
 import MyNavLink from "./MyNavLink";
+import { useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
+  const router = useNavigate();
 
   const logout = () => {
     BaseAPI.logout();
     setIsAuth(false);
+    router("/login");
   };
 
   //get  elements with nameNav only

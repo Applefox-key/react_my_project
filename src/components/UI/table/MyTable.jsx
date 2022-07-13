@@ -4,11 +4,13 @@ import MyTableBody from "./MyTableBody";
 import MyTableHeader from "./MyTableHeader";
 
 const MyTable = (props) => {
-  return (
+  return props.dataArray ? (
     <Table striped bordered hover className=" border-2 pointer">
       <MyTableHeader {...props} />
       <MyTableBody {...props} />
     </Table>
+  ) : (
+    <></>
   );
 };
 

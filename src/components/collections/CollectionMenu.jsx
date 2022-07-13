@@ -7,9 +7,9 @@ import BaseAPI from "../../API/BaseAPI";
 const CollectionMenu = ({ collectionContent, deleteAllWords, rename }) => {
   const router = useNavigate();
 
-  const removeCollection = () => {
+  const removeCollection = async () => {
     if (!window.confirm("Remove this collection?")) return;
-    BaseAPI.deleteColection(collectionContent.id);
+    await BaseAPI.deleteColection(collectionContent.id);
     router("/collections");
   };
 

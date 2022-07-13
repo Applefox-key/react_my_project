@@ -3,25 +3,40 @@ import BaseAPI from "../API/BaseAPI";
 import UserAvatar from "../components/users/UserAvatar";
 import WordList from "../components/words/WordsList";
 import MySelect from "../components/UI/MySelect";
+import { useQuery } from "../hooks/useQuery";
+import MySpinner from "../components/UI/MySpinner";
 
 const Training = () => {
   const [collectionid, setCollectionid] = useState(-1);
   const [list, setList] = useState();
   const [collectionsList, setCollectionsList] = useState();
-  //hooks
-  useEffect(() => {
+  //other hooks
+  const [getList, isLoadingWords, errorWords] = useQuery(async () => {
     console.log("effect DB UnreadWords");
-    setList(BaseAPI.getUnreadWordsByCollection(collectionid));
+    const data = await BaseAPI.getUnreadWordsByCollection(collectionid);
+    setList(data);
+  });
+  const [getCollections, isLoadingCollect, errorCollect] = useQuery(
+    async () => {
+      console.log("effect DB UnreadWords");
+      const data = await BaseAPI.getCollections();
+      setCollectionsList(data);
+    }
+  );
+
+  useEffect(() => {
+    getList();
   }, [collectionid]);
 
   useEffect(() => {
-    setCollectionsList(BaseAPI.getCollections());
+    getCollections();
   }, []);
   //actions
-  const wordUpdate = (word) => {
-    BaseAPI.updateWord(word.id);
+  const wordUpdate = async (word) => {
+    await BaseAPI.updateWord(word.id);
     setList(list.filter((item) => word.id !== item.id));
   };
+
   const filterWordsList = (e) => {
     setCollectionid(e.target.value);
   };
@@ -39,8 +54,8 @@ const Training = () => {
           optionslist={collectionsList}
         />
       )}
-      {!list ? (
-        <h2>No words to read</h2>
+      {isLoadingWords ? (
+        <MySpinner />
       ) : (
         <WordList list={list} wordUpdate={wordUpdate} />
       )}

@@ -1,0 +1,28 @@
+  .empty{
+    height: 1.5rem;opacity: 0;
+  }
+  .success{
+    background-color: rgb(72, 255, 121);
+  }
+  .error{
+    background-color: rgb(255, 3, 53);
+    color:white
+  }
+  .toast{
+    height: 1.5rem;
+     opacity: 0;
+    margin-right:10%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    animation: popup 5s;
+    animation-iteration-count:1;
+  }
+  @keyframes popup {
+    0%{
+        opacity: 0;
+    }
+    50%{opacity: 1;}
+    100%{opacity: 0;}
+  }

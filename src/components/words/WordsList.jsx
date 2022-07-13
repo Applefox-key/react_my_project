@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import WordCard from "./WordCard";
 import WordInfo from "./WordInfo";
 
-const WordList = ({ list, wordUpdate }) => {
+const WordList = ({ list = [], wordUpdate }) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [contentModal, setContentModal] = useState("");
 
@@ -25,7 +25,8 @@ const WordList = ({ list, wordUpdate }) => {
             <WordCard word={word} wordUpdate={wordUpdate} wordInfo={wordInfo} />
           </CSSTransition>
         ))}
-      </TransitionGroup>
+      </TransitionGroup>{" "}
+      : <></>
     </>
   );
 };

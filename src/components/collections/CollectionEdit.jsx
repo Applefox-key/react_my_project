@@ -11,16 +11,22 @@ import NewWordOne from "../words/NewWordOne";
 import NewWordFile from "../words/NewWordFile";
 import CollectionMenu from "./CollectionMenu";
 import CollectionRename from "./CollectionRename";
+import { useQuery } from "../../hooks/useQuery";
+import MySpinner from "../UI/MySpinner";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
-  const [editedValues, setEditedValues] = useState({});
   const [dataModal, setVDataModal] = useState(false);
   const collectionContent = useParams();
   const route = useNavigate();
 
+  const [getWord, isLoading, error] = useQuery(async () => {
+    const words = await BaseAPI.getWordsByCollectionAll(collectionContent.id);
+    setWords(words);
+  });
+
   useEffect(() => {
-    setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
+    getWord();
   }, [collectionContent]);
 
   //modal content
@@ -52,28 +58,32 @@ const CollectionEdit = () => {
   };
   //actions
 
-  const addWord = (newWord) => {
-    BaseAPI.createWord(newWord.word, newWord.sentence, collectionContent.id);
-    setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
+  const addWord = async (newWord) => {
+    await BaseAPI.createWord(
+      newWord.word,
+      newWord.sentence,
+      collectionContent.id
+    );
+    setWords(await BaseAPI.getWordsByCollectionAll(collectionContent.id));
   };
-  const addWordsFromFile = (newWordArr) => {
+  const addWordsFromFile = async (newWordArr) => {
     if (!newWordArr) return;
-    BaseAPI.createWordFromArray(newWordArr, collectionContent.id);
-    setWords(BaseAPI.getWordsByCollectionAll(collectionContent.id));
+    await BaseAPI.createWordFromArray(newWordArr, collectionContent.id);
+    setWords(await BaseAPI.getWordsByCollectionAll(collectionContent.id));
   };
-  const wordDelete = (word) => {
+  const wordDelete = async (word) => {
     if (!window.confirm("Delete the word?")) return;
-    BaseAPI.deleteWord(word.id);
+    await BaseAPI.deleteWord(word.id);
     let arr = words.filter((elem) => elem.id != word.id);
     setWords(arr);
   };
-  const deleteAllWords = () => {
+  const deleteAllWords = async () => {
     if (!window.confirm("Delete all words?")) return;
-    BaseAPI.deleteWordOfCollection(collectionContent.id);
+    await BaseAPI.deleteWordOfCollection(collectionContent.id);
     setWords([]);
   };
-  const Rename = (newName) => {
-    BaseAPI.renameCollection(newName.trim(), collectionContent.id);
+  const Rename = async (newName) => {
+    await BaseAPI.renameCollection(newName.trim(), collectionContent.id);
     setVDataModal(false);
     route(`/collections/${collectionContent.id}/${newName.trim()}`);
   };
@@ -106,7 +116,7 @@ const CollectionEdit = () => {
         <NewWordFile addWords={addWordsFromFile} />
       </TabPills>
 
-      {words ? (
+      {!isLoading ? (
         <MyTable
           dataArray={words}
           namesArray={["word", "sentence", "stage"]}
@@ -117,7 +127,7 @@ const CollectionEdit = () => {
           ]}
         />
       ) : (
-        <></>
+        <MySpinner />
       )}
     </div>
   );

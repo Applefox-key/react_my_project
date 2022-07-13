@@ -2,16 +2,25 @@ import React from "react";
 import BaseAPI from "../../API/BaseAPI";
 import Image from "react-bootstrap/Image";
 import { useState, useEffect } from "react";
+import { useQuery } from "../../hooks/useQuery";
+import MySpinner from "../UI/MySpinner";
 
 const UserAvatar = () => {
   const [av, setAv] = useState();
-
-  useEffect(() => {
-    let ud = BaseAPI.getUser();
-    setAv(ud.imgu);
+  const [getData, isLoading, error] = useQuery(async () => {
+    let userData = await BaseAPI.getUser();
+    setAv(userData.imgu);
   });
 
-  return <Image rounded src={av} style={{ width: "100px" }} />;
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return isLoading ? (
+    <MySpinner />
+  ) : (
+    <Image rounded src={av} style={{ width: "100px" }} />
+  );
 };
 
 export default UserAvatar;

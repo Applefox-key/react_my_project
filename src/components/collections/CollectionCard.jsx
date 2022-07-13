@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import BaseAPI from "../../API/BaseAPI";
 import Card from "react-bootstrap/esm/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+
 import { useNavigate } from "react-router-dom";
+import CollectionWords from "./CollectionWords";
+import MySpinner from "../UI/MySpinner";
+import { useQuery } from "../../hooks/useQuery";
 
 const CollectionCard = ({ collection }) => {
   const [wordsList, setwordsList] = useState();
   const router = useNavigate();
 
+  const [getWordsList, isLoading, error] = useQuery(async () => {
+    const words = await BaseAPI.getWordsByCollectionAll(collection.id);
+    setwordsList(words);
+  });
+
   useEffect(() => {
-    setwordsList(BaseAPI.getWordsByCollectionAll(collection.id));
-  }, []);
+    getWordsList();
+  }, [collection]);
 
   return (
     <div
@@ -21,25 +29,7 @@ const CollectionCard = ({ collection }) => {
     >
       <Card style={{ width: "18rem" }}>
         <Card.Header>{collection.name}</Card.Header>
-        <ListGroup variant="flush">
-          {!wordsList ? (
-            <ListGroup.Item>No words</ListGroup.Item>
-          ) : (
-            <>
-              {wordsList.slice(0, 5).map((item) => (
-                <ListGroup.Item key={item.id}>{item.word}</ListGroup.Item>
-              ))}
-
-              {wordsList.length > 5 ? (
-                <ListGroup.Item variant="secondary" className="text-lg-end">
-                  {wordsList.length}...({wordsList.length - 5})
-                </ListGroup.Item>
-              ) : (
-                <> </>
-              )}
-            </>
-          )}
-        </ListGroup>
+        {isLoading ? <MySpinner /> : <CollectionWords wordsList={wordsList} />}
       </Card>
     </div>
   );

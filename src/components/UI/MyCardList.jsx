@@ -8,13 +8,13 @@ const MyCardList = ({ header, subtitle, list }) => {
       <Card.Body>
         <Card.Header as="h5">{header}</Card.Header>
         <Card.Subtitle className="display-6">{subtitle}</Card.Subtitle>
-        <Card.Text className=" text-muted">
+        <div className=" text-muted">
           <ListGroup variant="flush">
             {list.map((item, i) => (
               <ListGroup.Item key={i}>{item}</ListGroup.Item>
             ))}
           </ListGroup>
-        </Card.Text>
+        </div>
       </Card.Body>
     </Card>
   );
