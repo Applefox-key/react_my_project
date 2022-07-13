@@ -1,12 +1,9 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/esm/Button";
-import { useState } from "react";
-
-import { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { wordsFromFiles } from "../../utils/files";
-import MyToast from "../UI/toast/MyToast";
+import Button from "react-bootstrap/esm/Button";
 import ModalWordsList from "./ModalWordList";
+import Form from "react-bootstrap/Form";
+import MyToast from "../UI/toast/MyToast";
 
 const NewWordFile = ({ addWords }) => {
   const [fileContent, setFileContent] = useState();
@@ -16,14 +13,13 @@ const NewWordFile = ({ addWords }) => {
 
   const FileChange = (e) => {
     let userFile = e.target;
-
     const [files] = userFile.files;
+
     if (files.type !== "text/plain") {
       inputFileName.current.value = "";
       setShowToast(true);
       return;
     }
-
     wordsFromFiles(files, setFileContent);
   };
 
@@ -32,6 +28,7 @@ const NewWordFile = ({ addWords }) => {
     if (!fileContent) return;
     setVisible(true);
   };
+
   const addWordsToColection = () => {
     addWords(fileContent);
     setVisible(false);
@@ -48,8 +45,8 @@ const NewWordFile = ({ addWords }) => {
         onClick={addWordsToColection}
       />
 
-      {/* <Form.Group controlId="formFile" className="mb-3"> */}
       <Form.Control ref={inputFileName} type="file" onChange={FileChange} />
+
       <div className="d-flex p-2 justify-content-around">
         <p className="text-black-50">
           Add words from .txt file with semicolon as separator between word and
@@ -59,13 +56,13 @@ const NewWordFile = ({ addWords }) => {
           Add new words from file
         </Button>
       </div>
+
       <MyToast
         show={showToast}
         setShow={setShowToast}
         message="wrong file type"
         variant="error"
       />
-      {/* </Form.Group> */}
     </>
   );
 };

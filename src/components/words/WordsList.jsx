@@ -19,14 +19,14 @@ const WordList = ({ list = [], wordUpdate }) => {
         word={contentModal}
       />
       <h5>You have {list.length} words to read</h5>
+
       <TransitionGroup className="d-flex p-2 flex-wrap justify-content-center">
         {list.map((word) => (
           <CSSTransition timeout={500} classNames="word" key={word.id}>
             <WordCard word={word} wordUpdate={wordUpdate} wordInfo={wordInfo} />
           </CSSTransition>
         ))}
-      </TransitionGroup>{" "}
-      : <></>
+      </TransitionGroup>
     </>
   );
 };

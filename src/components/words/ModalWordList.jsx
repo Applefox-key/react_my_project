@@ -1,8 +1,8 @@
 import React from "react";
 import MyTable from "../UI/table/MyTable";
 import MyModal from "../UI/MyModal";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
+
 const ModalWordsList = ({ dataArray, onClick, visible, setVisible }) => {
   return (
     <MyModal

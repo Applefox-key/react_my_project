@@ -1,18 +1,16 @@
-import React from "react";
-import MyTable from "../UI/table/MyTable";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-import BaseAPI from "../../API/BaseAPI";
-import WordInfo from "../words/WordInfo";
-import WordEdit from "../words/WordEdit";
-import TabPills from "../UI/TabPills";
-import NewWordOne from "../words/NewWordOne";
+import { useQuery } from "../../hooks/useQuery";
+import CollectionRename from "./CollectionRename";
 import NewWordFile from "../words/NewWordFile";
 import CollectionMenu from "./CollectionMenu";
-import CollectionRename from "./CollectionRename";
-import { useQuery } from "../../hooks/useQuery";
+import NewWordOne from "../words/NewWordOne";
+import MyTable from "../UI/table/MyTable";
+import WordInfo from "../words/WordInfo";
+import WordEdit from "../words/WordEdit";
 import MySpinner from "../UI/MySpinner";
+import BaseAPI from "../../API/BaseAPI";
+import TabPills from "../UI/TabPills";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
@@ -87,17 +85,10 @@ const CollectionEdit = () => {
     setVDataModal(false);
     route(`/collections/${collectionContent.id}/${newName.trim()}`);
   };
-  // const editWord = (id, newWord, newSentence) => {
-  //   BaseAPI.editWord(id, newWord, newSentence);
-  //   setVDataModal(false);
-  //   route(`/collections/${collectionContent.id}/${collectionContent.name}`);
-  // };
 
-  const editWord = (word, nw, ns) => {
-    console.log(word);
+  const editWord = async (word, newWord, newSentence) => {
     if (!word) return;
-    let id = word.id;
-    BaseAPI.editWord(id, nw, ns);
+    await BaseAPI.editWord(word.id, newWord, newSentence);
     setVDataModal(false);
     route(`/collections/${collectionContent.id}/${collectionContent.name}`);
   };

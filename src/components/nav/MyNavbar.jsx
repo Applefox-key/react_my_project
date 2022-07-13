@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import BaseAPI from "../../API/BaseAPI";
 import { AuthContext } from "../../context";
 import { privateRoutes, publicRoutes } from "../../router/routes";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import MyNavLink from "./MyNavLink";
-import { useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
@@ -21,7 +21,7 @@ const MyNavbar = () => {
   const routesArr = (isAuth ? privateRoutes : publicRoutes).filter(
     (rout) => rout.nameNav
   );
-  //navbar bg-light justify-content-end position-fixed top-0 end-0
+
   return (
     <div
       className="position-fixed top-0 end-0 start-0 bg-light justify-content-end"

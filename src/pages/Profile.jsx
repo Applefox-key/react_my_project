@@ -54,14 +54,5 @@ const Profile = () => {
     </div>
   );
 };
-// {alert && (
-//   <div className="d-flex justify-content-center">
-//     <MyAlert show={show} setShow={setShow} {...alertProps} />
-//   </div>
-// )}
+
 export default Profile;
-// {show && (
-//         <div className="d-flex justify-content-center">
-//           <MyToast show={show} setShow={setShow} {...toastProps} />
-//         </div>
-//       )}

@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import MyInputGroup from "../UI/input/MyInputGroup";
-
-import { useState } from "react";
 
 const NewWordOne = ({ addWord }) => {
   const [newWord, setNewWord] = useState({ word: "", sentence: "" });

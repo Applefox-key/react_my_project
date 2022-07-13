@@ -16,9 +16,7 @@ const WordCard = ({ word, wordUpdate, wordInfo }) => {
           <Card.Subtitle className="display-6  my-2">
             {word.sentence}
           </Card.Subtitle>
-          <Card.Text
-            className={overdue ? "mb-2 text-danger" : "mb-2 text-muted"}
-          >
+          <Card.Text className={"mb-2 text-" + overdue ? "danger" : "muted"}>
             {hintForUser}
           </Card.Text>
           <Button variant="outline-info" onClick={(e) => wordUpdate(word)}>
