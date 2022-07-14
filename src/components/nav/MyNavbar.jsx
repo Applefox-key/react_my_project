@@ -6,6 +6,8 @@ import { privateRoutes, publicRoutes } from "../../router/routes";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import MyNavLink from "./MyNavLink";
+import imgFav from "../../img/favicon3.ico";
+import cl from "./MyNavbar.module.css";
 
 const MyNavbar = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
@@ -28,6 +30,7 @@ const MyNavbar = () => {
       style={{ zIndex: "500" }}
     >
       <Nav activeKey="/about" className="justify-content-end">
+        <img src={imgFav} className={cl.navbarico} />
         {routesArr.map((item, i) => (
           <Nav.Item key={i}>
             <MyNavLink root={item} />

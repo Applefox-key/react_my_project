@@ -29,7 +29,7 @@ const AvatarGalary = ({ visible, setVisible, fileChange }) => {
   return (
     <MyModal
       title={"Import from file"}
-      subtitle={"Click on the picture"}
+      subtitle={"Сlick on the picture or choose your own"}
       visible={visible}
       setVisible={setVisible}
     >

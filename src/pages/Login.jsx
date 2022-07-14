@@ -56,6 +56,7 @@ const Login = () => {
           Sign up
         </Button>
       </Form>
+      <img src="" />
     </Container>
   );
 };

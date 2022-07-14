@@ -36,3 +36,7 @@ padding-right: 25%;
   align-items: center; 
 }
 /* d-flex p-2 flex-wrap justify-content-center */
+.aboutImg{
+width:600px;
+height: 600px;
+}

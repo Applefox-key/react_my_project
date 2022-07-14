@@ -10,7 +10,7 @@ export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
   { path: "/signup", element: <SignUp />, nameNav: "" },
-  { path: "/*", element: <Login />, nameNav: "" },
+  { path: "/*", element: <About />, nameNav: "" },
 ];
 export const privateRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
