@@ -271,7 +271,7 @@ const dataBase = {
       history: [{ action: "add", date: new Date() }],
     },
     {
-      id: 64,
+      id: 65,
       collectionid: 4,
       stage: 0,
       word: "Szykować się",

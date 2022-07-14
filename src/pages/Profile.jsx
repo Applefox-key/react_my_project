@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import BaseAPI from "../API/BaseAPI";
@@ -7,19 +7,12 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MySpinner from "../components/UI/MySpinner";
 import { useQuery } from "../hooks/useQuery";
-import MyToast from "../components/UI/toast/MyToast";
+import { PopupContext } from "../context";
 
 const Profile = () => {
-  const [show, setShow] = useState(false);
   const target = useRef(null);
   const [userData, setUserData] = useState();
-  const toastProps = {
-    message: "The changes have been saved",
-    smalltext: "user data",
-    header: "SUCCESS!!!",
-    bg: "info",
-    autohide: true,
-  };
+  const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const router = useNavigate();
   const [getUserData, isLoading, error] = useQuery(async () => {
     console.log("effect DB UnreadWords");
@@ -33,15 +26,16 @@ const Profile = () => {
 
   const updateUser = (data) => {
     let result = BaseAPI.updateUser(data);
-    // router = "/collections";
     result.then((res) => {
-      setShow(result);
+      const popup = res
+        ? [true, "The changes have been saved", "success"]
+        : [true, "Somethig goes wrong.." + error, "error"];
+      setPopupSettings(popup);
     });
   };
 
   return (
-    <div ref={target}>
-      <MyToast show={show} setShow={setShow} {...toastProps} />
+    <>
       {isLoading ? (
         <MySpinner />
       ) : (
@@ -51,7 +45,7 @@ const Profile = () => {
           onClick={updateUser}
         />
       )}
-    </div>
+    </>
   );
 };
 

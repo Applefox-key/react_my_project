@@ -25,10 +25,7 @@ const MyNavbar = () => {
   );
 
   return (
-    <div
-      className="position-fixed top-0 end-0 start-0 bg-light justify-content-end"
-      style={{ zIndex: "500" }}
-    >
+    <div className={[cl.nav, "bg-light"].join(" ")}>
       <Nav activeKey="/about" className="justify-content-end">
         <img src={imgFav} className={cl.navbarico} />
         {routesArr.map((item, i) => (

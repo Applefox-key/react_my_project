@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
 import UserAvatar from "../components/users/UserAvatar";
 import WordList from "../components/words/WordsList";
 import MySelect from "../components/UI/MySelect";
 import { useQuery } from "../hooks/useQuery";
 import MySpinner from "../components/UI/MySpinner";
+import { PopupContext } from "../context";
 
 const Training = () => {
   const [collectionid, setCollectionid] = useState(-1);
   const [list, setList] = useState();
   const [collectionsList, setCollectionsList] = useState();
+  const { popupSetting, setPopupSettings } = useContext(PopupContext);
   //other hooks
   const [getList, isLoadingWords, errorWords] = useQuery(async () => {
     console.log("effect DB UnreadWords");
@@ -34,7 +36,9 @@ const Training = () => {
   //actions
   const wordUpdate = async (word) => {
     await BaseAPI.updateWord(word.id);
-    setList(list.filter((item) => word.id !== item.id));
+    const newList = list.filter((item) => word.id !== item.id);
+    if (newList.length == 0) setPopupSettings([true, "GOOD JOB!", "success"]);
+    setList(newList);
   };
 
   const filterWordsList = (e) => {

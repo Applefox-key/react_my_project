@@ -18,7 +18,7 @@ const WordList = ({ list = [], wordUpdate }) => {
         setVisible={setVisibleModal}
         word={contentModal}
       />
-      <h5>You have {list.length} words to read</h5>
+      <h6 className="mt-3">you have {list.length} words to read</h6>
 
       <TransitionGroup className="d-flex p-2 flex-wrap justify-content-center">
         {list.map((word) => (

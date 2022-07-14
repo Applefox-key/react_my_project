@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContext } from "./context";
+import { AuthContext, PopupContext } from "./context";
 import BaseAPI from "./API/BaseAPI";
 import AppRouter from "./components/AppRouter";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [popupSettings, setPopupSettings] = useState([false, "", "success"]);
 
   useEffect(() => {
     BaseAPI.createDB();
@@ -19,11 +20,13 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>
-      <div className="App">
-        <BrowserRouter>
-          <AppRouter />
-        </BrowserRouter>
-      </div>
+      <PopupContext.Provider value={{ popupSettings, setPopupSettings }}>
+        <div className="App">
+          <BrowserRouter>
+            <AppRouter />
+          </BrowserRouter>
+        </div>
+      </PopupContext.Provider>
     </AuthContext.Provider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 import CollectionRename from "./CollectionRename";
@@ -11,13 +11,14 @@ import WordEdit from "../words/WordEdit";
 import MySpinner from "../UI/MySpinner";
 import BaseAPI from "../../API/BaseAPI";
 import TabPills from "../UI/TabPills";
+import { PopupContext } from "../../context";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
   const [dataModal, setVDataModal] = useState(false);
   const collectionContent = useParams();
   const route = useNavigate();
-
+  const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getWord, isLoading, error] = useQuery(async () => {
     const words = await BaseAPI.getWordsByCollectionAll(collectionContent.id);
     setWords(words);
@@ -57,6 +58,10 @@ const CollectionEdit = () => {
   //actions
 
   const addWord = async (newWord) => {
+    if (!newWord.word || !newWord.sentence) {
+      setPopupSettings([true, "please fill in both fields", "error"]);
+      return;
+    }
     await BaseAPI.createWord(
       newWord.word,
       newWord.sentence,
@@ -94,7 +99,7 @@ const CollectionEdit = () => {
   };
 
   return (
-    <div className="mt-5">
+    <div>
       {dataModal ? dataModal : <></>}
 
       <TabPills tabsArr={["Collection menu ", "Add one word", "Add from File"]}>

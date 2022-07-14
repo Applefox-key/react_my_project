@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
 import CollectionList from "../components/collections/CollectionList";
 import MySpinner from "../components/UI/MySpinner";
 import UserAvatar from "../components/users/UserAvatar";
+import { PopupContext } from "../context";
 import { useQuery } from "../hooks/useQuery";
 
 const UserCollections = () => {
   const [collectionList, setCollectionList] = useState([]);
-
+  const { popupSetting, setPopupSettings } = useContext(PopupContext);
   const [getCollectionList, isLoading, error] = useQuery(async () => {
     const col = await BaseAPI.getCollectionsAll();
     setCollectionList(col);
   });
 
   const addNewCollection = async (name) => {
-    if (!name) return;
+    if (!name) {
+      setPopupSettings([
+        true,
+        "please specify the name of the collection",
+        "error",
+      ]);
+      return;
+    }
     await BaseAPI.createCollection(name);
     const col = await BaseAPI.getCollectionsAll();
     setCollectionList(col);
@@ -25,8 +34,8 @@ const UserCollections = () => {
   }, []);
 
   return (
-    <div>
-      <div className="d-flex p-2 justify-content-center">
+    <>
+      <div className="d-flex pb-2 justify-content-center">
         <UserAvatar />
         <h1 className="display-1">Collections</h1>
       </div>
@@ -39,7 +48,7 @@ const UserCollections = () => {
           addNewCollection={addNewCollection}
         />
       )}
-    </div>
+    </>
   );
 };
 
