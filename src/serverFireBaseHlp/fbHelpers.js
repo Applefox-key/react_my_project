@@ -1,4 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
+import { initializeApp } from "firebase/app";
 // import * as Storage from "https://www.gstatic.com/firebasejs/9.8.3/firebase-storage.js";
 import {
   getStorage,
@@ -6,7 +7,8 @@ import {
   listAll,
   getDownloadURL,
   uploadBytesResumable,
-} from "https://www.gstatic.com/firebasejs/9.8.3/firebase-storage.js";
+} from "firebase/storage";
+// } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-storage.js";
 
 export function firebaseInit() {
   const firebaseConfig = {
