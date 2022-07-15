@@ -26,7 +26,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
         onClick(userDataForm);
       }}
     >
-      <div className="d-flex justify-content-center px-5">
+      <div className="d-flex justify-content-center px-1">
         <ProfileImg
           userDataForm={userDataForm}
           setUserDataForm={setUserDataForm}

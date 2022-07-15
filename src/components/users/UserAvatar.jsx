@@ -19,7 +19,7 @@ const UserAvatar = () => {
   return isLoading ? (
     <MySpinner />
   ) : (
-    <Image rounded src={av} style={{ width: "100px" }} />
+    <Image rounded src={av} style={{ width: "5%", height: "5%" }} />
   );
 };
 

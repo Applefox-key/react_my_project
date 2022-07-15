@@ -5,7 +5,7 @@ const MyModal = ({ title = "", subtitle = "", ...props }) => {
   return (
     <Modal
       fullscreen={props.fullscreen}
-      dialogClassName={props.fullscreen ? "" : "modal-max"}
+      // dialogClassName={props.fullscreen ? "" : "modal-max"}
       show={props.visible}
       onHide={() => props.setVisible(false)}
     >
@@ -21,3 +21,6 @@ const MyModal = ({ title = "", subtitle = "", ...props }) => {
 };
 
 export default MyModal;
+
+// width: max-content; */
+//     /* max-width

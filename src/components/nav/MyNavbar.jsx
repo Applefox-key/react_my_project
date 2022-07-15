@@ -27,7 +27,7 @@ const MyNavbar = () => {
   return (
     <div className={[cl.nav, "bg-light"].join(" ")}>
       <Nav activeKey="/about" className="justify-content-end">
-        <img src={imgFav} className={cl.navbarico} />
+        {/* <img src={imgFav} className={cl.navbarico} /> */}
         {routesArr.map((item, i) => (
           <Nav.Item key={i}>
             <MyNavLink root={item} />

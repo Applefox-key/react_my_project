@@ -37,6 +37,7 @@ padding-right: 25%;
 }
 /* d-flex p-2 flex-wrap justify-content-center */
 .aboutImg{
-width:40rem;
-height: 40rem;
+width:50%;
+height: 50%;
+float:left;
 }

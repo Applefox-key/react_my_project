@@ -11,27 +11,28 @@ const ProfileImg = (props) => {
   };
   return (
     // <div className="d-flex justify-content-center mt-2 px-5">
-    <div className="mx-2">
-      <Image
-        ref={props.imgPrev}
-        rounded
-        src={props.userDataForm.imgu}
-        style={{ width: "250px" }}
-      />
-
+    <div style={{ width: "20%" }}>
       <AvatarGalary
         visible={props.visible}
         setVisible={props.setVisible}
         fileChange={changeAvatar}
       />
-
-      <Button
-        onClick={() => {
-          props.setVisible(true);
-        }}
-      >
-        Choose an avatar
-      </Button>
+      <div className="mx-2 ">
+        <Image
+          ref={props.imgPrev}
+          rounded
+          src={props.userDataForm.imgu}
+          style={{ width: "100%" }}
+          // style={{ width: "250px" }}
+        />
+        <Button
+          onClick={() => {
+            props.setVisible(true);
+          }}
+        >
+          Choose an avatar
+        </Button>
+      </div>
     </div>
     // </div>
   );
