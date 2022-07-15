@@ -3,10 +3,11 @@ import MyInputGroup from "../UI/input/MyInputGroup";
 
 const ProfileText = ({ userDataForm, setUserDataForm }) => {
   return (
-    <div style={{ width: "80%" }}>
+    <div>
       <h1 className="display-2">Your data</h1>
       <MyInputGroup
         required
+        size="lg"
         text="Name"
         placeholder="Name"
         value={userDataForm.name}
@@ -15,6 +16,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
         }
       ></MyInputGroup>
       <MyInputGroup
+        size="lg"
         required
         text="email"
         type="email"
@@ -26,6 +28,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
       ></MyInputGroup>
       <MyInputGroup
         required
+        size="lg"
         text="password"
         type="password"
         placeholder="password"

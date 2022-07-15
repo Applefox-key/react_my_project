@@ -1,0 +1,20 @@
+
+  .avatarProfile{
+   width: 100%;
+  }
+@media screen and (min-width: 600px) {
+  .avatarDiv{
+    width: 20%;
+    max-width: 200px;
+text-align: center;
+  }
+
+}
+@media screen and (max-width: 600px) {
+  .avatarDiv{
+    width: 30%;
+    max-width: 200px;
+    text-align: center;
+  }
+
+}

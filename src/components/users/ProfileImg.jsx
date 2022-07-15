@@ -2,6 +2,7 @@ import React from "react";
 import AvatarGalary from "./AvatarGalary";
 import Button from "react-bootstrap/esm/Button";
 import Image from "react-bootstrap/Image";
+import cl from "./users.module.css";
 
 const ProfileImg = (props) => {
   const changeAvatar = (url) => {
@@ -11,19 +12,18 @@ const ProfileImg = (props) => {
   };
   return (
     // <div className="d-flex justify-content-center mt-2 px-5">
-    <div style={{ width: "20%" }}>
+    <div className={cl.avatarDiv}>
       <AvatarGalary
         visible={props.visible}
         setVisible={props.setVisible}
         fileChange={changeAvatar}
       />
-      <div className="mx-2 ">
+      <div>
         <Image
           ref={props.imgPrev}
           rounded
           src={props.userDataForm.imgu}
-          style={{ width: "100%" }}
-          // style={{ width: "250px" }}
+          className={cl.avatarProfile}
         />
         <Button
           onClick={() => {

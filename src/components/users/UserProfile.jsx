@@ -4,6 +4,7 @@ import imgProfile from "../../img/profile.ico";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
+import cl from "./users.module.css";
 
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState();
@@ -26,19 +27,20 @@ const UserProfile = ({ userData, onClick, btnName }) => {
         onClick(userDataForm);
       }}
     >
-      <div className="d-flex justify-content-center px-1">
+      <div className="d-flex justify-content-center px-1 flex-wrap">
         <ProfileImg
           userDataForm={userDataForm}
           setUserDataForm={setUserDataForm}
           visible={visible}
           setVisible={setVisible}
         />
-
-        <ProfileText
-          userDataForm={userDataForm}
-          setUserDataForm={setUserDataForm}
-        />
-        <Button as="input" type="submit" value={btnName} />
+        <div style={{ width: "80%" }}>
+          <ProfileText
+            userDataForm={userDataForm}
+            setUserDataForm={setUserDataForm}
+          />
+          <Button as="input" type="submit" value={btnName} />
+        </div>
       </div>
     </Form>
   );
