@@ -18,3 +18,31 @@ text-align: center;
   }
 
 }
+.imgPreview{
+  /* margin-right: 2rem; */
+  /* margin-bottom: 2rem; */
+  /* width: 22%; */
+  /* max-width: 100px; */
+  /* height:  22%; */
+  /* float: left; */
+  border: 2px dotted ;
+  box-shadow: 3px;
+  /* background-color: rgb(255, 255, 255); */
+}
+.imgGallary{
+  width: 30%;
+  height:  30%;
+  /* margin-left: 0.5rem;
+  margin-right: 0.5rem;               */
+}
+.btn{
+  display:flex;
+  justify-content: space-evenly;
+  /* flex-direction: column; */
+  /* width: 30%; */
+}
+.previewBlock{
+  display:flex;
+  flex-direction: column;
+  width: 30%;
+}

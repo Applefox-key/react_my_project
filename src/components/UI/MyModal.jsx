@@ -1,13 +1,14 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 
-const MyModal = ({ title = "", subtitle = "", ...props }) => {
+const MyModal = ({ children, title = "", subtitle = "", ...props }) => {
   return (
     <Modal
-      fullscreen={props.fullscreen}
+      // fullscreen={props.fullscreen}
       // dialogClassName={props.fullscreen ? "" : "modal-max"}
       show={props.visible}
       onHide={() => props.setVisible(false)}
+      {...props}
     >
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
@@ -15,7 +16,7 @@ const MyModal = ({ title = "", subtitle = "", ...props }) => {
 
       <h5 className="d-flex flex-wrap justify-content-center">{subtitle}</h5>
 
-      <Modal.Body>{props.children}</Modal.Body>
+      <Modal.Body>{children}</Modal.Body>
     </Modal>
   );
 };

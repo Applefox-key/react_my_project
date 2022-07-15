@@ -12,6 +12,7 @@ const WordInfo = ({ visible, setVisible, word }) => {
       subtitle={word.sentence}
       visible={visible}
       setVisible={setVisible}
+      dialogClassName="modal-max"
     >
       <div className="d-flex ">
         <MyCardList header="Study plan" subtitle="" list={studyPlan} />
