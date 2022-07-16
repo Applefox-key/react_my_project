@@ -11,6 +11,7 @@ const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
   const back = () => {
     router("/public");
   };
+
   return (
     <div>
       <h1 className="display-4 mss-4">{collectionContent.name}</h1>
@@ -21,7 +22,7 @@ const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
             Add to my collections
           </Button>
           <Button variant="secondary" onClick={back}>
-            {"❰ Back"}
+            "❰ Back"
           </Button>
         </ButtonGroup>
       </div>

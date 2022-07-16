@@ -11,6 +11,7 @@ const PublicCollectionsView = () => {
   const [words, setWords] = useState();
   const collectionContent = useParams();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
+
   const [getWord, isLoading, error] = useQuery(async () => {
     const words = await BaseAPI.getPublicWordsByCollection(
       collectionContent.id
