@@ -25,7 +25,7 @@ text-align: center;
   /* max-width: 100px; */
   /* height:  22%; */
   /* float: left; */
-  border: 2px dotted ;
+
   box-shadow: 3px;
   /* background-color: rgb(255, 255, 255); */
 }
@@ -37,12 +37,17 @@ text-align: center;
 }
 .btn{
   display:flex;
-  justify-content: space-evenly;
+  justify-content: center;
   /* flex-direction: column; */
   /* width: 30%; */
 }
 .previewBlock{
   display:flex;
   flex-direction: column;
-  width: 30%;
+  width: 30%;  
+  height:  30%;
+  box-shadow: 3px;
+  /* border: 2px solid  #888888; */
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }

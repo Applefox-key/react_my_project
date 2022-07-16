@@ -11,7 +11,7 @@ const UserCollections = () => {
   const [collectionList, setCollectionList] = useState([]);
   const { popupSetting, setPopupSettings } = useContext(PopupContext);
   const [getCollectionList, isLoading, error] = useQuery(async () => {
-    const col = await BaseAPI.getCollectionsAll();
+    const col = await BaseAPI.getCollectionAndWords();
     setCollectionList(col);
   });
 
@@ -25,7 +25,8 @@ const UserCollections = () => {
       return;
     }
     await BaseAPI.createCollection(name);
-    const col = await BaseAPI.getCollectionsAll();
+    const col = await BaseAPI.getCollectionAndWords();
+
     setCollectionList(col);
   };
 

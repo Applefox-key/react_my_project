@@ -78,7 +78,22 @@ const BaseAPI = {
     let words_ = words.map((item) => new Word(item));
     return words_;
   },
+  async getCollectionAndWords(colId) {
+    var words = await this.fromLS("wordsList");
+    var collect;
+    let allCollections = await this.fromLS("collectionsList");
+    if (colId) collect = allCollections.filter((item) => item.id == colId);
+    else collect = allCollections;
 
+    const result = collect.map((coll) => {
+      const arrW = words.filter((word) => word.collectionid == coll.id);
+      return {
+        collection: coll,
+        words: arrW.map((item) => new Word(item)),
+      };
+    });
+    return result;
+  },
   async getUnreadWordsByCollection(colId = -1) {
     let temp = await this.fromLS("wordsList");
 
@@ -332,17 +347,14 @@ const BaseAPI = {
     if (!localStorage.getItem("wordsList1"))
       localStorage.setItem("wordsList1", JSON.stringify(dataBase.wordsList));
 
-    if (!localStorage.getItem("collectionsListExample"))
+    if (!localStorage.getItem("publicC"))
       localStorage.setItem(
-        "collectionsListExample",
-        JSON.stringify(dataBase.collectionsListExample)
+        "publicC",
+        JSON.stringify(dataBase.publicCollections)
       );
 
-    if (!localStorage.getItem("wordsListExample"))
-      localStorage.setItem(
-        "wordsListExample",
-        JSON.stringify(dataBase.wordsListExample)
-      );
+    if (!localStorage.getItem("publicW"))
+      localStorage.setItem("publicW", JSON.stringify(dataBase.publicWords));
 
     if (!localStorage.getItem("users"))
       localStorage.setItem("users", JSON.stringify(dataBase.users));
@@ -359,6 +371,65 @@ const BaseAPI = {
     localStorage.removeItem("users");
     localStorage.removeItem("user");
     console.log("DB DEL OK");
+  },
+  async getPublicCollectionsAll() {
+    return JSON.parse(localStorage.getItem("publicC"));
+  },
+  async getPublicWordsByCollection(colId) {
+    var words = JSON.parse(localStorage.getItem("publicW"));
+    if (!colId) return words;
+    words = words.filter((word) => word.collectionid == colId);
+    //  words = new WordsList(words);
+    // let words_ = words.map((item) => new Word(item));
+    return words;
+  },
+  async getPublicCollectionAndWords(colId) {
+    var words = JSON.parse(localStorage.getItem("publicW"));
+
+    var collect;
+    if (colId)
+      collect = JSON.parse(localStorage.getItem("publicC")).filter(
+        (item) => item.id == colId
+      );
+    else collect = JSON.parse(localStorage.getItem("publicC"));
+
+    const result = collect.map((coll) => {
+      const arrW = words.filter((word) => word.collectionid == coll.id);
+      return {
+        collection: coll,
+        words: arrW,
+      };
+    });
+    return result;
+  },
+  async CreatePublicCollection(lang, name, words) {
+    try {
+      let user = this.getUser();
+      let listC = JSON.parse(localStorage.getItem("publicC"));
+      let listW = JSON.parse(localStorage.getItem("publicW"));
+      let colId = +new Date();
+      listC.push({
+        id: colId,
+        name: name,
+        language: lang,
+        user: user,
+      });
+      localStorage.setItem("publicC", JSON.stringify(listC));
+
+      words.forEach((element, i) => {
+        let wId = Date.now() + i;
+        listW.push({
+          id: wId,
+          collectionid: colId,
+          word: element.word,
+          sentence: element.sentence,
+        });
+      });
+      localStorage.setItem("publicW", JSON.stringify(listW));
+      return true;
+    } catch (error) {
+      return false;
+    }
   },
 };
 export default BaseAPI;

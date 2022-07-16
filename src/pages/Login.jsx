@@ -31,14 +31,14 @@ const Login = () => {
           value={email}
           type="email"
           placeholder="email"
-          text="email"
+          label="email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <MyInputGroup
           value={password}
           type="password"
           placeholder="password"
-          text="password"
+          label="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 

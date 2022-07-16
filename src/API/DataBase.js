@@ -297,11 +297,106 @@ const dataBase = {
       history: [{ action: "add", date: new Date() }],
     },
   ],
-  avatars: [
-    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av1.png?alt=media&token=66a857ae-e129-40f6-9cb4-83cc9eb16d37",
-    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av2.jpg?alt=media&token=f4af2c02-e974-4fe0-abb9-e61aefa079ed",
-    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av3.jpg?alt=media&token=b6c0c2c7-2f64-4625-a8f9-abfe053d58a7",
-    "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/av4.jpg?alt=media&token=7704c553-f7e4-4447-9309-ae13356a4526",
+
+  publicCollections: [
+    {
+      id: "p1",
+      name: "Gratitude (English)",
+      language: "English",
+      user: "admin",
+    },
+    {
+      id: "p2",
+      name: "Questions (English)",
+      language: "English",
+      user: "admin",
+    },
+  ],
+  publicWords: [
+    {
+      id: "p11",
+      collectionid: "p1",
+      word: "Thank you",
+      sentence: "Thank you very much.",
+    },
+    {
+      id: "p12",
+      collectionid: "p1",
+      word: "Appreciate ",
+      sentence: "I appreciate your help.",
+    },
+    {
+      id: "p13",
+      collectionid: "p1",
+      word: "Welcome ",
+      sentence: "You’re welcome. Always welcome.",
+    },
+    {
+      id: "p14",
+      collectionid: "p1",
+      word: "It’s nothing ",
+      sentence: "It’s nothing. Don’t mention it. Not at all",
+    },
+    {
+      id: "p21",
+      collectionid: "p2",
+      word: "What is",
+      sentence: "What is sarcasm?",
+    },
+    {
+      id: "p22",
+      collectionid: "p2",
+      word: "Where are",
+      sentence: "Where are your friends when you need them?",
+    },
+    {
+      id: "p23",
+      collectionid: "p2",
+      word: "Can I ",
+      sentence: "Can I borrow your pen? ",
+    },
+    {
+      id: "p24",
+      collectionid: "p2",
+      word: "Can you",
+      sentence: "Can you ask your dog to bark, please?",
+    },
+    {
+      id: "p25",
+      collectionid: "p2",
+      word: "How much",
+      sentence: "How much are your boots, your clothes and your motorcycle? ",
+    },
+    {
+      id: "p26",
+      collectionid: "p2",
+      word: "How many",
+      sentence: "How many times can you fold a piece of paper? ",
+    },
+    {
+      id: "p26",
+      collectionid: "p2",
+      word: "How long",
+      sentence: "How long can you hold your breath?",
+    },
+    {
+      id: "p27",
+      collectionid: "p2",
+      word: "How do I",
+      sentence: "How do I go to the library, please?",
+    },
+    {
+      id: "p27",
+      collectionid: "p2",
+      word: "What time",
+      sentence: "What time do you close?",
+    },
+    {
+      id: "p28",
+      collectionid: "p2",
+      word: "Where can I get",
+      sentence: "Where can I get such a nice prom dress? ",
+    },
   ],
 };
 export default dataBase;

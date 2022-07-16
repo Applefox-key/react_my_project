@@ -12,10 +12,11 @@ import MySpinner from "../UI/MySpinner";
 import BaseAPI from "../../API/BaseAPI";
 import TabPills from "../UI/TabPills";
 import { PopupContext } from "../../context";
+import CollectionShare from "./CollectionShare";
 
 const CollectionEdit = () => {
   const [words, setWords] = useState();
-  const [dataModal, setVDataModal] = useState(false);
+  const [dataModal, setDataModal] = useState(false);
   const collectionContent = useParams();
   const route = useNavigate();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
@@ -30,28 +31,40 @@ const CollectionEdit = () => {
 
   //modal content
   const modalWordInfo = (word) => {
-    setVDataModal(
-      <WordInfo visible={true} setVisible={setVDataModal} word={word} />
+    setDataModal(
+      <WordInfo visible={true} setVisible={setDataModal} word={word} />
     );
   };
   const modalRenameCollection = () => {
-    setVDataModal(
+    setDataModal(
       <CollectionRename
         visible={true}
-        setVisible={setVDataModal}
+        setVisible={setDataModal}
         collection={collectionContent}
-        onClick={Rename}
+        onClick={rename}
       />
     );
   };
 
   const modalWordEdit = (word) => {
-    setVDataModal(
+    setDataModal(
       <WordEdit
         visible={true}
-        setVisible={setVDataModal}
+        setVisible={setDataModal}
         word={word}
         onClick={editWord}
+      />
+    );
+  };
+
+  const modalShare = () => {
+    setDataModal(
+      <CollectionShare
+        visible={true}
+        setVisible={setDataModal}
+        setPopup={setPopupSettings}
+        // collection={{ collection: collectionContent, words: words }}
+        collection={{ collectionContent, words }}
       />
     );
   };
@@ -85,16 +98,16 @@ const CollectionEdit = () => {
     await BaseAPI.deleteWordOfCollection(collectionContent.id);
     setWords([]);
   };
-  const Rename = async (newName) => {
+  const rename = async (newName) => {
     await BaseAPI.renameCollection(newName.trim(), collectionContent.id);
-    setVDataModal(false);
+    setDataModal(false);
     route(`/collections/${collectionContent.id}/${newName.trim()}`);
   };
 
   const editWord = async (word, newWord, newSentence) => {
     if (!word) return;
     await BaseAPI.editWord(word.id, newWord, newSentence);
-    setVDataModal(false);
+    setDataModal(false);
     route(`/collections/${collectionContent.id}/${collectionContent.name}`);
   };
 
@@ -107,6 +120,7 @@ const CollectionEdit = () => {
           collectionContent={collectionContent}
           deleteAllWords={deleteAllWords}
           rename={modalRenameCollection}
+          share={modalShare}
         />
         <NewWordOne addWord={addWord} />
         <NewWordFile addWords={addWordsFromFile} />
@@ -115,7 +129,7 @@ const CollectionEdit = () => {
       {!isLoading ? (
         <MyTable
           dataArray={words}
-          namesArray={["word", "sentence", "stage"]}
+          namesArray={["word", "sentence", "nextDate", "stage"]}
           onRowClick={modalWordInfo}
           btnsArray={[
             { name: "Edit", callback: modalWordEdit },

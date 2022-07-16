@@ -1,38 +1,33 @@
-import React, { useEffect, useState } from "react";
-import BaseAPI from "../../API/BaseAPI";
+import React from "react";
 import Card from "react-bootstrap/esm/Card";
-
 import { useNavigate } from "react-router-dom";
+import { wordsCounter } from "../../utils/wordsCounter";
 import CollectionWords from "./CollectionWords";
-import MySpinner from "../UI/MySpinner";
-import { useQuery } from "../../hooks/useQuery";
+import Badge from "react-bootstrap/Badge";
 
 const CollectionCard = ({ collection }) => {
-  const [wordsList, setwordsList] = useState();
   const router = useNavigate();
-
-  const [getWordsList, isLoading, error] = useQuery(async () => {
-    const words = await BaseAPI.getWordsByCollectionAll(collection.id);
-    setwordsList(words);
-  });
-
-  useEffect(() => {
-    getWordsList();
-  }, [collection]);
-
+  const countUnread = wordsCounter(collection.words);
+  console.log(countUnread);
   return (
     <div
       className="mx-2 my-2 pointer"
       onClick={(e) => {
-        router(`/collections/${collection.id}/${collection.name}`);
+        router(
+          `/collections/${collection.collection.id}/${collection.collection.name}`
+        );
       }}
     >
       <Card style={{ width: "18rem" }}>
-        <Card.Header>{collection.name}</Card.Header>
-        {isLoading ? <MySpinner /> : <CollectionWords wordsList={wordsList} />}
+        <Card.Header>
+          {collection.collection.name}{" "}
+          {countUnread ? <Badge bg="success">{countUnread}</Badge> : <></>}
+        </Card.Header>
+        <CollectionWords wordsList={collection.words} />
       </Card>
     </div>
   );
 };
 
 export default CollectionCard;
+//  <Badge bg="secondary">New</Badge>

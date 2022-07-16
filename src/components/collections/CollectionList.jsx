@@ -3,6 +3,8 @@ import CollectionCard from "./CollectionCard";
 
 import NewCollection from "./NewCollection";
 const CollectionList = ({ collectionList, addNewCollection }) => {
+  console.log(collectionList);
+
   return (
     <div>
       <NewCollection addNewCollection={addNewCollection} />
@@ -11,7 +13,7 @@ const CollectionList = ({ collectionList, addNewCollection }) => {
       ) : (
         <div className="d-flex p-2 flex-wrap justify-content-center">
           {collectionList.map((item) => (
-            <CollectionCard collection={item} key={item.id} />
+            <CollectionCard collection={item} key={item.collection.id} />
           ))}
         </div>
       )}

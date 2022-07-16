@@ -52,7 +52,9 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
         <div className={cl.previewBlock}>
           <Image rounded src={choice} className={cl.imgPreview} />
           <div className={cl.btn}>
-            <Button onClick={defaultImg}>CLEAR</Button>{" "}
+            <Button variant="secondary" onClick={defaultImg}>
+              CLEAR
+            </Button>{" "}
             <Button onClick={fromGallery}>SELECT</Button>
           </div>
         </div>

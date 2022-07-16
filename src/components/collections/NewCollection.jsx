@@ -7,7 +7,7 @@ const NewCollection = ({ addNewCollection }) => {
   return (
     <div className="padding25">
       <MyInputGroup
-        text="New collection name:"
+        label="New collection name:"
         value={nameC}
         onChange={(e) => setNameC(e.target.value)}
       >

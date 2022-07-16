@@ -15,12 +15,12 @@ const WordEdit = ({ visible, setVisible, word, onClick }) => {
       fullscreen={true}
     >
       <MyInputGroup
-        text="new sentence"
+        label="new sentence"
         value={newSentence}
         onChange={(e) => setNewSentence(e.target.value)}
       />
       <MyInputGroup
-        text="word"
+        label="word"
         value={newWord}
         onChange={(e) => setNewwWord(e.target.value)}
       >

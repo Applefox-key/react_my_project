@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
 import BaseAPI from "../../API/BaseAPI";
 
-const CollectionMenu = ({ collectionContent, deleteAllWords, rename }) => {
+const CollectionMenu = ({ collectionContent, ...props }) => {
   const router = useNavigate();
 
   const removeCollection = async () => {
@@ -24,11 +24,14 @@ const CollectionMenu = ({ collectionContent, deleteAllWords, rename }) => {
             <Button variant="secondary" onClick={removeCollection}>
               Remove collection
             </Button>
-            <Button variant="secondary" onClick={deleteAllWords}>
+            <Button variant="secondary" onClick={props.deleteAllWords}>
               Delete all words
             </Button>
-            <Button variant="secondary" onClick={rename}>
+            <Button variant="secondary" onClick={props.rename}>
               Rename collection
+            </Button>
+            <Button variant="secondary" onClick={props.share}>
+              Share the collection
             </Button>
             <Button variant="secondary" onClick={back}>
               {"❰ Back"}

@@ -8,7 +8,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
       <MyInputGroup
         required
         size="lg"
-        text="Name"
+        label="Name"
         placeholder="Name"
         value={userDataForm.name}
         onChange={(e) =>
@@ -18,7 +18,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
       <MyInputGroup
         size="lg"
         required
-        text="email"
+        label="email"
         type="email"
         placeholder="name@example.com"
         value={userDataForm.email}
@@ -29,7 +29,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
       <MyInputGroup
         required
         size="lg"
-        text="password"
+        label="password"
         type="password"
         placeholder="password"
         value={userDataForm.password}

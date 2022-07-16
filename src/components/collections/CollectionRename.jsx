@@ -10,7 +10,7 @@ const CollectionRename = ({ visible, setVisible, collection, onClick }) => {
   return (
     <MyModal visible={visible} setVisible={setVisible} title={collection.name}>
       <MyInputGroup
-        text="new name"
+        label="new name"
         value={newName}
         onChange={(e) => setNewName(e.target.value)}
       >
