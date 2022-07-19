@@ -2,7 +2,6 @@ import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
-import BaseAPI from "../../API/BaseAPI";
 
 const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
   const router = useNavigate();

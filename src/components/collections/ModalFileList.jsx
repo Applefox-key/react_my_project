@@ -3,19 +3,19 @@ import MyTable from "../UI/table/MyTable";
 import MyModal from "../UI/MyModal";
 import Button from "react-bootstrap/esm/Button";
 
-const ModalWordsList = ({ dataArray, onClick, visible, setVisible }) => {
+const ModalFileList = ({ dataArray, onClick, visible, setVisible }) => {
   return (
     <MyModal
       title={"Import from file"}
-      subtitle={"New words:"}
+      subtitle={"New expressions:"}
       visible={visible}
       setVisible={setVisible}
     >
-      <MyTable dataArray={dataArray} namesArray={["word", "sentence"]} />
+      <MyTable dataArray={dataArray} namesArray={["side1", "side2", "tag"]} />
 
       <Button onClick={onClick}>Add</Button>
     </MyModal>
   );
 };
 
-export default ModalWordsList;
+export default ModalFileList;

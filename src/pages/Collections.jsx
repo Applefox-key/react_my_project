@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
+import BaseExtraAPI from "../API/BaseExtraAPI";
 import CollectionList from "../components/collections/CollectionList";
 import MySpinner from "../components/UI/MySpinner";
 import UserAvatar from "../components/users/UserAvatar";
 import { PopupContext } from "../context";
 import { useQuery } from "../hooks/useQuery";
 
-const UserCollections = () => {
-  const [collectionList, setCollectionList] = useState([]);
+const Collections = () => {
+  const [collections, setCollections] = useState([]);
   const { popupSetting, setPopupSettings } = useContext(PopupContext);
-  const [getCollectionList, isLoading, error] = useQuery(async () => {
-    const col = await BaseAPI.getCollectionAndWords();
-    setCollectionList(col);
+  const [getCollections, isLoading, error] = useQuery(async () => {
+    const col = await BaseExtraAPI.getCollections();
+    setCollections(col);
   });
 
-  const addNewCollection = async (name) => {
+  const createCollection = async (name, tag) => {
     if (!name) {
       setPopupSettings([
         true,
@@ -24,33 +25,36 @@ const UserCollections = () => {
       ]);
       return;
     }
-    await BaseAPI.createCollection(name);
-    const col = await BaseAPI.getCollectionAndWords();
+    await BaseExtraAPI.createCollection(name, tag);
+    const col = await BaseExtraAPI.getCollections();
 
-    setCollectionList(col);
+    setCollections(col);
   };
 
   useEffect(() => {
-    getCollectionList();
+    getCollections();
   }, []);
 
   return (
     <>
       <div className="d-flex pb-2 justify-content-center">
         <UserAvatar />
-        <h1 className="display-1">Collections</h1>
+        <h1 className="display-1">Collections </h1>
       </div>
-
+      <h1 className="display-6">
+        create any set of information and memorize with the help of cards and
+        other games{" "}
+      </h1>
       {isLoading ? (
         <MySpinner />
       ) : (
         <CollectionList
-          collectionList={collectionList}
-          addNewCollection={addNewCollection}
+          collectionList={collections}
+          createCollection={createCollection}
         />
       )}
     </>
   );
 };
 
-export default UserCollections;
+export default Collections;

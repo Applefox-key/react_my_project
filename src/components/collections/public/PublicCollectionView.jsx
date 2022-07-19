@@ -1,33 +1,33 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "../../hooks/useQuery";
-import MyTable from "../UI/table/MyTable";
-import MySpinner from "../UI/MySpinner";
-import BaseAPI from "../../API/BaseAPI";
-import { PopupContext } from "../../context";
+import { useQuery } from "../../../hooks/useQuery";
+import MyTable from "../../UI/table/MyTable";
+import MySpinner from "../../UI/MySpinner";
+import BaseAPI from "../../../API/BaseAPI";
+import { PopupContext } from "../../../context";
 import PublicCollectionMenu from "./PublicCollectionMenu";
 
 const PublicCollectionsView = () => {
-  const [words, setWords] = useState();
+  const [expressions, setExpressions] = useState();
   const collectionContent = useParams();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
-  const [getWord, isLoading, error] = useQuery(async () => {
-    const words = await BaseAPI.getPublicWordsByCollection(
+  const [getExpression, isLoading, error] = useQuery(async () => {
+    const expressions = await BaseAPI.getPublicExpressionsByCollection(
       collectionContent.id
     );
-    setWords(words);
+    setExpressions(expressions);
   });
 
   useEffect(() => {
-    getWord();
+    getExpression();
   }, [collectionContent]);
 
   const addToMyCollection = async () => {
-    if (!words) return;
+    if (!expressions) return;
     if (!collectionContent) return;
     const colID = await BaseAPI.createCollection(collectionContent.name);
-    await BaseAPI.createWordFromArray(words, colID);
+    await BaseAPI.createExpressionFromArray(expressions, colID);
     setPopupSettings([
       true,
       "the collection has been added to your list",
@@ -43,7 +43,10 @@ const PublicCollectionsView = () => {
       />
 
       {!isLoading ? (
-        <MyTable dataArray={words} namesArray={["word", "sentence"]} />
+        <MyTable
+          dataArray={expressions}
+          namesArray={["expression", "phrase"]}
+        />
       ) : (
         <MySpinner />
       )}

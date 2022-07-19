@@ -6,11 +6,15 @@ const MyInput = ({ name, content, callback = null }) => {
   const [value, setValue] = useState(content);
   return (
     <Form.Control
+      aria-label={name}
       value={value}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
       onChange={(e) => {
         e.stopPropagation();
         setValue(e.target.value);
-        callback(name, e.target.value);
+        callback(e);
       }}
       aria-describedby="basic-addon1"
     />

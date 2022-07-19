@@ -2,12 +2,10 @@ import React from "react";
 import CollectionCard from "./CollectionCard";
 
 import NewCollection from "./NewCollection";
-const CollectionList = ({ collectionList, addNewCollection }) => {
-  console.log(collectionList);
-
+const CollectionList = ({ collectionList, createCollection }) => {
   return (
     <div>
-      <NewCollection addNewCollection={addNewCollection} />
+      <NewCollection createCollection={createCollection} />
       {!collectionList ? (
         <h2>No collections</h2>
       ) : (

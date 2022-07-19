@@ -15,7 +15,7 @@ const Profile = () => {
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const router = useNavigate();
   const [getUserData, isLoading, error] = useQuery(async () => {
-    console.log("effect DB UnreadWords");
+    console.log("effect DB UnreadExpressions");
     const data = await BaseAPI.getUser();
     setUserData(data);
   });

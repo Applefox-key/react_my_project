@@ -1,48 +1,36 @@
 import React, { useState, useEffect, useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
 import UserAvatar from "../components/users/UserAvatar";
-import WordList from "../components/words/WordsList";
+import TrainingList from "../components/expressions/TrainingList";
 import MySelect from "../components/UI/MySelect";
 import { useQuery } from "../hooks/useQuery";
 import MySpinner from "../components/UI/MySpinner";
 import { PopupContext } from "../context";
 
 const Training = () => {
-  const [collectionid, setCollectionid] = useState(-1);
+  // const [collectionid, setCollectionid] = useState(-1);
   const [list, setList] = useState();
-  const [collectionsList, setCollectionsList] = useState();
+  // const [collectionsList, setCollectionsList] = useState();
   const { popupSetting, setPopupSettings } = useContext(PopupContext);
   //other hooks
-  const [getList, isLoadingWords, errorWords] = useQuery(async () => {
-    console.log("effect DB UnreadWords");
-    const data = await BaseAPI.getUnreadWordsByCollection(collectionid);
-    setList(data);
-  });
-  const [getCollections, isLoadingCollect, errorCollect] = useQuery(
+  const [getList, isLoadingExpressions, errorExpressions] = useQuery(
     async () => {
-      console.log("effect DB UnreadWords");
-      const data = await BaseAPI.getCollections();
-      setCollectionsList(data);
+      console.log("effect DB UnreadExpressions");
+      const data = await BaseAPI.getUnreadExpressions();
+      setList(data);
     }
   );
 
   useEffect(() => {
     getList();
-  }, [collectionid]);
-
-  useEffect(() => {
-    getCollections();
   }, []);
+
   //actions
-  const wordUpdate = async (word) => {
-    await BaseAPI.updateWord(word.id);
-    const newList = list.filter((item) => word.id !== item.id);
+  const expressionUpdate = async (expression) => {
+    await BaseAPI.updateExpression(expression.id);
+    const newList = list.filter((item) => expression.id !== item.id);
     if (newList.length == 0) setPopupSettings([true, "GOOD JOB!", "success"]);
     setList(newList);
-  };
-
-  const filterWordsList = (e) => {
-    setCollectionid(e.target.value);
   };
 
   return (
@@ -51,17 +39,11 @@ const Training = () => {
         <UserAvatar />
         <h1 className="display-1 mb-2">Training</h1>
       </div>
-      {collectionsList && (
-        <MySelect
-          defaultOption={{ id: -1, name: "...all collections" }}
-          onChange={filterWordsList}
-          optionslist={collectionsList}
-        />
-      )}
-      {isLoadingWords ? (
+
+      {isLoadingExpressions ? (
         <MySpinner />
       ) : (
-        <WordList list={list} wordUpdate={wordUpdate} />
+        <TrainingList list={list} expressionUpdate={expressionUpdate} />
       )}
     </div>
   );

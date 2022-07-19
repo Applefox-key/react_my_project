@@ -7,12 +7,12 @@ import ProfileText from "./ProfileText";
 import cl from "./users.module.css";
 
 const UserProfile = ({ userData, onClick, btnName }) => {
-  const [visible, setVisible] = useState();
+  const [visible, setVisible] = useState(false);
   const [userDataForm, setUserDataForm] = useState({
     name: "",
     email: "",
     imgu: imgProfile,
-    password: "",
+    passexpression: "",
   });
 
   useEffect(() => {

@@ -3,27 +3,27 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import Badge from "react-bootstrap/Badge";
 
-const WordCard = ({ word, wordUpdate, wordInfo }) => {
-  const [hintForUser, overdue] = word.hintForReading;
+const ExpressionCard = ({ expression, expressionUpdate, expressionInfo }) => {
+  const [hintForUser, overdue] = expression.hintForReading;
 
   return (
     <>
       <Card className="my-4 " style={{ width: "90%" }}>
         <div className="pb-2">
           <Card.Header className="text-lg-start" as="h5">
-            {word.word}
+            {expression.expression}
           </Card.Header>
           <Card.Subtitle className="display-6  my-2">
-            {word.sentence}
+            {expression.phrase}
           </Card.Subtitle>
           <Card.Text className={"mb-2 text-" + overdue ? "danger" : "muted"}>
             {hintForUser}
           </Card.Text>
-          <Button variant="outline-info" onClick={(e) => wordUpdate(word)}>
+          <Button variant="outline-info" onClick={(e) => expressionUpdate(expression)}>
             {overdue && <Badge bg="danger">!</Badge>} has been read
           </Button>{" "}
-          <Button variant="outline-info" onClick={(e) => wordInfo(word)}>
-            Word's info
+          <Button variant="outline-info" onClick={(e) => expressionInfo(expression)}>
+            Expression's info
           </Button>
         </div>
       </Card>
@@ -31,4 +31,4 @@ const WordCard = ({ word, wordUpdate, wordInfo }) => {
   );
 };
 
-export default WordCard;
+export default ExpressionCard;

@@ -12,7 +12,7 @@ import {
 
 export function firebaseInit() {
   const firebaseConfig = {
-    storageBucket: "gs://words-d2019.appspot.com",
+    storageBucket: "gs://words-d2019.appspot.com/",
   };
   initializeApp(firebaseConfig);
 }

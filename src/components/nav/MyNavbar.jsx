@@ -6,7 +6,6 @@ import { privateRoutes, publicRoutes } from "../../router/routes";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import MyNavLink from "./MyNavLink";
-import imgFav from "../../img/favicon3.ico";
 import cl from "./MyNavbar.module.css";
 
 const MyNavbar = () => {

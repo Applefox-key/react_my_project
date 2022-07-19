@@ -2,6 +2,7 @@ import React from "react";
 import RowContent from "./RowContent";
 
 const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
+  const editId = props.edit ? props.edit.content.id : null;
   return (
     <tbody>
       {props.dataArray.map((element, i) => (
@@ -13,6 +14,7 @@ const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
           }}
         >
           <RowContent
+            edit={editId === element.id ? props.edit : null}
             content={element}
             i={i}
             btnsArray={btnsArray}

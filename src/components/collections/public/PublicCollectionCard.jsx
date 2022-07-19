@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/esm/Card";
 
 import { useNavigate } from "react-router-dom";
-import CollectionWords from "./CollectionWords";
+import ContentList from "../ContentList";
 
 const PublicCollectionCard = ({ list }) => {
   const router = useNavigate();
@@ -15,7 +15,7 @@ const PublicCollectionCard = ({ list }) => {
     >
       <Card style={{ width: "18rem" }}>
         <Card.Header>{list.collection.name}</Card.Header>
-        <CollectionWords wordsList={list.words} />
+        <ContentList expressionsList={list.expressions} />
       </Card>
     </div>
   );

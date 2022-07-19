@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useContext } from "react";
+// import { useContext } from "react";
 import Button from "react-bootstrap/esm/Button";
-import BaseAPI from "../API/BaseAPI";
-import PublicCollectionCard from "../components/collections/PublicCollectionCard";
-import MyInputGroup from "../components/UI/input/MyInputGroup";
-import MySpinner from "../components/UI/MySpinner";
-import { PopupContext } from "../context";
-import { useQuery } from "../hooks/useQuery";
+import BaseAPI from "../../../API/BaseAPI";
+import PublicCollectionCard from "./PublicCollectionCard";
+import MyInputGroup from "../../UI/input/MyInputGroup";
+import MySpinner from "../../UI/MySpinner";
+// import { PopupContext } from "../../../context";
+import { useQuery } from "../../../hooks/useQuery";
 
 const PublicCollections = () => {
   const [collectionList, setCollectionList] = useState([]);
   const [filtredList, setFiltredList] = useState([]);
   const [filter, setFilter] = useState("");
-  const { popupSetting, setPopupSettings } = useContext(PopupContext);
+  // const { popupSetting, setPopupSettings } = useContext(PopupContext);
 
   const [getPublicCollectionList, isLoading, error] = useQuery(async () => {
-    const col = await BaseAPI.getPublicCollectionAndWords();
+    const col = await BaseAPI.getPublicCollectionAndExpressions();
     setCollectionList(col);
     setFiltredList(col);
   });
@@ -30,10 +30,12 @@ const PublicCollections = () => {
       if (item.collection.name.toLowerCase().includes(filter.toLowerCase()))
         return true;
       else
-        return item.words.some(
-          (word) =>
-            word.word.toLowerCase().includes(filter.toLowerCase()) ||
-            word.sentence.toLowerCase().includes(filter.toLowerCase())
+        return item.expressions.some(
+          (expression) =>
+            expression.expression
+              .toLowerCase()
+              .includes(filter.toLowerCase()) ||
+            expression.phrase.toLowerCase().includes(filter.toLowerCase())
         );
     });
     setFiltredList(res);

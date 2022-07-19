@@ -2,14 +2,14 @@ import React from "react";
 import MyCardList from "../UI/MyCardList";
 import MyModal from "../UI/MyModal";
 
-const WordInfo = ({ visible, setVisible, word }) => {
-  let studyPlan = word.studyPlan;
-  let history = word.userHistory;
+const ExpressionInfo = ({ visible, setVisible, expression }) => {
+  let studyPlan = expression.studyPlan;
+  let history = expression.userHistory;
 
   return (
     <MyModal
-      title={word.word}
-      subtitle={word.sentence}
+      title={expression.expression}
+      subtitle={expression.phrase}
       visible={visible}
       setVisible={setVisible}
       dialogClassName="modal-max"
@@ -22,4 +22,4 @@ const WordInfo = ({ visible, setVisible, word }) => {
   );
 };
 
-export default WordInfo;
+export default ExpressionInfo;

@@ -29,12 +29,12 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
       <MyInputGroup
         required
         size="lg"
-        label="password"
-        type="password"
-        placeholder="password"
-        value={userDataForm.password}
+        label="passexpression"
+        type="passexpression"
+        placeholder="passexpression"
+        value={userDataForm.passexpression}
         onChange={(e) =>
-          setUserDataForm({ ...userDataForm, password: e.target.value })
+          setUserDataForm({ ...userDataForm, passexpression: e.target.value })
         }
       ></MyInputGroup>
     </div>

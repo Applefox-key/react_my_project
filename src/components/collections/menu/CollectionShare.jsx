@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import MyInputGroup from "../UI/input/MyInputGroup";
-import MyModal from "../UI/MyModal";
-import MyTable from "../UI/table/MyTable";
-import BaseAPI from "../../API/BaseAPI";
+import MyInputGroup from "../../UI/input/MyInputGroup";
+// import MyModal from "../../UI/MyModal";
+import MyTable from "../../UI/table/MyTable";
+import BaseAPI from "../../../API/BaseAPI";
 
 const CollectionShare = (props) => {
   const [name, setName] = useState(props.collection.collectionContent.name);
   const [lang, setLang] = useState("");
-  const [wordList, setWordList] = useState(props.collection.words);
-  const notShare = (word) => {
-    const id = word.id;
-    const arr = wordList.filter((item) => item.id != id);
-    setWordList(arr);
+  const [trainingList, setTrainingList] = useState(props.collection.content);
+  const notShare = (expression) => {
+    const id = expression.id;
+    const arr = trainingList.filter((item) => item.id != id);
+    setTrainingList(arr);
   };
 
-  const share = async (lang, name, wordList) => {
+  const share = async (lang, name, trainingList) => {
     let result = await BaseAPI.CreatePublicCollection(
       lang,
       name.trim(),
-      wordList
+      trainingList
     );
     props.setVisible(false);
     if (result)
@@ -28,11 +28,12 @@ const CollectionShare = (props) => {
   };
 
   return (
-    <MyModal
-      title="Share the collection"
-      setVisible={props.setVisible}
-      visible={props.visible}
-    >
+    // <MyModal
+    //   title="Share the collection"
+    //   setVisible={props.setVisible}
+    //   visible={props.visible}
+    // >
+    <div>
       <MyInputGroup
         label="Collection name"
         type="text"
@@ -51,17 +52,17 @@ const CollectionShare = (props) => {
       />
       <Button
         onClick={() => {
-          share(lang, name, wordList);
+          share(lang, name, trainingList);
         }}
       >
         Share
       </Button>
       <MyTable
-        dataArray={wordList}
-        namesArray={["word", "sentence"]}
+        dataArray={trainingList}
+        namesArray={["expression", "phrase"]}
         btnsArray={[{ name: "X", callback: notShare }]}
       />
-    </MyModal>
+    </div>
   );
 };
 

@@ -9,13 +9,13 @@ const About = () => {
         The simple and effective strategy of "the 90 second method"
       </h1>
       <p className="aboutP">
-        When you see a new word, you should write it down in your notes. But not
-        just the word by itself. Give it some context. For example, don't just
+        When you see a new expression, you should write it down in your notes. But not
+        just the expression by itself. Give it some context. For example, don't just
         write the translation of depend. It's better to write down the phrase
-        you saw or heard the word in. For example, it entirely depends on you.
+        you saw or heard the expression in. For example, it entirely depends on you.
         This way, you will get a ton of useful details (prepositions, articles,
-        word order, and so on), and most importantly, you will be able to say
-        the phrase when you need it. The word itself should be highlighted or
+        expression order, and so on), and most importantly, you will be able to say
+        the phrase when you need it. The expression itself should be highlighted or
         underlined.
       </p>
       <p className="aboutP">

@@ -1,11 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
-import { wordsFromFiles } from "../../utils/files";
+import { expressionsFromFiles } from "../../utils/files";
 import Button from "react-bootstrap/esm/Button";
-import ModalWordsList from "./ModalWordList";
+import ModalTrainingList from "./ModalTrainingList";
 import Form from "react-bootstrap/Form";
 import { PopupContext } from "../../context";
 
-const NewWordFile = ({ addWords }) => {
+const NewExpressionFile = ({ addExpressions }) => {
   const [fileContent, setFileContent] = useState();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [visible, setVisible] = useState(false);
@@ -19,17 +19,17 @@ const NewWordFile = ({ addWords }) => {
       setPopupSettings([true, "wrong file type", "error"]);
       return;
     }
-    wordsFromFiles(files, setFileContent);
+    expressionsFromFiles(files, setFileContent);
   };
 
-  const ViewWords = (e) => {
+  const ViewExpressions = (e) => {
     e.stopPropagation();
     if (!fileContent) return;
     setVisible(true);
   };
 
-  const addWordsToColection = () => {
-    addWords(fileContent);
+  const addExpressionsToColection = () => {
+    addExpressions(fileContent);
     setVisible(false);
     setFileContent([]);
     inputFileName.current.value = "";
@@ -37,11 +37,11 @@ const NewWordFile = ({ addWords }) => {
 
   return (
     <>
-      <ModalWordsList
+      <ModalTrainingList
         dataArray={fileContent}
         setVisible={setVisible}
         visible={visible}
-        onClick={addWordsToColection}
+        onClick={addExpressionsToColection}
       />
 
       <Form.Control
@@ -53,15 +53,20 @@ const NewWordFile = ({ addWords }) => {
 
       <div className="d-flex p-2  justify-content-around">
         <p className="text-black-50">
-          Add words from .txt file with semicolon as separator between word and
-          sentence. arrange the word-sentence pair in a separate line
+          Add expressions from .txt file with semicolon as separator between
+          expression and phrase. arrange the expression-phrase pair in a
+          separate line
         </p>
-        <Button className="mt-1" variant="outline-dark" onClick={ViewWords}>
-          Add new words from file
+        <Button
+          className="mt-1"
+          variant="outline-dark"
+          onClick={ViewExpressions}
+        >
+          Add new expressions from file
         </Button>
       </div>
     </>
   );
 };
 
-export default NewWordFile;
+export default NewExpressionFile;

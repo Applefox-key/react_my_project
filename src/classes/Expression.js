@@ -1,28 +1,28 @@
-export class Word {
-  #word;
-  #sentence;
+export class Expression {
+  #expression;
+  #phrase;
   #nextDate;
   #stage;
   #id;
   #collectionid;
   #history;
 
-  constructor(word) {
-    this.#word = word.word;
-    this.#sentence = word.sentence;
+  constructor(expression) {
+    this.#expression = expression.expression;
+    this.#phrase = expression.phrase;
 
-    this.#nextDate = new Date(word.nextDate);
+    this.#nextDate = new Date(expression.nextDate);
 
-    this.#stage = word.stage;
-    this.#id = word.id;
-    this.#collectionid = word.collectionid;
-    if (word.history == undefined) {
+    this.#stage = expression.stage;
+    this.#id = expression.id;
+    this.#collectionid = expression.collectionid;
+    if (expression.history == undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
-    } else this.#history = word.history;
+    } else this.#history = expression.history;
   }
-  get word() {
-    return this.#word;
+  get expression() {
+    return this.#expression;
   }
   get collectionid() {
     return this.#collectionid;
@@ -33,8 +33,8 @@ export class Word {
   get history() {
     return this.#history;
   }
-  get sentence() {
-    return this.#sentence;
+  get phrase() {
+    return this.#phrase;
   }
   get stage() {
     return this.#stage;
@@ -153,5 +153,5 @@ export class Word {
 }
 
 try {
-  module.exports = { Word };
+  module.exports = { Expression };
 } catch (error) {}

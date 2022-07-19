@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import MyInputGroup from "../UI/input/MyInputGroup";
 
-const NewCollection = ({ addNewCollection }) => {
+const NewCollection = ({ createCollection }) => {
   const [nameC, setNameC] = useState("");
   return (
     <div className="padding25">
@@ -14,7 +14,7 @@ const NewCollection = ({ addNewCollection }) => {
         <Button
           variant="outline-dark"
           onClick={() => {
-            addNewCollection(nameC);
+            createCollection(nameC);
           }}
         >
           Add new collection
