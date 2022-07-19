@@ -50,6 +50,18 @@ float:left;
   }
   .aboutH{
     font-size: 3vw;
+    
+  }
+  .hint{
+    width: 60%;
+    display: flex;
+    margin: auto;
+    height: fit-content;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  font-size: small;
+  
   }
 }
 @media screen and (max-width: 600px) {
@@ -59,6 +71,17 @@ float:left;
   }
   .aboutH{
     font-size: 5vw;
+  }
+  .hint{
+    width: 80%;
+    display: flex;
+    margin: auto;
+    height: fit-content;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  font-size: small;
+  
   }
 }
 
@@ -200,14 +223,3 @@ float:left;
   /* transition: all 500ms ease; */
 }
 
-.hint{
-  width: 50%;
-  display: flex;
-  margin: auto;
-  height: fit-content;
-  flex-wrap: wrap;
-  text-align: center;
-  justify-content: center;
-font-size: small;
-
-}

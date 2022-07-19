@@ -43,7 +43,7 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
         setVisible={setVisibleModal}
         expression={contentModal}
       />
-      <h6 className="mt-3">you have {items.length} expressions to read</h6>
+      {/* <h6 className="mt-3">you have {items.length} expressions to read</h6> */}
 
       <div>
         {/* <Button variant="secondary" onClick={back}>

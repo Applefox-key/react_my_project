@@ -1,12 +1,36 @@
-.card-container {
+
+  
+  @media screen and (min-width: 600px) {
+    .card-container {
+
+      padding: 0;
+      margin: 0;
+    
+  
+      width: 60%;
+      height: 30rem;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding: auto;
+      margin: auto;
+    
+    
+      left: 40px;
+      top: 40px;
+    
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .card-container {
     width: 250px;
     height: 400px;
     padding: 0;
     margin: 0;
   
 
-    width: 50%;
-    height: 30rem;
+    width: 80%;
+    height: 50rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -18,7 +42,9 @@
     top: 40px;
   
   }
-  
+  }
+
+
   .card-container .card-button {
     padding: 0;
     margin: 0;

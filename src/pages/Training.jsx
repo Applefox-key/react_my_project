@@ -7,6 +7,7 @@ import MySpinner from "../components/UI/MySpinner";
 import { PopupContext } from "../context";
 import RadioCheck from "../components/UI/radio/RadioCheck";
 import TrainingCards from "../components/expressions/TrainingCards";
+import Badge from "react-bootstrap/esm/Badge";
 
 const Training = () => {
   // const [collectionid, setCollectionid] = useState(-1);
@@ -42,12 +43,17 @@ const Training = () => {
       <div className="d-flex p-2 justify-content-center ">
         <UserAvatar />
         <h1 className="display-1 mb-2">Training</h1>
+        <div>
+          <RadioCheck
+            list={["one by one", "list"]}
+            val="one by one"
+            callback={check}
+          />
+          <h5>
+            <Badge>you have {list ? list.length : 0} expressions to read</Badge>
+          </h5>
+        </div>
       </div>
-      <RadioCheck
-        list={["one by one", "list"]}
-        val="one by one"
-        callback={check}
-      />
       {isLoading || !list ? (
         <MySpinner />
       ) : mode ? (
