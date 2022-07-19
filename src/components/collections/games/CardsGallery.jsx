@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
 import { useQuery } from "../../../hooks/useQuery";
 import MySpinner from "../../UI/MySpinner";
-import OneCard from "./OneCard";
+import OneCardG from "./OneCardG";
 
 const CardsGallery = () => {
   const pageParam = useParams();
@@ -47,7 +47,7 @@ const CardsGallery = () => {
         <div>
           {" "}
           <p>{items && itemNum + 1 + "/" + items.length}</p>
-          <OneCard anim={anim} direction={direction} item={items[itemNum]} />
+          <OneCardG anim={anim} direction={direction} item={items[itemNum]} />
           <div className="mt-5">
             <Button variant="primary" onClick={prew} disabled={itemNum === 0}>
               {"❰ PREW"}

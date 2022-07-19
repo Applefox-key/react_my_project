@@ -6,10 +6,10 @@ import ExpressionsListMenu from "../components/expressions/ExpressionsListMenu";
 import NewExpressionOne from "../components/expressions/NewExpressionOne";
 import MyTable from "../components/UI/table/MyTable";
 import ExpressionInfo from "../components/expressions/ExpressionInfo";
-import ExpressionEdit from "../components/expressions/ExpressionEdit";
 import MySpinner from "../components/UI/MySpinner";
 import BaseAPI from "../API/BaseAPI";
 import TabPills from "../components/UI/TabPills";
+import RadioCheck from "../components/UI/radio/RadioCheck";
 import { PopupContext } from "../context";
 import * as ExpAct from "../utils/expressionsAction";
 
@@ -85,6 +85,7 @@ const ExpressionsList = () => {
   return (
     <div>
       {dataModal ? dataModal : <></>}
+
       <ExpressionsListMenu deleteAllExpressions={deleteAllExpressions} />
       <TabPills tabsArr={["Add one expression", "Add from File"]}>
         <NewExpressionOne addExpression={addExpression} />

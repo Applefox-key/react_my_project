@@ -6,7 +6,7 @@ import { useQuery } from "../../hooks/useQuery";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
-const OneCard = () => {
+const OneCard1 = () => {
   const [item, setitem] = useState();
   const router = useNavigate();
 
@@ -37,4 +37,4 @@ const OneCard = () => {
   );
 };
 
-export default OneCard;
+export default OneCard1;

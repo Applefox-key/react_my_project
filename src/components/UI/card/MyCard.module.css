@@ -54,3 +54,8 @@
   .card-back {
     background: rgb(234, 247, 234);
   }
+
+  .hint{
+   text-align: end;
+
+  }

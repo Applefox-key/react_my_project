@@ -2,7 +2,7 @@ import React from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import MyCard from "../../UI/card/MyCard";
 
-const OneCard = ({ anim, direction, item }) => {
+const OneCardG = ({ anim, direction, item }) => {
   return (
     <>
       <div className="my-3" style={{ display: direction ? "block" : "none" }}>
@@ -27,4 +27,4 @@ const OneCard = ({ anim, direction, item }) => {
   );
 };
 
-export default OneCard;
+export default OneCardG;
