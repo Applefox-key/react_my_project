@@ -25,7 +25,7 @@ const MyNavbar = () => {
 
   return (
     <div className={[cl.nav, "bg-light"].join(" ")}>
-      <Nav activeKey="/about" className="justify-content-end">
+      <Nav activeKey="/about" className="justify-content-end pe-4">
         {/* <img src={imgFav} className={cl.navbarico} /> */}
         {routesArr.map((item, i) => (
           <Nav.Item key={i}>
@@ -34,7 +34,7 @@ const MyNavbar = () => {
         ))}
 
         {isAuth && (
-          <Button variant="outline-dark" className="mx-2" onClick={logout}>
+          <Button variant="outline-dark" onClick={logout}>
             Logout
           </Button>
         )}
