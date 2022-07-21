@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import Badge from "react-bootstrap/Badge";
 
-const ExpressionCard = ({ expression, expressionUpdate, expressionInfo }) => {
+const ExpressionBlock = ({ expression, expressionUpdate, expressionInfo }) => {
   const [hintForUser, overdue] = expression.hintForReading;
 
   return (
@@ -19,10 +19,16 @@ const ExpressionCard = ({ expression, expressionUpdate, expressionInfo }) => {
           <Card.Text className={"mb-2 text-" + overdue ? "danger" : "muted"}>
             {hintForUser}
           </Card.Text>
-          <Button variant="outline-info" onClick={(e) => expressionUpdate(expression)}>
+          <Button
+            variant="outline-info"
+            onClick={(e) => expressionUpdate(expression)}
+          >
             {overdue && <Badge bg="danger">!</Badge>} has been read
           </Button>{" "}
-          <Button variant="outline-info" onClick={(e) => expressionInfo(expression)}>
+          <Button
+            variant="outline-info"
+            onClick={(e) => expressionInfo(expression)}
+          >
             Expression's info
           </Button>
         </div>
@@ -31,4 +37,4 @@ const ExpressionCard = ({ expression, expressionUpdate, expressionInfo }) => {
   );
 };
 
-export default ExpressionCard;
+export default ExpressionBlock;

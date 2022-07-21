@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MyCard from "../../components/UI/card/MyCard";
+import MyCardExtra from "../../components/UI/card/MyCardExtra";
 import { useState } from "react";
 import BaseExtraAPI from "../../API/BaseExtraAPI";
 import { useQuery } from "../../hooks/useQuery";
@@ -11,7 +11,7 @@ const OneCard1 = () => {
   const router = useNavigate();
 
   const pageParam = useParams();
-  const [getContent, isLoading, error] = useQuery(async () => {
+  const [getContent, ,] = useQuery(async () => {
     const content = await BaseExtraAPI.getContentItem(pageParam.item);
 
     setitem(content);
@@ -27,12 +27,12 @@ const OneCard1 = () => {
 
   return (
     <>
-      <div className="text-start mx-5">
+      <div className="text-start mx-5 my-5">
         <Button variant="primary" onClick={back}>
           {"❰ Back"}
         </Button>
       </div>
-      {item && <MyCard item={item} />}
+      {item && <MyCardExtra item={item} />}
     </>
   );
 };

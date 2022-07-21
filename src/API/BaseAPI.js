@@ -4,18 +4,18 @@ import * as fbHelpers from "../serverFireBaseHlp/fbHelpers";
 
 const BaseAPI = {
   async toLS(key, value) {
-    if (key != "users") {
+    if (key !== "users") {
       let user = await this.getUser();
-      if (user == undefined)
+      if (user === undefined)
         return null; //key = key.replace("List", "ListExample");
       else key = key.replace("List", "List" + user.id);
     }
     localStorage.setItem(key, JSON.stringify(value));
   },
   async fromLS(key) {
-    if (key != "users") {
+    if (key !== "users") {
       let user = await this.getUser();
-      if (user == undefined)
+      if (user === undefined)
         return null; //key = key.replace("List", "ListExample");
       else key = key.replace("List", "List" + user.id);
     }
@@ -23,7 +23,7 @@ const BaseAPI = {
     return JSON.parse(localStorage.getItem(key));
   },
   newDateFormat(dt = new Date()) {
-    if (typeof dt == "string" && dt[10] == "T") dt = dt.slice(0, 10);
+    if (typeof dt == "string" && dt[10] === "T") dt = dt.slice(0, 10);
     let nd = new Date(dt);
     nd.setHours(0, 0, 0, 0);
     return nd;
@@ -86,15 +86,15 @@ const BaseAPI = {
     return true;
   },
   async createUser(ud) {
-    let login = ud.email; //document.querySelector("#loginS").value;
-    let passw = ud.passexpression; // document.querySelector("#passexpressionS").value;
-    let name = ud.name; //document.querySelector("#nameS").value;
-    let imgu = ud.imgu; //document.querySelector("#nameS").value;
+    let login = ud.email;
+    let passw = ud.password;
+    let name = ud.name;
+    let imgu = ud.imgu;
 
     let usersList = await this.fromLS("users");
-    let user = usersList.find((item) => item.email == login);
+    let user = usersList.find((item) => item.email.trim() === login.trim());
 
-    if (user != undefined)
+    if (user !== undefined)
       return { status: false, error: "user already exist" };
     let uId = Date.now();
     localStorage.setItem("expressionsList" + uId, JSON.stringify([]));
@@ -104,7 +104,7 @@ const BaseAPI = {
       id: uId,
       name: name,
       email: login,
-      passexpression: passw,
+      password: passw,
       sessions: [],
       imgu: imgu,
     };
@@ -120,20 +120,26 @@ const BaseAPI = {
   },
   async deleteExpression(wId) {
     let expressionsList = await this.fromLS("expressionsList");
-    let indbase = expressionsList.findIndex((item) => item.id == wId);
-    if (indbase != -1) expressionsList.splice(indbase, 1);
+    let indbase = expressionsList.findIndex(
+      (item) => item.id.toString() === wId.toString()
+    );
+    if (indbase !== -1) expressionsList.splice(indbase, 1);
     await this.toLS("expressionsList", expressionsList);
   },
   async deleteAllExpressions() {
     await this.toLS("expressionsList", []);
   },
-  async editExpression(expressionId, w, s) {
+  async editExpression(expressionId, w = "", s = "") {
+    debugger;
     if (!expressionId) return false;
     let expressionsList = await this.fromLS("expressionsList");
-    let ind = expressionsList.findIndex((item) => item.id == expressionId);
+
+    let ind = expressionsList.findIndex(
+      (item) => item.id.toString() === expressionId.toString()
+    );
     let expression = expressionsList[ind];
-    expression.expression = w;
-    expression.phrase = s;
+    if (w) expression.expression = w;
+    if (s) expression.phrase = s;
     await this.toLS("expressionsList", expressionsList);
     return true;
   },
@@ -153,7 +159,7 @@ const BaseAPI = {
       ...usersList[num],
       name: ud.name,
       email: ud.email,
-      passexpression: ud.passexpression,
+      password: ud.password,
       imgu: img,
     };
     await this.toLS("users", usersList);
@@ -165,8 +171,9 @@ const BaseAPI = {
     if (!expressionId) return false;
 
     let expressionsList = await this.fromLS("expressionsList");
-
-    let ind = expressionsList.findIndex((item) => item.id == expressionId);
+    let ind = expressionsList.findIndex(
+      (item) => item.id.toString() === expressionId.toString()
+    );
     let expression = expressionsList[ind];
     // let expressionObj = new ExpressionsList([expression]);
     let expressionObj = new Expression(expression);
@@ -184,9 +191,9 @@ const BaseAPI = {
     }
 
     let act =
-      todayDate - expressionNextDate == 0 ? "read by the plan" : "read late";
+      todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
 
-    if (expression.history == undefined) {
+    if (expression.history === undefined) {
       expression.history = [];
       expression.history.push({ action: "add", date: new Date() });
     }
@@ -210,14 +217,14 @@ const BaseAPI = {
     return true;
   },
   async login(login, passw) {
-    // let login = document.querySelector('#login').value;
-    // let passw = document.querySelector('#passexpression').value;
     let usersList = await this.fromLS("users");
-    let userInd = usersList.findIndex((item) => item.email == login);
+    let userInd = usersList.findIndex(
+      (item) => item.email.trim() === login.trim()
+    );
     let user = usersList[userInd];
-    if (user == undefined) return { status: false, error: "user is not find" };
-    if (user.passexpression != passw)
-      return { status: false, error: "wrong passexpression" };
+    if (user === undefined) return { status: false, error: "user is not find" };
+    if (user.password !== passw)
+      return { status: false, error: "wrong password" };
     let token = +new Date();
     usersList[userInd].sessions.push(token);
     localStorage.setItem("users", JSON.stringify(usersList));
@@ -251,7 +258,7 @@ const BaseAPI = {
     return avlist;
   },
   createDB() {
-    if (!localStorage.getItem("expressionsList1")) window.localStorage.clear();
+    if (!localStorage.getItem("avatars")) window.localStorage.clear();
     if (!localStorage.getItem("expressionsList1"))
       localStorage.setItem(
         "expressionsList1",
@@ -270,6 +277,11 @@ const BaseAPI = {
     //     JSON.stringify(dataBase.publicExpressions)
     //   );
 
+    if (!localStorage.getItem("avatars")) {
+      const avList = fbHelpers.getAvatarsFromStore();
+      localStorage.setItem("avatars", JSON.stringify(dataBase.avatars));
+      avList.then(localStorage.setItem("avatars", JSON.stringify(avList)));
+    }
     if (!localStorage.getItem("users"))
       localStorage.setItem("users", JSON.stringify(dataBase.users));
 

@@ -30,6 +30,7 @@ const BaseExtraAPI = {
     return true;
   },
   async createContent(content, colId) {
+    debugger;
     let list = await BaseAPI.fromLS("extraList");
     let wId = Date.now();
     list.push({
@@ -44,32 +45,41 @@ const BaseExtraAPI = {
   },
   async deleteColection(colId) {
     let collectionList = await BaseAPI.fromLS("collectionsList");
-    let num = collectionList.findIndex((item) => item.id == colId);
+
+    let num = collectionList.findIndex(
+      (item) => item.id.toString() === colId.toString()
+    );
     this.deleteColContent(colId);
     collectionList.splice(num, 1);
     await BaseAPI.toLS("collectionsList", collectionList);
   },
   async deleteContent(wId) {
     let list = await BaseAPI.fromLS("extraList");
-    let indbase = list.findIndex((item) => item.id == wId);
-    if (indbase != -1) list.splice(indbase, 1);
+    let indbase = list.findIndex(
+      (item) => item.id.toString() === wId.toString()
+    );
+    if (indbase !== -1) list.splice(indbase, 1);
     await BaseAPI.toLS("extraList", list);
   },
   async deleteColContent(colId) {
     let list = await BaseAPI.fromLS("extraList");
-    let indbase = list.filter((item) => item.collectionid != colId);
+    let indbase = list.filter(
+      (item) => item.collectionid.toString() !== colId.toString()
+    );
     await BaseAPI.toLS("extraList", indbase);
   },
   async editColName(newName, colId) {
     let collectionList = await this.getCollectionsList();
-    let num = collectionList.findIndex((item) => item.id == colId);
+    let num = collectionList.findIndex(
+      (item) => item.id.toString() === colId.toString()
+    );
     collectionList[num] = { ...collectionList[num], name: newName };
     await BaseAPI.toLS("collectionsList", collectionList);
   },
   async editContent(id, s1, s2, t) {
     if (!id) return false;
     let list = await BaseAPI.fromLS("extraList");
-    let ind = list.findIndex((item) => item.id == id);
+    let ind = list.findIndex((item) => item.id.toString() === id.toString());
     let oneEntry = list[ind];
     oneEntry.side1 = s1 ? s1 : oneEntry.expression;
     oneEntry.side2 = s2 ? s2 : oneEntry.expression;
@@ -86,11 +96,15 @@ const BaseExtraAPI = {
     var content = await BaseAPI.fromLS("extraList");
     var collect;
     let allCollections = await BaseAPI.fromLS("collectionsList");
-    if (colId) collect = allCollections.filter((item) => item.id == colId);
+    if (colId)
+      collect = allCollections.filter(
+        (item) => item.id.toString() === colId.toString()
+      );
     else collect = allCollections;
-
     const result = collect.map((coll) => {
-      const arrW = content.filter((elem) => elem.collectionid == coll.id);
+      const arrW = content.filter(
+        (elem) => elem.collectionid.toString() === coll.id.toString()
+      );
       return {
         collection: coll,
         content: arrW,
@@ -104,7 +118,7 @@ const BaseExtraAPI = {
   },
   async getContentItem(id) {
     var list = await BaseAPI.fromLS("extraList");
-    let ind = list.findIndex((item) => item.id == id);
+    let ind = list.findIndex((item) => item.id.toString() === id.toString());
     let oneEntry = list[ind];
 
     return oneEntry;

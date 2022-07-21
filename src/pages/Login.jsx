@@ -25,10 +25,11 @@ const Login = () => {
   };
 
   return (
-    <Container style={{ width: "25rem" }}>
+    <Container style={{ width: "25rem", marginTop: "2rem" }}>
       <Form onSubmit={login} className="my-3">
         <MyInputGroup
           value={email}
+          size="lg"
           type="email"
           placeholder="email"
           label="email"
@@ -36,17 +37,19 @@ const Login = () => {
         />
         <MyInputGroup
           value={password}
+          size="lg"
           type="password"
           placeholder="password"
           label="password"
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" size="lg">
           Log in
         </Button>
         <p></p>
         <Button
+          size="lg"
           type="button"
           variant="outline-primary"
           onClick={() => {
@@ -56,7 +59,6 @@ const Login = () => {
           Sign up
         </Button>
       </Form>
-      <img src="" />
     </Container>
   );
 };

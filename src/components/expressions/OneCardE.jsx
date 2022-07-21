@@ -1,24 +1,32 @@
 import React from "react";
-import MyCardStatic from "../UI/card/MyCardStatic";
+import MyCardExpress from "../UI/card/MyCardExpress";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import Hint from "./Hint";
+import HintCount from "./HintCount";
 
 const OneCardE = ({ anim, dir, item }) => {
   const [hintForUser, overdue] = item.hintForReading;
-  console.log(hintForUser);
-  console.log(overdue);
+  const count = item.stage < 7 ? 2 : 3;
   return (
     <>
-      <div className="my-3" style={{ display: dir === 0 ? "block" : "none" }}>
-        <SwitchTransition mode="out-in">
+      <div className="my-1" style={{ display: dir === 0 ? "block" : "none" }}>
+        <SwitchTransition
+          mode="out-in"
+          className="my-3"
+          style={{ display: dir === 0 ? "block" : "none" }}
+        >
           <CSSTransition key={!anim} timeout={500} classNames="card_gallery">
             <div>
-              <MyCardStatic item={item} />
-              <Hint overdue={overdue} hintForUser={hintForUser}></Hint>
+              <HintCount
+                count={count}
+                overdue={overdue}
+                hintForUser={hintForUser}
+              ></HintCount>
+              <MyCardExpress item={item} />
             </div>
           </CSSTransition>
         </SwitchTransition>
       </div>
+
       <div className="my-3" style={{ display: dir === 1 ? "block" : "none" }}>
         <SwitchTransition mode="out-in">
           <CSSTransition
@@ -27,8 +35,12 @@ const OneCardE = ({ anim, dir, item }) => {
             classNames="card_gallery_back"
           >
             <div>
-              <MyCardStatic item={item} />
-              <Hint overdue={overdue} hintForUser={hintForUser}></Hint>
+              <HintCount
+                count={count}
+                overdue={overdue}
+                hintForUser={hintForUser}
+              ></HintCount>
+              <MyCardExpress item={item} />
             </div>
           </CSSTransition>
         </SwitchTransition>
@@ -37,8 +49,12 @@ const OneCardE = ({ anim, dir, item }) => {
         <SwitchTransition mode="out-in">
           <CSSTransition key={anim} timeout={500} classNames="card_gallery_up">
             <div>
-              <MyCardStatic item={item} />
-              <Hint overdue={overdue} hintForUser={hintForUser}></Hint>
+              <HintCount
+                count={count}
+                overdue={overdue}
+                hintForUser={hintForUser}
+              ></HintCount>
+              <MyCardExpress item={item} />
             </div>
           </CSSTransition>
         </SwitchTransition>

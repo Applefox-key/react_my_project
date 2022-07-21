@@ -1,49 +1,29 @@
-
+.card-container {
+  padding: 0;
+  margin: 0;
+  width: 60%;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: auto;
+  margin: auto;
+  left: 40px;
+  top: 40px;
+}
   
   @media screen and (min-width: 600px) {
     .card-container {
-
-      padding: 0;
-      margin: 0;
-    
-  
       width: 60%;
-      height: 30rem;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding: auto;
-      margin: auto;
-    
-    
-      left: 40px;
-      top: 40px;
-    
+      height: 40rem;
     }
   }
   @media screen and (max-width: 600px) {
     .card-container {
-    width: 250px;
-    height: 400px;
-    padding: 0;
-    margin: 0;
-  
-
     width: 80%;
     height: 50rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: auto;
-    margin: auto;
-  
-  
-    left: 40px;
-    top: 40px;
-  
+    }
   }
-  }
-
 
   .card-container .card-button {
     padding: 0;
@@ -67,7 +47,11 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 100%;box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 100%;
+    /* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   }
   
   .card-front {

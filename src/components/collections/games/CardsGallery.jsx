@@ -1,30 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import { useNavigate, useParams } from "react-router-dom";
-import BaseExtraAPI from "../../../API/BaseExtraAPI";
-import { useQuery } from "../../../hooks/useQuery";
+import { PopupContext } from "../../../context";
+import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import OneCardG from "./OneCardG";
 
 const CardsGallery = () => {
-  const pageParam = useParams();
   const [items, setItems] = useState();
   const [direction, setDirection] = useState(true);
   const [itemNum, setItemNum] = useState(0);
   const [anim, setShowAnim] = useState(false);
-  const router = useNavigate();
-  const [getContent, isLoading, error] = useQuery(async () => {
-    const content = await BaseExtraAPI.getContent(pageParam.id);
-    setItems(content);
-  });
+  const { popupSettings, setPopupSettings } = useContext(PopupContext);
+  const [getContent, back, isLoading, error] = useGame(setItems);
 
   useEffect(() => {
     getContent();
-  }, [pageParam]);
-
-  const back = () => {
-    router(`/collections/${pageParam.id}/${pageParam.name}`);
-  };
+    if (error) setPopupSettings([true, error, "error"]);
+  }, []);
 
   const next = () => {
     if (!direction) setDirection(true);
@@ -39,8 +31,8 @@ const CardsGallery = () => {
   };
 
   return (
-    <div>
-      <Button variant="secondary" onClick={back}>
+    <div style={{ overflow: "hidden" }}>
+      <Button variant="dark" size="lg" onClick={back}>
         {"❰ Back"}
       </Button>
       {!isLoading && items ? (
@@ -69,35 +61,3 @@ const CardsGallery = () => {
 };
 
 export default CardsGallery;
-{
-  /* <>
-<div
-  className="my-3"
-  style={{ display: direction ? "block" : "none" }}
->
-  <SwitchTransition mode="out-in">
-    <CSSTransition
-      key={!anim}
-      timeout={500}
-      classNames="card_gallery"
-    >
-      <MyCard item={items[itemNum]} />
-    </CSSTransition>
-  </SwitchTransition>
-</div>
-<div
-  className="my-3"
-  style={{ display: !direction ? "block" : "none" }}
->
-  <SwitchTransition mode="out-in">
-    <CSSTransition
-      key={anim}
-      timeout={500}
-      classNames="card_gallery_back"
-    >
-      <MyCard item={items[itemNum]} />
-    </CSSTransition>
-  </SwitchTransition>
-</div>
-</> */
-}

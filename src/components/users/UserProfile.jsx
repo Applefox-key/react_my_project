@@ -4,7 +4,6 @@ import imgProfile from "../../img/profile.ico";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "./ProfileImg";
 import ProfileText from "./ProfileText";
-import cl from "./users.module.css";
 
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState(false);
@@ -12,7 +11,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
     name: "",
     email: "",
     imgu: imgProfile,
-    passexpression: "",
+    password: "",
   });
 
   useEffect(() => {

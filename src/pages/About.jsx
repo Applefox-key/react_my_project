@@ -3,20 +3,20 @@ import pct from "../img/pngkey.png";
 const About = () => {
   return (
     // <div className="d-flex mx-3">
-    <div className="mx-4">
-      <img src={pct} className="aboutImg" />
+    <div className="mx-4 mt-3">
+      <img src={pct} className="aboutImg" alt="about" />
       <h1 className="display-5 text-center aboutH">
         The simple and effective strategy of "the 90 second method"
       </h1>
       <p className="aboutP">
-        When you see a new expression, you should write it down in your notes. But not
-        just the expression by itself. Give it some context. For example, don't just
-        write the translation of depend. It's better to write down the phrase
-        you saw or heard the expression in. For example, it entirely depends on you.
-        This way, you will get a ton of useful details (prepositions, articles,
-        expression order, and so on), and most importantly, you will be able to say
-        the phrase when you need it. The expression itself should be highlighted or
-        underlined.
+        When you see a new expression, you should write it down in your notes.
+        But not just the expression by itself. Give it some context. For
+        example, don't just write the translation of depend. It's better to
+        write down the phrase you saw or heard the expression in. For example,
+        it entirely depends on you. This way, you will get a ton of useful
+        details (prepositions, articles, expression order, and so on), and most
+        importantly, you will be able to say the phrase when you need it. The
+        expression itself should be highlighted or underlined.
       </p>
       <p className="aboutP">
         For 7 days, you should read this expression out loud 1-2 times. Don't

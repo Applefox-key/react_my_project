@@ -4,7 +4,7 @@ const dataBase = {
       id: 1,
       name: "test user",
       email: "test@test.test",
-      passexpression: 1,
+      password: 1,
       sessions: [],
       imgu: "https://firebasestorage.googleapis.com/v0/b/words-d2019.appspot.com/o/avatars%2Fav1.png?alt=media&token=d83bc75a-2744-49c2-b961-93c631c4351f",
     },

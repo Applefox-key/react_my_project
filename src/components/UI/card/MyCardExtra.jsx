@@ -4,7 +4,7 @@ import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 import { CSSTransition } from "react-transition-group";
 
-const MyCard = (item) => {
+const MyCardExtra = (item) => {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -39,7 +39,7 @@ const MyCard = (item) => {
   );
 };
 
-export default MyCard;
+export default MyCardExtra;
 // <CSSTransition
 //   in={!side}
 //   timeout={500}

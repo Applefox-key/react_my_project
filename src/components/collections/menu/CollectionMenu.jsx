@@ -8,7 +8,7 @@ const CollectionMenu = ({ collection, ...props }) => {
   const [renameMode, setRenameMode] = useState(false);
 
   return (
-    <div className="d-flex  justify-content-start flex-row">
+    <div className="d-flex  justify-content-start flex-row flex-wrap">
       <div className="d-flex  justify-content-start flex-column">
         <MenuBtnMain
           collection={collection}

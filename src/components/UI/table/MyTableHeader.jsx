@@ -2,7 +2,7 @@ import React from "react";
 
 const MyTableHeader = ({ namesArray, btnsArray = [] }) => {
   return (
-    <thead>
+    <thead className="fs-5">
       <tr>
         <th key="c">#</th>
         {namesArray.map((item) => (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import ColumnInput from "./ColumnInput";
 
 import ColumnWithBtns from "./ColumnWithBtns";
@@ -13,6 +14,11 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
   const editCancel = () => {
     edit.edit();
   };
+  useEffect(() => {
+    if (!editValue.id) {
+      setEditValue({ id: content.id });
+    }
+  }, []);
   const btnsColumn = edit
     ? [
         { name: "OK", callback: editOk },

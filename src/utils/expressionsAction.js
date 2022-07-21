@@ -12,10 +12,11 @@ export const addExpression = async (newExp, callback, setPopupSettings) => {
 export const addExpressionsFromFile = async (newExpressionArr, callback) => {
   if (!newExpressionArr) return;
   await BaseAPI.createExpressionFromArray(newExpressionArr);
+
   callback(await BaseAPI.getTrainingListAll());
 };
 
-export const expressionDelete = async (expression, expressions, callback) => {
+export const expressionDelete = async (expression, callback, expressions) => {
   if (!window.confirm("Delete the expression?")) return;
   await BaseAPI.deleteExpression(expression.id);
   let arr = expressions.filter((elem) => elem.id !== expression.id);

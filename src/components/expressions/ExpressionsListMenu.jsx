@@ -2,13 +2,12 @@ import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
-import BaseAPI from "../../API/BaseAPI";
 
 const ExpressionsListMenu = ({ ...props }) => {
   const router = useNavigate();
 
   const back = () => {
-    router("/collections");
+    router("/training");
   };
   return (
     <div>
@@ -18,7 +17,7 @@ const ExpressionsListMenu = ({ ...props }) => {
             <Button variant="secondary" onClick={props.deleteAllExpressions}>
               Delete all expressions
             </Button>
-            <Button variant="secondary" onClick={back}>
+            <Button variant="dark" onClick={back}>
               {"❰ Back"}
             </Button>
           </ButtonGroup>

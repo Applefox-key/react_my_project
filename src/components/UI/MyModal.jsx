@@ -14,7 +14,9 @@ const MyModal = ({ children, title = "", subtitle = "", ...props }) => {
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
 
-      <h5 className="d-flex flex-wrap justify-content-center">{subtitle}</h5>
+      <div className="d-flex justify-content-center align-items-center">
+        <h5 className="text-center">{subtitle}</h5>
+      </div>
 
       <Modal.Body>{children}</Modal.Body>
     </Modal>

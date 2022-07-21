@@ -32,7 +32,7 @@ const MenuBtnMain = ({ collection, setContent, setRenameMode }) => {
   };
   return (
     <div className="d-flex   align-items-start">
-      <ButtonGroup aria-label="delete and renaming buttons">
+      <ButtonGroup size="lg" aria-label="delete and renaming buttons">
         <Button variant="secondary" onClick={removeCollection}>
           Remove collection
         </Button>
@@ -45,7 +45,7 @@ const MenuBtnMain = ({ collection, setContent, setRenameMode }) => {
         {/* <Button variant="secondary" onClick={props.share}>
               Share the collection
             </Button> */}
-        <Button variant="secondary" onClick={back}>
+        <Button variant="dark" onClick={back}>
           {"❰ Back"}
         </Button>
       </ButtonGroup>

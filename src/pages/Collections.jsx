@@ -37,7 +37,7 @@ const Collections = () => {
 
   return (
     <>
-      <div className="d-flex pb-2 justify-content-center">
+      <div className="d-flex pb-2 justify-content-center mt-4">
         <UserAvatar />
         <h1 className="display-1">Collections </h1>
       </div>

@@ -6,6 +6,7 @@
     left: 0;
   }
   .nav{
+   
     position:fixed;
     top:0;
      right:0;
@@ -13,4 +14,16 @@
      justify-content:end;
      z-index: 500;
      padding-right: 1rem;
+  }
+
+  @media screen and (min-width: 600px) {
+    
+    .nav{
+      font-size: large;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .nav{
+      font-size: small;
+    }
   }

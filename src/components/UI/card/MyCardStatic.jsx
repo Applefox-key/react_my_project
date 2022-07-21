@@ -21,19 +21,3 @@ const MyCardStatic = (item) => {
 };
 
 export default MyCardStatic;
-// <CSSTransition
-//   in={!side}
-//   timeout={500}
-//   classNames={cl.animation}
-//   // unmountOnExit
-//   onEnter={(node) => console.log(node.classList)}
-//   onExited={(node) => console.log("exit")}
-// >
-//   <div className={cl.card}>
-//     <h1 className="displwy-4">{side ? item.side1 : item.side2}</h1>
-//     <p>{item.tag}</p>
-//     <div>
-//       <Button onClick={() => setSide(!side)}>rotate</Button>
-//     </div>
-//   </div>
-// </CSSTransition>

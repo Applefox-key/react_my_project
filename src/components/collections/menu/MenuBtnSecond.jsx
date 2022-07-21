@@ -9,14 +9,22 @@ const MenuBtnSecond = () => {
 
   return (
     <div className="d-flex   align-items-start pt-2">
-      <ButtonGroup aria-label="play buttons">
+      <ButtonGroup size="lg" aria-label="play buttons">
         <Button
-          variant="secondary"
+          variant="outline-secondary"
           onClick={() => {
             router(`/collections/play/${pageParam.id}/${pageParam.name}`);
           }}
         >
-          PLAY CARDs
+          PLAY CARDS
+        </Button>
+        <Button
+          variant="outline-secondary"
+          onClick={() => {
+            router(`/collections/play_pairs/${pageParam.id}/${pageParam.name}`);
+          }}
+        >
+          PLAY PAIRS
         </Button>
       </ButtonGroup>
     </div>

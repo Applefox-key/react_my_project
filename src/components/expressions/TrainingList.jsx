@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import ExpressionCard from "./ExpressionCard";
+import ExpressionBlock from "./ExpressionBlock";
 import ExpressionInfo from "./ExpressionInfo";
 
 const TrainingList = ({ list = [], expressionUpdate }) => {
@@ -27,7 +27,7 @@ const TrainingList = ({ list = [], expressionUpdate }) => {
             classNames="expression"
             key={expression.id}
           >
-            <ExpressionCard
+            <ExpressionBlock
               expression={expression}
               expressionUpdate={expressionUpdate}
               expressionInfo={expressionInfo}

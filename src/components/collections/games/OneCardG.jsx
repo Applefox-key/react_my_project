@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import MyCard from "../../UI/card/MyCard";
+import MyCardExtra from "../../UI/card/MyCardExtra";
 
 const OneCardG = ({ anim, direction, item }) => {
   return (
@@ -8,7 +8,7 @@ const OneCardG = ({ anim, direction, item }) => {
       <div className="my-3" style={{ display: direction ? "block" : "none" }}>
         <SwitchTransition mode="out-in">
           <CSSTransition key={!anim} timeout={500} classNames="card_gallery">
-            <MyCard item={item} />
+            <MyCardExtra item={item} />
           </CSSTransition>
         </SwitchTransition>
       </div>
@@ -19,7 +19,7 @@ const OneCardG = ({ anim, direction, item }) => {
             timeout={500}
             classNames="card_gallery_back"
           >
-            <MyCard item={item} />
+            <MyCardExtra item={item} />
           </CSSTransition>
         </SwitchTransition>
       </div>

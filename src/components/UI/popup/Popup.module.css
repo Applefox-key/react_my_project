@@ -2,8 +2,8 @@
     height: 1.5rem;
     opacity: 0;    
     position:  sticky;
-    top:2.5rem;
-    z-index: 500;
+    top:3.8rem;
+    z-index: 500;    
   }
   .success{
     background-color: rgb(72, 255, 121);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./styles/App.css";
+import "./styles/animation.css";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContext, PopupContext } from "./context";
 import BaseAPI from "./API/BaseAPI";

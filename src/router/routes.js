@@ -10,6 +10,7 @@ import PublicCollectionsView from "../components/collections/public/PublicCollec
 import ExpressionsList from "../pages/ExpressionsList";
 import CardsGallery from "../components/collections/games/CardsGallery";
 import OneCard from "../components/collections/OneCard";
+import Pairs from "../components/collections/games/Pairs";
 export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
@@ -32,6 +33,7 @@ export const privateRoutes = [
   { path: "/collections/:id/:name", element: <CollectionEdit /> },
   { path: "/collections/:id/:name/:item", element: <OneCard /> },
   { path: "/collections/play/:id/:name", element: <CardsGallery /> },
+  { path: "/collections/play_pairs/:id/:name", element: <Pairs /> },
   { path: "/public/:id/:name", element: <PublicCollectionsView /> },
   // {
   //   path: "/public",

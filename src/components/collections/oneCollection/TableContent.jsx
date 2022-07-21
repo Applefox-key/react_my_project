@@ -39,7 +39,7 @@ const TableContent = ({ content, setContent, pageParam, onRowClick }) => {
         onRowClick={onRowClick}
         edit={editMode}
         dataArray={content}
-        namesArray={["side1", "side2", "tag", "id"]}
+        namesArray={["side1", "side2", "tag"]}
         btnsArray={[
           { name: "Edit", callback: editOn },
           { name: "Delete", callback: contentDelete },

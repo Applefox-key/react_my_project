@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "../../hooks/useQuery";
 import MySpinner from "../UI/MySpinner";
 
-const UserAvatar = () => {
+const UserAvatar = (props) => {
   const [av, setAv] = useState();
   const [getData, isLoading, error] = useQuery(async () => {
     let userData = await BaseAPI.getUser();
@@ -19,7 +19,7 @@ const UserAvatar = () => {
   return isLoading ? (
     <MySpinner />
   ) : (
-    <Image rounded src={av} style={{ width: "5%", height: "5%" }} />
+    <Image rounded src={av} style={{ width: "8%", height: "8%" }} {...props} />
   );
 };
 

@@ -5,9 +5,7 @@ import Image from "react-bootstrap/Image";
 import cl from "./users.module.css";
 
 const ProfileImg = (props) => {
-  console.log(props);
   const changeAvatar = (url) => {
-    console.log(url);
     props.setUserDataForm({ ...props.userDataForm, imgu: url });
   };
   return (

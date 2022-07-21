@@ -45,6 +45,7 @@ const NewContentFile = ({ addContent }) => {
       />
 
       <Form.Control
+        size="lg"
         className="mt-1"
         ref={inputFileName}
         type="file"
@@ -57,6 +58,7 @@ const NewContentFile = ({ addContent }) => {
           side1, side2 and the tag. arrange the each set in a separate line
         </p>
         <Button
+          size="lg"
           className="mt-1"
           variant="outline-dark"
           onClick={ViewExpressions}

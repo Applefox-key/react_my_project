@@ -8,6 +8,7 @@ import { PopupContext } from "../context";
 import RadioCheck from "../components/UI/radio/RadioCheck";
 import TrainingCards from "../components/expressions/TrainingCards";
 import Badge from "react-bootstrap/esm/Badge";
+import TrainingHeader from "../components/expressions/TrainingHeader";
 
 const Training = () => {
   // const [collectionid, setCollectionid] = useState(-1);
@@ -39,28 +40,17 @@ const Training = () => {
   };
 
   return (
-    <div>
-      <div className="d-flex p-2 justify-content-center ">
-        <UserAvatar />
-        <h1 className="display-1 mb-2">Training</h1>
-        <div>
-          <RadioCheck
-            list={["one by one", "list"]}
-            val="one by one"
-            callback={check}
-          />
-          <h5>
-            <Badge>you have {list ? list.length : 0} expressions to read</Badge>
-          </h5>
-        </div>
+    <div className="mt-3 fs-3 ">
+      <TrainingHeader list={list} check={check} />
+      <div>
+        {isLoading || !list ? (
+          <MySpinner />
+        ) : mode ? (
+          <TrainingList list={list} expressionUpdate={expressionUpdate} />
+        ) : (
+          <TrainingCards items={list} expressionUpdate={expressionUpdate} />
+        )}
       </div>
-      {isLoading || !list ? (
-        <MySpinner />
-      ) : mode ? (
-        <TrainingList list={list} expressionUpdate={expressionUpdate} />
-      ) : (
-        <TrainingCards items={list} expressionUpdate={expressionUpdate} />
-      )}
     </div>
   );
 };

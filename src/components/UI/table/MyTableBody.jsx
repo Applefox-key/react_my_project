@@ -4,7 +4,7 @@ import RowContent from "./RowContent";
 const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
   const editId = props.edit ? props.edit.content.id : null;
   return (
-    <tbody>
+    <tbody className="fs-5">
       {props.dataArray.map((element, i) => (
         <tr
           key={"row" + i}

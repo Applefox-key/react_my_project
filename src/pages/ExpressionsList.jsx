@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import NewExpressionFile from "../components/expressions/NewExpressionFile";
 import ExpressionsListMenu from "../components/expressions/ExpressionsListMenu";
@@ -9,7 +9,6 @@ import ExpressionInfo from "../components/expressions/ExpressionInfo";
 import MySpinner from "../components/UI/MySpinner";
 import BaseAPI from "../API/BaseAPI";
 import TabPills from "../components/UI/TabPills";
-import RadioCheck from "../components/UI/radio/RadioCheck";
 import { PopupContext } from "../context";
 import * as ExpAct from "../utils/expressionsAction";
 
@@ -19,7 +18,7 @@ const ExpressionsList = () => {
   const route = useNavigate();
   const [editMode, setEditMode] = useState(null);
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  const [getExpression, isLoading, error] = useQuery(async () => {
+  const [getExpression, isLoading] = useQuery(async () => {
     const expressions = await BaseAPI.getTrainingListAll();
     setExpressions(expressions);
   });
@@ -38,18 +37,6 @@ const ExpressionsList = () => {
       />
     );
   };
-
-  // const modalExpressionEdit = (expression) => {
-  //   setDataModal(
-  //     <ExpressionEdit
-  //       visible={true}
-  //       setVisible={setDataModal}
-  //       expression={expression}
-  //       onClick={editExpression}
-  //     />
-  //   );
-  // };
-
   //actions
 
   const addExpression = (newExpr) => {
@@ -59,7 +46,7 @@ const ExpressionsList = () => {
     ExpAct.addExpressionsFromFile(newExprArr, setExpressions);
   };
   const expressionDelete = async (expression) => {
-    ExpAct.expressionDelete(expression, setExpressions);
+    ExpAct.expressionDelete(expression, setExpressions, expressions);
   };
   const deleteAllExpressions = async () => {
     ExpAct.deleteAllExpressions(setExpressions);
@@ -83,7 +70,7 @@ const ExpressionsList = () => {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       {dataModal ? dataModal : <></>}
 
       <ExpressionsListMenu deleteAllExpressions={deleteAllExpressions} />
