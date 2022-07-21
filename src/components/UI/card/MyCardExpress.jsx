@@ -4,10 +4,10 @@ import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 import { CSSTransition } from "react-transition-group";
 
-const MyCardExpress = (item) => {
+const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
 
-  let studyPlan = item.item.studyPlan;
+  let studyPlan = item.studyPlan;
 
   return (
     <div>
@@ -22,8 +22,7 @@ const MyCardExpress = (item) => {
             classNames="front-face-transition"
           >
             <div className={cl["card-front"]}>
-              <h1 className="display-1">{item.item.expression}</h1>
-              <h1 className="display-5">{item.item.phrase}</h1>
+              <h1 className="display-1">{item.expression}</h1>
             </div>
           </CSSTransition>
           <CSSTransition
@@ -33,7 +32,10 @@ const MyCardExpress = (item) => {
           >
             <div className={cl["card-back"]}>
               <div className="d-flex justify-content-around w-100">
-                <h1 className="display-4">Study plan</h1>
+                <div className="w-50 d-flex flex-column  justify-content-between">
+                  <h1 className="display-4 mb-5">Study plan</h1>
+                  <p>{hint}</p>
+                </div>
                 <div className="text-start">
                   {studyPlan.map((el) => (
                     <p>{el}</p>

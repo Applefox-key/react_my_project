@@ -16,7 +16,7 @@ export class Expression {
     this.#stage = expression.stage;
     this.#id = expression.id;
     this.#collectionid = expression.collectionid;
-    if (expression.history == undefined) {
+    if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
     } else this.#history = expression.history;
@@ -91,23 +91,28 @@ export class Expression {
     //checking the date and set a hint for user
     if (this.alreadyRead) {
       //the text is already read
-      result = [`the text has been read today`, false];
+      result = [`the text has been read today`, false, 0];
     }
 
     //the text is not read today
-    result = [`read the text ${this.stage < 7 ? "twice " : "thrice "}`, false];
+    result = [
+      `read the text ${this.stage < 7 ? "twice " : "thrice "}`,
+      false,
+      this.stage < 7 ? 2 : 3,
+    ];
     //check the allert about late reading
     if (this.exceededSkipsCount) {
       result = [
         ` ☹ The number of deviations from the study plan has been exceeded. 
         The study will be started from the beginning! Read the text twice`,
         true,
+        2,
       ];
     }
     return result;
   }
   inCollection(colid) {
-    return this.#collectionid == colid;
+    return this.#collectionid.toString() === colid.toString();
   }
   get userHistory() {
     let result = [];

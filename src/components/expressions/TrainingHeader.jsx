@@ -6,8 +6,14 @@ import UserAvatar from "../users/UserAvatar";
 const TrainingHeader = ({ list, check }) => {
   return (
     <div className="p-1">
-      <UserAvatar />
-      {/* <h1 className="display-1 mb-2">Training</h1> */}
+      {/* <UserAvatar
+        style={{
+          width: "5%",
+          float: "right",
+          marginRight: "2%",
+          marginLeft: "-2%",
+        }}
+      /> */}
       <h3>
         <Badge bg="warning" text="dark">
           you have {list ? list.length : 0} expressions to read

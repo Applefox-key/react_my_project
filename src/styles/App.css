@@ -40,6 +40,7 @@ float:left;
   display: flex;
   margin: auto;
   height: fit-content;
+  
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
@@ -50,7 +51,7 @@ float:left;
   width: 60%;
   display: flex;
   margin: auto;
-  height: 2.8rem;
+  height: 2.8vc;
   align-items: flex-end;
   /* flex-wrap: wrap; */
   text-align: center;
@@ -70,7 +71,7 @@ float:left;
   .aboutH{
     font-size: 3vw; 
   }
-  .hint{
+  .hint1{
     width: 60%;
   }
 }
@@ -82,7 +83,7 @@ float:left;
   .aboutH{
     font-size: 5vw;
   }
-  .hint{
+  .hint1{
     width: 80%;
   
   

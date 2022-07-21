@@ -4,8 +4,8 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 import HintCount from "./HintCount";
 
 const OneCardE = ({ anim, dir, item }) => {
-  const [hintForUser, overdue] = item.hintForReading;
-  const count = item.stage < 7 ? 2 : 3;
+  const hintForUser = item.hintForReading;
+
   return (
     <>
       <div className="my-1" style={{ display: dir === 0 ? "block" : "none" }}>
@@ -16,12 +16,8 @@ const OneCardE = ({ anim, dir, item }) => {
         >
           <CSSTransition key={!anim} timeout={500} classNames="card_gallery">
             <div>
-              <HintCount
-                count={count}
-                overdue={overdue}
-                hintForUser={hintForUser}
-              ></HintCount>
-              <MyCardExpress item={item} />
+              <HintCount hint={hintForUser}></HintCount>
+              <MyCardExpress item={item} hint={hintForUser[0]} />
             </div>
           </CSSTransition>
         </SwitchTransition>
@@ -35,12 +31,8 @@ const OneCardE = ({ anim, dir, item }) => {
             classNames="card_gallery_back"
           >
             <div>
-              <HintCount
-                count={count}
-                overdue={overdue}
-                hintForUser={hintForUser}
-              ></HintCount>
-              <MyCardExpress item={item} />
+              <HintCount hint={hintForUser}></HintCount>
+              <MyCardExpress item={item} hint={hintForUser[0]} />
             </div>
           </CSSTransition>
         </SwitchTransition>
@@ -49,12 +41,8 @@ const OneCardE = ({ anim, dir, item }) => {
         <SwitchTransition mode="out-in">
           <CSSTransition key={anim} timeout={500} classNames="card_gallery_up">
             <div>
-              <HintCount
-                count={count}
-                overdue={overdue}
-                hintForUser={hintForUser}
-              ></HintCount>
-              <MyCardExpress item={item} />
+              <HintCount hint={hintForUser}></HintCount>
+              <MyCardExpress item={item} hint={hintForUser[0]} />
             </div>
           </CSSTransition>
         </SwitchTransition>
