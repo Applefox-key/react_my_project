@@ -3,6 +3,7 @@ import RowContent from "./RowContent";
 
 const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
   const editId = props.edit ? props.edit.content.id : null;
+
   return (
     <tbody className="fs-5">
       {props.dataArray.map((element, i) => (
@@ -10,9 +11,8 @@ const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
           key={"row" + i}
           onClick={(e) => {
             e.stopPropagation();
-            if (onRowClick) onRowClick(element);
-          }}
-        >
+            if (onRowClick && editId !== element.id) onRowClick(element);
+          }}>
           <RowContent
             edit={editId === element.id ? props.edit : null}
             content={element}

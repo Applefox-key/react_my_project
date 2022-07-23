@@ -71,6 +71,8 @@ const BaseAPI = {
   async createExpressionFromArray(arr) {
     let list = await this.fromLS("expressionsList");
     arr.forEach((element, i) => {
+      if (!element.expression || !element.phrase)
+        throw new Error("you cannot add an empty value ....row " + (i + 1));
       let wId = Date.now() + i;
       list.push({
         id: wId,
@@ -81,7 +83,6 @@ const BaseAPI = {
         history: [{ action: "add", date: new Date() }],
       });
     });
-
     await this.toLS("expressionsList", list);
     return true;
   },
@@ -130,7 +131,6 @@ const BaseAPI = {
     await this.toLS("expressionsList", []);
   },
   async editExpression(expressionId, w = "", s = "") {
-    debugger;
     if (!expressionId) return false;
     let expressionsList = await this.fromLS("expressionsList");
 

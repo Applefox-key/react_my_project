@@ -1,7 +1,7 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 
-const ContentList = ({ content }) => {
+const CollectionContentList = ({ content }) => {
   return (
     <ListGroup variant="flush">
       {!content ? (
@@ -9,7 +9,7 @@ const ContentList = ({ content }) => {
       ) : (
         <>
           {content.slice(0, 5).map((item) => (
-            <ListGroup.Item key={item.id}>{item.side1}</ListGroup.Item>
+            <ListGroup.Item key={item.id}>{item.question}</ListGroup.Item>
           ))}
 
           {content.length > 5 ? (
@@ -25,4 +25,4 @@ const ContentList = ({ content }) => {
   );
 };
 
-export default ContentList;
+export default CollectionContentList;

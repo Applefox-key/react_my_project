@@ -7,6 +7,9 @@
   }
   .success{
     background-color: rgb(72, 255, 121);
+  }  
+  .attantion{
+    background-color: rgb(250, 255, 116);
   }
   .error{
     background-color: rgb(255, 3, 53);

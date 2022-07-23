@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/esm/Card";
 import { useNavigate } from "react-router-dom";
-import ContentList from "./ContentList";
+import CollectionContentList from "./CollectionContentList";
 
 const CollectionCard = ({ collection }) => {
   const router = useNavigate();
@@ -13,14 +13,13 @@ const CollectionCard = ({ collection }) => {
         router(
           `/collections/${collection.collection.id}/${collection.collection.name}`
         );
-      }}
-    >
+      }}>
       <Card style={{ width: "18rem" }}>
         <Card.Header>
           {collection.collection.name}{" "}
           {/* {countUnread ? <Badge bg="success">{countUnread}</Badge> : <></>} */}
         </Card.Header>
-        <ContentList content={collection.content} />
+        <CollectionContentList content={collection.content} />
       </Card>
     </div>
   );

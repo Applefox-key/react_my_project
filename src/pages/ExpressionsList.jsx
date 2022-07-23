@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "../hooks/useQuery";
-import NewExpressionFile from "../components/expressions/NewExpressionFile";
 import ExpressionsListMenu from "../components/expressions/ExpressionsListMenu";
 import NewExpressionOne from "../components/expressions/NewExpressionOne";
 import MyTable from "../components/UI/table/MyTable";
@@ -9,15 +7,13 @@ import ExpressionInfo from "../components/expressions/ExpressionInfo";
 import MySpinner from "../components/UI/MySpinner";
 import BaseAPI from "../API/BaseAPI";
 import TabPills from "../components/UI/TabPills";
-import { PopupContext } from "../context";
-import * as ExpAct from "../utils/expressionsAction";
+import NewExpressionFile from "../components/expressions/NewExpressionFile";
+import NewExpressionPaste from "../components/expressions/NewExpressionPaste";
 
 const ExpressionsList = () => {
   const [expressions, setExpressions] = useState();
   const [dataModal, setDataModal] = useState(false);
-  const route = useNavigate();
   const [editMode, setEditMode] = useState(null);
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getExpression, isLoading] = useQuery(async () => {
     const expressions = await BaseAPI.getTrainingListAll();
     setExpressions(expressions);
@@ -38,18 +34,17 @@ const ExpressionsList = () => {
     );
   };
   //actions
-
-  const addExpression = (newExpr) => {
-    ExpAct.addExpression(newExpr, setExpressions, setPopupSettings);
-  };
-  const addExpressionsFromFile = async (newExprArr) => {
-    ExpAct.addExpressionsFromFile(newExprArr, setExpressions);
-  };
   const expressionDelete = async (expression) => {
-    ExpAct.expressionDelete(expression, setExpressions, expressions);
+    if (!window.confirm("Delete the expression?")) return;
+    await BaseAPI.deleteExpression(expression.id);
+    let arr = expressions.filter((elem) => elem.id !== expression.id);
+    setExpressions(arr);
   };
+
   const deleteAllExpressions = async () => {
-    ExpAct.deleteAllExpressions(setExpressions);
+    if (!window.confirm("Delete all expressions?")) return;
+    await BaseAPI.deleteAllExpressions();
+    setExpressions([]);
   };
 
   const editOn = (content) => {
@@ -66,7 +61,7 @@ const ExpressionsList = () => {
     }
     await BaseAPI.editExpression(newV.id, newV.expression, newV.phrase);
     setEditMode(null);
-    route(`/expressions`);
+    getExpression();
   };
 
   return (
@@ -74,9 +69,12 @@ const ExpressionsList = () => {
       {dataModal ? dataModal : <></>}
 
       <ExpressionsListMenu deleteAllExpressions={deleteAllExpressions} />
-      <TabPills tabsArr={["Add one expression", "Add from File"]}>
-        <NewExpressionOne addExpression={addExpression} />
-        <NewExpressionFile addExpressions={addExpressionsFromFile} />
+      <TabPills tabsArr={["Add one expression", "Add several expressions"]}>
+        <NewExpressionOne setExpressions={setExpressions} />
+        <>
+          <NewExpressionFile setExpressions={setExpressions} />
+          <NewExpressionPaste setExpressions={setExpressions} />{" "}
+        </>
       </TabPills>
 
       {!isLoading ? (

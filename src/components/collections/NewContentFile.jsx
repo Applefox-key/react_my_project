@@ -1,25 +1,29 @@
 import React, { useState, useRef, useContext } from "react";
-import { contentFromFile } from "../../utils/files";
+import { contentFromFile, contentFromTxtFile } from "../../utils/files";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { PopupContext } from "../../context";
 import ModalFileList from "./ModalFileList";
+import InputGroup from "react-bootstrap/InputGroup";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+import Tooltip from "react-bootstrap/esm/Tooltip";
+import BaseExtraAPI from "../../API/BaseExtraAPI";
 
-const NewContentFile = ({ addContent }) => {
+const NewContentFile = ({ setContent, pageParam }) => {
   const [fileContent, setFileContent] = useState();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [visible, setVisible] = useState(false);
   const inputFileName = useRef();
 
   const FileChange = (e) => {
-    let userFile = e.target;
-    const [files] = userFile.files;
-    if (files.type !== "text/plain") {
+    debugger;
+    try {
+      contentFromTxtFile(e.target.files[0], setFileContent);
+    } catch (error) {
       inputFileName.current.value = "";
-      setPopupSettings([true, "wrong file type", "error"]);
+      setPopupSettings([true, error.message, "error"]);
       return;
     }
-    contentFromFile(files, setFileContent);
   };
 
   const ViewExpressions = (e) => {
@@ -28,11 +32,18 @@ const NewContentFile = ({ addContent }) => {
     setVisible(true);
   };
 
-  const addToColection = () => {
-    addContent(fileContent);
-    setVisible(false);
-    setFileContent([]);
-    inputFileName.current.value = "";
+  const addToColection = async () => {
+    if (!fileContent) return;
+    try {
+      await BaseExtraAPI.createContentFromArray(fileContent, pageParam.id);
+      setContent(await BaseExtraAPI.getContent(pageParam.id));
+      setVisible(false);
+      setFileContent([]);
+      inputFileName.current.value = "";
+    } catch (error) {
+      setPopupSettings([true, error.message, "error"]);
+      return;
+    }
   };
 
   return (
@@ -44,27 +55,33 @@ const NewContentFile = ({ addContent }) => {
         onClick={addToColection}
       />
 
-      <Form.Control
-        size="lg"
-        className="mt-1"
-        ref={inputFileName}
-        type="file"
-        onChange={FileChange}
-      />
-
-      <div className="d-flex p-2  justify-content-around">
-        <p className="text-black-50">
-          Add the content from .txt file with semicolon as separator between
-          side1, side2 and the tag. arrange the each set in a separate line
-        </p>
-        <Button
-          size="lg"
-          className="mt-1"
-          variant="outline-dark"
-          onClick={ViewExpressions}
-        >
-          Add new expressions from file
-        </Button>
+      <div className="d-flex">
+        <OverlayTrigger
+          placement={"top"}
+          overlay={
+            <Tooltip>
+              Add the content from .txt file with semicolon as separator between
+              question, answer and the note. arrange the each set in a separate
+              line
+            </Tooltip>
+          }>
+          <Button
+            size="lg"
+            className="mt-1"
+            variant="outline-dark"
+            onClick={ViewExpressions}>
+            Add new content from file
+          </Button>
+        </OverlayTrigger>
+        <InputGroup className="w-75">
+          <Form.Control
+            size="lg"
+            className="mt-1"
+            ref={inputFileName}
+            type="file"
+            onChange={FileChange}
+          />
+        </InputGroup>
       </div>
     </>
   );

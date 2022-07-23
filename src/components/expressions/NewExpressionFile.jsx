@@ -1,69 +1,80 @@
 import React, { useState, useRef, useContext } from "react";
-import { expressionsFromFiles } from "../../utils/files";
+import { expressionsFromTxtFile } from "../../utils/files";
 import Button from "react-bootstrap/esm/Button";
-import ModalTrainingList from "./ModalTrainingList";
+import ModalFileContent from "./ModalFileContent";
 import Form from "react-bootstrap/Form";
 import { PopupContext } from "../../context";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import InputGroup from "react-bootstrap/InputGroup";
+import BaseAPI from "../../API/BaseAPI";
 
-const NewExpressionFile = ({ addExpressions }) => {
+const NewExpressionFile = ({ setExpressions }) => {
   const [fileContent, setFileContent] = useState();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [visible, setVisible] = useState(false);
   const inputFileName = useRef();
 
   const FileChange = (e) => {
-    let userFile = e.target;
-    const [files] = userFile.files;
-    if (files.type !== "text/plain") {
+    try {
+      expressionsFromTxtFile(e.target.files, setFileContent);
+    } catch (error) {
       inputFileName.current.value = "";
-      setPopupSettings([true, "wrong file type", "error"]);
+      setPopupSettings([true, error.message, "error"]);
       return;
     }
-    expressionsFromFiles(files, setFileContent);
   };
 
   const ViewExpressions = (e) => {
     e.stopPropagation();
+    if (!fileContent) setPopupSettings([true, "Please choose a file", "error"]);
+    else setVisible(true);
+  };
+
+  const addToColection = async () => {
     if (!fileContent) return;
-    setVisible(true);
+    try {
+      await BaseAPI.createExpressionFromArray(fileContent);
+      setExpressions(await BaseAPI.getTrainingListAll());
+      setVisible(false);
+      setFileContent([]);
+      inputFileName.current.value = "";
+    } catch (error) {
+      setPopupSettings([true, error.message, "error"]);
+      return;
+    }
   };
-
-  const addExpressionsToColection = () => {
-    addExpressions(fileContent);
-    setVisible(false);
-    setFileContent([]);
-    inputFileName.current.value = "";
-  };
-
   return (
     <>
-      <ModalTrainingList
+      <ModalFileContent
         dataArray={fileContent}
         setVisible={setVisible}
         visible={visible}
-        onClick={addExpressionsToColection}
-      />
+        onClick={addToColection}
+      />{" "}
+      <div className="d-flex">
+        <OverlayTrigger
+          placement={"bottom"}
+          overlay={
+            <Tooltip>
+              Add expressions from .txt file with semicolon as separator between
+              expression and phrase. arrange the expression-phrase pair in a
+              separate line.
+            </Tooltip>
+          }>
+          <Button variant="outline-dark" onClick={ViewExpressions}>
+            Add new expressions from file
+          </Button>
+        </OverlayTrigger>
 
-      <Form.Control
-        className="mt-1"
-        ref={inputFileName}
-        type="file"
-        onChange={FileChange}
-      />
-
-      <div className="d-flex p-2  justify-content-around">
-        <p className="text-black-50">
-          Add expressions from .txt file with semicolon as separator between
-          expression and phrase. arrange the expression-phrase pair in a
-          separate line
-        </p>
-        <Button
-          className="mt-1"
-          variant="outline-dark"
-          onClick={ViewExpressions}
-        >
-          Add new expressions from file
-        </Button>
+        <InputGroup className="w-75">
+          <Form.Control
+            className="mt-1"
+            ref={inputFileName}
+            type="file"
+            onChange={FileChange}
+          />
+        </InputGroup>
       </div>
     </>
   );

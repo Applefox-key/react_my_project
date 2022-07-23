@@ -3,7 +3,6 @@ import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
-import * as ExtAct from "../../../utils/extraActions";
 
 const MenuBtnMain = ({ collection, setContent, setRenameMode }) => {
   const router = useNavigate();
@@ -25,7 +24,9 @@ const MenuBtnMain = ({ collection, setContent, setRenameMode }) => {
     setRenameMode(true);
   };
   const deleteAllContent = async () => {
-    ExtAct.deleteAllContent(collection.id, setContent);
+    if (!window.confirm("Delete all expressions?")) return;
+    await BaseExtraAPI.deleteColContent(collection.id);
+    setContent([]);
   };
   const back = () => {
     router("/collections");

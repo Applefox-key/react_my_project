@@ -14,22 +14,20 @@ const MyCardExpress = ({ item, hint }) => {
       <div className={cl["card-container"]}>
         <button
           className={cl["card-button"]}
-          onClick={() => setFlipped(!flipped)}
-        >
+          onClick={() => setFlipped(!flipped)}>
           <CSSTransition
             in={!flipped}
             timeout={1000}
-            classNames="front-face-transition"
-          >
+            classNames="front-face-transition">
             <div className={cl["card-front"]}>
-              <h1 className="display-1">{item.expression}</h1>
+              <h1 className="display-4">{item.expression}</h1>
+              <h1 className="display-1">{item.phrase}</h1>
             </div>
           </CSSTransition>
           <CSSTransition
             in={flipped}
             timeout={1000}
-            classNames="back-face-transition"
-          >
+            classNames="back-face-transition">
             <div className={cl["card-back"]}>
               <div className="d-flex justify-content-around w-100">
                 <div className="w-50 d-flex flex-column  justify-content-between">
@@ -93,8 +91,8 @@ export default MyCardExpress;
 //   onExited={(node) => console.log("exit")}
 // >
 //   <div className={cl.card}>
-//     <h1 className="displwy-4">{side ? item.side1 : item.side2}</h1>
-//     <p>{item.tag}</p>
+//     <h1 className="displwy-4">{side ? item.question : item.answer}</h1>
+//     <p>{item.note}</p>
 //     <div>
 //       <Button onClick={() => setSide(!side)}>rotate</Button>
 //     </div>

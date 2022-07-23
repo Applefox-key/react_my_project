@@ -3,7 +3,7 @@ import MyTable from "../UI/table/MyTable";
 import MyModal from "../UI/MyModal";
 import Button from "react-bootstrap/esm/Button";
 
-const ModalTrainingList = ({ dataArray, onClick, visible, setVisible }) => {
+const ModalFileContent = ({ dataArray, onClick, visible, setVisible }) => {
   return (
     <MyModal
       title={"Import from file"}
@@ -18,4 +18,4 @@ const ModalTrainingList = ({ dataArray, onClick, visible, setVisible }) => {
   );
 };
 
-export default ModalTrainingList;
+export default ModalFileContent;

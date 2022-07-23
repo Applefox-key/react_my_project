@@ -9,9 +9,11 @@ const ModalFileList = ({ dataArray, onClick, visible, setVisible }) => {
       title={"Import from file"}
       subtitle={"New expressions:"}
       visible={visible}
-      setVisible={setVisible}
-    >
-      <MyTable dataArray={dataArray} namesArray={["side1", "side2", "tag"]} />
+      setVisible={setVisible}>
+      <MyTable
+        dataArray={dataArray}
+        namesArray={["question", "answer", "note"]}
+      />
 
       <Button onClick={onClick}>Add</Button>
     </MyModal>

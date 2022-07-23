@@ -4,42 +4,44 @@ import MyInputGroup from "../UI/input/MyInputGroup";
 
 const NewContentOne = ({ addContent }) => {
   const [newContent, setNewContent] = useState({
-    side1: "",
-    side2: "",
-    tag: "",
+    question: "",
+    answer: "",
+    note: "",
   });
+
   return (
     <>
+      <div className="d-flex">
+        <MyInputGroup
+          text="question"
+          placeholder="question"
+          value={newContent.question}
+          onChange={(e) =>
+            setNewContent({ ...newContent, question: e.target.value })
+          }
+        />
+        <MyInputGroup
+          text="note"
+          placeholder="note"
+          value={newContent.note}
+          onChange={(e) =>
+            setNewContent({ ...newContent, note: e.target.value })
+          }></MyInputGroup>
+      </div>
       <MyInputGroup
-        text="Side1"
-        placeholder="Side1"
-        value={newContent.side1}
+        text="answer"
+        placeholder="answer"
+        value={newContent.answer}
         onChange={(e) =>
-          setNewContent({ ...newContent, side1: e.target.value })
-        }
-      />
-      <MyInputGroup
-        text="Side2"
-        placeholder="Side2"
-        value={newContent.side2}
-        onChange={(e) =>
-          setNewContent({ ...newContent, side2: e.target.value })
-        }
-      ></MyInputGroup>
-      <MyInputGroup
-        text="tag"
-        placeholder="tag"
-        value={newContent.tag}
-        onChange={(e) => setNewContent({ ...newContent, tag: e.target.value })}
-      >
+          setNewContent({ ...newContent, answer: e.target.value })
+        }>
         <Button
           variant="outline-dark"
           onClick={(e) => {
             e.stopPropagation();
             addContent(newContent);
-            setNewContent({ side1: "", side2: "", tag: "" });
-          }}
-        >
+            setNewContent({ question: "", answer: "", note: "" });
+          }}>
           Add new card
         </Button>
       </MyInputGroup>

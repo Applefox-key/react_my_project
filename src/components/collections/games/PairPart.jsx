@@ -8,17 +8,15 @@ const PairPart = ({ items, onClick, num, active }) => {
         <CSSTransition
           timeout={500}
           classNames="expression"
-          key={el.id + "&" + num}
-        >
+          key={el.id + "&" + num}>
           <button
             className={[
               cl.list,
-              num === 2 ? cl.side2 : "",
+              num === 2 ? cl.answer : "",
               active === el.id + "&" + num ? cl.active : "",
             ].join(" ")}
             id={el.id + "&" + num}
-            onClick={onClick}
-          >
+            onClick={onClick}>
             {el["side" + num]}
           </button>
         </CSSTransition>

@@ -1,28 +1,31 @@
 import BaseAPI from "./BaseAPI.js";
 
 const BaseExtraAPI = {
-  async createCollection(nameCollect, tag = "") {
+  async createCollection(nameCollect, note = "") {
     let listC = await BaseAPI.fromLS("collectionsList");
     let colId = +new Date();
     listC.push({
       id: colId,
       name: nameCollect,
-      tag: tag,
+      note: note,
     });
     await BaseAPI.toLS("collectionsList", listC);
     return colId;
   },
+
   async createContentFromArray(arr, colId) {
     let list = await BaseAPI.fromLS("extraList");
 
     arr.forEach((element, i) => {
+      if (!element.answer || !element.question)
+        throw new Error("you cannot add an empty value ....row " + (i + 1));
       let wId = Date.now() + i;
       list.push({
         id: wId,
         collectionid: colId,
-        side1: element.side1,
-        side2: element.side2,
-        tag: element.tag,
+        question: element.question,
+        answer: element.answer,
+        note: element.note,
       });
     });
 
@@ -30,15 +33,14 @@ const BaseExtraAPI = {
     return true;
   },
   async createContent(content, colId) {
-    debugger;
     let list = await BaseAPI.fromLS("extraList");
     let wId = Date.now();
     list.push({
       id: wId,
       collectionid: colId,
-      side1: content.side1,
-      side2: content.side2,
-      tag: content.tag,
+      question: content.question,
+      answer: content.answer,
+      note: content.note,
     });
     await BaseAPI.toLS("extraList", list);
     return wId;
@@ -81,9 +83,9 @@ const BaseExtraAPI = {
     let list = await BaseAPI.fromLS("extraList");
     let ind = list.findIndex((item) => item.id.toString() === id.toString());
     let oneEntry = list[ind];
-    oneEntry.side1 = s1 ? s1 : oneEntry.expression;
-    oneEntry.side2 = s2 ? s2 : oneEntry.expression;
-    oneEntry.tag = t ? t : oneEntry.tag;
+    oneEntry.question = s1 ? s1 : oneEntry.expression;
+    oneEntry.answer = s2 ? s2 : oneEntry.expression;
+    oneEntry.note = t ? t : oneEntry.note;
     await BaseAPI.toLS("extraList", list);
     return true;
   },

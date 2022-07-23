@@ -2,7 +2,7 @@ import React from "react";
 import CollectionCard from "./CollectionCard";
 
 import NewCollection from "./NewCollection";
-const CollectionList = ({ collectionList, createCollection }) => {
+const CollectionCardsList = ({ collectionList, createCollection }) => {
   return (
     <>
       <NewCollection createCollection={createCollection} />
@@ -19,4 +19,4 @@ const CollectionList = ({ collectionList, createCollection }) => {
   );
 };
 
-export default CollectionList;
+export default CollectionCardsList;

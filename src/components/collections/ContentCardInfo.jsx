@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import MyCardExtra from "../../components/UI/card/MyCardExtra";
+import MyCardExtra from "../UI/card/MyCardExtra";
 import { useState } from "react";
 import BaseExtraAPI from "../../API/BaseExtraAPI";
 import { useQuery } from "../../hooks/useQuery";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
-const OneCard1 = () => {
+const ContentCardInfo = () => {
   const [item, setitem] = useState();
   const router = useNavigate();
 
@@ -37,4 +37,4 @@ const OneCard1 = () => {
   );
 };
 
-export default OneCard1;
+export default ContentCardInfo;

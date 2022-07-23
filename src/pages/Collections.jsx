@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import BaseExtraAPI from "../API/BaseExtraAPI";
-import CollectionList from "../components/collections/CollectionList";
+import CollectionCardsList from "../components/collections/CollectionCardsList";
 import MySpinner from "../components/UI/MySpinner";
 import UserAvatar from "../components/users/UserAvatar";
 import { PopupContext } from "../context";
@@ -15,7 +15,7 @@ const Collections = () => {
     setCollections(col);
   });
 
-  const createCollection = async (name, tag) => {
+  const createCollection = async (name, note) => {
     if (!name) {
       setPopupSettings([
         true,
@@ -24,7 +24,7 @@ const Collections = () => {
       ]);
       return;
     }
-    await BaseExtraAPI.createCollection(name, tag);
+    await BaseExtraAPI.createCollection(name, note);
     const col = await BaseExtraAPI.getCollections();
 
     setCollections(col);
@@ -50,7 +50,7 @@ const Collections = () => {
       {isLoading ? (
         <MySpinner />
       ) : (
-        <CollectionList
+        <CollectionCardsList
           collectionList={collections}
           createCollection={createCollection}
         />
