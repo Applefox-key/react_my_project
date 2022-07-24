@@ -56,7 +56,7 @@ const Pairs = () => {
         <div>
           <h1 className="display-5 mt-2 mb-2">mistakes: {count}</h1>
           <h1>{items.length + itemsV[0].length}</h1>
-          <div className={cl.main_container}>
+          <div className={cl.pairs_container}>
             <PairPart items={itemsV} onClick={choose} num={1} active={active} />
             <PairPart items={itemsV} onClick={choose} num={2} active={active} />
           </div>

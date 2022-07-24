@@ -3,7 +3,7 @@ import cl from "./Games.module.css";
 
 const TestOptions = ({ items, onClick, active }) => {
   return (
-    <div className="flex-center">
+    <div className="flex-center flex-wrap">
       {items.map((el) => (
         <button
           id={el.id}
