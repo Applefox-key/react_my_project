@@ -4,27 +4,27 @@ import CollectionRename from "./CollectionRename";
 import MenuBtnMain from "./MenuBtnMain";
 import MenuBtnSecond from "./MenuBtnSecond";
 
-const CollectionMenu = ({ collection, ...props }) => {
+const CollectionMenu = ({ colObj, ...props }) => {
   const [renameMode, setRenameMode] = useState(false);
 
   return (
-    <div className="d-flex  justify-content-start flex-row flex-wrap">
-      <div className="d-flex  justify-content-start flex-column">
+    <div className="d-flex  justify-content-between flex-row flex-wrap">
+      {renameMode ? (
+        <CollectionRename
+          collection={colObj.collection}
+          cancel={setRenameMode}
+        />
+      ) : (
+        <h1 className="display-5 ms-4 ">{colObj.collection.name}</h1>
+      )}{" "}
+      <div className="d-flex  justify-content-end flex-column">
         <MenuBtnMain
-          collection={collection}
+          colObj={colObj}
           setContent={props.setContent}
           setRenameMode={setRenameMode}
         />
         <MenuBtnSecond />
       </div>
-
-      {/* <div className="d-flex  justify-content-center w-80"> */}
-      {renameMode ? (
-        <CollectionRename collection={collection} cancel={setRenameMode} />
-      ) : (
-        <h1 className="display-5 ms-4 ">{collection.name}</h1>
-      )}
-      {/* </div> */}
     </div>
   );
 };

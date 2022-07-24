@@ -47,8 +47,7 @@ const CardsGallery = () => {
             <Button
               variant="primary"
               onClick={next}
-              disabled={items.length - 1 === itemNum}
-            >
+              disabled={items.length - 1 === itemNum}>
               {"NEXT ❱"}
             </Button>
           </div>

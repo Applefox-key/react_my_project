@@ -11,35 +11,34 @@ const CollectionRename = ({ collection, cancel }) => {
   const rename = async (newName) => {
     await BaseExtraAPI.editColName(newName.trim(), collection.id);
     cancel(false);
-    route(`/collections/${collection.id}/${newName.trim()}`);
+    route(`/collections/my/${collection.id}/${newName.trim()}`);
   };
   return (
-    <div className="d-flex  flex-column align-items-start ">
-      <div className="d-flex  justify-content-center align-items-start mb-2">
-        <Button
-          className="mx-2"
-          onClick={() => {
-            rename(newName);
-          }}
-        >
-          Rename
-        </Button>
-        <Button
-          onClick={(e) => {
-            cancel(false);
-          }}
-        >
-          cancel
-        </Button>
-      </div>
+    <div className="d-flex  flex-column align-items-start rename-div">
+      <div className="d-flex  justify-content-center align-items-start mb-2"></div>
 
       <MyInputGroup
         autoFocus
         size="lg"
         label="new name"
         value={newName}
-        onChange={(e) => setNewName(e.target.value)}
-      ></MyInputGroup>
+        onChange={(e) => setNewName(e.target.value)}>
+        <Button
+          size="lg"
+          className="mx-2"
+          onClick={() => {
+            rename(newName);
+          }}>
+          Rename
+        </Button>
+        <Button
+          size="lg"
+          onClick={(e) => {
+            cancel(false);
+          }}>
+          cancel
+        </Button>
+      </MyInputGroup>
     </div>
   );
 };

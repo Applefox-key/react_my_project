@@ -2,18 +2,13 @@ import React from "react";
 import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 
-const MyCardStatic = ({ item }) => {
-  console.log(item);
-
+const Result = ({ text }) => {
   return (
     <div>
       <div className={cl["card-container"]}>
-        <button
-          className={cl["card-button"]}
-          // onClick={() => setFlipped(!flipped)}
-        >
+        <button className={cl["card-button"]}>
           <div className={cl["card-front"]}>
-            <h1 className="display-1">{item.question}</h1>
+            <h1 className="display-1">{text}</h1>
           </div>
         </button>
       </div>
@@ -21,4 +16,4 @@ const MyCardStatic = ({ item }) => {
   );
 };
 
-export default MyCardStatic;
+export default Result;

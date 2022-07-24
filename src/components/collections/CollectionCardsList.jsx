@@ -6,6 +6,7 @@ const CollectionCardsList = ({ collectionList, createCollection }) => {
   return (
     <>
       <NewCollection createCollection={createCollection} />
+
       {!collectionList ? (
         <h2>No collections</h2>
       ) : (

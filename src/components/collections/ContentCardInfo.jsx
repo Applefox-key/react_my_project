@@ -22,13 +22,13 @@ const ContentCardInfo = () => {
   }, [pageParam]);
 
   const back = () => {
-    router(`/collections/${pageParam.id}/${pageParam.name}`);
+    router(`/collections/my/${pageParam.id}/${pageParam.name}`);
   };
 
   return (
     <>
-      <div className="text-start mx-5 my-5">
-        <Button variant="primary" onClick={back}>
+      <div className="text-center mx-5 my-5">
+        <Button variant="primary" size="lg" onClick={back}>
           {"❰ Back"}
         </Button>
       </div>

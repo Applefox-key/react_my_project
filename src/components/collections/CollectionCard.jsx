@@ -11,7 +11,7 @@ const CollectionCard = ({ collection }) => {
       className="mx-2 my-2 pointer"
       onClick={(e) => {
         router(
-          `/collections/${collection.collection.id}/${collection.collection.name}`
+          `/collections/my/${collection.collection.id}/${collection.collection.name}`
         );
       }}>
       <Card style={{ width: "18rem" }}>

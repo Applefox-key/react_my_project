@@ -12,7 +12,7 @@ const SignUp = () => {
     let ok = BaseAPI.createUser(data);
     if (ok) {
       setIsAuth(true);
-      router("/collections");
+      router("/collections/my");
     }
   };
   return (

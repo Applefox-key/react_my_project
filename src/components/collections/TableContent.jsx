@@ -33,7 +33,7 @@ const TableContent = ({ content, setContent, col, onRowClick, pageParam }) => {
       newV.note
     );
     setEditMode(null);
-    route(`/collections/${pageParam.id}/${pageParam.name}`);
+    route(`/collections/my/${pageParam.id}/${pageParam.name}`);
   };
 
   return (

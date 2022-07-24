@@ -28,7 +28,7 @@ const OneCollection = () => {
 
   //actions
   const openCard = (item) => {
-    route(`/collections/${pageParam.id}/${pageParam.name}/${item.id}`);
+    route(`/collections/my/${pageParam.id}/${pageParam.name}/${item.id}`);
   };
 
   const addContent = async (newC) => {
@@ -41,10 +41,13 @@ const OneCollection = () => {
   };
 
   return (
-    <div className="mt-3">
+    <div className="mt-">
       <TabPills
         tabsArr={["Collection menu ", "Add one set", "Add several sets"]}>
-        <CollectionMenu setContent={setContent} collection={pageParam} />
+        <CollectionMenu
+          setContent={setContent}
+          colObj={{ collection: pageParam, content: content }}
+        />
         <NewContentOne addContent={addContent} />
         <div>
           <NewContentFile setContent={setContent} pageParam={pageParam} />

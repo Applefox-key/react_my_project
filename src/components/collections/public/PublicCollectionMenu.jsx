@@ -8,19 +8,19 @@ const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
   console.log(collectionContent);
 
   const back = () => {
-    router("/public");
+    router("/collections/pub");
   };
 
   return (
     <div>
       <h1 className="display-4 mss-4">{collectionContent.name}</h1>
-
-      <div className="d-flex   align-items-start">
-        <ButtonGroup aria-label="delete and renaming buttons">
-          <Button variant="primary" onClick={addToMyCollection}>
+      {/* className="d-flex   align-items-end justify-content-end pt-2" */}
+      <div className="d-flex   align-items-start  align-items-end justify-content-end ">
+        <ButtonGroup aria-label="delete and renaming buttons" size="lg">
+          <Button variant="secondary" onClick={addToMyCollection}>
             Add to my collections
           </Button>
-          <Button variant="secondary" onClick={back}>
+          <Button variant="dark" onClick={back}>
             "❰ Back"
           </Button>
         </ButtonGroup>

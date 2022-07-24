@@ -4,7 +4,7 @@ import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 import { CSSTransition } from "react-transition-group";
 
-const MyCardExtra = (item) => {
+const MyCardExtra = ({ item, mode = "0" }) => {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -18,7 +18,10 @@ const MyCardExtra = (item) => {
             timeout={1000}
             classNames="front-face-transition">
             <div className={cl["card-front"]}>
-              <h1 className="display-1">{item.item.question}</h1>
+              {/* <h1 className="display-1"> */}
+              <h1 className={["display-1", cl.text1].join(" ")}>
+                {mode === "0" ? item.question : item.answer}
+              </h1>
             </div>
           </CSSTransition>
           <CSSTransition
@@ -26,8 +29,11 @@ const MyCardExtra = (item) => {
             timeout={1000}
             classNames="back-face-transition">
             <div className={cl["card-back"]}>
-              <h1 className="display-1">{item.item.answer}</h1>
-              <p className="display-5">{item.item.note}</p>
+              {/* <h1 className="display-1"> */}
+              <h1 className={["display-4", cl.text1].join(" ")}>
+                {mode === "0" ? item.answer : item.question}
+              </h1>
+              <p className="display-5">{item.note}</p>
             </div>
           </CSSTransition>
         </button>

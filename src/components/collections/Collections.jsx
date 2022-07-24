@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useContext } from "react";
-import BaseExtraAPI from "../API/BaseExtraAPI";
-import CollectionCardsList from "../components/collections/CollectionCardsList";
-import MySpinner from "../components/UI/MySpinner";
-import UserAvatar from "../components/users/UserAvatar";
-import { PopupContext } from "../context";
-import { useQuery } from "../hooks/useQuery";
+import BaseExtraAPI from "../../API/BaseExtraAPI";
+import CollectionCardsList from "./CollectionCardsList";
+import MySpinner from "../UI/MySpinner";
+import UserAvatar from "../users/UserAvatar";
+import { PopupContext } from "../../context";
+import { useQuery } from "../../hooks/useQuery";
 
 const Collections = () => {
   const [collections, setCollections] = useState([]);
@@ -38,6 +38,7 @@ const Collections = () => {
     <>
       <div className="d-flex pb-2 justify-content-center mt-4">
         <UserAvatar />
+
         <div style={{ width: " min-content" }}>
           <h1 className="display-1">Collections </h1>{" "}
           <div className="fs-5">

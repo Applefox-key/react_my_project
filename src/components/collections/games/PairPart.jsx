@@ -1,6 +1,7 @@
 import React from "react";
 import cl from "./Games.module.css";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 const PairPart = ({ items, onClick, num, active }) => {
   return (
     <TransitionGroup className={cl.container}>
@@ -11,13 +12,13 @@ const PairPart = ({ items, onClick, num, active }) => {
           key={el.id + "&" + num}>
           <button
             className={[
-              cl.list,
+              cl.list_btn,
               num === 2 ? cl.answer : "",
               active === el.id + "&" + num ? cl.active : "",
             ].join(" ")}
             id={el.id + "&" + num}
             onClick={onClick}>
-            {el["side" + num]}
+            {el[num === 1 ? "question" : "answer"]}
           </button>
         </CSSTransition>
       ))}

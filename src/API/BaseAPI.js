@@ -258,24 +258,21 @@ const BaseAPI = {
     return avlist;
   },
   createDB() {
-    if (!localStorage.getItem("avatars")) window.localStorage.clear();
+    if (!localStorage.getItem("publicW")) window.localStorage.clear();
     if (!localStorage.getItem("expressionsList1"))
       localStorage.setItem(
         "expressionsList1",
         JSON.stringify(dataBase.expressionsList)
       );
 
-    // if (!localStorage.getItem("publicC"))
-    //   localStorage.setItem(
-    //     "publicC",
-    //     JSON.stringify(dataBase.publicCollections)
-    //   );
+    if (!localStorage.getItem("publicC"))
+      localStorage.setItem(
+        "publicC",
+        JSON.stringify(dataBase.publicCollections)
+      );
 
-    // if (!localStorage.getItem("publicW"))
-    //   localStorage.setItem(
-    //     "publicW",
-    //     JSON.stringify(dataBase.publicExpressions)
-    //   );
+    if (!localStorage.getItem("publicW"))
+      localStorage.setItem("publicW", JSON.stringify(dataBase.publicContent));
 
     if (!localStorage.getItem("avatars")) {
       const avList = fbHelpers.getAvatarsFromStore();

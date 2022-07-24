@@ -10,11 +10,13 @@ const PublicCollectionCard = ({ list }) => {
     <div
       className="mx-2 my-2 pointer"
       onClick={(e) => {
-        router(`/public/${list.collection.id}/${list.collection.name}`);
+        router(
+          `/collections/pub/${list.collection.id}/${list.collection.name}`
+        );
       }}>
       <Card style={{ width: "18rem" }}>
         <Card.Header>{list.collection.name}</Card.Header>
-        <CollectionContentList expressionsList={list.expressions} />
+        <CollectionContentList content={list.content} />
       </Card>
     </div>
   );

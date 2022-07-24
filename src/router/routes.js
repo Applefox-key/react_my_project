@@ -1,7 +1,6 @@
 import OneCollection from "../components/collections/OneCollection";
 import About from "../pages/About";
 import Login from "../pages/Login";
-import Collections from "../pages/Collections";
 import Training from "../pages/Training";
 import SignUp from "../pages/SignUp";
 import Profile from "../pages/Profile";
@@ -11,6 +10,8 @@ import ExpressionsList from "../pages/ExpressionsList";
 import CardsGallery from "../components/collections/games/CardsGallery";
 import ContentCardInfo from "../components/collections/ContentCardInfo";
 import Pairs from "../components/collections/games/Pairs";
+import Extra from "../pages/Extra";
+import TestCard from "../components/collections/games/TestCard";
 export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
@@ -27,17 +28,20 @@ export const privateRoutes = [
   },
   { path: "/*", element: <Training />, nameNav: "" },
 
-  { path: "/collections", element: <Collections />, nameNav: "Extra" },
+  { path: "/collections", element: <Extra />, nameNav: "Extra" },
   { path: "/profile", element: <Profile />, nameNav: "Profile" },
 
-  { path: "/collections/:id/:name", element: <OneCollection /> },
-  { path: "/collections/:id/:name/:item", element: <ContentCardInfo /> },
-  { path: "/collections/play/:id/:name", element: <CardsGallery /> },
-  { path: "/collections/play_pairs/:id/:name", element: <Pairs /> },
-  { path: "/public/:id/:name", element: <PublicCollectionsView /> },
-  // {
-  //   path: "/public",
-  //   element: <PublicCollections />,
-  //   nameNav: "Public collections",
-  // },
+  { path: "/collections/my/:id/:name", element: <OneCollection /> },
+  { path: "/collections/:tab", element: <Extra /> },
+  { path: "/collections/my/:id/:name/:item", element: <ContentCardInfo /> },
+  { path: "/play_cards/:tab/:mode/:id/:name", element: <CardsGallery /> },
+  { path: "/play_test/:tab/:id/:name", element: <TestCard /> },
+  { path: "/play_pairs/:tab/:id/:name", element: <Pairs /> },
+  { path: "/collections/pub/:id/:name", element: <PublicCollectionsView /> },
+
+  {
+    path: "/public",
+    element: <PublicCollections />,
+    // nameNav: "Public collections",
+  },
 ];
