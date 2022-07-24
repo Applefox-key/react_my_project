@@ -40,7 +40,6 @@ const BaseExtraAPI = {
       localStorage.setItem("publicW", JSON.stringify(listW));
       return true;
     } catch (error) {
-      debugger;
       throw new Error(error);
     }
   },

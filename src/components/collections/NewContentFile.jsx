@@ -16,7 +16,6 @@ const NewContentFile = ({ setContent, pageParam }) => {
   const inputFileName = useRef();
 
   const FileChange = (e) => {
-    debugger;
     try {
       contentFromTxtFile(e.target.files[0], setFileContent);
     } catch (error) {

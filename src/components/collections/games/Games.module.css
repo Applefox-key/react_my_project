@@ -9,7 +9,7 @@
     min-width:130px;
     min-height: 50px;
     margin: 15px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 .pairs_container{
@@ -21,16 +21,7 @@
     height: 80%;
 
 }
-.answer{
-    background-color: rgb(128, 226, 248);
-    color: #fff;
-    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
-}
-.active{
-    background-color: rgb(251, 255, 0);
-    box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-}
+
 
 .container{
     margin: auto;
@@ -71,9 +62,68 @@
     color: black;
     -webkit-transition: all 150ms ease-in-out;
     transition: all 150ms ease-in-out;
-    
   }
-  .wrong_answer{
+
+
+/* test */
+ .wrong_answer{
+    text-decoration: line-through;
+    box-shadow: 0 0 10px 0 #e82d6f inset, 0 0 10px 4px #f4449a;
+  }
+.right_answer{
+    color: #fff;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+}
+
+  /* pairs */
+
+/* .question{
+    background-color: rgb(128, 226, 248);
+    color: #fff;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+} */
+.answer{
+    box-shadow: 0 0 10px 0 #f1c40f inset, 0 0 10px 4px #f1c40f;
+    /* background-color: rgb(128, 226, 248);
+    color: #fff;
+    box-shadow: 0 0 40px 40px  #f1c40f  inset, 0 0 0 0  #f1c40f ; */
+}
+.active2{
+    color: #fff;
+    background-color: black;
+    box-shadow: 0 0 40px 40px #f1c40f inset, 0 0 0 0 #f1c40f;
+}
+.active1{
+    color: #fff;
+    background-color: black;
+    box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+}
+
+.game_count{
+    /* height: 2rem; */
+    /* margin-top: 1rem;
+    margin-bottom: 1rem; */
+    border: 1px ;
+    border-radius: 10%;    cursor: auto;
+}
+
+
+
+
+/* unused */
+  .redbth {
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  }
+  .redbth:hover {
+    box-shadow: 0 0 40px 40px #e74c3c inset;
+  }
+  .yellow {
+    -webkit-transition: box-shadow 300ms ease-in-out,  #f1c40f  300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out,  #f1c40f  300ms ease-in-out;
+  }
+
+  .list-on{
     color: #fff;
     background-color: black;
     box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;

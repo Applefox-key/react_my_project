@@ -7,7 +7,9 @@
   /* display: contents;
   justify-content: center; */
 }
-
+.enable-button-pointers{
+  cursor: auto;
+}
 
 .modal-max{
   width:fit-content;

@@ -7,14 +7,14 @@ const PairPart = ({ items, onClick, num, active }) => {
     <TransitionGroup className={cl.container}>
       {items[num - 1].map((el) => (
         <CSSTransition
-          timeout={500}
+          timeout={400}
           classNames="expression"
           key={el.id + "&" + num}>
           <button
             className={[
               cl.list_btn,
               num === 2 ? cl.answer : "",
-              active === el.id + "&" + num ? cl.active : "",
+              active === el.id + "&" + num ? cl["active" + num] : "",
             ].join(" ")}
             id={el.id + "&" + num}
             onClick={onClick}>
@@ -27,3 +27,8 @@ const PairPart = ({ items, onClick, num, active }) => {
 };
 
 export default PairPart;
+// className={[
+//   cl.list_btn,
+//   num === 2 ? cl.answer : "",
+//   active === el.id + "&" + num ? cl.active : "",
+// ].join(" ")}
