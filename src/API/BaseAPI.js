@@ -258,7 +258,7 @@ const BaseAPI = {
     return avlist;
   },
   createDB() {
-    if (!localStorage.getItem("publicW")) window.localStorage.clear();
+    if (!localStorage.getItem("publicS")) this.deleteDB();
     if (!localStorage.getItem("expressionsList1"))
       localStorage.setItem(
         "expressionsList1",
@@ -271,8 +271,8 @@ const BaseAPI = {
         JSON.stringify(dataBase.publicCollections)
       );
 
-    if (!localStorage.getItem("publicW"))
-      localStorage.setItem("publicW", JSON.stringify(dataBase.publicContent));
+    if (!localStorage.getItem("publicS"))
+      localStorage.setItem("publicS", JSON.stringify(dataBase.publicContent));
 
     if (!localStorage.getItem("avatars")) {
       const avList = fbHelpers.getAvatarsFromStore();
@@ -297,10 +297,11 @@ const BaseAPI = {
   deleteDB() {
     localStorage.removeItem("collectionsList1");
     localStorage.removeItem("expressionsList1");
-    localStorage.removeItem("collectionsListExample");
-    localStorage.removeItem("expressionsListExample");
+
     localStorage.removeItem("users");
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
+    localStorage.removeItem("publicC");
+    localStorage.removeItem("publicS");
     console.log("DB DEL OK");
   },
 };

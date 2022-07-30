@@ -17,7 +17,7 @@ export const expressionsFromText = async (
     }
 
     const expressionArr = contArr.map((row, i) => {
-      let [p1, p2] = row.split(separator);
+      let [p1, p2] = row.replace("  ", " ").split(separator);
       if (!p1 || !p2) return { id: i, expression: p1, phrase: p2 };
       if (p1.length > p2.length) return { id: i, expression: p2, phrase: p1 };
       else return { id: i, expression: p1, phrase: p2 };
@@ -53,7 +53,10 @@ export const contentFromText = async (
       return;
     }
     const contentArr = contArr.map((row, i) => {
-      let arr = row.split(separator).filter((el) => el);
+      let arr = row
+        .replace("  ", " ")
+        .split(separator)
+        .filter((el) => el);
       if (auto) {
         //automatically determine the column name
         arr.sort((a, b) => a.length - b.length); //q n a

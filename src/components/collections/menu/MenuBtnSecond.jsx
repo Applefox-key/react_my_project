@@ -24,6 +24,10 @@ const MenuBtnSecond = () => {
             href={`/play_cards/my/1/${pageParam.id}/${pageParam.name}`}>
             answer - question
           </Dropdown.Item>
+          <Dropdown.Item
+            href={`/play_timecard/my/0/${pageParam.id}/${pageParam.name}`}>
+            time
+          </Dropdown.Item>
         </DropdownButton>
 
         {/* <Button

@@ -7,6 +7,7 @@ import PairPart from "./PairPart";
 import { shuffle, delId } from "../../../utils/arraysFunc";
 import Button from "react-bootstrap/esm/Button";
 import GameCount from "./GameCount";
+import Result from "../../UI/card/Result";
 
 const Pairs = () => {
   const [items, setItems] = useState();
@@ -42,9 +43,9 @@ const Pairs = () => {
         if (arr1.length === 0) setItemsV(contentParts());
         else setItemsV([arr1, arr2]);
         setCount([count[0] + 1, count[1]]);
+        setActive("");
       } else {
         setCount([count[0], count[1] + 1]);
-        setActive("");
       }
     }
   };
@@ -56,6 +57,8 @@ const Pairs = () => {
       </Button>
       {isLoading || !items ? (
         <MySpinner />
+      ) : 0 === items.length + itemsV[0].length ? (
+        <Result text="Job is done!" />
       ) : (
         <div>
           <GameCount count={count} all={items.length + itemsV[0].length} />

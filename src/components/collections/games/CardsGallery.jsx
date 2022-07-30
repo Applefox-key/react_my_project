@@ -4,6 +4,7 @@ import { PopupContext } from "../../../context";
 import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import OneCardG from "./OneCardG";
+import { shuffle } from "../../../utils/arraysFunc";
 
 const CardsGallery = () => {
   const [items, setItems] = useState();
@@ -11,7 +12,7 @@ const CardsGallery = () => {
   const [itemNum, setItemNum] = useState(0);
   const [anim, setShowAnim] = useState(false);
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  const [getContent, back, isLoading, error] = useGame(setItems);
+  const [getContent, back, isLoading, error] = useGame(setItems, shuffle);
 
   useEffect(() => {
     getContent();

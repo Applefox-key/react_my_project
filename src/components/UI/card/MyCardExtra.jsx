@@ -3,9 +3,13 @@ import { useState } from "react";
 import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 import { CSSTransition } from "react-transition-group";
+import { useEffect } from "react";
 
-const MyCardExtra = ({ item, mode = "0" }) => {
+const MyCardExtra = ({ item, mode = "0", flip }) => {
   const [flipped, setFlipped] = useState(false);
+  useEffect(() => {
+    if (flip !== flipped && flip !== undefined) setFlipped(!flipped);
+  }, [flip]);
 
   return (
     <div>

@@ -12,6 +12,7 @@ import ContentCardInfo from "../components/collections/ContentCardInfo";
 import Pairs from "../components/collections/games/Pairs";
 import Extra from "../pages/Extra";
 import TestCard from "../components/collections/games/TestCard";
+import TimeCard from "../components/collections/games/TimeCard";
 export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
@@ -35,6 +36,7 @@ export const privateRoutes = [
   { path: "/collections/:tab", element: <Extra /> },
   { path: "/collections/my/:id/:name/:item", element: <ContentCardInfo /> },
   { path: "/play_cards/:tab/:mode/:id/:name", element: <CardsGallery /> },
+  { path: "/play_timecard/:tab/:mode/:id/:name", element: <TimeCard /> },
   { path: "/play_test/:tab/:id/:name", element: <TestCard /> },
   { path: "/play_pairs/:tab/:id/:name", element: <Pairs /> },
   { path: "/collections/pub/:id/:name", element: <PublicCollectionsView /> },

@@ -17,7 +17,7 @@ const BaseExtraAPI = {
     try {
       let user = BaseAPI.getUser();
       let listC = JSON.parse(localStorage.getItem("publicC"));
-      let listW = JSON.parse(localStorage.getItem("publicW"));
+      let listW = JSON.parse(localStorage.getItem("publicS"));
       let colId = +new Date();
       listC.push({
         id: colId,
@@ -37,7 +37,7 @@ const BaseExtraAPI = {
           note: element.note,
         });
       });
-      localStorage.setItem("publicW", JSON.stringify(listW));
+      localStorage.setItem("publicS", JSON.stringify(listW));
       return true;
     } catch (error) {
       throw new Error(error);
@@ -153,7 +153,7 @@ const BaseExtraAPI = {
   },
 
   async getPublicCollections(colId) {
-    var cont = JSON.parse(localStorage.getItem("publicW"));
+    var cont = JSON.parse(localStorage.getItem("publicS"));
     var collect;
     if (colId)
       collect = JSON.parse(localStorage.getItem("publicC")).filter(
@@ -193,8 +193,8 @@ export default BaseExtraAPI;
 // async getPublicCollectionsAll() {
 //   return JSON.parse(localStorage.getItem("publicC"));
 // },
-// async getPublicWordsByCollection(colId) {
-//   var words = JSON.parse(localStorage.getItem("publicW"));
+// async getpublicSordsByCollection(colId) {
+//   var words = JSON.parse(localStorage.getItem("publicS"));
 //   if (!colId) return words;
 //   words = words.filter((word) => word.collectionid == colId);
 //   //  words = new WordsList(words);
@@ -202,7 +202,7 @@ export default BaseExtraAPI;
 //   return words;
 // },
 // async getPublicCollectionAndWords(colId) {
-//   var words = JSON.parse(localStorage.getItem("publicW"));
+//   var words = JSON.parse(localStorage.getItem("publicS"));
 
 //   var collect;
 //   if (colId)

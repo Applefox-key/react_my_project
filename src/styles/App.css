@@ -23,6 +23,11 @@
   width:40%;
   /* max-width: none!important; */
 }
+.center-div{
+  width:fit-content;
+  margin: auto;
+  /* max-width: none!important; */
+}
 .modal-h50{
   height:28rem;
 }
