@@ -258,7 +258,8 @@ const BaseAPI = {
     return avlist;
   },
   createDB() {
-    if (!localStorage.getItem("publicS")) this.deleteDB();
+    localStorage.removeItem("publicC");
+    localStorage.removeItem("publicS");
     if (!localStorage.getItem("expressionsList1"))
       localStorage.setItem(
         "expressionsList1",

@@ -9,7 +9,7 @@ import MyInputGroup from "../../UI/input/MyInputGroup";
 
 const TimeCard = () => {
   const [items, setItems] = useState();
-  const [oneDelay, setOneDelay] = useState(1.5);
+  const [oneDelay, setOneDelay] = useState(2);
   // const [card, setCard] = useState({ flip: false, num: 0, anim: false });
   const [num, setNum] = useState(0);
   const [flip, setFlip] = useState(false);
