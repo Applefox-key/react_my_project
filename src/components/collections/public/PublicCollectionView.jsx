@@ -3,17 +3,18 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../../../hooks/useQuery";
 import MyTable from "../../UI/table/MyTable";
 import MySpinner from "../../UI/MySpinner";
-import BaseAPI from "../../../API/BaseAPI";
+
 import { PopupContext } from "../../../context";
 import PublicCollectionMenu from "./PublicCollectionMenu";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
-import MenuBtnPublic from "./MenuBtnPublic";
 
 const PublicCollectionsView = () => {
   const [content, setContent] = useState();
   const PageParam = useParams();
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
+  // eslint-disable-next-line no-unused-vars
   const [getExpression, isLoading, error] = useQuery(async () => {
     const cont = await BaseExtraAPI.getPublicContent(PageParam.id);
     setContent(cont);
@@ -21,6 +22,7 @@ const PublicCollectionsView = () => {
 
   useEffect(() => {
     getExpression();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [PageParam]);
 
   const addToMyCollection = async () => {
@@ -41,7 +43,7 @@ const PublicCollectionsView = () => {
         collectionContent={PageParam}
         addToMyCollection={addToMyCollection}
       />
-      <MenuBtnPublic />
+      {/* <MenuBtnPublic /> */}
       {!isLoading ? (
         <MyTable
           dataArray={content}

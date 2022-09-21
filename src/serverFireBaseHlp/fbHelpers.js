@@ -33,7 +33,6 @@ export async function getAvatarsFromStore() {
     });
     res.items.forEach((itemRef, i) => {
       getDownloadURL(itemRef).then((url) => {
-        console.log(itemRef);
         imgarr.push({ name: itemRef.name, url: url });
         if (imgarr.length === res.items.length) {
           localStorage.setItem("avatars", JSON.stringify(imgarr));

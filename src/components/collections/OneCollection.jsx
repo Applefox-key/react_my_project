@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
-import CollectionMenu from "./menu/CollectionMenu";
 import MySpinner from "../UI/MySpinner";
-import TabPills from "../UI/TabPills";
+
 import { PopupContext } from "../../context";
 import BaseExtraAPI from "../../API/BaseExtraAPI";
-import NewContentOne from "./NewContentOne";
-import NewContentFile from "./NewContentFile";
+
 import TableContent from "./TableContent";
-import NewContentPaste from "./NewContentPaste";
+
+import CollNameMenu from "./menu/CollNameMenu";
 
 const OneCollection = () => {
   const [content, setContent] = useState();
   const pageParam = useParams();
   const route = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getContent, isLoading, error] = useQuery(async () => {
     const colContent = await BaseExtraAPI.getContent(pageParam.id);
@@ -24,6 +24,7 @@ const OneCollection = () => {
   useEffect(() => {
     getContent();
     if (error) setPopupSettings(true, error, "error");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageParam]);
 
   //actions
@@ -31,35 +32,17 @@ const OneCollection = () => {
     route(`/collections/my/${pageParam.id}/${pageParam.name}/${item.id}`);
   };
 
-  const addContent = async (newC) => {
-    if (!newC.question || !newC.answer || !pageParam.id) {
-      setPopupSettings([true, "please fill in both fields", "error"]);
-      return;
-    }
-    await BaseExtraAPI.createContent(newC, pageParam.id);
-    setContent(await BaseExtraAPI.getContent(pageParam.id));
-  };
-
   return (
     <div className="mt-">
-      <TabPills
-        tabsArr={["Collection menu ", "Add one set", "Add several sets"]}>
-        <CollectionMenu
-          setContent={setContent}
-          colObj={{ collection: pageParam, content: content }}
-        />
-        <NewContentOne addContent={addContent} />
-        <div>
-          <NewContentFile setContent={setContent} pageParam={pageParam} />
-          <NewContentPaste setContent={setContent} pageParam={pageParam} />
-        </div>
-      </TabPills>
+      <CollNameMenu
+        setContent={setContent}
+        colObj={{ collection: pageParam, content: content }}
+      />
 
       {!isLoading ? (
         <TableContent
           setContent={setContent}
           content={content}
-          col={pageParam}
           onRowClick={openCard}
           pageParam={pageParam}
         />

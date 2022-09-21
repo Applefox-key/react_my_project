@@ -1,7 +1,6 @@
 import React from "react";
 import Badge from "react-bootstrap/esm/Badge";
 import RadioCheck from "../UI/radio/RadioCheck";
-import UserAvatar from "../users/UserAvatar";
 
 const TrainingHeader = ({ list, check }) => {
   return (

@@ -1,12 +1,13 @@
 import React from "react";
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { AuthContext, PopupContext } from "../context";
+import { AuthContext } from "../context";
 import MyNavbar from "./nav/MyNavbar";
 import { privateRoutes, publicRoutes } from "../router/routes";
 import Popup from "./UI/popup/Popup";
 
 const AppRouter = () => {
+  // eslint-disable-next-line no-unused-vars
   const { isAuth, setIsAuth } = useContext(AuthContext);
 
   const routesArr = isAuth ? privateRoutes : publicRoutes;

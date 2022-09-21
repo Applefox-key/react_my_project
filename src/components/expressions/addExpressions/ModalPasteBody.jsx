@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MyTable from "../UI/table/MyTable";
+import MyTable from "../../UI/table/MyTable";
 
 const ModalPasteBody = ({ dataArr, dataStr, setDataStr, setDataArr }) => {
   const [editMode, setEditMode] = useState(null);

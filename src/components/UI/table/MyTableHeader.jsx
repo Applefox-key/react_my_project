@@ -1,4 +1,5 @@
 import React from "react";
+import ColumnHeadWithBtns from "./ColumnHeadWithBtns";
 
 const MyTableHeader = ({ namesArray, btnsArray = [] }) => {
   return (
@@ -8,7 +9,11 @@ const MyTableHeader = ({ namesArray, btnsArray = [] }) => {
         {namesArray.map((item) => (
           <th key={item}>{item}</th>
         ))}
-        {btnsArray ? <th key="btnA"></th> : <></>}
+        {btnsArray ? (
+          <ColumnHeadWithBtns key="btnA" btnsArray={btnsArray} />
+        ) : (
+          <></>
+        )}
       </tr>
     </thead>
   );

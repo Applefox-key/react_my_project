@@ -7,8 +7,6 @@ import Collections from "../components/collections/Collections";
 
 const Extra = () => {
   const page = useParams();
-  console.log(!!page);
-
   return (
     <div>
       <Tabs

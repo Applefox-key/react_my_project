@@ -18,15 +18,13 @@ const TrainingList = ({ list = [], expressionUpdate }) => {
         setVisible={setVisibleModal}
         expression={contentModal}
       />
-      {/* <h6 className="mt-1">you have {list.length} expressions to read</h6> */}
 
       <TransitionGroup className="d-flex p-2 flex-wrap justify-content-center">
         {list.map((expression) => (
           <CSSTransition
             timeout={500}
             classNames="expression"
-            key={expression.id}
-          >
+            key={expression.id}>
             <ExpressionBlock
               expression={expression}
               expressionUpdate={expressionUpdate}

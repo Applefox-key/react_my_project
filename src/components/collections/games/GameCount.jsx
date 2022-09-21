@@ -2,7 +2,6 @@ import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import cl from "./Games.module.css";
-import Badge from "react-bootstrap/Badge";
 const GameCount = ({ count, all }) => {
   return (
     <h1>

@@ -1,7 +1,7 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 
-const CollectionContentList = ({ content }) => {
+const CollectionCardBody = ({ content }) => {
   return (
     <ListGroup variant="flush">
       {!content ? (
@@ -25,4 +25,4 @@ const CollectionContentList = ({ content }) => {
   );
 };
 
-export default CollectionContentList;
+export default CollectionCardBody;

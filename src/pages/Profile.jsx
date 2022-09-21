@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,13 +12,13 @@ const Profile = () => {
   const [userData, setUserData] = useState();
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getUserData, isLoading, error] = useQuery(async () => {
-    console.log("effect DB UnreadExpressions");
     const data = await BaseAPI.getUser();
     setUserData(data);
   });
 
   useEffect(() => {
     getUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateUser = (data) => {

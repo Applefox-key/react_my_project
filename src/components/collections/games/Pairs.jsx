@@ -14,7 +14,6 @@ const Pairs = () => {
   const [itemsV, setItemsV] = useState([]);
   const [active, setActive] = useState();
   const [count, setCount] = useState([0, 0]);
-
   const contentParts = (arr = null) => {
     let newArr = arr ? shuffle([...arr]) : [...items];
     if (!newArr.length) return [[], []];
@@ -25,9 +24,11 @@ const Pairs = () => {
     let a2 = shuffle([...part]);
     return [a1, a2];
   };
+  // eslint-disable-next-line no-unused-vars
   const [getContent, back, isLoading, error] = useGame(setItemsV, contentParts);
   useEffect(() => {
     getContent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const choose = (e) => {

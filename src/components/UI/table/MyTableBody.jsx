@@ -8,12 +8,14 @@ const MyTableBody = ({ btnsArray = [], onRowClick = "", ...props }) => {
     <tbody className="fs-5">
       {props.dataArray.map((element, i) => (
         <tr
-          key={"row" + i}
+          key={"row" + element.id}
+          // key={"row" + i}
           onClick={(e) => {
             e.stopPropagation();
             if (onRowClick && editId !== element.id) onRowClick(element);
           }}>
           <RowContent
+            key={"row" + element.id}
             edit={editId === element.id ? props.edit : null}
             content={element}
             i={i}

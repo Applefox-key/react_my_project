@@ -4,7 +4,6 @@ const HintCount = ({ hint }) => {
   const [hintForUser, od, count] = hint;
   const cl1 = od ? "circle bg-danger" : "circle bg-warning";
   const cl2 = od ? "circle bg-dark" : "circle bg-primary";
-  console.log(od);
 
   return (
     <div className="hint1">

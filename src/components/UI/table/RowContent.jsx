@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import ColumnInput from "./ColumnInput";
-
 import ColumnWithBtns from "./ColumnWithBtns";
 
 const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
-  const [editValue, setEditValue] = useState({ ...content });
+  const [editValue, setEditValue] = useState({ ...content }); //{ ...content }
   const editNames = edit ? edit.names : [];
-
+  // debugger;
   const editOk = () => {
     edit.edit(editValue);
   };
   const editCancel = () => {
-    edit.edit();
+    edit.edit(editValue.id === "new" ? "newCancel" : "");
   };
   useEffect(() => {
     if (!editValue.id) {
       setEditValue({ id: content.id });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const btnsColumn = edit
     ? [
@@ -39,10 +39,12 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
       {namesArray.map((column) =>
         editNames.includes(column) ? (
           <ColumnInput
+            editCancel={editCancel}
             edit={edit}
             col={column}
             editVal={editVal}
             key={column}
+            autofocus={editNames[0] === column}
           />
         ) : Object.prototype.toString.call(content[column]) ===
           "[object Date]" ? (
@@ -59,7 +61,3 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
 };
 
 export default RowContent;
-
-{
-  /* <td key={column}>{content[column]}</td>; */
-}

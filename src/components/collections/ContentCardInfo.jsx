@@ -19,6 +19,7 @@ const ContentCardInfo = () => {
 
   useEffect(() => {
     getContent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageParam]);
 
   const back = () => {

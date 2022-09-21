@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import BaseAPI from "../../API/BaseAPI";
 import Image from "react-bootstrap/Image";
@@ -14,6 +15,7 @@ const UserAvatar = (props) => {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isLoading ? (

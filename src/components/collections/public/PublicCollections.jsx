@@ -11,6 +11,7 @@ const PublicCollections = () => {
   const [filtredList, setFiltredList] = useState([]);
   const [filter, setFilter] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [getPublicCollectionList, isLoading, error] = useQuery(async () => {
     const col = await BaseExtraAPI.getPublicCollections();
     setCollectionList(col);
@@ -19,6 +20,7 @@ const PublicCollections = () => {
 
   useEffect(() => {
     getPublicCollectionList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterList = () => {
@@ -49,6 +51,9 @@ const PublicCollections = () => {
           label="find:"
           value={filter}
           type="text"
+          onKeyPress={(e) => {
+            if (e.key === "Enter") filterList();
+          }}
           onChange={(e) => {
             setFilter(e.target.value);
           }}>

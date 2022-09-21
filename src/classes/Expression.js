@@ -124,7 +124,6 @@ export class Expression {
       });
       return result;
     } catch (err) {
-      console.log(err.message);
       return result;
     }
   }
@@ -151,7 +150,6 @@ export class Expression {
       }
       return result;
     } catch (err) {
-      console.log(err);
       return err.message;
     }
   }

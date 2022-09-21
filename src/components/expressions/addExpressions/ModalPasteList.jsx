@@ -1,32 +1,32 @@
 import React, { useContext } from "react";
-import MyModal from "../UI/MyModal";
-import { contentFromText } from "../../utils/texts";
+import MyModal from "../../UI/MyModal";
+import { expressionsFromText } from "../../../utils/texts";
 import { useState } from "react";
-import { PopupContext } from "../../context";
-import Popup from "../UI/popup/Popup";
-import ModalPasteContentBtns from "./ModalPasteContentBtns";
-import ModalPasteContentBody from "./ModalPasteContentBody";
-import BaseExtraAPI from "../../API/BaseExtraAPI";
+import { PopupContext } from "../../../context";
+import Popup from "../../UI/popup/Popup";
+import ModalPasteBtns from "./ModalPasteBtns";
+import ModalPasteBody from "./ModalPasteBody";
+import BaseAPI from "../../../API/BaseAPI";
 
-const ModalPasteContent = ({ visible, setVisible, onClick, pageParam }) => {
+const ModalCopyPasteList = ({ visible, setVisible, onClick }) => {
   const [dataArray, setDataArray] = useState();
-  const [check, setCheck] = useState(true);
   const [dataString, setDataString] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
   const read = () => {
-    contentFromText(dataString, setDataArray, setPopupSettings, check);
+    expressionsFromText(dataString, setDataArray, setPopupSettings);
   };
 
   const back = () => {
     setDataArray();
   };
 
-  const add = async () => {
+  const addExpressions = async () => {
     if (!dataArray) return;
     try {
-      await BaseExtraAPI.createContentFromArray(dataArray, pageParam.id);
-      onClick(await BaseExtraAPI.getContent(pageParam.id));
+      await BaseAPI.createExpressionFromArray(dataArray);
+      onClick(await BaseAPI.getTrainingListAll());
       setDataString("");
       setDataArray(null);
       setVisible(false);
@@ -45,21 +45,18 @@ const ModalPasteContent = ({ visible, setVisible, onClick, pageParam }) => {
       dialogClassName="h100"
       title={"Adding"}
       subtitle={
-        <ModalPasteContentBtns
+        <ModalPasteBtns
           dataArray={dataArray}
           read={read}
-          add={add}
+          add={addExpressions}
           back={back}
-          check={check}
-          setCheck={setCheck}
         />
       }>
       <div className="modal-h50">
         <div>
           <Popup />{" "}
         </div>
-
-        <ModalPasteContentBody
+        <ModalPasteBody
           dataArr={dataArray}
           dataStr={dataString}
           setDataStr={setDataString}
@@ -70,4 +67,4 @@ const ModalPasteContent = ({ visible, setVisible, onClick, pageParam }) => {
   );
 };
 
-export default ModalPasteContent;
+export default ModalCopyPasteList;

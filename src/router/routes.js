@@ -29,14 +29,14 @@ export const privateRoutes = [
   },
   { path: "/*", element: <Training />, nameNav: "" },
 
-  { path: "/collections", element: <Extra />, nameNav: "Extra" },
+  { path: "/collections", element: <Extra />, nameNav: "Collections" },
   { path: "/profile", element: <Profile />, nameNav: "Profile" },
 
   { path: "/collections/my/:id/:name", element: <OneCollection /> },
   { path: "/collections/:tab", element: <Extra /> },
   { path: "/collections/my/:id/:name/:item", element: <ContentCardInfo /> },
   { path: "/play_cards/:tab/:mode/:id/:name", element: <CardsGallery /> },
-  { path: "/play_timecard/:tab/:mode/:id/:name", element: <TimeCard /> },
+  { path: "/play_timecard/:tab/:id/:name", element: <TimeCard /> },
   { path: "/play_test/:tab/:id/:name", element: <TestCard /> },
   { path: "/play_pairs/:tab/:id/:name", element: <Pairs /> },
   { path: "/collections/pub/:id/:name", element: <PublicCollectionsView /> },

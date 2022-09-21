@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
@@ -35,6 +36,7 @@ const TestCard = () => {
   useEffect(() => {
     getContent();
     if (error) setPopupSettings([true, error, "error"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const choose = (e) => {

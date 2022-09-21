@@ -9,6 +9,7 @@ import { useQuery } from "../../hooks/useQuery";
 
 const Collections = () => {
   const [collections, setCollections] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const { popupSetting, setPopupSettings } = useContext(PopupContext);
   const [getCollections, isLoading] = useQuery(async () => {
     const col = await BaseExtraAPI.getCollections();
@@ -32,6 +33,7 @@ const Collections = () => {
 
   useEffect(() => {
     getCollections();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

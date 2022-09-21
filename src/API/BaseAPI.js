@@ -151,7 +151,6 @@ const BaseAPI = {
     let img = ud.imgu;
 
     if (img.includes("blob")) {
-      console.log(ud.imgu);
       img = await fbHelpers.setImgToStorage(usersList[num].id, img);
     }
 
@@ -253,7 +252,6 @@ const BaseAPI = {
   },
   getAvatarUrlList(num) {
     const avlist = JSON.parse(localStorage.getItem("avatars"));
-    console.log(avlist.entries());
 
     return avlist;
   },
@@ -293,7 +291,6 @@ const BaseAPI = {
         "collectionsList1",
         JSON.stringify(dataBase.collectionsList)
       );
-    console.log("DB OK");
   },
   deleteDB() {
     localStorage.removeItem("collectionsList1");
@@ -303,7 +300,6 @@ const BaseAPI = {
     // localStorage.removeItem("user");
     localStorage.removeItem("publicC");
     localStorage.removeItem("publicS");
-    console.log("DB DEL OK");
   },
 };
 export default BaseAPI;

@@ -4,7 +4,6 @@ import cl from "../popup/Popup.module.css";
 
 const Popup = () => {
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  console.log(popupSettings);
 
   let [show, message, variant] = [false, "", "success"];
   if (popupSettings) {

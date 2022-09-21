@@ -4,13 +4,14 @@ import { expressionsFromText } from "../../utils/texts";
 import { useState } from "react";
 import { PopupContext } from "../../context";
 import Popup from "../UI/popup/Popup";
-import ModalPasteBtns from "./ModalPasteBtns";
+import ModalPasteBtns from "./addExpressions/ModalPasteBtns";
 import ModalPasteBody from "./ModalPasteBody";
 import BaseAPI from "../../API/BaseAPI";
 
 const ModalCopyPasteList = ({ visible, setVisible, onClick }) => {
   const [dataArray, setDataArray] = useState();
   const [dataString, setDataString] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
   const read = () => {

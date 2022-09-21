@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import MyModal from "../UI/MyModal";
@@ -18,6 +19,7 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
 
   useEffect(() => {
     getAvatarList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const defaultImg = () => {
@@ -42,8 +44,7 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
       title={"Import from file"}
       subtitle={"Сlick on the picture or choose your own"}
       visible={visible}
-      setVisible={setVisible}
-    >
+      setVisible={setVisible}>
       <div className="d-flex mt-3">
         <Form.Control type="file" onChange={fromFile} size="lg" />
       </div>

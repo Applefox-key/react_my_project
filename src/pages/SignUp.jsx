@@ -6,6 +6,7 @@ import { AuthContext } from "../context";
 
 const SignUp = () => {
   const router = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const { isAuth, setIsAuth } = useContext(AuthContext);
 
   const newUser = (data) => {

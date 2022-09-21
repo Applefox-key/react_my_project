@@ -1,34 +1,30 @@
 import React, { useState, useEffect, useContext } from "react";
 import BaseAPI from "../API/BaseAPI";
-import UserAvatar from "../components/users/UserAvatar";
 import TrainingList from "../components/expressions/TrainingList";
 import { useQuery } from "../hooks/useQuery";
 import MySpinner from "../components/UI/MySpinner";
 import { PopupContext } from "../context";
-import RadioCheck from "../components/UI/radio/RadioCheck";
 import TrainingCards from "../components/expressions/TrainingCards";
-import Badge from "react-bootstrap/esm/Badge";
 import TrainingHeader from "../components/expressions/TrainingHeader";
 
 const Training = () => {
   // const [collectionid, setCollectionid] = useState(-1);
   const [list, setList] = useState();
   const [mode, setMode] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const { popupSetting, setPopupSettings } = useContext(PopupContext);
   //other hooks
   const [getList, isLoading, error] = useQuery(async () => {
-    console.log("effect DB UnreadExpressions");
     const data = await BaseAPI.getUnreadExpressions();
     setList(data);
   });
   const check = (event) => {
-    console.log(event.target.id);
-
     setMode(event.target.id);
   };
   useEffect(() => {
     getList();
     if (error) setPopupSettings([true, error, "error"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //actions

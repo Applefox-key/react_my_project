@@ -3,8 +3,6 @@ import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
 
 const MyCardStatic = ({ item }) => {
-  console.log(item);
-
   return (
     <div>
       <div className={cl["card-container"]}>

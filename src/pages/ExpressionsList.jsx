@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from "../hooks/useQuery";
-import ExpressionsListMenu from "../components/expressions/ExpressionsListMenu";
-import NewExpressionOne from "../components/expressions/NewExpressionOne";
+
 import MyTable from "../components/UI/table/MyTable";
 import ExpressionInfo from "../components/expressions/ExpressionInfo";
 import MySpinner from "../components/UI/MySpinner";
 import BaseAPI from "../API/BaseAPI";
-import TabPills from "../components/UI/TabPills";
-import NewExpressionFile from "../components/expressions/NewExpressionFile";
-import NewExpressionPaste from "../components/expressions/NewExpressionPaste";
+
+import ExpressionsMenu from "../components/expressions/ExpressionsMenu";
+import { PopupContext } from "../context";
 
 const ExpressionsList = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [expressions, setExpressions] = useState();
   const [dataModal, setDataModal] = useState(false);
   const [editMode, setEditMode] = useState(null);
@@ -21,6 +22,7 @@ const ExpressionsList = () => {
 
   useEffect(() => {
     getExpression();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //modal content
@@ -59,31 +61,49 @@ const ExpressionsList = () => {
       setEditMode(null);
       return;
     }
+    if (newV === "newCancel") {
+      setEditMode(null);
+      setExpressions(expressions.filter((el) => el.id !== "new"));
+      return;
+    }
+    if (newV.id === "new") {
+      await BaseAPI.createExpression(newV.expression, newV.phrase);
+      setExpressions(await BaseAPI.getTrainingListAll());
+      setEditMode(null);
+      setPopupSettings([true, "expression was added", "success"]);
+      return;
+    }
     await BaseAPI.editExpression(newV.id, newV.expression, newV.phrase);
     setEditMode(null);
     getExpression();
+  };
+  const addRow = async () => {
+    const newEl = {
+      id: "new",
+      expression: "",
+      phrase: "",
+    };
+    // await BaseExtraAPI.deleteColContent(pageParam.id);
+    setExpressions([newEl, ...expressions]);
+    editOn(newEl);
   };
 
   return (
     <div className="mt-3">
       {dataModal ? dataModal : <></>}
-
-      <ExpressionsListMenu deleteAllExpressions={deleteAllExpressions} />
-      <TabPills tabsArr={["Add one expression", "Add several expressions"]}>
-        <NewExpressionOne setExpressions={setExpressions} />
-        <>
-          <NewExpressionFile setExpressions={setExpressions} />
-          <NewExpressionPaste setExpressions={setExpressions} />{" "}
-        </>
-      </TabPills>
-
+      <ExpressionsMenu
+        deleteAllExpressions={deleteAllExpressions}
+        setExpressions={setExpressions}
+      />
       {!isLoading ? (
         <MyTable
           edit={editMode}
           dataArray={expressions}
-          namesArray={["expression", "phrase", "nextDate", "stage"]}
+          namesArray={["expression", "phrase", "stage"]}
           onRowClick={modalExpressionInfo}
           btnsArray={[
+            { nameMain: "Add row", callback: addRow },
+            { nameMain: "Delete all", callback: deleteAllExpressions },
             { name: "Edit", callback: editOn },
             { name: "Delete", callback: expressionDelete },
           ]}

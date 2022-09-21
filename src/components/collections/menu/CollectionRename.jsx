@@ -1,5 +1,5 @@
 import React from "react";
-import MyInputGroup from "../../UI/input/MyInputGroup";
+
 import Button from "react-bootstrap/esm/Button";
 import { useState } from "react";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
@@ -14,31 +14,37 @@ const CollectionRename = ({ collection, cancel }) => {
     route(`/collections/my/${collection.id}/${newName.trim()}`);
   };
   return (
-    <div className="d-flex  flex-column align-items-start rename-div">
-      <div className="d-flex  justify-content-center align-items-start mb-2"></div>
-
-      <MyInputGroup
+    <div className="d-flex">
+      <input
+        className="display-5 ms-4 border-dark"
         autoFocus
-        size="lg"
-        label="new name"
-        value={newName}
-        onChange={(e) => setNewName(e.target.value)}>
-        <Button
-          size="lg"
-          className="mx-2"
-          onClick={() => {
-            rename(newName);
-          }}>
-          Rename
-        </Button>
-        <Button
-          size="lg"
-          onClick={(e) => {
+        onBlur={(e) => {
+          if (!e.relatedTarget) {
             cancel(false);
-          }}>
-          cancel
-        </Button>
-      </MyInputGroup>
+          } else if (e.target.parentElement !== e.relatedTarget.parentElement)
+            cancel(false);
+        }}
+        value={newName}
+        onChange={(e) => setNewName(e.target.value)}
+      />{" "}
+      <Button
+        variant="outline-dark"
+        size="lg"
+        className="mx-2 h-100"
+        onClick={() => {
+          rename(newName);
+        }}>
+        OK
+      </Button>
+      <Button
+        className="h-100"
+        variant="outline-dark"
+        size="lg"
+        onClick={(e) => {
+          cancel(false);
+        }}>
+        CANCEL
+      </Button>
     </div>
   );
 };

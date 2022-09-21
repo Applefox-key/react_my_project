@@ -11,12 +11,14 @@ const CardsGallery = () => {
   const [direction, setDirection] = useState(true);
   const [itemNum, setItemNum] = useState(0);
   const [anim, setShowAnim] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getContent, back, isLoading, error] = useGame(setItems, shuffle);
 
   useEffect(() => {
     getContent();
     if (error) setPopupSettings([true, error, "error"]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const next = () => {

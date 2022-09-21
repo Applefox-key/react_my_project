@@ -8,8 +8,7 @@ const MyModal = ({ children, title = "", subtitle = "", ...props }) => {
       // dialogClassName={props.fullscreen ? "" : "modal-max"}
       show={props.visible}
       onHide={() => props.setVisible(false)}
-      {...props}
-    >
+      {...props}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>

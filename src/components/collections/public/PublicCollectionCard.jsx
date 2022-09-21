@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/esm/Card";
 
 import { useNavigate } from "react-router-dom";
-import CollectionContentList from "../CollectionContentList";
+import CollectionCardBody from "../CollectionCardBody";
 
 const PublicCollectionCard = ({ list }) => {
   const router = useNavigate();
@@ -16,7 +16,7 @@ const PublicCollectionCard = ({ list }) => {
       }}>
       <Card style={{ width: "18rem" }}>
         <Card.Header>{list.collection.name}</Card.Header>
-        <CollectionContentList content={list.content} />
+        <CollectionCardBody content={list.content} />
       </Card>
     </div>
   );

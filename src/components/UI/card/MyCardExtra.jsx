@@ -9,6 +9,7 @@ const MyCardExtra = ({ item, mode = "0", flip }) => {
   const [flipped, setFlipped] = useState(false);
   useEffect(() => {
     if (flip !== flipped && flip !== undefined) setFlipped(!flipped);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flip]);
 
   return (
@@ -47,19 +48,3 @@ const MyCardExtra = ({ item, mode = "0", flip }) => {
 };
 
 export default MyCardExtra;
-// <CSSTransition
-//   in={!side}
-//   timeout={500}
-//   classNames={cl.animation}
-//   // unmountOnExit
-//   onEnter={(node) => console.log(node.classList)}
-//   onExited={(node) => console.log("exit")}
-// >
-//   <div className={cl.card}>
-//     <h1 className="displwy-4">{side ? item.question : item.answer}</h1>
-//     <p>{item.note}</p>
-//     <div>
-//       <Button onClick={() => setSide(!side)}>rotate</Button>
-//     </div>
-//   </div>
-// </CSSTransition>

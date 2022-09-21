@@ -7,10 +7,11 @@ import { PopupContext } from "../../../context";
 import MyModal from "../../UI/MyModal";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
 
-const CollectionShare = ({ colObj, setVisible, visible }) => {
+const CollectionShare = ({ colObj, setVisible }) => {
   const [note, setNote] = useState("");
   const [contentList, setContentList] = useState(colObj.content);
   const [name, setName] = useState(colObj.collection.name);
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const notShare = (expression) => {
     const id = expression.id;
@@ -37,7 +38,7 @@ const CollectionShare = ({ colObj, setVisible, visible }) => {
     <MyModal
       title="Share the collection"
       setVisible={setVisible}
-      visible={visible}>
+      visible={true}>
       <div>
         <MyInputGroup
           label="Collection name"

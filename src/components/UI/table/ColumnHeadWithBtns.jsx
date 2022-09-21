@@ -1,24 +1,24 @@
 import React from "react";
 import Button from "react-bootstrap/esm/Button";
 
-const ColumnWithBtns = ({ btnsArray, content }) => {
+const ColumnHeadWithBtns = ({ btnsArray }) => {
   return (
-    <td key="btnA">
+    <th>
       {btnsArray
-        .filter((el) => !el.nameMain)
+        .filter((el) => el.nameMain)
         .map((btn, i) => (
           <Button
             key={i}
             variant="link"
             onClick={(e) => {
               e.stopPropagation();
-              btn.callback(content);
+              btn.callback();
             }}>
-            {btn.name}
+            {btn.nameMain}
           </Button>
         ))}
-    </td>
+    </th>
   );
 };
 
-export default ColumnWithBtns;
+export default ColumnHeadWithBtns;

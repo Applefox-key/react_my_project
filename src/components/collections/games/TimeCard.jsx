@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { PopupContext } from "../../../context";
@@ -14,6 +15,7 @@ const TimeCard = () => {
   const [num, setNum] = useState(0);
   const [flip, setFlip] = useState(false);
   const [anim, setShowAnim] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [getContent, back, isLoading, error] = useGame(setItems, shuffle);
 
@@ -27,8 +29,6 @@ const TimeCard = () => {
       setTimeout(() => {
         // setCard({ ...card, flip: true });
         setFlip(true);
-        console.log(1000 * oneDelay * (i * 2 + 1));
-        console.log("flip " + i);
       }, 1000 * oneDelay * (i * 2 + 1));
 
       if (i + 1 < items.length)
@@ -37,9 +37,6 @@ const TimeCard = () => {
           setShowAnim(i % 2 === 0);
           setFlip(false);
           setNum(i + 1);
-          //   console.log(1000 * oneDelay * (i * 2 + 2));
-          //   console.log("next " + i + 1);
-          //   console.log((i + 1) % 2 === 0);
         }, 1000 * oneDelay * (i * 2 + 2));
     });
 
@@ -75,15 +72,6 @@ const TimeCard = () => {
             <Button variant="primary" onClick={start} disabled={num !== 0}>
               {"START"}
             </Button>{" "}
-            {/* <Button variant="primary" onClick={prew} disabled={itemNum === 0}>
-              {"❰ PREW"}
-            </Button>{" "}
-            <Button
-              variant="primary"
-              onClick={next}
-              disabled={items.length - 1 === itemNum}>
-              {"NEXT ❱"}
-            </Button> */}
           </div>
         </div>
       ) : (
