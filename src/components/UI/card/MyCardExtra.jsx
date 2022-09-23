@@ -5,7 +5,7 @@ import "./MyCard.module.css";
 import { CSSTransition } from "react-transition-group";
 import { useEffect } from "react";
 
-const MyCardExtra = ({ item, mode = "0", flip }) => {
+const MyCardExtra = ({ item, mode = "0", flip, clc = true }) => {
   const [flipped, setFlipped] = useState(false);
   useEffect(() => {
     if (flip !== flipped && flip !== undefined) setFlipped(!flipped);
@@ -17,11 +17,10 @@ const MyCardExtra = ({ item, mode = "0", flip }) => {
       <div className={cl["card-container"]}>
         <button
           className={cl["card-button"]}
-          onClick={() => setFlipped(!flipped)}>
-          <CSSTransition
-            in={!flipped}
-            timeout={1000}
-            classNames="front-face-transition">
+          onClick={() => {
+            if (clc) setFlipped(!flipped);
+          }}>
+          <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
               {/* <h1 className="display-1"> */}
               <h1 className={["display-1", cl.text1].join(" ")}>
@@ -29,10 +28,7 @@ const MyCardExtra = ({ item, mode = "0", flip }) => {
               </h1>
             </div>
           </CSSTransition>
-          <CSSTransition
-            in={flipped}
-            timeout={1000}
-            classNames="back-face-transition">
+          <CSSTransition in={flipped} timeout={1000} classNames="cardBack">
             <div className={cl["card-back"]}>
               {/* <h1 className="display-1"> */}
               <h1 className={["display-4", cl.text1].join(" ")}>

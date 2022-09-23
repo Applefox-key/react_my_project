@@ -11,7 +11,6 @@ const ModalCommand = ({ mod, setMod, colObj, setContent }) => {
       )}{" "}
       {mod === "list" && (
         <ModalPasteContent
-          visible={mod === "list"}
           setVisible={setMod}
           onClick={setContent}
           pageParam={colObj}
@@ -19,7 +18,6 @@ const ModalCommand = ({ mod, setMod, colObj, setContent }) => {
       )}{" "}
       {mod === "file" && (
         <ModalFileContent
-          visible={mod === "file"}
           setVisible={setMod}
           setContent={setContent}
           colId={colObj.collection.id}

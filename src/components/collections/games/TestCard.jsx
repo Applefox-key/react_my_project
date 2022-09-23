@@ -5,11 +5,9 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { PopupContext } from "../../../context";
 import { useGame } from "../../../hooks/useGame";
 import { shuffle } from "../../../utils/arraysFunc";
-import MyCardStatic from "../../UI/card/MyCardStatic";
 import Result from "../../UI/card/Result";
 import MySpinner from "../../UI/MySpinner";
-import GameCount from "./GameCount";
-import TestOptions from "./TestOptions";
+import TestBody from "./TestBody";
 
 const TestCard = () => {
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
@@ -63,26 +61,12 @@ const TestCard = () => {
 
       {isLoading || !items ? (
         <MySpinner />
-      ) : num === items.length - 1 ? (
+      ) : items.length === count[0] + count[1] ? (
         <Result text="Job is done!" />
       ) : (
-        <>
-          <GameCount count={count} all={items.length - num} />
-
-          <SwitchTransition mode="out-in">
-            <CSSTransition timeout={500} key={num} classNames="card_gallery_up">
-              <div>
-                <MyCardStatic item={items[num].item} />
-                <TestOptions
-                  items={items[num].answ}
-                  onClick={choose}
-                  active={active}
-                  right={right}
-                />
-              </div>
-            </CSSTransition>
-          </SwitchTransition>
-        </>
+        <CSSTransition appear={true} in={true} timeout={500} classNames="game">
+          <TestBody items={items} />
+        </CSSTransition>
       )}
     </div>
   );

@@ -7,7 +7,7 @@ const ModalCommand = ({ mod, setMod, setExpressions }) => {
     <div>
       {mod === "list" && (
         <ModalPasteList
-          visible={mod === "list"}
+          //  visible={mod === "list"}
           setVisible={setMod}
           onClick={setExpressions}
         />

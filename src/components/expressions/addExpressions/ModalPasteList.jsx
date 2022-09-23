@@ -8,7 +8,7 @@ import ModalPasteBtns from "./ModalPasteBtns";
 import ModalPasteBody from "./ModalPasteBody";
 import BaseAPI from "../../../API/BaseAPI";
 
-const ModalCopyPasteList = ({ visible, setVisible, onClick }) => {
+const ModalCopyPasteList = ({ setVisible, onClick }) => {
   const [dataArray, setDataArray] = useState();
   const [dataString, setDataString] = useState("");
   // eslint-disable-next-line no-unused-vars
@@ -38,7 +38,7 @@ const ModalCopyPasteList = ({ visible, setVisible, onClick }) => {
 
   return (
     <MyModal
-      visible={visible}
+      visible={true}
       setVisible={setVisible}
       fullscreen
       size="md"

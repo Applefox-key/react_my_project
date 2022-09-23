@@ -5,10 +5,9 @@ import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import { shuffle } from "../../../utils/arraysFunc";
 import BackBtn from "../../UI/BackBtn/BackBtn";
-import TimeCardBody from "./TimeCardBody";
-import { CSSTransition } from "react-transition-group";
+import WriteCardBody from "./WriteCardBody";
 
-const TimeCard = () => {
+const WriteCard = () => {
   const [items, setItems] = useState();
 
   // eslint-disable-next-line no-unused-vars
@@ -23,15 +22,9 @@ const TimeCard = () => {
   return (
     <div style={{ overflow: "hidden" }}>
       <BackBtn size="lg" onClick={back} />
-      {!isLoading && items ? (
-        <CSSTransition appear={true} in={true} timeout={500} classNames="game">
-          <TimeCardBody items={items} />
-        </CSSTransition>
-      ) : (
-        <MySpinner />
-      )}
+      {!isLoading && items ? <WriteCardBody items={items} /> : <MySpinner />}
     </div>
   );
 };
 
-export default TimeCard;
+export default WriteCard;

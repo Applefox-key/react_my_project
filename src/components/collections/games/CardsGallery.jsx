@@ -5,6 +5,8 @@ import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import OneCardG from "./OneCardG";
 import { shuffle } from "../../../utils/arraysFunc";
+import BackBtn from "../../UI/BackBtn/BackBtn";
+import { CSSTransition } from "react-transition-group";
 
 const CardsGallery = () => {
   const [items, setItems] = useState();
@@ -35,26 +37,25 @@ const CardsGallery = () => {
 
   return (
     <div style={{ overflow: "hidden" }}>
-      <Button variant="dark" size="lg" onClick={back}>
-        {"❰ Back"}
-      </Button>
+      <BackBtn size="lg" onClick={back} />
       {!isLoading && items ? (
-        <div>
-          {" "}
-          <p>{items && itemNum + 1 + "/" + items.length}</p>
-          <OneCardG anim={anim} direction={direction} item={items[itemNum]} />
-          <div className="mt-5">
-            <Button variant="primary" onClick={prew} disabled={itemNum === 0}>
-              {"❰ PREW"}
-            </Button>{" "}
-            <Button
-              variant="primary"
-              onClick={next}
-              disabled={items.length - 1 === itemNum}>
-              {"NEXT ❱"}
-            </Button>
+        <CSSTransition appear={true} in={true} timeout={500} classNames="game">
+          <div>
+            <p>{items && itemNum + 1 + "/" + items.length}</p>
+            <OneCardG anim={anim} direction={direction} item={items[itemNum]} />
+            <div className="mt-5">
+              <Button variant="primary" onClick={prew} disabled={itemNum === 0}>
+                {"❰ PREW"}
+              </Button>{" "}
+              <Button
+                variant="primary"
+                onClick={next}
+                disabled={items.length - 1 === itemNum}>
+                {"NEXT ❱"}
+              </Button>
+            </div>
           </div>
-        </div>
+        </CSSTransition>
       ) : (
         <MySpinner />
       )}

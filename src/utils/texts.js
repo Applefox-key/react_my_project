@@ -72,3 +72,10 @@ export const contentFromText = async (
     return;
   }
 };
+
+export const onlyLetters = (text) => {
+  let res = text.replace(/\W/g, "");
+  res = res.replace(/[0-9]/g, "");
+  res = res.replace(/\s/g, "");
+  return res.toLowerCase();
+};

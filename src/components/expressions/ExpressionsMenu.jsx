@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
+import BackBtn from "../UI/BackBtn/BackBtn";
 
 import ExpModalCommand from "./ExpModalCommand";
 
@@ -39,9 +40,7 @@ const ExpressionsMenu = ({ setExpressions, ...props }) => {
           </Button>
         </ButtonGroup>
       </div>{" "}
-      <Button variant="dark" onClick={back}>
-        {"❰ Back"}
-      </Button>
+      <BackBtn size="lg" onClick={back} />
     </div>
   );
 };

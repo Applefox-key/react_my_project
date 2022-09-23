@@ -1,16 +1,13 @@
 import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import BackBtn from "../../UI/BackBtn/BackBtn";
 import MyDropDownBtn from "../../UI/MyDropDownBtn/MyDropDowmBtn";
 
 const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
-  const router = useNavigate();
   const pageParam = useParams();
 
-  const back = () => {
-    router("/collections/pub");
-  };
   const gameMenu = [
     {
       name: "Cards: question - answer",
@@ -33,6 +30,10 @@ const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
       name: "Find the right answer",
       href: `/play_test/pub/${pageParam.id}/${pageParam.name}`,
     },
+    {
+      name: "Write the right answer",
+      href: `/play_write/pub/${pageParam.id}/${pageParam.name}`,
+    },
   ];
   return (
     <div>
@@ -48,9 +49,7 @@ const PublicCollectionMenu = ({ collectionContent, addToMyCollection }) => {
           <Button variant="ligth" onClick={addToMyCollection}>
             Add to my collections
           </Button>
-          <Button variant="dark" onClick={back}>
-            "❰ Back"
-          </Button>
+          <BackBtn path="/collections/pub" />
         </ButtonGroup>
       </div>
     </div>

@@ -9,7 +9,6 @@ const RadioCheck = ({ list, val, callback }) => {
       {list.map((m, i) => (
         <Form.Check
           key={m}
-          custom
           inline
           label={m}
           id={i}

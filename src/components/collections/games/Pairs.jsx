@@ -5,10 +5,10 @@ import MySpinner from "../../UI/MySpinner";
 import cl from "./Games.module.css";
 import PairPart from "./PairPart";
 import { shuffle, delId } from "../../../utils/arraysFunc";
-import Button from "react-bootstrap/esm/Button";
 import GameCount from "./GameCount";
 import Result from "../../UI/card/Result";
-
+import BackBtn from "../../UI/BackBtn/BackBtn";
+import { CSSTransition } from "react-transition-group";
 const Pairs = () => {
   const [items, setItems] = useState();
   const [itemsV, setItemsV] = useState([]);
@@ -53,23 +53,35 @@ const Pairs = () => {
 
   return (
     <>
-      <Button variant="dark" size="lg" onClick={back}>
-        {"❰ Back"}
-      </Button>
+      <BackBtn size="lg" onClick={back} />
       {isLoading || !items ? (
         <MySpinner />
       ) : 0 === items.length + itemsV[0].length ? (
         <Result text="Job is done!" />
       ) : (
-        <div>
-          <GameCount count={count} all={items.length + itemsV[0].length} />
-          {/* <h1 className="display-5 mt-2 mb-2">mistakes: {count}</h1> */}
-          {/* <h1>{items.length + itemsV[0].length}</h1> */}
-          <div className={cl.pairs_container}>
-            <PairPart items={itemsV} onClick={choose} num={1} active={active} />
-            <PairPart items={itemsV} onClick={choose} num={2} active={active} />
+        <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="result">
+          <div>
+            <GameCount count={count} all={items.length + itemsV[0].length} />
+            <div className={cl.pairs_container}>
+              <PairPart
+                items={itemsV}
+                onClick={choose}
+                num={1}
+                active={active}
+              />
+              <PairPart
+                items={itemsV}
+                onClick={choose}
+                num={2}
+                active={active}
+              />
+            </div>{" "}
           </div>
-        </div>
+        </CSSTransition>
       )}
     </>
   );

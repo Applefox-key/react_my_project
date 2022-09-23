@@ -15,19 +15,13 @@ const MyCardExpress = ({ item, hint }) => {
         <button
           className={cl["card-button"]}
           onClick={() => setFlipped(!flipped)}>
-          <CSSTransition
-            in={!flipped}
-            timeout={1000}
-            classNames="front-face-transition">
+          <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
               <h1 className="display-4">{item.expression}</h1>
               <h1 className="display-1">{item.phrase}</h1>
             </div>
           </CSSTransition>
-          <CSSTransition
-            in={flipped}
-            timeout={1000}
-            classNames="back-face-transition">
+          <CSSTransition in={flipped} timeout={1000} classNames="cardBack">
             <div className={cl["card-back"]}>
               <div className="d-flex justify-content-around w-100">
                 <div className="w-50 d-flex flex-column  justify-content-between">
@@ -35,8 +29,8 @@ const MyCardExpress = ({ item, hint }) => {
                   <p>{hint}</p>
                 </div>
                 <div className="text-start">
-                  {studyPlan.map((el) => (
-                    <p>{el}</p>
+                  {studyPlan.map((el, i) => (
+                    <p key={i}>{el}</p>
                   ))}
                 </div>
               </div>

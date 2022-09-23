@@ -9,7 +9,7 @@ const MyDropDownBtn = ({ arr, title, variant }) => {
           <Dropdown.Item
             key={i}
             href={item.href ? item.href : ""}
-            onClick={item.onClick ? item.onClick : ""}>
+            onClick={item.onClick}>
             {item.name}
           </Dropdown.Item>
         ) : (

@@ -13,7 +13,7 @@ const OneCardE = ({ anim, dir, item }) => {
           mode="out-in"
           className="my-3"
           style={{ display: dir === 0 ? "block" : "none" }}>
-          <CSSTransition key={!anim} timeout={500} classNames="card_gallery">
+          <CSSTransition key={!anim} timeout={500} classNames="card">
             <div>
               <HintCount hint={hintForUser}></HintCount>
               <MyCardExpress item={item} hint={hintForUser[0]} />
@@ -24,10 +24,7 @@ const OneCardE = ({ anim, dir, item }) => {
 
       <div className="my-1" style={{ display: dir === 1 ? "block" : "none" }}>
         <SwitchTransition mode="out-in">
-          <CSSTransition
-            key={anim}
-            timeout={500}
-            classNames="card_gallery_back">
+          <CSSTransition key={anim} timeout={500} classNames="card_left">
             <div>
               <HintCount hint={hintForUser}></HintCount>
               <MyCardExpress item={item} hint={hintForUser[0]} />
@@ -37,7 +34,7 @@ const OneCardE = ({ anim, dir, item }) => {
       </div>
       <div className="my-1" style={{ display: dir === 2 ? "block" : "none" }}>
         <SwitchTransition mode="out-in">
-          <CSSTransition key={anim} timeout={500} classNames="card_gallery_up">
+          <CSSTransition key={anim} timeout={500} classNames="card_up">
             <div>
               <HintCount hint={hintForUser}></HintCount>
               <MyCardExpress item={item} hint={hintForUser[0]} />

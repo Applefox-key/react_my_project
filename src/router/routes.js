@@ -13,6 +13,7 @@ import Pairs from "../components/collections/games/Pairs";
 import Extra from "../pages/Extra";
 import TestCard from "../components/collections/games/TestCard";
 import TimeCard from "../components/collections/games/TimeCard";
+import WriteCard from "../components/collections/games/WriteCard";
 export const publicRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/login", element: <Login />, nameNav: "Login" },
@@ -34,12 +35,13 @@ export const privateRoutes = [
 
   { path: "/collections/my/:id/:name", element: <OneCollection /> },
   { path: "/collections/:tab", element: <Extra /> },
+  { path: "/collections/pub/:id/:name", element: <PublicCollectionsView /> },
   { path: "/collections/my/:id/:name/:item", element: <ContentCardInfo /> },
   { path: "/play_cards/:tab/:mode/:id/:name", element: <CardsGallery /> },
   { path: "/play_timecard/:tab/:id/:name", element: <TimeCard /> },
   { path: "/play_test/:tab/:id/:name", element: <TestCard /> },
+  { path: "/play_write/:tab/:id/:name", element: <WriteCard /> },
   { path: "/play_pairs/:tab/:id/:name", element: <Pairs /> },
-  { path: "/collections/pub/:id/:name", element: <PublicCollectionsView /> },
 
   {
     path: "/public",

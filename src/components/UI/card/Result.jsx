@@ -1,10 +1,12 @@
 import React from "react";
 import cl from "./MyCard.module.css";
 import "./MyCard.module.css";
+import { CSSTransition } from "react-transition-group";
 
+import "animate.css";
 const Result = ({ text }) => {
   return (
-    <div>
+    <CSSTransition appear={true} in={true} timeout={500} classNames="result">
       <div className={cl["card-container"]}>
         <button className={cl["card-button"]}>
           <div className={cl["card-front"]}>
@@ -12,7 +14,7 @@ const Result = ({ text }) => {
           </div>
         </button>
       </div>
-    </div>
+    </CSSTransition>
   );
 };
 

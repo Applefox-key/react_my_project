@@ -6,6 +6,7 @@ const TestOptions = ({ items, onClick, active, right }) => {
     <div className="flex-center flex-wrap">
       {items.map((el) => (
         <button
+          key={el.id}
           id={el.id}
           onClick={onClick}
           disabled={right !== el.id.toString() && right}

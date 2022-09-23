@@ -4,13 +4,13 @@ import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { useNavigate } from "react-router-dom";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
+import BackBtn from "../../UI/BackBtn/BackBtn";
 import MyDropDownBtn from "../../UI/MyDropDownBtn/MyDropDowmBtn";
 import ModalCommand from "./ModalCommand";
 
 const NavOneColl = ({ colObj, setContent }) => {
   const [mod, setMod] = useState(false);
   const router = useNavigate();
-  // const pageParam = useParams();
 
   const modal = (el) => {
     setMod(el);
@@ -44,10 +44,11 @@ const NavOneColl = ({ colObj, setContent }) => {
       name: "Find the right answer",
       href: `/play_test/my/${colObj.collection.id}/${colObj.collection.name}`,
     },
+    {
+      name: "Write an answer",
+      href: `/play_write/my/${colObj.collection.id}/${colObj.collection.name}`,
+    },
   ];
-  const back = () => {
-    router("/collections/my");
-  };
 
   return (
     <div className="d-flex   justify-content-between p-2">
@@ -87,9 +88,7 @@ const NavOneColl = ({ colObj, setContent }) => {
           />
         </ButtonGroup>
       </div>{" "}
-      <Button variant="dark" onClick={back}>
-        {"❰ Back to the my collections"}
-      </Button>
+      <BackBtn path="/collections/my" />
     </div>
   );
 };
