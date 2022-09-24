@@ -9,6 +9,7 @@ import BaseExtraAPI from "../../../API/BaseExtraAPI";
 
 const CollectionShare = ({ colObj, setVisible }) => {
   const [note, setNote] = useState("");
+  const [textFile, settextFile] = useState(null);
   const [contentList, setContentList] = useState(colObj.content);
   const [name, setName] = useState(colObj.collection.name);
   // eslint-disable-next-line no-unused-vars
@@ -17,6 +18,20 @@ const CollectionShare = ({ colObj, setVisible }) => {
     const id = expression.id;
     const arr = contentList.filter((item) => item.id !== id);
     setContentList(arr);
+  };
+
+  const createFile = (note, name, trainingList) => {
+    const content = trainingList
+      .map((el) => el.question + ";" + el.answer + ";" + el.note + ";")
+      .join("\n");
+    console.log(content);
+    console.log(typeof content);
+
+    const data = new Blob([content], { type: "text/plain" });
+    if (textFile !== null) {
+      window.URL.revokeObjectURL(textFile);
+    }
+    settextFile(window.URL.createObjectURL(data));
   };
 
   const share = async (note, name, trainingList) => {
@@ -60,8 +75,21 @@ const CollectionShare = ({ colObj, setVisible }) => {
           onClick={() => {
             share(note, name, contentList);
           }}>
-          Share
+          Share public collection
+        </Button>{" "}
+        <Button
+          onClick={() => {
+            createFile(note, name, contentList);
+          }}>
+          Create file for download
         </Button>
+        {textFile ? (
+          <a download={name} href={textFile}>
+            Download
+          </a>
+        ) : (
+          <></>
+        )}
         <MyTable
           dataArray={contentList}
           namesArray={["question", "answer", "note"]}
