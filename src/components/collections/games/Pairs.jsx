@@ -56,8 +56,6 @@ const Pairs = () => {
       <BackBtn size="lg" onClick={back} />
       {isLoading || !items ? (
         <MySpinner />
-      ) : 0 === items.length + itemsV[0].length ? (
-        <Result text="Job is done!" />
       ) : (
         <CSSTransition
           in={true}
@@ -66,20 +64,24 @@ const Pairs = () => {
           classNames="result">
           <div>
             <GameCount count={count} all={items.length + itemsV[0].length} />
-            <div className={cl.pairs_container}>
-              <PairPart
-                items={itemsV}
-                onClick={choose}
-                num={1}
-                active={active}
-              />
-              <PairPart
-                items={itemsV}
-                onClick={choose}
-                num={2}
-                active={active}
-              />
-            </div>{" "}
+            {items.length + itemsV[0].length === 0 ? (
+              <Result text="Job is done!" />
+            ) : (
+              <div className={cl.pairs_container}>
+                <PairPart
+                  items={itemsV}
+                  onClick={choose}
+                  num={1}
+                  active={active}
+                />
+                <PairPart
+                  items={itemsV}
+                  onClick={choose}
+                  num={2}
+                  active={active}
+                />
+              </div>
+            )}{" "}
           </div>
         </CSSTransition>
       )}

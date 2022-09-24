@@ -1,24 +1,20 @@
 import React from "react";
-import Button from "react-bootstrap/esm/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import cl from "./Games.module.css";
+import GameCountBage from "./GameCountBage";
 const GameCount = ({ count, all }) => {
   return (
-    <h1>
-      <ButtonGroup className={cl.game_count}>
-        <Button size="lg" variant="success" style={{ cursor: "auto" }}>
-          {" POSITIVE: " + count[0]}
-        </Button>{" "}
-        <Button size="lg" variant="warning" style={{ cursor: "auto" }}>
-          {"LEFT" + all}
-        </Button>{" "}
-        <Button size="lg" variant="danger" style={{ cursor: "auto" }}>
-          {" NEGATIVE: " + count[1]}
-        </Button>{" "}
-        {/* <h1 className="display-5 mt-2 mb-2">mistakes: {positive}</h1> */}
-      </ButtonGroup>
-    </h1>
+    <div className="d-flex justify-content-center ">
+      <GameCountBage value={count[0]} lable="👍" bg="success" />
+
+      <div className="countBtn">
+        <h1>
+          <GameCountBage value={all} bg="warning" text="dark" />
+        </h1>
+        <h4>Left</h4>
+      </div>
+      <GameCountBage value={count[1]} lable="👎" bg="danger" />
+    </div>
   );
 };
 
 export default GameCount;
+// {" POSITIVE: " + count[0]}

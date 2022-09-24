@@ -127,9 +127,7 @@
     overflow:  visible ;
     animation: backInUp;
     animation-duration: 1000ms;
-  }
-  
-  .card_up-exit {
+  }.card_up-exit {
     overflow:  visible ;
     animation: backOutUp;
     animation-duration: 1000ms;
@@ -144,9 +142,7 @@
   .result-appear {
     animation: jackInTheBox;
     animation-duration: 1000ms;
-    
-  }
-  .result-appear-done {   
+  }  .result-appear-done {   
     animation: jackInTheBox;
     animation-duration: 1000ms;
   } 
@@ -154,9 +150,47 @@
   .game-appear {
     animation: lightSpeedInLeft;
     animation-duration: 1000ms;
-    
-  }
-  .game-appear-done {   
+  }.game-appear-done {   
     animation: lightSpeedInLeft;
     animation-duration: 1000ms;
   } 
+
+
+  .count-enter {
+    animation: bounceIn;
+    animation-duration: 300ms;
+  } .count-enter-done {
+    animation: bounceIn;
+    animation-duration: 300ms;
+  }  .count-exit {
+    animation: bounceOut;
+    animation-duration: 300ms;
+  } .count-exit-done {
+    animation: bounceOut;
+    animation-duration: 300ms;
+  }
+  
+
+  .countLeft-enter {
+    animation: shakeX;
+    animation-duration: 300ms;
+  } .countLeft-enter-done {
+    animation: shakeX;
+    animation-duration: 300ms;
+  } 
+
+
+  
+  .cardChange-enter {
+    animation: fadeInLeft;
+    animation-duration: 1000ms;
+  }.cardChange-enter-done {
+    animation: fadeInleft;
+    animation-duration: 1000ms;
+  }.cardChange-exit {
+    animation: fadeOutRight;
+    animation-duration: 1000ms;
+  }.cardChange-exit-done {
+    animation: fadeOutRight;
+    animation-duration: 1000ms;
+  }

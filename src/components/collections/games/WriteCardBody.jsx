@@ -25,19 +25,21 @@ const WriteCardBody = ({ items }) => {
     } else {
       let ra = onlyLetters(items[num].answer);
       let a = onlyLetters(answer);
-      console.log(a);
-      console.log(ra);
-      console.log(ra === a);
-      setCount([count[0] + 1, count[1]]);
+      setNum(Math.min(num + 1, items.length - 1));
+      ra === a
+        ? setCount([count[0] + 1, count[1]])
+        : setCount([count[0], count[1] + 1]);
     }
-    setNum(Math.min(num + 1, items.length - 1));
     setFlip(!flip);
     console.log(num);
   };
   return (
     <div className={cl.cardSize}>
       {items.length === count[0] + count[1] && !flip ? (
-        <Result text="Job is done!" />
+        <div>
+          <Result text="Job is done!" />
+          <GameCount count={count} all={0} />
+        </div>
       ) : (
         <CSSTransition
           appear={true}
@@ -55,7 +57,10 @@ const WriteCardBody = ({ items }) => {
               />{" "}
             </div>
             <div className="d-flex align-items-center justify-content-between w-50 m-auto">
-              <GameCount count={count} all={items.length - num} />
+              <GameCount
+                count={count}
+                all={items.length - count[0] - count[1]}
+              />
               <Button onClick={check} size="lg" disabled={!answer}>
                 {flip ? "NEXT" : "CHECK AN ANSWER"}
               </Button>{" "}

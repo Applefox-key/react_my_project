@@ -30,7 +30,7 @@ const TestBody = ({ items }) => {
   return (
     <div>
       <GameCount count={count} all={items.length - num} />
-      {items.length === count[0] + count[1] ? (
+      {items.length === num ? (
         <Result text="Job is done!" />
       ) : (
         <SwitchTransition mode="out-in">
@@ -38,7 +38,7 @@ const TestBody = ({ items }) => {
             appear={false}
             timeout={500}
             key={num}
-            classNames="card_up">
+            classNames="cardChange">
             <div>
               <MyCardStatic item={items[num].item} />
               <TestOptions

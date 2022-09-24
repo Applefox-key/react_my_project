@@ -12,10 +12,7 @@ import TestBody from "./TestBody";
 const TestCard = () => {
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
   const [items, setItems] = useState();
-  const [num, setNum] = useState(0);
-  const [active, setActive] = useState([]);
-  const [count, setCount] = useState([0, 0]);
-  const [right, setRight] = useState();
+
   const contentParts = (arr) => {
     shuffle(arr);
     let res = arr.map((el, i) => {
@@ -37,22 +34,6 @@ const TestCard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const choose = (e) => {
-    if (items[num].item.id.toString() === e.target.id.toString()) {
-      setRight(e.target.id);
-      setCount([count[0] + 1, count[1]]);
-      setTimeout(() => {
-        setRight("");
-        setActive([]);
-        setNum(num + 1);
-      }, 800);
-    } else {
-      setCount([count[0], count[1] + 1]);
-      let na = [...active];
-      na.push(e.target.id);
-      setActive(na);
-    }
-  };
   return (
     <div>
       <Button variant="dark" size="lg" onClick={back}>
@@ -61,8 +42,6 @@ const TestCard = () => {
 
       {isLoading || !items ? (
         <MySpinner />
-      ) : items.length === count[0] + count[1] ? (
-        <Result text="Job is done!" />
       ) : (
         <CSSTransition appear={true} in={true} timeout={500} classNames="game">
           <TestBody items={items} />
