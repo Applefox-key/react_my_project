@@ -20,12 +20,13 @@ const WriteCardBody = ({ items }) => {
 
   const check = () => {
     if (flip) {
+      setNum(Math.min(num + 1, items.length - 1));
       setAnswer("");
       setShowAnim(!anim);
     } else {
       let ra = onlyLetters(items[num].answer);
       let a = onlyLetters(answer);
-      setNum(Math.min(num + 1, items.length - 1));
+
       ra === a
         ? setCount([count[0] + 1, count[1]])
         : setCount([count[0], count[1] + 1]);
