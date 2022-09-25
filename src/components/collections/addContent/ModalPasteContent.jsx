@@ -8,7 +8,7 @@ import ModalPasteContentBtns from "./ModalPasteContentBtns";
 import ModalPasteContentBody from "./ModalPasteContentBody";
 import BaseExtraAPI from "../../../API/BaseExtraAPI";
 
-const ModalPasteContent = ({ setVisible, onClick, pageParam }) => {
+const ModalPasteContent = ({ setVisible, setContent, pageParam }) => {
   const [dataArray, setDataArray] = useState();
   const [check, setCheck] = useState(true);
   const [dataString, setDataString] = useState("");
@@ -26,11 +26,14 @@ const ModalPasteContent = ({ setVisible, onClick, pageParam }) => {
   const add = async () => {
     if (!dataArray) return;
     try {
-      await BaseExtraAPI.createContentFromArray(dataArray, pageParam.id);
-      onClick(await BaseExtraAPI.getContent(pageParam.id));
+      await BaseExtraAPI.createContentFromArray(
+        dataArray,
+        pageParam.collection.id
+      );
       setDataString("");
       setDataArray(null);
       setVisible(false);
+      setContent(await BaseExtraAPI.getContent(pageParam.collection.id));
     } catch (error) {
       setPopupSettings([true, error.message, "error"]);
       return;

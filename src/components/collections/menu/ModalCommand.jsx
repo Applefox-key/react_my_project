@@ -12,7 +12,7 @@ const ModalCommand = ({ mod, setMod, colObj, setContent }) => {
       {mod === "list" && (
         <ModalPasteContent
           setVisible={setMod}
-          onClick={setContent}
+          setContent={setContent}
           pageParam={colObj}
         />
       )}{" "}
