@@ -1,9 +1,12 @@
 import React from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
-const MyDropDownBtn = ({ arr, title, variant }) => {
+const MyDropDownBtn = ({ arr, title, variant, dis }) => {
+  console.log(dis);
+  console.log(!!dis);
+
   return (
-    <DropdownButton size="lg" variant={variant} title={title}>
+    <DropdownButton disabled={dis} size="lg" variant={variant} title={title}>
       {arr.map((item, i) =>
         item.href || item.onClick ? (
           <Dropdown.Item

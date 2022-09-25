@@ -69,6 +69,7 @@ const NavOneColl = ({ colObj, setContent }) => {
             arr={gameMenu}
             title="PLAY GAMES"
             variant="outline-info"
+            dis={colObj.content ? colObj.content.length === 0 : true}
           />
           <Button variant="ligth" onClick={removeCollection}>
             Remove
