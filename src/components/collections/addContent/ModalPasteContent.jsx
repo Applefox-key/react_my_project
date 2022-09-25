@@ -12,11 +12,12 @@ const ModalPasteContent = ({ setVisible, setContent, pageParam }) => {
   const [dataArray, setDataArray] = useState();
   const [check, setCheck] = useState(true);
   const [dataString, setDataString] = useState("");
+
   // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
-  const read = () => {
-    contentFromText(dataString, setDataArray, setPopupSettings, check);
+  const read = (sep) => {
+    contentFromText(dataString, setDataArray, setPopupSettings, check, sep);
   };
 
   const back = () => {
@@ -50,11 +51,11 @@ const ModalPasteContent = ({ setVisible, setContent, pageParam }) => {
       title={"Adding"}>
       <ModalPasteContentBtns
         dataArray={dataArray}
-        read={read}
-        add={add}
-        back={back}
-        check={check}
-        setCheck={setCheck}
+        actions={{ read: read, add: add, back: back }}
+        options={{
+          check: check,
+          setCheck: setCheck,
+        }}
       />
       <div className="modal-h50">
         <div>
