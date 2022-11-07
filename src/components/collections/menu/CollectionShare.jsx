@@ -48,12 +48,15 @@ const CollectionShare = ({ colObj, setVisible }) => {
       setPopupSettings([true, error, "error"]);
     }
   };
+  console.log(contentList);
+  console.log(!contentList);
 
   return (
     <MyModal
       title="Share the collection"
-      setVisible={setVisible}
-      visible={true}>
+      setShowModal={setVisible}
+      // visible={true}
+      showmodal={true}>
       <div>
         <MyInputGroup
           label="Collection name"
@@ -72,12 +75,14 @@ const CollectionShare = ({ colObj, setVisible }) => {
           }}
         />
         <Button
+          disabled={!contentList}
           onClick={() => {
             share(note, name, contentList);
           }}>
           Share public collection
         </Button>{" "}
         <Button
+          disabled={!contentList}
           onClick={() => {
             createFile(note, name, contentList);
           }}>

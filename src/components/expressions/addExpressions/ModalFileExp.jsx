@@ -43,8 +43,8 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
 
   return (
     <MyModal
-      visible={true}
-      setVisible={setVisible}
+      showmodal={true}
+      setShowModal={setVisible}
       fullscreen
       size="md"
       dialogClassName="h100"

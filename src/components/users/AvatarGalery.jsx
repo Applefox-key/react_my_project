@@ -43,8 +43,8 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
     <MyModal
       title={"Import from file"}
       subtitle={"Сlick on the picture or choose your own"}
-      visible={visible}
-      setVisible={setVisible}>
+      showmodal={visible}
+      setShowModal={setVisible}>
       <div className="d-flex mt-3">
         <Form.Control type="file" onChange={fromFile} size="lg" />
       </div>

@@ -17,7 +17,7 @@ const ModalPasteBtns = ({ dataArray, actions, options }) => {
                 options.setCheck(e.target.checked);
               }}
             />{" "}
-            <label for="sep" className="ms-5">
+            <label htmlFor="sep" className="ms-5">
               Separator
             </label>
             <input

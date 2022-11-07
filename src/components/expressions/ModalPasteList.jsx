@@ -38,8 +38,8 @@ const ModalCopyPasteList = ({ visible, setVisible, onClick }) => {
 
   return (
     <MyModal
-      visible={visible}
-      setVisible={setVisible}
+      showmodal={visible}
+      setShowModal={setVisible}
       fullscreen
       size="md"
       dialogClassName="h100"

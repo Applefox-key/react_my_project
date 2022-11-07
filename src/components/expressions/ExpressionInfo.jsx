@@ -10,10 +10,9 @@ const ExpressionInfo = ({ visible, setVisible, expression }) => {
     <MyModal
       title={expression.expression}
       subtitle={expression.phrase}
-      visible={visible}
-      setVisible={setVisible}
-      dialogClassName="modal-info"
-    >
+      showmodal={visible}
+      setShowModal={setVisible}
+      dialogClassName="modal-info">
       <div className="d-flex ">
         <MyCardList header="Study plan" subtitle="" list={studyPlan} />
         <MyCardList header="History" subtitle="" list={history} />

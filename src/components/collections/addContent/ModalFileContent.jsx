@@ -13,7 +13,6 @@ const ModalFileContent = ({ setVisible, setContent, colId }) => {
   const [fileContent, setFileContent] = useState();
   // eslint-disable-next-line no-unused-vars
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  // const [visible, setVisible] = useState(false);
   const inputFileName = useRef();
 
   const FileChange = async (e) => {
@@ -43,8 +42,8 @@ const ModalFileContent = ({ setVisible, setContent, colId }) => {
 
   return (
     <MyModal
-      visible={true}
-      setVisible={setVisible}
+      showmodal={true}
+      setShowModal={setVisible}
       fullscreen
       size="md"
       dialogClassName="h100"
