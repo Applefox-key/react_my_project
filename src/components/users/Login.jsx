@@ -15,10 +15,8 @@ const Login = () => {
 
   // eslint-disable-next-line no-unused-vars
   const { userAuth, setUserAuth } = useContext(AuthContext);
-  const [email, setEmail] = useState(
-    pageParam.email ? pageParam.email : "my@test.test"
-  );
-  const [password, setPassword] = useState(1);
+  const [email, setEmail] = useState(pageParam.email ? pageParam.email : "");
+  const [password, setPassword] = useState("");
 
   const login = async (event) => {
     try {
