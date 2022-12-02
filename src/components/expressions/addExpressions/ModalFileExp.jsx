@@ -1,7 +1,4 @@
-import React, { useContext, useRef } from "react";
-
-import { useState } from "react";
-import { PopupContext } from "../../../context";
+import React, { useState, useRef } from "react";
 import Popup from "../../UI/popup/Popup";
 import MyTable from "../../UI/table/MyTable";
 import { Button } from "react-bootstrap";
@@ -9,12 +6,11 @@ import { expressionsFromTxtFile } from "../../../utils/files";
 import MyModal from "../../UI/MyModal";
 import BaseAPI from "../../../API/BaseAPI";
 import ModalFileExpBtns from "./ModalFileExpBtns";
+import { usePopup } from "../../../hooks/usePopup";
 
 const ModalFileExp = ({ setVisible, setExpressions }) => {
   const [fileContent, setFileContent] = useState();
-  // eslint-disable-next-line no-unused-vars
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  // const [visible, setVisible] = useState(false);
+  const setPopup = usePopup();
   const inputFileName = useRef();
 
   const FileChange = async (e) => {
@@ -22,7 +18,7 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       await expressionsFromTxtFile(e.target.files[0], setFileContent);
     } catch (error) {
       inputFileName.current.value = "";
-      setPopupSettings([true, error.message, "error"]);
+      setPopup.error(error.message);
       return;
     }
   };
@@ -31,12 +27,15 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
     if (!fileContent) return;
     try {
       await BaseAPI.createExpressionFromArray(fileContent);
-      setExpressions(await BaseAPI.getTrainingListAll());
+      let res = await BaseAPI.getTrainingListAll();
+      setPopup.success("The changes have been saved");
+      setExpressions(res);
+
       setVisible(false);
       setFileContent([]);
       inputFileName.current.value = "";
     } catch (error) {
-      setPopupSettings([true, error.message, "error"]);
+      setPopup.error(error.message);
       return;
     }
   };
@@ -44,7 +43,7 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
   return (
     <MyModal
       showmodal={true}
-      setShowModal={setVisible}
+      setshowmodal={setVisible}
       fullscreen
       size="md"
       dialogClassName="h100"

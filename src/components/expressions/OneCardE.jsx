@@ -1,5 +1,5 @@
 import React from "react";
-import MyCardExpress from "../UI/card/MyCardExpress";
+import MyCardExpress from "../UI/CARDS/MyCardExpress";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import HintCount from "./HintCount";
 

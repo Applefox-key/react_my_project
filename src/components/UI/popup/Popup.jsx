@@ -4,12 +4,10 @@ import cl from "../popup/Popup.module.css";
 
 const Popup = () => {
   const { popupSettings, setPopupSettings } = useContext(PopupContext);
-
   let [show, message, variant] = [false, "", "success"];
   if (popupSettings) {
     [show, message, variant] = popupSettings;
   }
-
   if (show)
     setTimeout(() => {
       setPopupSettings([false, "", ""]);

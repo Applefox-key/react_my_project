@@ -6,19 +6,21 @@ import ColumnWithBtns from "./ColumnWithBtns";
 const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
   const [editValue, setEditValue] = useState({ ...content }); //{ ...content }
   const editNames = edit ? edit.names : [];
-  // debugger;
+
   const editOk = () => {
     edit.edit(editValue);
   };
   const editCancel = () => {
     edit.edit(editValue.id === "new" ? "newCancel" : "");
   };
+
   useEffect(() => {
     if (!editValue.id) {
       setEditValue({ id: content.id });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const btnsColumn = edit
     ? [
         { name: "OK", callback: editOk },
@@ -32,13 +34,14 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
     const nv = { ...editValue, [col]: e.target.value };
     setEditValue(nv);
   };
-  // .toISOString().slice(0, 10)}
+
   return (
     <>
       <td key="cln">{i + 1}</td>
       {namesArray.map((column) =>
         editNames.includes(column) ? (
           <ColumnInput
+            onEnter={editOk}
             editCancel={editCancel}
             edit={edit}
             col={column}

@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import { PopupContext } from "../../../context";
+
 import OneCardG from "./OneCardG";
 import cl from "./Games.module.css";
 import GameCount from "./GameCount";
 import { onlyLetters } from "../../../utils/texts";
-import Result from "../../UI/card/Result";
+import Result from "../../UI/CARDS/Result";
 import { CSSTransition } from "react-transition-group";
 
 const WriteCardBody = ({ items }) => {
@@ -15,8 +15,6 @@ const WriteCardBody = ({ items }) => {
   const [num, setNum] = useState(0);
   const [flip, setFlip] = useState(false);
   const [anim, setShowAnim] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
 
   const check = () => {
     if (flip) {
@@ -32,7 +30,6 @@ const WriteCardBody = ({ items }) => {
         : setCount([count[0], count[1] + 1]);
     }
     setFlip(!flip);
-    console.log(num);
   };
   return (
     <div className={cl.cardSize}>

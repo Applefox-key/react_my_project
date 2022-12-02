@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 const MyModal = ({
   children,
   showmodal,
+  setshowmodal,
   title = "",
   subtitle = "",
   ...props
@@ -14,7 +15,7 @@ const MyModal = ({
       // dialogClassName={props.fullscreen ? "" : "modal-max"}
       // show={props.visible}
       show={showmodal}
-      onHide={() => props.setShowModal(false)}
+      onHide={() => setshowmodal(false)}
       {...props}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>

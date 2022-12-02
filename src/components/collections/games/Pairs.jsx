@@ -4,11 +4,13 @@ import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import cl from "./Games.module.css";
 import PairPart from "./PairPart";
-import { shuffle, delId } from "../../../utils/arraysFunc";
+import { shuffle } from "../../../utils/arraysFunc";
 import GameCount from "./GameCount";
-import Result from "../../UI/card/Result";
+import Result from "../../UI/CARDS/Result";
 import BackBtn from "../../UI/BackBtn/BackBtn";
 import { CSSTransition } from "react-transition-group";
+import { pairAnswerCheck } from "../../../utils/games";
+
 const Pairs = () => {
   const [items, setItems] = useState();
   const [itemsV, setItemsV] = useState([]);
@@ -24,36 +26,37 @@ const Pairs = () => {
     let a2 = shuffle([...part]);
     return [a1, a2];
   };
-  // eslint-disable-next-line no-unused-vars
-  const [getContent, back, isLoading, error] = useGame(setItemsV, contentParts);
+  const [getContent, isLoading] = useGame(setItemsV, contentParts);
   useEffect(() => {
     getContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const choose = (e) => {
-    if (!active) setActive(e.target.id);
-    else {
-      let [num1, set1] = [...active.split("&")];
-      let [num2, set2] = [...e.target.id.split("&")];
-
-      if (active === e.target.id || set1 === set2) setActive("");
-      else if (num1 === num2) {
-        let arr1 = delId([...itemsV[0]], num1);
-        let arr2 = delId([...itemsV[1]], num1);
-        if (arr1.length === 0) setItemsV(contentParts());
-        else setItemsV([arr1, arr2]);
-        setCount([count[0] + 1, count[1]]);
-        setActive("");
-      } else {
-        setCount([count[0], count[1] + 1]);
-      }
+    if (!active) {
+      setActive(e.target.id);
+      return;
+    }
+    let [id1, set1] = [...active.split("&")];
+    let [id2, set2] = [...e.target.id.split("&")];
+    if (active === e.target.id || set1 === set2) {
+      setActive("");
+      return;
+    }
+    let [res, arr1, arr2] = pairAnswerCheck(id1, id2, itemsV);
+    if (res) {
+      if (arr1.length === 0) setItemsV(contentParts());
+      else setItemsV([arr1, arr2]);
+      setCount([count[0] + 1, count[1]]);
+      setActive("");
+    } else {
+      setCount([count[0], count[1] + 1]);
     }
   };
 
   return (
     <>
-      <BackBtn size="lg" onClick={back} />
+      <BackBtn size="lg" />
       {isLoading || !items ? (
         <MySpinner />
       ) : (
@@ -69,13 +72,13 @@ const Pairs = () => {
             ) : (
               <div className={cl.pairs_container}>
                 <PairPart
-                  items={itemsV}
+                  items={itemsV[0]}
                   onClick={choose}
                   num={1}
                   active={active}
                 />
                 <PairPart
-                  items={itemsV}
+                  items={itemsV[1]}
                   onClick={choose}
                   num={2}
                   active={active}

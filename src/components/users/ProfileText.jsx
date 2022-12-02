@@ -1,7 +1,7 @@
 import React from "react";
-import MyInputGroup from "../UI/input/MyInputGroup";
+import MyInputGroup from "../UI/MyInput/MyInputGroup";
 
-const ProfileText = ({ userDataForm, setUserDataForm }) => {
+const ProfileText = ({ userDataForm, setUserDataForm, passRequired }) => {
   return (
     <div>
       <h1 className="display-2">Your data</h1>
@@ -13,8 +13,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
         value={userDataForm.name}
         onChange={(e) =>
           setUserDataForm({ ...userDataForm, name: e.target.value })
-        }
-      ></MyInputGroup>
+        }></MyInputGroup>
       <MyInputGroup
         size="lg"
         required
@@ -24,10 +23,9 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
         value={userDataForm.email}
         onChange={(e) =>
           setUserDataForm({ ...userDataForm, email: e.target.value })
-        }
-      ></MyInputGroup>
+        }></MyInputGroup>
       <MyInputGroup
-        required
+        required={passRequired}
         size="lg"
         label="password"
         type="password"
@@ -35,8 +33,7 @@ const ProfileText = ({ userDataForm, setUserDataForm }) => {
         value={userDataForm.password}
         onChange={(e) =>
           setUserDataForm({ ...userDataForm, password: e.target.value })
-        }
-      ></MyInputGroup>
+        }></MyInputGroup>
     </div>
   );
 };

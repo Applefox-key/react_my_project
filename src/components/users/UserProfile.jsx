@@ -10,7 +10,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
   const [userDataForm, setUserDataForm] = useState({
     name: "",
     email: "",
-    imgu: imgProfile,
+    img: imgProfile,
     password: "",
   });
 
@@ -24,8 +24,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
       onSubmit={(event) => {
         event.preventDefault();
         onClick(userDataForm);
-      }}
-    >
+      }}>
       <div className="d-flex justify-content-center px-1 flex-wrap">
         <ProfileImg
           userDataForm={userDataForm}
@@ -37,6 +36,7 @@ const UserProfile = ({ userData, onClick, btnName }) => {
           <ProfileText
             userDataForm={userDataForm}
             setUserDataForm={setUserDataForm}
+            passRequired={btnName === "Sign up"}
           />
           <Button as="input" type="submit" value={btnName} />
         </div>

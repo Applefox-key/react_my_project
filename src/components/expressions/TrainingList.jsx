@@ -18,21 +18,24 @@ const TrainingList = ({ list = [], expressionUpdate }) => {
         setVisible={setVisibleModal}
         expression={contentModal}
       />
-
-      <TransitionGroup className="d-flex p-2 flex-wrap justify-content-center">
-        {list.map((expression) => (
-          <CSSTransition
-            timeout={500}
-            classNames="expression"
-            key={expression.id}>
-            <ExpressionBlock
-              expression={expression}
-              expressionUpdate={expressionUpdate}
-              expressionInfo={expressionInfo}
-            />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      {list.length ? (
+        <TransitionGroup className="d-flex p-2 flex-wrap justify-content-center">
+          {list.map((expression) => (
+            <CSSTransition
+              timeout={500}
+              classNames="expression"
+              key={expression.id}>
+              <ExpressionBlock
+                expression={expression}
+                expressionUpdate={expressionUpdate}
+                expressionInfo={expressionInfo}
+              />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+      ) : (
+        <h1 className="display-1">there are no expressions for training!</h1>
+      )}
     </>
   );
 };

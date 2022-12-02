@@ -1,18 +1,18 @@
 export const expressionsFromText = async (
   text,
   callbackForResult,
-  setPopupSettings,
+  setPopupAdvise,
   separator = ";"
 ) => {
   if (!text) {
-    setPopupSettings([true, "please paste:  expression; phrase ", "attantion"]);
+    setPopupAdvise("please paste:  expression; phrase ");
     return;
   }
 
   try {
     const contArr = text.split(/\n/).filter((item) => item.trim());
     if (!contArr) {
-      setPopupSettings([true, "failed to recognize expressions", "attantion"]);
+      setPopupAdvise("failed to recognize expressions");
       return;
     }
 
@@ -25,7 +25,7 @@ export const expressionsFromText = async (
 
     callbackForResult(expressionArr);
   } catch (error) {
-    setPopupSettings([true, error.message, "attantion"]);
+    setPopupAdvise(error.message);
     return;
   }
 };
@@ -33,23 +33,19 @@ export const expressionsFromText = async (
 export const contentFromText = async (
   text,
   callbackForResult,
-  setPopupSettings,
+  setPopupAdvise,
   auto = true,
   separator = ";"
 ) => {
   if (!text) {
-    setPopupSettings([
-      true,
-      "please paste:  question ; answer ; note ",
-      "attantion",
-    ]);
+    setPopupAdvise("please paste:  question ; answer ; note");
     return;
   }
 
   try {
     const contArr = text.split(/\n/).filter((item) => item.trim());
     if (!contArr) {
-      setPopupSettings([true, "failed to recognize content", "attantion"]);
+      setPopupAdvise("failed to recognize content");
       return;
     }
     const contentArr = contArr.map((row, i) => {
@@ -68,7 +64,7 @@ export const contentFromText = async (
     });
     callbackForResult(contentArr);
   } catch (error) {
-    setPopupSettings([true, error.message, "attantion"]);
+    setPopupAdvise(error.message);
     return;
   }
 };

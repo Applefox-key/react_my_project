@@ -194,3 +194,22 @@
     animation: fadeOutRight;
     animation-duration: 1000ms;
   }
+
+
+ 
+
+ .sideb-enter {
+  animation: slideInDown; 
+  animation-duration: 500ms;
+}.sideb-enter-done {   
+  animation: slideInDown; 
+    animation-duration: 500ms;
+} 
+.sideb-exit {
+  animation: slideOutUp; 
+  animation-duration: 500ms;
+}.sideb-exit-done {   
+  animation: slideOutUp; 
+    animation-duration: 500ms;
+} 
+

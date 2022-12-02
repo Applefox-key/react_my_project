@@ -1,16 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import { PopupContext } from "../../../context";
+
 import { useGame } from "../../../hooks/useGame";
+import { usePopup } from "../../../hooks/usePopup";
 import { shuffle } from "../../../utils/arraysFunc";
-import Result from "../../UI/card/Result";
+import BackBtn from "../../UI/BackBtn/BackBtn";
+
 import MySpinner from "../../UI/MySpinner";
 import TestBody from "./TestBody";
 
 const TestCard = () => {
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
+  const setPopup = usePopup();
   const [items, setItems] = useState();
 
   const contentParts = (arr) => {
@@ -26,19 +28,20 @@ const TestCard = () => {
     return res;
   };
 
-  const [getContent, back, isLoading, error] = useGame(setItems, contentParts);
+  const [getContent, isLoading, error] = useGame(setItems, contentParts);
 
   useEffect(() => {
     getContent();
-    if (error) setPopupSettings([true, error, "error"]);
+    if (error) setPopup.error(error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <Button variant="dark" size="lg" onClick={back}>
+      <BackBtn variant="dark" size="lg" />
+      {/* <Button variant="dark" size="lg" onClick={back}>
         {"❰ Back"}
-      </Button>
+      </Button> */}
 
       {isLoading || !items ? (
         <MySpinner />

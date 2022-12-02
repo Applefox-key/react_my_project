@@ -1,250 +1,397 @@
 import { Expression } from "../classes/Expression.js";
 import dataBase from "./DataBase.js";
-import * as fbHelpers from "../serverFireBaseHlp/fbHelpers";
+import * as fbHelpers from "../utils/serverFireBaseHlp/fbHelpers";
+import axios from "axios";
 
 const BaseAPI = {
-  async toLS(key, value) {
-    if (key !== "users") {
-      let user = await this.getUser();
-      if (user === undefined)
-        return null; //key = key.replace("List", "ListExample");
-      else key = key.replace("List", "List" + user.id);
-    }
-    localStorage.setItem(key, JSON.stringify(value));
-  },
-  async fromLS(key) {
-    if (key !== "users") {
-      let user = await this.getUser();
-      if (user === undefined)
-        return null; //key = key.replace("List", "ListExample");
-      else key = key.replace("List", "List" + user.id);
-    }
-
-    return JSON.parse(localStorage.getItem(key));
-  },
-  newDateFormat(dt = new Date()) {
-    if (typeof dt == "string" && dt[10] === "T") dt = dt.slice(0, 10);
-    let nd = new Date(dt);
-    nd.setHours(0, 0, 0, 0);
-    return nd;
-  },
-
-  async getUser() {
+  async getAuthHeaders() {
     let token = JSON.parse(localStorage.getItem("token"));
-    if (!token) return undefined;
-    let usersList = JSON.parse(localStorage.getItem("users"));
-    let user = usersList.filter((item) => item.sessions.includes(token));
-    return user[0];
+    if (!token) throw new Error("session not found");
+    return {
+      "Authorization": `Bearer ${token}`,
+    };
   },
-  async getTrainingListAll() {
-    let temp = await this.fromLS("expressionsList");
-    let expressions_ = temp.map((item) => new Expression(item));
-    return expressions_;
-  },
-  async getUnreadExpressions() {
-    let temp = await this.fromLS("expressionsList");
+  async serverReq(method, url, isHeader, data = "", params = "") {
+    let axiosConfig = {
+      method: method,
+      url: "http://localhost:8000" + url,
+      // url: "http://34.214.160.243:8000" + url,
+    };
+    if (params) axiosConfig.params = params;
+    if (data) axiosConfig.data = { data: data };
+    if (isHeader) axiosConfig.headers = await this.getAuthHeaders();
 
-    let trainingList = temp.filter((item) => {
-      let dayToday = this.newDateFormat();
-      let nextDay = this.newDateFormat(item.nextDate);
-      return nextDay <= dayToday;
+    try {
+      let result = await axios(axiosConfig);
+      if ((method = "get")) return result.data;
+      return { status: true, message: "success" };
+    } catch (error) {
+      if (error.code === "ERR_NETWORK") return { error: error.message };
+      return { error: error.response.data.error };
+    }
+  },
+  async createCategory(name, isPublic = false) {
+    let reqData = {
+      name: name,
+    };
+    return await this.serverReq("post", "/categories/user", true, reqData);
+  },
+  async createCollection(set) {
+    let reqData = {
+      name: set.name,
+    };
+    if (set.note) reqData.note = set.note;
+    // if (set.category.id) reqData.categoryid = set.category.id;
+    if (set.categoryid) reqData.categoryid = set.categoryid;
+    return await this.serverReq("post", "/collections", true, reqData);
+  },
+  async CreateCollectionWithContent(collectionFrom, content, fromPub = false) {
+    let reqData = {
+      name: collectionFrom.name,
+      note: collectionFrom.note,
+      content: content,
+    };
+    if (fromPub) reqData.categoryName = collectionFrom.category;
+    else reqData.categoryid = collectionFrom.categoryid;
+    return await this.serverReq("post", "/collections/content", true, reqData);
+  },
+  async createContentFromArray(arr, colId) {
+    arr.forEach((element, i) => {
+      if (!element.question || !element.answer)
+        return { error: "you cannot add an empty value ....row " + (i + 1) };
+      // throw new Error("you cannot add an empty value ....row " + (i + 1));
     });
-    // let expressions = new ExpressionsList(trainingList);
+    let reqData = { list: arr };
 
-    let expressions = trainingList.map((item) => new Expression(item));
-    return expressions;
+    return await this.serverReq(
+      "post",
+      "/collections/" + colId + "/content",
+      true,
+      reqData
+    );
+  },
+  async createContent(content, colId) {
+    let reqData = {
+      question: content.question,
+      answer: content.answer,
+      note: content.note,
+    };
+    return await this.serverReq(
+      "post",
+      "/collections/" + colId + "/content",
+      true,
+      reqData
+    );
+    // let list = await BaseAPI.fromLS("extraList");
+    // let wId = Date.now();
+    // list.push({
+    //   id: wId,
+    //   collectionid: colId,
+    //   question: content.question,
+    //   answer: content.answer,
+    //   note: content.note,
+    // });
+    // await BaseAPI.toLS("extraList", list);
+    // return wId;
   },
   async createExpression(textW, textS) {
-    let list = await this.fromLS("expressionsList");
-    let wId = Date.now();
-    list.push({
-      id: wId,
-      stage: 0,
-      expression: textW,
-      phrase: textS,
-      nextDate: new Date(),
-      history: [{ action: "add", date: new Date() }],
-    });
-    await this.toLS("expressionsList", list);
-    return wId;
+    let reqData = { list: [{ expression: textW, phrase: textS }] };
+    return await this.serverReq("post", "/expressions", true, reqData);
   },
+
   async createExpressionFromArray(arr) {
-    let list = await this.fromLS("expressionsList");
     arr.forEach((element, i) => {
       if (!element.expression || !element.phrase)
         throw new Error("you cannot add an empty value ....row " + (i + 1));
-      let wId = Date.now() + i;
-      list.push({
-        id: wId,
-        stage: 0,
-        expression: element.expression,
-        phrase: element.phrase,
-        nextDate: new Date(),
-        history: [{ action: "add", date: new Date() }],
-      });
     });
-    await this.toLS("expressionsList", list);
-    return true;
+    let reqData = { list: arr };
+    return await this.serverReq("post", "/expressions", true, reqData);
+  },
+  async createPublicCollection(note, name, categoryid, content) {
+    let reqData = {
+      name: name,
+      note: note,
+      categoryid: categoryid,
+      content: content,
+    };
+    return await this.serverReq("post", "/pbcollections", true, reqData);
   },
   async createUser(ud) {
-    let login = ud.email;
-    let passw = ud.password;
-    let name = ud.name;
-    let imgu = ud.imgu;
-
-    let usersList = await this.fromLS("users");
-    let user = usersList.find((item) => item.email.trim() === login.trim());
-
-    if (user !== undefined)
-      return { status: false, error: "user already exist" };
-    let uId = Date.now();
-    localStorage.setItem("expressionsList" + uId, JSON.stringify([]));
-    localStorage.setItem("collectionsList" + uId, JSON.stringify([]));
-    localStorage.setItem("extraList" + uId, JSON.stringify([]));
-    let newUser = {
-      id: uId,
-      name: name,
-      email: login,
-      password: passw,
-      sessions: [],
-      imgu: imgu,
-    };
-
-    let token = Date.now();
-    newUser.sessions.push(token);
-    usersList.push(newUser);
-    localStorage.setItem("users", JSON.stringify(usersList));
-    localStorage.setItem("token", JSON.stringify(token));
-    return {
-      status: true,
-    };
-  },
-  async deleteExpression(wId) {
-    let expressionsList = await this.fromLS("expressionsList");
-    let indbase = expressionsList.findIndex(
-      (item) => item.id.toString() === wId.toString()
-    );
-    if (indbase !== -1) expressionsList.splice(indbase, 1);
-    await this.toLS("expressionsList", expressionsList);
-  },
-  async deleteAllExpressions() {
-    await this.toLS("expressionsList", []);
-  },
-  async editExpression(expressionId, w = "", s = "") {
-    if (!expressionId) return false;
-    let expressionsList = await this.fromLS("expressionsList");
-
-    let ind = expressionsList.findIndex(
-      (item) => item.id.toString() === expressionId.toString()
-    );
-    let expression = expressionsList[ind];
-    if (w) expression.expression = w;
-    if (s) expression.phrase = s;
-    await this.toLS("expressionsList", expressionsList);
-    return true;
-  },
-  async updateUser(ud) {
-    let token = JSON.parse(localStorage.getItem("token"));
-    if (!token) return undefined;
-    let usersList = JSON.parse(localStorage.getItem("users"));
-    let num = usersList.findIndex((item) => item.sessions.includes(token));
-    let img = ud.imgu;
-
-    if (img.includes("blob")) {
-      img = await fbHelpers.setImgToStorage(usersList[num].id, img);
-    }
-
-    usersList[num] = {
-      ...usersList[num],
-      name: ud.name,
+    let reqData = {
       email: ud.email,
       password: ud.password,
-      imgu: img,
+      name: ud.name,
+      img: ud.img,
     };
-    await this.toLS("users", usersList);
-    return true;
-    // let user = usersList.filter((item) => item.sessions.includes(token));
-    // return user[0];
+
+    return await this.serverReq("post", "/users", false, reqData);
   },
-  async updateExpression(expressionId) {
-    if (!expressionId) return false;
-
-    let expressionsList = await this.fromLS("expressionsList");
-    let ind = expressionsList.findIndex(
-      (item) => item.id.toString() === expressionId.toString()
+  async deleteCategory(catid) {
+    return await this.serverReq("delete", "/categories/" + catid, true);
+  },
+  async deleteCategoriesAll() {
+    return await this.serverReq("delete", "/categories", true);
+  },
+  async deleteColContent(colId) {
+    return await this.serverReq(
+      "delete",
+      "/collections/" + colId + "/content",
+      true
     );
-    let expression = expressionsList[ind];
-    // let expressionObj = new ExpressionsList([expression]);
-    let expressionObj = new Expression(expression);
+  },
+  async deleteColection(colId) {
+    if (colId === "new") return;
+    return await this.serverReq("delete", "/collections/" + colId, true);
 
-    let expressionNextDate = this.newDateFormat(expression.nextDate);
-    if (!expression.started) expressionNextDate = this.newDateFormat();
-    let todayDate = this.newDateFormat();
+    // let collectionList = await BaseAPI.fromLS("collectionsList");
 
-    if (expressionObj.exceededSkipsCount) {
-      //reset progress
-      expression.stage = 0;
-      expression.nextDate = todayDate;
-      expressionNextDate = this.newDateFormat();
-      expression.history.push({ action: "new try", date: new Date() });
+    // let num = collectionList.findIndex(
+    //   (item) => item.id.toString() === colId.toString()
+    // );
+    // this.deleteColContent(colId);
+    // collectionList.splice(num, 1);
+    // await BaseAPI.toLS("collectionsList", collectionList);
+  },
+  async deleteColectionAll() {
+    return await this.serverReq("delete", "/collections", true);
+  },
+  async deleteContent(wId) {
+    return await this.serverReq("delete", "/content/" + wId, true);
+    // let list = await BaseAPI.fromLS("extraList");
+    // let indbase = list.findIndex(
+    //   (item) => item.id.toString() === wId.toString()
+    // );
+    // if (indbase !== -1) list.splice(indbase, 1);
+    // await BaseAPI.toLS("extraList", list);
+  },
+  async deleteExpression(wId) {
+    return await this.serverReq("delete", "/expressions/" + wId, true);
+  },
+  async deleteAllExpressions() {
+    let reqData = { id: "*" };
+    return await this.serverReq("delete", "/expressions", true, reqData);
+  },
+  async deletePbColection(colId) {
+    return await this.serverReq("delete", "/pbcollections/" + colId, true);
+  },
+  async deleteUserPbColectionAll() {
+    return await this.serverReq("delete", "/pbcollections/user", true);
+  },
+  async editCategory(newParam, catId) {
+    if (!newParam || !catId) return { message: "nothing has changed" };
+
+    return await this.serverReq(
+      "patch",
+      "/categories/" + catId,
+      true,
+      newParam
+    );
+
+    // let collectionList = await this.getCollectionsList();
+    // let num = collectionList.findIndex(
+    //   (item) => item.id.toString() === colId.toString()
+    // );
+    // collectionList[num] = { ...collectionList[num], name: newName };
+    // await BaseAPI.toLS("collectionsList", collectionList);
+  },
+  async editColParam(newParam, colId) {
+    if (!newParam || !colId) return { message: "nothing has changed" };
+
+    return await this.serverReq(
+      "patch",
+      "/collections/" + colId,
+      true,
+      newParam
+    );
+
+    // let collectionList = await this.getCollectionsList();
+    // let num = collectionList.findIndex(
+    //   (item) => item.id.toString() === colId.toString()
+    // );
+    // collectionList[num] = { ...collectionList[num], name: newName };
+    // await BaseAPI.toLS("collectionsList", collectionList);
+  },
+  async editContent(newV) {
+    // id, s1, s2, t
+    // newV.id,
+    // newV.question,
+    // newV.answer,
+    // newV.note
+    if (!newV.id || !newV.answer || !newV.question)
+      throw new Error("please specify  the answer and the question");
+    // return {
+    //   status: false,
+    //   message: "please specify  the answer and the question",
+    // };
+    return await this.serverReq("patch", "/content", true, newV);
+
+    // let list = await BaseAPI.fromLS("extraList");
+    // let ind = list.findIndex((item) => item.id.toString() === id.toString());
+    // let oneEntry = list[ind];
+    // oneEntry.question = s1 ? s1 : oneEntry.expression;
+    // oneEntry.answer = s2 ? s2 : oneEntry.expression;
+    // oneEntry.note = t ? t : oneEntry.note;
+    // await BaseAPI.toLS("extraList", list);
+    // return true;
+  },
+  async editExpression(expressionN) {
+    if (
+      !expressionN.hasOwnProperty("expression") &&
+      !expressionN.hasOwnProperty("phrase")
+    )
+      return { message: "nothing has changed" };
+
+    return await this.serverReq("patch", "/expressions", true, expressionN);
+  },
+  async getCategoriesList(isPublic = false) {
+    const result = isPublic
+      ? await this.serverReq("get", "/categories/public", true)
+      : await this.serverReq("get", "/categories/user", true);
+
+    if (result.error) {
+      throw new Error(result.error);
+    }
+    return result.data;
+  },
+  async getCategoryCollections(catId) {
+    const result = await this.serverReq(
+      "get",
+      `/categories/${catId}/collections`,
+      true
+    );
+
+    if (result.error) {
+      throw new Error(result.error);
     }
 
-    let act =
-      todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
+    return result.data;
+  },
+  async getCollectionsAndContent(colId = "", categoryid = "", textFilter = "") {
+    let reqParams = {};
+    if (categoryid) reqParams.categoryid = categoryid;
+    if (textFilter) reqParams.textFilter = textFilter;
 
-    if (expression.history === undefined) {
-      expression.history = [];
-      expression.history.push({ action: "add", date: new Date() });
-    }
+    let result = colId
+      ? await this.serverReq("get", "/collections/" + colId + "/content", true)
+      : await this.serverReq(
+          "get",
+          "/content",
+          true,
+          "",
+          reqParams === {} ? "" : reqParams
+        );
+    if (result.error) throw new Error(result.error);
 
-    expression.history.push({ action: act, date: new Date() });
+    return result.data;
+  },
+  async getCollectionsList(colId) {
+    let result = colId
+      ? await this.serverReq("get", "/collections/" + colId, true)
+      : await this.serverReq("get", "/collections", true);
 
-    if (expression.stage < 6) {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 2);
-      // dt += oneDayinMs;
-    } else if (expression.stage < 7) {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 8);
-      //dt += 7*oneDayinMs;
-    } else {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 15);
-      //dt = this.newDateFormat(dt + 14*oneDayinMs);
-    }
-    expression.nextDate = expressionNextDate; //this.newDateFormat(expressionNextDate);
-    ++expression.stage;
-
-    await this.toLS("expressionsList", expressionsList);
-    return true;
+    if (result.error) throw new Error(result.error);
+    return result.data;
+  },
+  async getContent(colId) {
+    let result = await this.serverReq(
+      "get",
+      "/collections/" + colId + "/content",
+      true
+    );
+    if (result.error) throw new Error(result.error);
+    return result.data[0].content;
+  },
+  async getContentItem(id) {
+    let result = await this.serverReq("get", "/content/" + id, true);
+    if (result.error) throw new Error(result.error);
+    return result.data;
+  },
+  //pbcollection's list/ or one by id
+  async getPublicCollections(colId) {
+    let result = colId
+      ? await this.serverReq("get", "/pbcollections/" + colId, true)
+      : await this.serverReq("get", "/pbcollections", true);
+    if (result.error) throw new Error({ error: result.error });
+    return result.data;
+  },
+  //pbcollection's list shared by user
+  async getPublicCollectionsUser() {
+    let result = await this.serverReq("get", "/pbcollections/user", true);
+    if (result.error) throw new Error(result.error);
+    return result.data;
+  },
+  //pbcollection with content
+  async getPublicCollectionsAndContent(colId) {
+    let result = colId
+      ? await this.serverReq(
+          "get",
+          "/pbcollections/" + colId + "/content",
+          true
+        )
+      : await this.serverReq("get", "/pbcollections/content", true);
+    if (result.error) throw new Error(result.error);
+    return result.data;
+  },
+  async getPublicContent(colId) {
+    let result = await this.serverReq(
+      "get",
+      "/pbcollections/" + colId + "/content",
+      true
+    );
+    if (result.error) throw new Error(result.error);
+    return result.data[0].content;
+  },
+  async getTrainingListAll() {
+    let result = await this.serverReq("get", "/expressions", true);
+    if (result.error) throw new Error(result.error);
+    let expressions_ = result.data.map((item) => new Expression(item));
+    return expressions_;
+  },
+  async getUnreadExpressions() {
+    let result = await this.serverReq("get", "/expressions/unread", true);
+    if (result.error) throw new Error(result.error);
+    let expressions_ = result.data.map((item) => new Expression(item));
+    return expressions_;
+  },
+  async getUser() {
+    let result = await this.serverReq("get", "/users", true);
+    if (result.error) throw new Error(result.error);
+    let usrData = { ...result.data, password: "" };
+    return usrData;
   },
   async login(login, passw) {
-    let usersList = await this.fromLS("users");
-    let userInd = usersList.findIndex(
-      (item) => item.email.trim() === login.trim()
-    );
-    let user = usersList[userInd];
-    if (user === undefined) return { status: false, error: "user is not find" };
-    if (user.password !== passw)
-      return { status: false, error: "wrong password" };
-    let token = +new Date();
-    usersList[userInd].sessions.push(token);
-    localStorage.setItem("users", JSON.stringify(usersList));
-    localStorage.setItem("token", JSON.stringify(token));
-    return {
-      status: true,
+    let reqData = {
+      email: login,
+      password: passw.toString(),
     };
+    let result = await this.serverReq("post", "/users/login", false, reqData);
+    if (result.error) throw new Error(result.error);
 
-    // let url ='http://localhost:3000/';
-    // let response = await fetch(url, {
-    //     method: 'POST',
-    //     body: new FormData(document.querySelector('#loginForm'))
-    //   });
-
-    //   let result = await response.json();
-
-    //   alert(result.message);
+    let token = result.token;
+    localStorage.setItem("Auth", "true");
+    localStorage.setItem("token", JSON.stringify(token));
+    return { status: true, role: result.role };
   },
-  logout() {
-    localStorage.removeItem("token");
+  async logout() {
+    let result = await this.serverReq("delete", "/users/logout", true);
+    if (!result.error) {
+      localStorage.setItem("Auth", "false");
+      localStorage.removeItem("token");
+    }
+    return result;
   },
+  async updateUser(ud) {
+    let reqData = { ...ud };
+    return await this.serverReq("patch", "/users", true, reqData);
+  },
+  async updateExpression(expressionBefore) {
+    if (!expressionBefore)
+      return { status: false, error: "expression's not selected" };
+    let expression = expressionBefore.setForUpdate;
+
+    return await this.serverReq("patch", "/expressions", true, expression);
+  },
+
   getAvatarUrl(num) {
     const avlist = JSON.parse(localStorage.getItem("avatars"));
     if (num > avlist.length()) return "";
@@ -256,50 +403,11 @@ const BaseAPI = {
     return avlist;
   },
   createDB() {
-    localStorage.removeItem("publicC");
-    localStorage.removeItem("publicS");
-    if (!localStorage.getItem("expressionsList1"))
-      localStorage.setItem(
-        "expressionsList1",
-        JSON.stringify(dataBase.expressionsList)
-      );
-
-    if (!localStorage.getItem("publicC"))
-      localStorage.setItem(
-        "publicC",
-        JSON.stringify(dataBase.publicCollections)
-      );
-
-    if (!localStorage.getItem("publicS"))
-      localStorage.setItem("publicS", JSON.stringify(dataBase.publicContent));
-
     if (!localStorage.getItem("avatars")) {
       const avList = fbHelpers.getAvatarsFromStore();
       localStorage.setItem("avatars", JSON.stringify(dataBase.avatars));
       avList.then(localStorage.setItem("avatars", JSON.stringify(avList)));
     }
-    if (!localStorage.getItem("users"))
-      localStorage.setItem("users", JSON.stringify(dataBase.users));
-
-    if (!localStorage.getItem("user"))
-      localStorage.setItem("user", JSON.stringify(dataBase.user));
-    if (!localStorage.getItem("extraList1"))
-      localStorage.setItem("extraList1", JSON.stringify(dataBase.extraList));
-
-    if (!localStorage.getItem("collectionsList1"))
-      localStorage.setItem(
-        "collectionsList1",
-        JSON.stringify(dataBase.collectionsList)
-      );
-  },
-  deleteDB() {
-    localStorage.removeItem("collectionsList1");
-    localStorage.removeItem("expressionsList1");
-
-    localStorage.removeItem("users");
-    // localStorage.removeItem("user");
-    localStorage.removeItem("publicC");
-    localStorage.removeItem("publicS");
   },
 };
 export default BaseAPI;

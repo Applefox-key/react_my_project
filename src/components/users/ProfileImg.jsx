@@ -6,7 +6,7 @@ import cl from "./users.module.css";
 
 const ProfileImg = (props) => {
   const changeAvatar = (url) => {
-    props.setUserDataForm({ ...props.userDataForm, imgu: url });
+    props.setUserDataForm({ ...props.userDataForm, img: url });
   };
   return (
     // <div className="d-flex justify-content-center mt-2 px-5">
@@ -19,14 +19,13 @@ const ProfileImg = (props) => {
       <div>
         <Image
           rounded
-          src={props.userDataForm.imgu}
+          src={props.userDataForm.img}
           className={cl.avatarProfile}
         />
         <Button
           onClick={() => {
             props.setVisible(true);
-          }}
-        >
+          }}>
           Choose an avatar
         </Button>
       </div>

@@ -5,7 +5,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 const PairPart = ({ items, onClick, num, active }) => {
   return (
     <TransitionGroup className={cl.container}>
-      {items[num - 1].map((el) => (
+      {items.map((el) => (
         <CSSTransition
           timeout={400}
           classNames="expression"
@@ -18,7 +18,7 @@ const PairPart = ({ items, onClick, num, active }) => {
             ].join(" ")}
             id={el.id + "&" + num}
             onClick={onClick}>
-            {el[num === 1 ? "question" : "answer"]}
+            {el[num === 1 ? "question" : "answer"]}/{el.id}
           </button>
         </CSSTransition>
       ))}

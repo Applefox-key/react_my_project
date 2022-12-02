@@ -4,7 +4,6 @@ export class Expression {
   #nextDate;
   #stage;
   #id;
-  #collectionid;
   #history;
 
   constructor(expression) {
@@ -15,18 +14,18 @@ export class Expression {
 
     this.#stage = expression.stage;
     this.#id = expression.id;
-    this.#collectionid = expression.collectionid;
+
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
-    } else this.#history = expression.history;
+    } else if (Array.isArray(expression.history))
+      this.#history = expression.history;
+    else this.#history = JSON.parse(expression.history);
   }
   get expression() {
     return this.#expression;
   }
-  get collectionid() {
-    return this.#collectionid;
-  }
+
   get id() {
     return this.#id;
   }
@@ -111,15 +110,13 @@ export class Expression {
     }
     return result;
   }
-  inCollection(colid) {
-    return this.#collectionid.toString() === colid.toString();
-  }
+
   get userHistory() {
     let result = [];
     try {
       let history_ = this.#history;
       history_.forEach((item) => {
-        let day = new Date(item.date).toISOString().slice(0, 10);
+        let day = new Date(item.date).toString().slice(0, 10);
         result.push(`${item.action}: ${day}`);
       });
       return result;
@@ -131,8 +128,9 @@ export class Expression {
   get studyPlan() {
     try {
       let stage_ = this.#stage;
-      let nextDate_ = this.#nextDate;
+      let nextDate_ = new Date(this.#nextDate);
       let result = [];
+
       if (!this.started) nextDate_ = new Date();
       let ShowDate = new Date(nextDate_);
       ShowDate.setDate(
@@ -142,7 +140,7 @@ export class Expression {
         let nd = new Date().setHours(0, 0, 0, 0);
         let sd = new Date(ShowDate).setHours(0, 0, 0, 0);
         result.push(
-          `Day ${i + 1}: ${ShowDate.toISOString().slice(0, 10)} ${
+          `Day ${i + 1}: ${ShowDate.toString().slice(0, 10)} ${
             stage_ - 1 >= i ? "✔" : sd < nd ? "☹" : ""
           }`
         );
@@ -150,8 +148,52 @@ export class Expression {
       }
       return result;
     } catch (err) {
-      return err.message;
+      return [];
     }
+  }
+  newDateFormat(dt = new Date()) {
+    if (typeof dt == "string" && dt[10] === "T") dt = dt.slice(0, 10);
+    let nd = new Date(dt);
+    nd.setHours(12, 0, 0, 0);
+    return nd;
+  }
+  get setForUpdate() {
+    let expression = {
+      nextDate: this.nextDate,
+      stage: this.stage,
+      id: this.id,
+      history: this.history,
+    };
+    let expressionNextDate = this.newDateFormat(expression.nextDate);
+    if (!expression.started) expressionNextDate = this.newDateFormat();
+    let todayDate = this.newDateFormat();
+    if (this.exceededSkipsCount) {
+      //reset progress
+      expression.stage = 0;
+      expression.nextDate = todayDate;
+      expressionNextDate = this.newDateFormat();
+      expression.history.push({ action: "new try", date: new Date() });
+    }
+    let act =
+      todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
+    if (expression.history === undefined) {
+      expression.history = [];
+      expression.history.push({ action: "add", date: new Date() });
+    }
+    expression.history.push({ action: act, date: new Date() });
+    if (expression.stage < 6) {
+      expressionNextDate.setDate(expressionNextDate.getDate() + 1);
+      // dt += oneDayinMs;
+    } else if (expression.stage < 7) {
+      expressionNextDate.setDate(expressionNextDate.getDate() + 7);
+      //dt += 7*oneDayinMs;
+    } else {
+      expressionNextDate.setDate(expressionNextDate.getDate() + 14);
+      //dt = this.newDateFormat(dt + 14*oneDayinMs);
+    }
+    expression.nextDate = expressionNextDate.getTime(); //this.newDateFormat(expressionNextDate);
+    ++expression.stage;
+    return expression;
   }
 }
 

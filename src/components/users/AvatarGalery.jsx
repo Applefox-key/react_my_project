@@ -13,7 +13,7 @@ import cl from "./users.module.css";
 const AvatarGalery = ({ visible, setVisible, fileChange }) => {
   const [avatarUrlList, setAvatarUrlList] = useState([]);
   const [choice, setChoice] = useState(ProfileImg);
-  const [getAvatarList, isLoading, error] = useQuery(async () => {
+  const [getAvatarList, isLoading] = useQuery(async () => {
     setAvatarUrlList(await BaseAPI.getAvatarUrlList());
   });
 
@@ -44,7 +44,7 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
       title={"Import from file"}
       subtitle={"Сlick on the picture or choose your own"}
       showmodal={visible}
-      setShowModal={setVisible}>
+      setshowmodal={setVisible}>
       <div className="d-flex mt-3">
         <Form.Control type="file" onChange={fromFile} size="lg" />
       </div>

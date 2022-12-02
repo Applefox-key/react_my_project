@@ -1,18 +1,21 @@
 import React from "react";
-import MyInput from "../input/MyInput";
+import { onBlurCheck } from "../../../utils/domeElemFunc";
+import MyInput from "../MyInput/MyInput";
 
-const ColumnInput = ({ edit, col, editVal, autofocus, editCancel }) => {
+const ColumnInput = ({
+  edit,
+  col,
+  editVal,
+  autofocus,
+  editCancel,
+  onEnter,
+}) => {
   return (
     <td>
       <MyInput
+        onEnter={onEnter}
         onblur={(e) => {
-          if (!e.relatedTarget) {
-            editCancel();
-          } else if (
-            e.target.parentElement.parentElement !==
-            e.relatedTarget.parentElement.parentElement
-          )
-            editCancel();
+          if (!onBlurCheck(e, "tr")) editCancel();
         }}
         name={col}
         content={edit.content[col]}

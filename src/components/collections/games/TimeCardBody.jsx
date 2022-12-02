@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import OneCardG from "./OneCardG";
-import MyInputGroup from "../../UI/input/MyInputGroup";
+import MyInputGroup from "../../UI/MyInput/MyInputGroup";
 
 const TimeCardBody = ({ items }) => {
   const [oneDelay, setOneDelay] = useState(2);

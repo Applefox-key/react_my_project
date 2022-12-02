@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import MyCardStatic from "../../UI/card/MyCardStatic";
-import Result from "../../UI/card/Result";
+import MyCardStatic from "../../UI/CARDS/MyCardStatic";
+import Result from "../../UI/CARDS/Result";
 import GameCount from "./GameCount";
 import TestOptions from "./TestOptions";
 

@@ -38,20 +38,18 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
               variant="warning"
               onClick={(e) => {
                 update(items[num]);
-              }}
-            >
+              }}>
               {"has been read"}
             </Button>{" "}
             <Button
               onClick={next}
-              disabled={items.length - 1 === num || !items.length}
-            >
+              disabled={items.length - 1 === num || !items.length}>
               {"NEXT ❱"}
             </Button>
           </div>
         </>
       ) : (
-        <h1 className="display-1">the job is done!</h1>
+        <h1 className="display-1">there are no expressions for training!</h1>
       )}
     </div>
   );

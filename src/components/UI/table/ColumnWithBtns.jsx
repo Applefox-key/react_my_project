@@ -10,6 +10,7 @@ const ColumnWithBtns = ({ btnsArray, content }) => {
           <Button
             key={i}
             variant="link"
+            size="lg"
             onClick={(e) => {
               e.stopPropagation();
               btn.callback(content);

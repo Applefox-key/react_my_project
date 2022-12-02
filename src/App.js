@@ -8,19 +8,27 @@ import BaseAPI from "./API/BaseAPI";
 import AppRouter from "./components/AppRouter";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [userAuth, setUserAuth] = useState({ isAuth: false, role: null });
   const [popupSettings, setPopupSettings] = useState([false, "", "success"]);
+
+  // useEffect(() => {
+  //   BaseAPI.createDB();
+  // }, []);
+
+  const checkUserAuth = async () => {
+    try {
+      const user = await BaseAPI.getUser();
+      if (user) setUserAuth({ isAuth: true, role: user.role });
+    } catch (error) {}
+  };
 
   useEffect(() => {
     BaseAPI.createDB();
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) setIsAuth(true);
+    checkUserAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth }}>
+    <AuthContext.Provider value={{ userAuth, setUserAuth }}>
       <PopupContext.Provider value={{ popupSettings, setPopupSettings }}>
         <div className="App">
           <BrowserRouter>

@@ -8,9 +8,9 @@ import MySpinner from "../UI/MySpinner";
 
 const UserAvatar = (props) => {
   const [av, setAv] = useState();
-  const [getData, isLoading, error] = useQuery(async () => {
+  const [getData, isLoading] = useQuery(async () => {
     let userData = await BaseAPI.getUser();
-    setAv(userData.imgu);
+    if (userData) setAv(userData.img);
   });
 
   useEffect(() => {

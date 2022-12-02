@@ -2,7 +2,7 @@ import React from "react";
 import ModalFileExp from "./addExpressions/ModalFileExp";
 import ModalPasteList from "./addExpressions/ModalPasteList";
 
-const ModalCommand = ({ mod, setMod, setExpressions }) => {
+const ExpModalCommand = ({ mod, setMod, setExpressions }) => {
   return (
     <div>
       {mod === "list" && (
@@ -23,4 +23,4 @@ const ModalCommand = ({ mod, setMod, setExpressions }) => {
   );
 };
 
-export default ModalCommand;
+export default ExpModalCommand;

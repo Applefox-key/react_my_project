@@ -1,17 +1,14 @@
 import React from "react";
 import CollectionCard from "./CollectionCard";
 
-import NewCollection from "./NewCollection";
-const CollectionCardsList = ({ collectionList, createCollection }) => {
+const CollectionCardsList = ({ filtredList }) => {
   return (
     <>
-      <NewCollection createCollection={createCollection} />
-
-      {!collectionList ? (
+      {!filtredList ? (
         <h2>No collections</h2>
       ) : (
         <div className="d-flex  flex-wrap justify-content-center">
-          {collectionList.map((item) => (
+          {filtredList.map((item) => (
             <CollectionCard collection={item} key={item.collection.id} />
           ))}
         </div>

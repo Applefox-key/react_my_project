@@ -1,64 +1,89 @@
-import React, { useState, useEffect } from "react";
-import { useContext } from "react";
-import BaseExtraAPI from "../../API/BaseExtraAPI";
-import CollectionCardsList from "./CollectionCardsList";
-import MySpinner from "../UI/MySpinner";
-import UserAvatar from "../users/UserAvatar";
-import { PopupContext } from "../../context";
-import { useQuery } from "../../hooks/useQuery";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import ToggleBtnGroup from "../UI/ToggleBtnGroup";
+import CollectionsMenu from "./CollectionsMenu";
+import PublicCollections from "./publicC/PublicCollections";
+import CollectionEditModal from "./usersC/CollectionEditModal";
+import UsersCollections from "./usersC/UsersCollections";
 
 const Collections = () => {
-  const [collections, setCollections] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const { popupSetting, setPopupSettings } = useContext(PopupContext);
-  const [getCollections, isLoading] = useQuery(async () => {
-    const col = await BaseExtraAPI.getCollections();
-    setCollections(col);
-  });
+  const router = useNavigate();
+  const page = useParams();
 
-  const createCollection = async (name, note) => {
-    if (!name) {
-      setPopupSettings([
-        true,
-        "please specify the name of the collection",
-        "error",
-      ]);
-      return;
-    }
-    await BaseExtraAPI.createCollection(name, note);
-    const col = await BaseExtraAPI.getCollections();
-
-    setCollections(col);
+  const [isPublic, setisPublic] = useState(page.tab === "pub");
+  const [isNew, setIsNew] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [selectedCategory, setselectedCategory] = useState("");
+  const [viewmode, setViewmode] = useState(
+    window.location.hash === "#2" ? "2" : "1"
+  );
+  const viewmodeChange = (event) => {
+    setViewmode(event.target.value);
+    router(`/collections/${isPublic ? "pub#" : "my#"}${event.target.value}`);
+  };
+  const TabChange = (event) => {
+    setisPublic(event.target.value === "2");
+    router(
+      `/collections/${event.target.value === "2" ? "pub#" : "my#"}${viewmode}`
+    );
   };
 
   useEffect(() => {
-    getCollections();
+    setViewmode(window.location.hash === "#2" ? "2" : "1");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
-    <>
-      <div className="d-flex pb-2 justify-content-center mt-4">
-        <UserAvatar />
-
-        <div style={{ width: " min-content" }}>
-          <h1 className="display-1">Collections </h1>{" "}
-          <div className="fs-5">
-            create any set of information and memorize with the help of cards
-            and other games{" "}
-          </div>
-        </div>
-      </div>
-
-      {isLoading ? (
-        <MySpinner />
-      ) : (
-        <CollectionCardsList
-          collectionList={collections}
-          createCollection={createCollection}
+    <div>
+      {isNew && (
+        <CollectionEditModal
+          isEdit={isNew}
+          setIsEdit={setIsNew}
+          isNew={isNew}
+          onHide={() => {
+            setIsNew(false);
+            router(`/collections/my#${viewmode}`);
+          }}
         />
       )}
-    </>
+      <div className="d-flex">
+        <ToggleBtnGroup
+          checked={isPublic ? 2 : 1}
+          className="w-100"
+          // value={isPublic ? "2" : "1"}
+          name="isPubl"
+          size="lg"
+          arr={["MY COLLECTIONS", "PUBLIC COLLECTIONS"]}
+          onChange={TabChange}
+        />
+      </div>
+
+      <CollectionsMenu
+        viewmodeChange={viewmodeChange}
+        isPublic={isPublic}
+        isNew={isNew}
+        setIsNew={setIsNew}
+        selectedCategory={selectedCategory}
+        filter={filter}
+        setFilter={setFilter}
+        setselectedCategory={setselectedCategory}
+      />
+      <div>
+        {!isPublic ? (
+          <UsersCollections
+            selectedCategory={selectedCategory}
+            filter={filter}
+            viewmode={viewmode}
+            isNew={isNew}
+          />
+        ) : (
+          <PublicCollections
+            selectedCategory={selectedCategory}
+            filter={filter}
+            viewmode={viewmode}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 

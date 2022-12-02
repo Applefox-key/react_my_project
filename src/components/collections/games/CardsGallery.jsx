@@ -1,25 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import { PopupContext } from "../../../context";
 import { useGame } from "../../../hooks/useGame";
 import MySpinner from "../../UI/MySpinner";
 import OneCardG from "./OneCardG";
 import { shuffle } from "../../../utils/arraysFunc";
 import BackBtn from "../../UI/BackBtn/BackBtn";
 import { CSSTransition } from "react-transition-group";
+import { usePopup } from "../../../hooks/usePopup";
 
 const CardsGallery = () => {
   const [items, setItems] = useState();
   const [direction, setDirection] = useState(true);
   const [itemNum, setItemNum] = useState(0);
   const [anim, setShowAnim] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
-  const [getContent, back, isLoading, error] = useGame(setItems, shuffle);
+  const setPopup = usePopup();
+  const [getContent, isLoading, error] = useGame(setItems, shuffle);
 
   useEffect(() => {
     getContent();
-    if (error) setPopupSettings([true, error, "error"]);
+    if (error) setPopup.error(error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +36,7 @@ const CardsGallery = () => {
 
   return (
     <div style={{ overflow: "hidden" }}>
-      <BackBtn size="lg" onClick={back} />
+      <BackBtn size="lg" />
       {!isLoading && items ? (
         <CSSTransition appear={true} in={true} timeout={500} classNames="game">
           <div>

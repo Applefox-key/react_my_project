@@ -7,7 +7,8 @@ const BackBtn = ({ path, variant = "dark", onClick, ...props }) => {
   const router = useNavigate();
   const back = () => {
     if (path) router(path);
-    else onClick();
+    else if (onClick) onClick();
+    else router(-1);
   };
   return (
     <Button variant={variant} onClick={back} {...props}>

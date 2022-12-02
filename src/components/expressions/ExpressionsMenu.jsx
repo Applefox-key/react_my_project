@@ -2,19 +2,12 @@ import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import { useNavigate } from "react-router-dom";
 import BackBtn from "../UI/BackBtn/BackBtn";
 
 import ExpModalCommand from "./ExpModalCommand";
 
 const ExpressionsMenu = ({ setExpressions, ...props }) => {
   const [mod, setMod] = useState(false);
-  const router = useNavigate();
-  // const pageParam = useParams();
-
-  const back = () => {
-    router("/training");
-  };
   const modal = (el) => {
     setMod(el);
   };
@@ -32,15 +25,18 @@ const ExpressionsMenu = ({ setExpressions, ...props }) => {
           <></>
         )}
         <ButtonGroup size="lg" aria-label="delete and adding buttons">
+          <Button size="lg" variant="light" onClick={props.addOne}>
+            Add one
+          </Button>
+          <Button size="lg" variant="light" onClick={() => modal("list")}>
+            Add some
+          </Button>
           <Button variant="light" onClick={() => modal("file")}>
             Add from the file
           </Button>{" "}
-          <Button variant="light" onClick={() => modal("list")}>
-            Add from the list
-          </Button>
         </ButtonGroup>
       </div>{" "}
-      <BackBtn size="lg" onClick={back} />
+      <BackBtn size="lg" />
     </div>
   );
 };

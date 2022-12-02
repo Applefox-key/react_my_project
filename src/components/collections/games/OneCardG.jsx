@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import MyCardExtra from "../../UI/card/MyCardExtra";
+import MyCardExtra from "../../UI/CARDS/MyCardExtra";
 
 const OneCardG = ({ anim, direction = true, item, flip, clickable = true }) => {
   const mode = useParams().mode;

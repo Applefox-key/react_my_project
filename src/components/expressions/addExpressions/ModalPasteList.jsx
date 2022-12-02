@@ -1,21 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import MyModal from "../../UI/MyModal";
 import { expressionsFromText } from "../../../utils/texts";
 import { useState } from "react";
-import { PopupContext } from "../../../context";
 import Popup from "../../UI/popup/Popup";
 import ModalPasteBtns from "./ModalPasteBtns";
 import ModalPasteBody from "./ModalPasteBody";
 import BaseAPI from "../../../API/BaseAPI";
+import { usePopup } from "../../../hooks/usePopup";
 
-const ModalCopyPasteList = ({ setVisible, onClick }) => {
+const ModalPasteList = ({ setVisible, onClick }) => {
   const [dataArray, setDataArray] = useState();
   const [dataString, setDataString] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const { popupSettings, setPopupSettings } = useContext(PopupContext);
-
+  const setPopup = usePopup();
   const read = () => {
-    expressionsFromText(dataString, setDataArray, setPopupSettings);
+    expressionsFromText(dataString, setDataArray, setPopup.advise);
   };
 
   const back = () => {
@@ -23,7 +21,10 @@ const ModalCopyPasteList = ({ setVisible, onClick }) => {
   };
 
   const addExpressions = async () => {
-    if (!dataArray) return;
+    if (!dataArray) {
+      setPopup.error("Something goes wrong....");
+      return;
+    }
     try {
       await BaseAPI.createExpressionFromArray(dataArray);
       onClick(await BaseAPI.getTrainingListAll());
@@ -31,7 +32,7 @@ const ModalCopyPasteList = ({ setVisible, onClick }) => {
       setDataArray(null);
       setVisible(false);
     } catch (error) {
-      setPopupSettings([true, error.message, "error"]);
+      setPopup.error(error.message);
       return;
     }
   };
@@ -39,7 +40,7 @@ const ModalCopyPasteList = ({ setVisible, onClick }) => {
   return (
     <MyModal
       showmodal={true}
-      setShowModal={setVisible}
+      setshowmodal={setVisible}
       fullscreen
       size="md"
       dialogClassName="h100"
@@ -67,4 +68,4 @@ const ModalCopyPasteList = ({ setVisible, onClick }) => {
   );
 };
 
-export default ModalCopyPasteList;
+export default ModalPasteList;
