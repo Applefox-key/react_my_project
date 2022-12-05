@@ -4,7 +4,7 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 import HintCount from "./HintCount";
 
 const OneCardE = ({ anim, dir, item }) => {
-  const hintForUser = item.hintForReading;
+  const hintForUser = item ? item.hintForReading : "";
 
   return (
     <>

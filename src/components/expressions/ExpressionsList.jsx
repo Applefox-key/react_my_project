@@ -45,7 +45,13 @@ const ExpressionsList = () => {
     let arr = expressions.filter((elem) => elem.id !== expression.id);
     setExpressions(arr);
   };
+  const expressionState = (item) => {
+    let days = item.exceededSkipsDays;
+    if (days > 1) return <button className="circle bg-danger" />;
 
+    if (days > 0) return <button className="circle bg-warning" />;
+    return <></>;
+  };
   const deleteAllExpressions = async () => {
     if (!window.confirm("Delete all expressions?")) return;
     let res = await BaseAPI.deleteAllExpressions();
@@ -120,8 +126,9 @@ const ExpressionsList = () => {
             { nameMain: "Add row", callback: addRow },
             { nameMain: "Delete all", callback: deleteAllExpressions },
             // { name: "Edit", callback: editOn },
-            { name: "Info", callback: modalExpressionInfo },
+            { name: "Plan", callback: modalExpressionInfo },
             { name: "Delete", callback: expressionDelete },
+            { name: "", callback: expressionState },
           ]}
         />
       ) : (

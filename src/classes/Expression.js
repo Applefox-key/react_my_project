@@ -59,7 +59,7 @@ export class Expression {
     // Calculating the time difference between two dates
     const diffInTime = today.getTime() - nextDay.getTime();
     const diffInDays = Math.round(diffInTime / oneDayinMs);
-    return diffInDays;
+    return diffInDays < 0 ? 0 : diffInDays;
   }
   get exceededSkipsCount() {
     if (!this.started) return false;
@@ -175,14 +175,16 @@ export class Expression {
     let expressionNextDate = this.newDateFormat(expression.nextDate);
     if (!expression.started) expressionNextDate = this.newDateFormat();
     let todayDate = this.newDateFormat();
+    let diffInDays = this.exceededSkipsDays;
     if (this.exceededSkipsCount) {
       //reset progress
       expression.stage = 0;
       expression.nextDate = todayDate;
       expressionNextDate = this.newDateFormat();
       expression.history.push({ action: "new try", date: new Date() });
+      diffInDays = 0;
     }
-    const diffInDays = this.exceededSkipsDays;
+
     let act = diffInDays === 0 ? "read by the plan" : "read late";
     //  todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
     if (expression.history === undefined) {
