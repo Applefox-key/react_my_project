@@ -7,7 +7,7 @@ const ColumnWithBtns = ({ btnsArray, content }) => {
       {btnsArray
         .filter((el) => !el.nameMain)
         .map((btn, i) =>
-          btn.name ? (
+          !btn.isnotbtn ? (
             <Button
               key={i}
               variant="link"

@@ -111,11 +111,7 @@ const ExpressionsList = () => {
   return (
     <div className="mt-3 tableContainer">
       {dataModal ? dataModal : <></>}
-      <ExpressionsMenu
-        deleteAllExpressions={deleteAllExpressions}
-        setExpressions={setExpressions}
-        addOne={addRow}
-      />
+      <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
       {!isLoading ? (
         <MyTable
           edit={editMode}
@@ -128,7 +124,7 @@ const ExpressionsList = () => {
             // { name: "Edit", callback: editOn },
             { name: "Plan", callback: modalExpressionInfo },
             { name: "Delete", callback: expressionDelete },
-            { name: "", callback: expressionState },
+            { name: "expst", callback: expressionState, isnotbtn: true },
           ]}
         />
       ) : (

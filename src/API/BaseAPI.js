@@ -1,5 +1,4 @@
 import { Expression } from "../classes/Expression.js";
-import dataBase from "./DataBase.js";
 import * as fbHelpers from "../utils/serverFireBaseHlp/fbHelpers";
 import axios from "axios";
 
@@ -68,8 +67,7 @@ const BaseAPI = {
     return await this.serverReq("delete", "/expressions/" + wId, true);
   },
   async deleteAllExpressions() {
-    let reqData = { id: "*" };
-    return await this.serverReq("delete", "/expressions", true, reqData);
+    return await this.serverReq("delete", "/expressions", true);
   },
   async editCategory(newParam, catId) {
     if (!newParam || !catId) return { message: "nothing has changed" };
@@ -125,14 +123,6 @@ const BaseAPI = {
     let usrData = { ...result.data, password: "" };
     return usrData;
   },
-  // async getUsers() {
-  //   let user = await this.getUser();
-  //   if (user.role ==="admin")
-  //   let result = await this.serverReq("get", "/users", true);
-  //   if (result.error) throw new Error(result.error);
-  //   let usrData = { ...result.data, password: "" };
-  //   return usrData;
-  // },
   async login(login, passw) {
     let reqData = {
       email: login,
@@ -179,7 +169,6 @@ const BaseAPI = {
   createDB() {
     if (!localStorage.getItem("avatars")) {
       const avList = fbHelpers.getAvatarsFromStore();
-      localStorage.setItem("avatars", JSON.stringify(dataBase.avatars));
       avList.then(localStorage.setItem("avatars", JSON.stringify(avList)));
     }
   },
