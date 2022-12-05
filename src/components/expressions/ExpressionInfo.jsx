@@ -15,6 +15,7 @@ const ExpressionInfo = ({ visible, setVisible, expression }) => {
       // dialogClassName="modal-info"
       dialogClassName={"modal-max"}>
       <div className="d-flex ">
+        {/* <div> {expression.exceededSkipsDays}</div> */}
         <MyCardList header="Study plan" subtitle="" list={studyPlan} />
         <MyCardList header="History" subtitle="" list={history} />
       </div>

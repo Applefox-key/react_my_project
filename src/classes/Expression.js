@@ -48,18 +48,25 @@ export class Expression {
     nd = new Date(nd.getFullYear(), nd.getMonth(), nd.getDate());
     return nd > dt;
   }
-  get exceededSkipsCount() {
-    if (!this.started) return false;
-    // first - for the nextDate
-    let nd = new Date();
+  get exceededSkipsDays() {
+    let today = new Date();
     // let dt = this.#nextDate;
-    let st = this.#stage;
-    let ed = this.#nextDate;
+
+    let nextDay = new Date(this.#nextDate);
+    console.log(nextDay);
+
     const oneDayinMs = 1000 * 60 * 60 * 24;
     // Calculating the time difference between two dates
-    const diffInTime = nd.getTime() - ed.getTime();
+    const diffInTime = today.getTime() - nextDay.getTime();
     const diffInDays = Math.round(diffInTime / oneDayinMs);
+    return diffInDays;
+  }
+  get exceededSkipsCount() {
+    if (!this.started) return false;
 
+    let st = this.#stage;
+
+    const diffInDays = this.exceededSkipsDays;
     switch (diffInDays) {
       case 0:
         return false;
@@ -164,6 +171,7 @@ export class Expression {
       id: this.id,
       history: this.history,
     };
+
     let expressionNextDate = this.newDateFormat(expression.nextDate);
     if (!expression.started) expressionNextDate = this.newDateFormat();
     let todayDate = this.newDateFormat();
@@ -174,8 +182,9 @@ export class Expression {
       expressionNextDate = this.newDateFormat();
       expression.history.push({ action: "new try", date: new Date() });
     }
-    let act =
-      todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
+    const diffInDays = this.exceededSkipsDays;
+    let act = diffInDays === 0 ? "read by the plan" : "read late";
+    //  todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
     if (expression.history === undefined) {
       expression.history = [];
       expression.history.push({ action: "add", date: new Date() });
