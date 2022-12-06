@@ -3,14 +3,14 @@ import Button from "react-bootstrap/esm/Button";
 
 const ColumnWithBtns = ({ btnsArray, content }) => {
   return (
-    <td key="btnA" className="d-flex  align-items-center">
+    <td key="btnA" className="d-flex  align-items-center  justify-content-end">
       {btnsArray
         .filter((el) => !el.nameMain)
         .map((btn, i) =>
           !btn.isnotbtn ? (
             <Button
               key={i}
-              variant="link"
+              variant={btn.variant ? btn.variant : "link"}
               size="lg"
               onClick={(e) => {
                 e.stopPropagation();

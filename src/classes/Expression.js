@@ -79,10 +79,11 @@ export class Expression {
         let count = 0;
         for (let i = 0; i < st; i++) {
           let act = his[i].action;
-          if (act.indexOf("late")) count++;
+          if (act.includes("late")) count++;
+          else if (act.includes("new try")) break;
         }
 
-        return count > 1;
+        return count > 0;
       }
       default:
         return true;
@@ -107,6 +108,7 @@ export class Expression {
       this.stage < 7 ? 2 : 3,
     ];
     //check the allert about late reading
+
     if (this.exceededSkipsCount) {
       result = [
         ` ☹ The number of deviations from the study plan has been exceeded. 

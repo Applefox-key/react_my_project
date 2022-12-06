@@ -47,7 +47,9 @@ const ExpressionsList = () => {
   };
   const expressionState = (item) => {
     let days = item.exceededSkipsDays;
-    if (days > 1) return <button className="circle bg-danger" />;
+    let exceededSkipsCount = item.exceededSkipsCount;
+
+    if (exceededSkipsCount) return <button className="circle bg-danger" />;
 
     if (days > 0) return <button className="circle bg-warning" />;
     return <></>;
@@ -122,9 +124,9 @@ const ExpressionsList = () => {
             { nameMain: "Add row", callback: addRow },
             { nameMain: "Delete all", callback: deleteAllExpressions },
             // { name: "Edit", callback: editOn },
+            { name: "expst", callback: expressionState, isnotbtn: true },
             { name: "Plan", callback: modalExpressionInfo },
             { name: "Delete", callback: expressionDelete },
-            { name: "expst", callback: expressionState, isnotbtn: true },
           ]}
         />
       ) : (
