@@ -78,13 +78,6 @@ const BaseAPI = {
       true,
       newParam
     );
-
-    // let collectionList = await this.getCollectionsList();
-    // let num = collectionList.findIndex(
-    //   (item) => item.id.toString() === colId.toString()
-    // );
-    // collectionList[num] = { ...collectionList[num], name: newName };
-    // await BaseAPI.toLS("collectionsList", collectionList);
   },
   async editExpression(expressionN) {
     if (
@@ -112,7 +105,14 @@ const BaseAPI = {
     return expressions_;
   },
   async getUnreadExpressions() {
-    let result = await this.serverReq("get", "/expressions/unread", true);
+    let reqParams = { offset_ms: new Date().getTimezoneOffset() * 60 * 1000 };
+    let result = await this.serverReq(
+      "get",
+      "/expressions/unread",
+      true,
+      "",
+      reqParams
+    );
     if (result.error) throw new Error(result.error);
     let expressions_ = result.data.map((item) => new Expression(item));
     return expressions_;

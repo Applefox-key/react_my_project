@@ -9,12 +9,9 @@ export class Expression {
   constructor(expression) {
     this.#expression = expression.expression;
     this.#phrase = expression.phrase;
-
     this.#nextDate = new Date(expression.nextDate);
-
     this.#stage = expression.stage;
     this.#id = expression.id;
-
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
@@ -22,6 +19,7 @@ export class Expression {
       this.#history = expression.history;
     else this.#history = JSON.parse(expression.history);
   }
+
   get expression() {
     return this.#expression;
   }
@@ -41,14 +39,9 @@ export class Expression {
   get nextDate() {
     return this.#nextDate;
   }
-  get alreadyReadToday() {
-    let dt = new Date();
-    dt = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
-    let nd = new Date(this.#nextDate); //new Date(this.#nextDate);
-    nd = new Date(nd.getFullYear(), nd.getMonth(), nd.getDate());
-    return nd > dt;
-  }
+
   get exceededSkipsDays() {
+    if (!this.started) return 0;
     let today = new Date();
     // let dt = this.#nextDate;
 
@@ -173,9 +166,11 @@ export class Expression {
       id: this.id,
       history: this.history,
     };
+    const oneDayinMs = 1000 * 60 * 60 * 24;
+    let expressionNextDate = !expression.started
+      ? this.newDateFormat()
+      : this.newDateFormat(expression.nextDate);
 
-    let expressionNextDate = this.newDateFormat(expression.nextDate);
-    if (!expression.started) expressionNextDate = this.newDateFormat();
     let todayDate = this.newDateFormat();
     let diffInDays = this.exceededSkipsDays;
     if (this.exceededSkipsCount) {
@@ -183,28 +178,30 @@ export class Expression {
       expression.stage = 0;
       expression.nextDate = todayDate;
       expressionNextDate = this.newDateFormat();
-      expression.history.push({ action: "new try", date: new Date() });
+      expression.history.push({
+        action: "new try",
+        date: new Date().getTime(),
+      });
       diffInDays = 0;
     }
 
     let act = diffInDays === 0 ? "read by the plan" : "read late";
-    //  todayDate - expressionNextDate === 0 ? "read by the plan" : "read late";
     if (expression.history === undefined) {
       expression.history = [];
-      expression.history.push({ action: "add", date: new Date() });
+      expression.history.push({ action: "add", date: new Date().getTime() });
     }
-    expression.history.push({ action: act, date: new Date() });
+    expression.history.push({ action: act, date: new Date().getTime() });
     if (expression.stage < 6) {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 1);
-      // dt += oneDayinMs;
+      expressionNextDate.setTime(expressionNextDate.getTime() + oneDayinMs);
     } else if (expression.stage < 7) {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 7);
-      //dt += 7*oneDayinMs;
+      expressionNextDate.setTime(expressionNextDate.getTime() + 7 * oneDayinMs);
     } else {
-      expressionNextDate.setDate(expressionNextDate.getDate() + 14);
-      //dt = this.newDateFormat(dt + 14*oneDayinMs);
+      expressionNextDate.setTime(
+        expressionNextDate.getTime() + 14 * oneDayinMs
+      );
     }
-    expression.nextDate = expressionNextDate.getTime(); //this.newDateFormat(expressionNextDate);
+
+    expression.nextDate = expressionNextDate.getTime();
     ++expression.stage;
     return expression;
   }
