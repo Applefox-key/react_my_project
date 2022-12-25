@@ -2,7 +2,14 @@ import React from "react";
 import Card from "react-bootstrap/esm/Card";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 
-const CardForList = ({ header, subtitle, list }) => {
+const CardForHistoryList = ({ header, subtitle, list }) => {
+  const stylecss = (item) => {
+    if (item.includes("late")) return { color: "red", fontWeight: "600" };
+    if (item.includes("skipped")) return { color: "orange", fontWeight: "600" };
+    if (item.includes("new try")) return { color: "green", fontWeight: "600" };
+    if (item.includes("add")) return { color: "green", fontWeight: "600" };
+    return {};
+  };
   return (
     <Card>
       <Card.Body>
@@ -12,10 +19,7 @@ const CardForList = ({ header, subtitle, list }) => {
           <ListGroup variant="flush">
             {list.map((item, i) => (
               <ListGroup.Item style={{ width: "max-content" }} key={i}>
-                <span
-                  style={item.hasOwnProperty("stylecss") ? item.stylecss : {}}>
-                  {item}
-                </span>
+                <span style={stylecss(item)}>{item}</span>
               </ListGroup.Item>
             ))}
           </ListGroup>
@@ -25,4 +29,4 @@ const CardForList = ({ header, subtitle, list }) => {
   );
 };
 
-export default CardForList;
+export default CardForHistoryList;

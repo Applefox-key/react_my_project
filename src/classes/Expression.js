@@ -30,6 +30,15 @@ export class Expression {
   get history() {
     return this.#history;
   }
+  get historySort() {
+    let history_ = this.#history;
+    history_.sort((a, b) => {
+      let a_ = typeof a.date === "number" ? a.date : new Date(a.date).getTime();
+      let b_ = typeof b.date === "number" ? b.date : new Date(b.date).getTime();
+      return b_ - a_ === 0 ? (a.action > b.action ? -1 : 1) : b_ - a_;
+    });
+    return history_;
+  }
   get phrase() {
     return this.#phrase;
   }
@@ -65,10 +74,8 @@ export class Expression {
         return false;
       case 1: {
         //check the history
-
-        let his = this.history;
-
-        his.reverse();
+        let his = this.historySort;
+        // his.reverse();
         let count = 0;
         for (let i = 0; i < st; i++) {
           let act = his[i].action;
@@ -115,8 +122,18 @@ export class Expression {
 
   get userHistory() {
     let result = [];
+
     try {
-      let history_ = this.#history;
+      let history_ = this.historySort;
+
+      // history_.sort((a, b) => {
+      //   let a_ =
+      //     typeof a.date === "number" ? a.date : new Date(a.date).getTime();
+      //   let b_ =
+      //     typeof b.date === "number" ? b.date : new Date(b.date).getTime();
+      //   return b_ - a_ === 0 ? (a.action > b.action ? -1 : 1) : b_ - a_;
+      // });
+
       history_.forEach((item) => {
         let day = new Date(item.date).toString().slice(0, 10);
         result.push(`${item.action}: ${day}`);
@@ -179,6 +196,12 @@ export class Expression {
       expression.nextDate = todayDate;
       expressionNextDate = this.newDateFormat();
       expression.history.push({
+        action: `skipped training ( ${diffInDays} day${
+          diffInDays === 1 ? "" : "s"
+        }  )`,
+        date: this.nextDate.getTime(),
+      });
+      expression.history.push({
         action: "new try",
         date: new Date().getTime(),
       });
@@ -190,6 +213,14 @@ export class Expression {
       expression.history = [];
       expression.history.push({ action: "add", date: new Date().getTime() });
     }
+    if (diffInDays !== 0)
+      expression.history.push({
+        action: `skipped training ( ${diffInDays} day${
+          diffInDays === 1 ? "" : "s"
+        }  )`,
+        date: this.nextDate.getTime(),
+      });
+
     expression.history.push({ action: act, date: new Date().getTime() });
     if (expression.stage < 6) {
       expressionNextDate.setTime(expressionNextDate.getTime() + oneDayinMs);

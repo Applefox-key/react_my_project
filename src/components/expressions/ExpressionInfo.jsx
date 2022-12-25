@@ -1,11 +1,12 @@
 import React from "react";
+import CardForHistoryList from "../UI/CardForHistoryList";
 import CardForList from "../UI/CardForList";
 import MyModal from "../UI/MyModal";
 
 const ExpressionInfo = ({ visible, setVisible, expression }) => {
   let studyPlan = expression.studyPlan;
   let history = expression.userHistory;
-
+  let dif = expression.diffInDays;
   return (
     <MyModal
       title={expression.expression}
@@ -16,8 +17,9 @@ const ExpressionInfo = ({ visible, setVisible, expression }) => {
       dialogClassName={"modal-max"}>
       <div className="d-flex ">
         {/* <div> {expression.exceededSkipsDays}</div> */}
+        <div>dif{dif}</div>
         <CardForList header="Study plan" subtitle="" list={studyPlan} />
-        <CardForList header="History" subtitle="" list={history} />
+        <CardForHistoryList header="History" subtitle="" list={history} />
       </div>
     </MyModal>
   );
