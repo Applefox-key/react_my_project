@@ -4,10 +4,9 @@ import ListGroup from "react-bootstrap/esm/ListGroup";
 
 const CardForHistoryList = ({ header, subtitle, list }) => {
   const stylecss = (item) => {
-    if (item.includes("late")) return { color: "red", fontWeight: "600" };
-    if (item.includes("skipped")) return { color: "orange", fontWeight: "600" };
-    if (item.includes("new try")) return { color: "green", fontWeight: "600" };
-    if (item.includes("add")) return { color: "green", fontWeight: "600" };
+    if (item.includes("skipped")) return { color: "red", fontWeight: "600" };
+    if (item.includes("new try")) return { color: "green", fontWeight: "800" };
+    if (item.includes("add")) return { color: "green", fontWeight: "800" };
     return {};
   };
   return (
