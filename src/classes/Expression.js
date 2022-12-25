@@ -196,9 +196,9 @@ export class Expression {
       expression.nextDate = todayDate;
       expressionNextDate = this.newDateFormat();
       expression.history.push({
-        action: `skipped training ( ${diffInDays} day${
+        action: `skipped training (${diffInDays} day${
           diffInDays === 1 ? "" : "s"
-        }  )`,
+        })`,
         date: this.nextDate.getTime(),
       });
       expression.history.push({
@@ -215,9 +215,9 @@ export class Expression {
     }
     if (diffInDays !== 0)
       expression.history.push({
-        action: `skipped training ( ${diffInDays} day${
+        action: `skipped training (${diffInDays} day${
           diffInDays === 1 ? "" : "s"
-        }  )`,
+        })`,
         date: this.nextDate.getTime(),
       });
 
