@@ -2,12 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import BaseAPI from "../../API/BaseAPI";
-import MyInputGroup from "../UI/MyInput/MyInputGroup";
 import { AuthContext } from "../../context";
-import { useNavigate, useParams } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import cl from "./login.module.css";
 
 const Login = () => {
   const router = useNavigate();
@@ -28,45 +25,33 @@ const Login = () => {
     }
   };
 
-  // const serverQuery = async () => {
-  //   let response = await BaseAPI.login(email, password);
-  // };
-
   return (
-    <Container style={{ width: "25rem", marginTop: "2rem" }}>
-      <Form onSubmit={login} className="my-3">
-        <MyInputGroup
+    <div className={cl.page}>
+      <br />
+      <div className={cl.login_block}>
+        <h1 className={cl.h1login}>Login</h1>{" "}
+        <Link className="text-primary" to="/signup">
+          Creat Your Account
+        </Link>{" "}
+        <input
+          className={cl.inputlogin}
+          type="text"
           value={email}
-          size="lg"
-          type="email"
-          placeholder="email"
-          label="email"
+          placeholder="Username"
+          id="username"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <MyInputGroup
-          value={password}
-          size="lg"
+        <input
+          className={cl.inputlogin}
           type="password"
-          placeholder="password"
-          label="password"
+          value={password}
+          placeholder="Password"
+          id="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-
-        <Button type="button" size="lg" onClick={login}>
-          Log in
-        </Button>
-        <p></p>
-        <Button
-          size="lg"
-          type="button"
-          variant="outline-primary"
-          onClick={() => {
-            router("/signup");
-          }}>
-          Sign up
-        </Button>
-      </Form>
-    </Container>
+        <button onClick={login}>Login</button>
+      </div>
+    </div>
   );
 };
 

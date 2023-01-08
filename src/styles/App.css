@@ -7,6 +7,26 @@
   /* display: contents;
   justify-content: center; */
 }
+.aboutcontent{
+  /* display: flex; */
+  margin-top: 5rem;
+  height: 100%;
+  backdrop-filter: blur(14px);
+}.aboutpageImg{
+  /* filter: blur(3px); */
+  background-image: url(../img/loginpage.jpg);
+  background-size: 100%;
+  min-height: 100vh;background-attachment:scroll;
+  z-index: -4;
+  position: fixed;
+  left: 0;
+  right: 0;
+  border-top-right-radius: 35px;
+}.abouttext{
+  font-weight: 600;
+ /* opacity: 0.7;
+  background-color: aliceblue; */
+}
 .enable-button-pointers{
   cursor: auto;
 }
@@ -81,6 +101,7 @@ float:left;
     align-self: baseline;
   text-align: end;
 }
+
 @media screen and (min-width: 600px) {
   .aboutP{
     font-size: 1vw;
