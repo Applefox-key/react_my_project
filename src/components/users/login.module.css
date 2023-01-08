@@ -5,14 +5,13 @@
     background-attachment: fixed;
     font-family: "Open Sans", sans-serif;
     color: #333333;
-    /* background-image: url(../../img/mainBg.jpg); */
     background-image: url(../../img/loginpage.jpg);
     background-size: 100%;
     min-height: 100vh;background-attachment:fixed;
   }
   
 
-  /* @media screen and (min-width: 600px) and (min-height: 600px) */
+
   @media (max-width: 900px)  {
 
     .page {
@@ -65,31 +64,9 @@
     outline: none;
 }
 
-.login_block .inputlogin#username {
-    background: #fff  20px top no-repeat;
-    background-size: 16px 80px;
-}
 
-.login_block .inputlogin#username:focus {
-    background: #fff 20px bottom no-repeat;
-    background-size: 16px 80px;
-}
 
-.login_block .inputlogin#password {
-  background: #fff 20px bottom no-repeat;
-    background-size: 16px 80px;
-}
-
-.login_block .inputlogin#password:focus {
-  background: #fff 20px bottom no-repeat;
-    background-size: 16px 80px;
-}
-
-.login_block .inputlogin:active, .login-block input:focus {
-    border: 1px solid #296FD1;
-}
-
-.login_block button {
+.login_block .logbutton {
     width: 100%;
     height: 40px;
     background: #296FD1;
@@ -105,6 +82,6 @@
     cursor: pointer;
 }
 
-.login_block button:hover {
+.login_block .logbutton:hover {
     background: #72cbfe;
 }

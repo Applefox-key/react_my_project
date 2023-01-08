@@ -49,7 +49,9 @@ const Login = () => {
           id="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={login}>Login</button>
+        <button className={cl.logbutton} onClick={login}>
+          Login
+        </button>
       </div>
     </div>
   );
