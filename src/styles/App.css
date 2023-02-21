@@ -101,7 +101,15 @@ float:left;
     align-self: baseline;
   text-align: end;
 }
-
+.footer {
+  position: fixed;
+  left: 0; bottom: 0; 
+  padding: 10px; 
+  background: #B5DBEF; 
+  background: #B5DBEF; 
+ font-size: large;
+  width: 100%; 
+ }
 @media screen and (min-width: 600px) {
   .aboutP{
     font-size: 1vw;

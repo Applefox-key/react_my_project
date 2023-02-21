@@ -9,8 +9,26 @@
     background-size: 100%;
     min-height: 100vh;background-attachment:fixed;
   }
+  .pageheadText{
+    color: white;
+    font-family: cursive;
+    position: absolute;
+    top: 8rem;
+    left: 9rem;
+    transform: rotate(334deg);
+    font-size: 6rem;
+    width: 20rem;
+    text-align: center;
   
+  }
+.pagecontent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+height: 100%;
 
+}
 
   @media (max-width: 900px)  {
 
@@ -33,13 +51,14 @@
 
 .login_block {
 
-    width: 320px;
+    width: 350px;
     padding: 20px;
     background: #fff;
     border-radius: 5px;
     border-top: 5px solid #296FD1;
     margin: 0 auto;
     margin-top: 8rem;
+    font-size: large;
 }
 
 .login_block .h1login {
@@ -59,7 +78,8 @@
     border: 1px solid #ccc;
     margin-bottom: 20px;
     font-size: 14px;
-    font-family: Montserrat;
+    font-size: large;
+
     padding: 0 20px 0 50px;
     outline: none;
 }
@@ -77,11 +97,168 @@
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: Montserrat;
+
     outline: none;
     cursor: pointer;
 }
 
 .login_block .logbutton:hover {
     background: #72cbfe;
+}
+
+.card {
+  width: 390px;
+  height: 120px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  position: absolute;
+  left: 5%;
+  top:15%;
+  background: rgba(198, 198, 198, 0.34);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+  border-left: 2px  rgba(255, 255, 255, 0.545) outset;
+  box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+  transform: skewX(-10deg);
+  transition: .4s;
+  overflow: hidden;
+  color: white;
+}.card2{
+  left: 57rem;
+  /* top:20rem; */
+}.card3{
+  left: 100rem;
+  /* top:30rem; */
+}
+
+.card:hover {
+  height: 55%;  
+  transform: skew(0deg);
+ z-index: 1000;
+}.textabout{
+  font-size: large;
+  padding: 2rem;
+}
+
+
+
+
+
+.card h1 {
+  text-align: center;
+  margin: 1.3rem;
+  color: rgb(218, 244, 237);
+  text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+}
+
+
+@media screen and (max-width: 600px) {
+
+
+  .textabout{
+    font-size: 3vw;
+   
+  }
+  .card{
+    font-size: 5vw;
+  }
+ 
+}
+
+
+.books {
+  width: 200px;
+  height: 394px;
+  border-radius: 4px;
+  gap: 5px;  
+  padding: .4em;
+  margin-top: 8rem;
+   
+  display: flex;
+  justify-content: end;
+
+
+  backdrop-filter: blur(5px);
+  background: #113653;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+  border-left: 2px  rgba(255, 255, 255, 0.545) outset;
+  box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+  /* overflow: hidden; */
+  color: white;
+}
+.books:hover {  width: 100%;}
+.onebook {
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .5s;
+  background: #114D72;
+ 
+  border: 1px solid rgba(255, 255, 255, 0.440);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  background: rgba(198, 198, 198, 0.34);  background: #114D72;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+  border-left: 2px  rgba(255, 255, 255, 0.545) outset;
+  box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+}.onebook:hover {
+  flex: 7;
+  width: 10rem;  
+  /* width: 90%;   */
+  align-items: flex-start;
+}
+
+
+
+.booktext{
+display: none;
+}.booktext p{
+  margin-top: 2rem;
+}
+.bookdiv {
+  min-width: 14em;
+  padding: .5em;
+  transform: rotate(-90deg);
+  transition: all .5s;
+  /* text-transform: uppercase; */
+  color: #dbdbe7;
+  letter-spacing: .1em;
+  font-size: large;
+}
+
+.onebook:hover .bookdiv {
+  transform: rotate(0); 
+  text-align: center;
+}.onebook:hover .booktext {
+  display: inline;
+  text-align:start;
+}
+
+
+@media screen and (max-width: 600px) {
+  .books{
+    margin-left: 1rem;
+  }
+  .onebook:hover {
+    flex: 5;
+    width: 8rem;  
+    /* width: 90%;   */
+    font-size: small;
+    align-items: flex-start;
+  }.bookdiv {
+    min-width: 10em;
+    padding: .3em;
+    font-size: small;
+  }
+ 
+}
+.err{
+	color: 	 red;
+	font-size: large;
 }
