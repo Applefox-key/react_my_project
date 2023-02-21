@@ -3,9 +3,11 @@ import Spinner from "react-bootstrap/Spinner";
 
 const MySpinner = () => {
   return (
-    <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>
+    <div style={{ marginTop: "10rem" }}>
+      <Spinner animation="grow" variant="primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
   );
 };
 

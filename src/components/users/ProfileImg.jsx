@@ -1,6 +1,6 @@
 import React from "react";
 import AvatarGalery from "./AvatarGalery";
-import Button from "react-bootstrap/esm/Button";
+
 import Image from "react-bootstrap/Image";
 import cl from "./users.module.css";
 
@@ -9,7 +9,6 @@ const ProfileImg = (props) => {
     props.setUserDataForm({ ...props.userDataForm, img: url });
   };
   return (
-    // <div className="d-flex justify-content-center mt-2 px-5">
     <div className={cl.avatarDiv}>
       <AvatarGalery
         visible={props.visible}
@@ -18,19 +17,15 @@ const ProfileImg = (props) => {
       />
       <div>
         <Image
+          onClick={() => {
+            props.setVisible(true);
+          }}
           rounded
           src={props.userDataForm.img}
           className={cl.avatarProfile}
         />
-        <Button
-          onClick={() => {
-            props.setVisible(true);
-          }}>
-          Choose an avatar
-        </Button>
       </div>
     </div>
-    // </div>
   );
 };
 

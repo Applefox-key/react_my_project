@@ -27,8 +27,6 @@ const Profile = () => {
       setPopup.error(error);
       return;
     }
-    // if (!result.error) setPopup.success("The changes have been saved");
-    // else setPopup.error("Somethig goes wrong.." + error);
     setPopup.success("The changes have been saved");
     setUserData({ ...userData, ...data });
   };

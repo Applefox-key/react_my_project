@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/esm/Button";
+
 import imgProfile from "../../img/profile.ico";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "./ProfileImg";
-import ProfileText from "./ProfileText";
 
+import ProfileData from "./ProfileData";
+
+import cl from "./login.module.css";
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState(false);
   const [userDataForm, setUserDataForm] = useState({
@@ -21,25 +23,28 @@ const UserProfile = ({ userData, onClick, btnName }) => {
 
   return (
     <Form
+      className={cl.profileForm}
       onSubmit={(event) => {
         event.preventDefault();
         onClick(userDataForm);
       }}>
-      <div className="d-flex justify-content-center px-1 flex-wrap">
+      <div className="d-flex justify-content-center px-1 flex-wrap ">
         <ProfileImg
           userDataForm={userDataForm}
           setUserDataForm={setUserDataForm}
           visible={visible}
           setVisible={setVisible}
         />
-        <div style={{ width: "80%" }}>
-          <ProfileText
+        <div>
+          <ProfileData
             userDataForm={userDataForm}
             setUserDataForm={setUserDataForm}
             passRequired={btnName === "Sign up"}
           />
-          <Button as="input" type="submit" value={btnName} />
-        </div>
+          {/* <AnimatedBtn type="submit" title={btnName} /> */}
+
+          {/* <Button as="input" type="submit" value={btnName} /> */}
+        </div>{" "}
       </div>
     </Form>
   );

@@ -1,5 +1,5 @@
 .page {
-  margin-top: -5rem;
+   margin-top: -5rem;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -26,31 +26,32 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-height: 100%;
-
+  height: 100%;
 }
 
   @media (max-width: 900px)  {
-
     .page {
          background-size: cover;
          }
-         .box-form {
+    .box-form {
           flex-flow: wrap;
           text-align: center;
           align-content: center;
           align-items: center;
         }
-
   }
 
-
-
-
+.profileForm{
+  display: flex;
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
 
 
 .login_block {
-
     width: 350px;
     padding: 20px;
     background: #fff;
@@ -60,7 +61,6 @@ height: 100%;
     margin-top: 8rem;
     font-size: large;
 }
-
 .login_block .h1login {
     text-align: center;
     color: #000;
@@ -69,8 +69,7 @@ height: 100%;
     margin-top: 0;
     margin-bottom: 10px;
 }
-
-.login_block .inputlogin {
+.login_block .inputlogin {  caret-color: auto;
     width: 100%;
     height: 42px;
     box-sizing: border-box;
@@ -83,9 +82,6 @@ height: 100%;
     padding: 0 20px 0 50px;
     outline: none;
 }
-
-
-
 .login_block .logbutton {
     width: 100%;
     height: 40px;
@@ -101,71 +97,9 @@ height: 100%;
     outline: none;
     cursor: pointer;
 }
-
 .login_block .logbutton:hover {
     background: #72cbfe;
 }
-
-.card {
-  width: 390px;
-  height: 120px;
-  padding: 0.5rem;
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  position: absolute;
-  left: 5%;
-  top:15%;
-  background: rgba(198, 198, 198, 0.34);
-  border-bottom: 3px solid rgba(255, 255, 255, 0.440);
-  border-left: 2px  rgba(255, 255, 255, 0.545) outset;
-  box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
-  transform: skewX(-10deg);
-  transition: .4s;
-  overflow: hidden;
-  color: white;
-}.card2{
-  left: 57rem;
-  /* top:20rem; */
-}.card3{
-  left: 100rem;
-  /* top:30rem; */
-}
-
-.card:hover {
-  height: 55%;  
-  transform: skew(0deg);
- z-index: 1000;
-}.textabout{
-  font-size: large;
-  padding: 2rem;
-}
-
-
-
-
-
-.card h1 {
-  text-align: center;
-  margin: 1.3rem;
-  color: rgb(218, 244, 237);
-  text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
-}
-
-
-@media screen and (max-width: 600px) {
-
-
-  .textabout{
-    font-size: 3vw;
-   
-  }
-  .card{
-    font-size: 5vw;
-  }
- 
-}
-
-
 .books {
   width: 200px;
   height: 394px;
@@ -175,9 +109,7 @@ height: 100%;
   margin-top: 8rem;
    
   display: flex;
-  justify-content: end;
-
-
+  justify-content: flex-end;
   backdrop-filter: blur(5px);
   background: #113653;
   border-bottom: 3px solid rgba(255, 255, 255, 0.440);
@@ -201,7 +133,6 @@ height: 100%;
   justify-content: center;
   align-items: center;
 
-
   background: rgba(198, 198, 198, 0.34);  background: #114D72;
   border-bottom: 3px solid rgba(255, 255, 255, 0.440);
   border-bottom: 3px solid rgba(255, 255, 255, 0.440);
@@ -210,14 +141,11 @@ height: 100%;
 }.onebook:hover {
   flex: 7;
   width: 10rem;  
-  /* width: 90%;   */
   align-items: flex-start;
 }
 
-
-
 .booktext{
-display: none;
+  display: none;
 }.booktext p{
   margin-top: 2rem;
 }
@@ -226,7 +154,6 @@ display: none;
   padding: .5em;
   transform: rotate(-90deg);
   transition: all .5s;
-  /* text-transform: uppercase; */
   color: #dbdbe7;
   letter-spacing: .1em;
   font-size: large;
@@ -240,7 +167,6 @@ display: none;
   text-align:start;
 }
 
-
 @media screen and (max-width: 600px) {
   .books{
     margin-left: 1rem;
@@ -248,7 +174,6 @@ display: none;
   .onebook:hover {
     flex: 5;
     width: 8rem;  
-    /* width: 90%;   */
     font-size: small;
     align-items: flex-start;
   }.bookdiv {
@@ -256,9 +181,14 @@ display: none;
     padding: .3em;
     font-size: small;
   }
- 
 }
 .err{
 	color: 	 red;
 	font-size: large;
+}
+.lblInput{
+  font-size: small;
+  margin: 0;
+  text-align: left;
+  color: rgb(165, 179, 186);
 }

@@ -5,6 +5,7 @@ import Profile from "../components/users/Profile";
 import ExpressionsList from "../components/expressions/ExpressionsList";
 
 import CategoriesManager from "../components/CategorySelection/CategoriesManager";
+import About from "../components/About";
 
 export const publicRoutes = [
   // { path: "/login", element: <Login />, nameNav: "Login" },
@@ -13,6 +14,7 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
+  { path: "/about", element: <About />, nameNav: "About" },
   { path: "/training", element: <Training />, nameNav: "Training" },
   {
     path: "/expressions",
