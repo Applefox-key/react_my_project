@@ -13,7 +13,7 @@ const Login = () => {
       <div className={cl.pageheadText}>90 seconds to remember anything</div>
       <div className={cl.pagecontent}>
         <br />
-        <div className="d-flex h-100">
+        <div className="d-flex h-100 justify-content-around">
           <AboutBox />
         </div>
         <div>" "</div>

@@ -105,11 +105,12 @@ float:left;
 .footer {
   position: fixed;
   left: 0; bottom: 0; 
-  padding: 10px; 
+  padding: 5px; 
   background: #B5DBEF; 
-  background: #B5DBEF; 
+  background: #93AEBF; 
  font-size: large;
-  width: 100%; 
+  width: 100%;
+  height: 3%; 
  }
 @media screen and (min-width: 600px) {
   .aboutP{

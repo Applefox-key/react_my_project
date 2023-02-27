@@ -14,16 +14,22 @@
     font-family: cursive;
     position: absolute;
     top: 8rem;
+    top: 43rem;
     left: 9rem;
-    transform: rotate(334deg);
-    font-size: 6rem;
-    width: 20rem;
+    left: -6rem;
+    /* transform: rotate(334deg); */
+    font-size: 5.5rem;
+    /* font-size: 9rem; */
+    /* width: 60rem; */
     text-align: center;
+    transform: rotate(34.1deg);
+    /* height: 100%; */
   
   }
 .pagecontent{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   justify-content: center;
   align-items: center;
   height: 100%;
