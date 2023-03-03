@@ -33,7 +33,7 @@ export const expressionsFromText = async (
 export const addSpanToExpInPrase = (item) => {
   if (!item.expression) return [item.phrase];
   const repT = item.phrase.replace(
-    new RegExp(item.expression, "gim"),
+    new RegExp(item.expression.trim(), "gim"),
     "Spanitemexpression"
   );
   let res = [""];
