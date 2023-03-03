@@ -9,10 +9,11 @@ import MySpinner from "../../UI/MySpinner";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "../../../img/profile.ico";
 import cl from "./users.module.css";
+import { setImgToStorage } from "../../../utils/serverFireBaseHlp/fbHelpers";
 
-const AvatarGalery = ({ visible, setVisible, fileChange }) => {
+const AvatarGalery = ({ visible, setVisible, fileChange, userid }) => {
   const [avatarUrlList, setAvatarUrlList] = useState([]);
-  const [choice, setChoice] = useState(ProfileImg);
+  const [choice, setChoice] = useState({ img: ProfileImg });
   const [getAvatarList, isLoading] = useQuery(async () => {
     setAvatarUrlList(await BaseAPI.getAvatarUrlList());
   });
@@ -28,9 +29,13 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
 
   const fromFile = (e) => {
     let img = e.target;
+    // let img = document.getElementById("fileName");
+    // const [file] = img.files;
+
     const [file] = img.files;
     if (file) {
-      setChoice(URL.createObjectURL(file));
+      let urlim = URL.createObjectURL(file);
+      setChoice({ img: urlim, file: file });
     }
   };
 
@@ -51,7 +56,7 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
 
       <div className="d-flex p-2 flex-wrap justify-content-between">
         <div className={cl.previewBlock}>
-          <Image rounded src={choice} className={cl.imgPreview} />
+          <Image rounded src={choice.img} className={cl.imgPreview} />
           <div className={cl.btn}>
             <Button variant="secondary" onClick={defaultImg}>
               CLEAR
@@ -70,7 +75,7 @@ const AvatarGalery = ({ visible, setVisible, fileChange }) => {
                 className={cl.imgGallary}
                 src={elem.url}
                 onClick={(e) => {
-                  setChoice(elem.url);
+                  setChoice({ img: elem.url });
                 }}
               />
             ))}

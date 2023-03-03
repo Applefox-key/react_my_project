@@ -50,9 +50,11 @@ export async function setImgToStorage(userKey, file) {
   if (file) {
     const storage = await getStorage();
     const storageData = await ref(storage, "usersAvatars/" + userKey);
+
     let task = await uploadBytesResumable(storageData, file, {
       contentType: file.type,
     });
+
     if (task) {
       console.log("Uploaded a blob or file!");
       let curl = await getDownloadURL(task.task.snapshot.ref);

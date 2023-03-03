@@ -146,6 +146,11 @@ const BaseAPI = {
   },
   async updateUser(ud) {
     let reqData = { ...ud };
+    if (ud.img.includes("blob")) {
+      let img = fbHelpers.setImgToStorage(ud.id, ud.file);
+      reqData = { ...ud, img: img };
+    }
+
     return await this.serverReq("patch", "/users", true, reqData);
   },
   async updateExpression(expressionBefore) {

@@ -6,7 +6,11 @@ import cl from "./users.module.css";
 
 const ProfileImg = (props) => {
   const changeAvatar = (url) => {
-    props.setUserDataForm({ ...props.userDataForm, img: url });
+    props.setUserDataForm({
+      ...props.userDataForm,
+      ...url,
+      // img: url.file ? url.file : url.img,
+    });
   };
   return (
     <div className={cl.avatarDiv}>
@@ -14,6 +18,7 @@ const ProfileImg = (props) => {
         visible={props.visible}
         setVisible={props.setVisible}
         fileChange={changeAvatar}
+        userid={props.userDataForm.id}
       />
       <div>
         <Image
