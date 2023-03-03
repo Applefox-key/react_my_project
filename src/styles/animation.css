@@ -140,10 +140,10 @@
   }
 
   .result-appear {
-    animation: jackInTheBox;
+    animation: pulse;
     animation-duration: 1000ms;
   }  .result-appear-done {   
-    animation: jackInTheBox;
+    animation: pulse;
     animation-duration: 1000ms;
   } 
 

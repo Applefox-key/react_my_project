@@ -7,9 +7,10 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
   const [editValue, setEditValue] = useState({ ...content }); //{ ...content }
   const editNames = edit ? edit.names : [];
 
-  const editOk = () => {
-    edit.edit(editValue);
+  const editOk = (val = "") => {
+    edit.edit(val ? { ...val, id: editValue.id } : editValue);
   };
+
   const editCancel = () => {
     edit.edit(editValue.id === "new" ? "newCancel" : "");
   };
@@ -56,7 +57,7 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
           <td key={column}>{content[column]}</td>
         )
       )}
-      {btnsArray && (
+      {btnsArray.length > 0 && (
         <ColumnWithBtns btnsArray={btnsColumn} content={content} edit={edit} />
       )}
     </>

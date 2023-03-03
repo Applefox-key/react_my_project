@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import imgProfile from "../../img/profile.ico";
+import imgProfile from "../../../img/profile.ico";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "./ProfileImg";
 
 import ProfileData from "./ProfileData";
 
-import cl from "./login.module.css";
+import cl from "./users.module.css";
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState(false);
   const [userDataForm, setUserDataForm] = useState({

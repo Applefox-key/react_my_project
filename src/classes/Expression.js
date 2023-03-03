@@ -55,7 +55,6 @@ export class Expression {
     // let dt = this.#nextDate;
 
     let nextDay = new Date(this.#nextDate);
-    console.log(nextDay);
 
     const oneDayinMs = 1000 * 60 * 60 * 24;
     // Calculating the time difference between two dates

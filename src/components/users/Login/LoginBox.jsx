@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import BaseAPI from "../../API/BaseAPI";
-import { AuthContext } from "../../context";
+import BaseAPI from "../../../API/BaseAPI";
+import { AuthContext } from "../../../context";
 import { useNavigate, useParams } from "react-router-dom";
 import cl from "./login.module.css";
-import AnimatedBtn from "../UI/AnimatedBtn/AnimatedBtn";
-import { isEmailValid } from "../../utils/validation";
+import AnimatedBtn from "../../UI/AnimatedBtn/AnimatedBtn";
+import { isEmailValid } from "../../../utils/validation";
 
 const LoginBox = ({ setLoginMode }) => {
   const router = useNavigate();

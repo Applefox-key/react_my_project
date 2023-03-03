@@ -1,6 +1,6 @@
 import React from "react";
 import { onBlurCheck } from "../../../utils/domeElemFunc";
-import MyInput from "../MyInput/MyInput";
+import MyInputTbl from "../MyInput/MyInputTbl";
 
 const ColumnInput = ({
   edit,
@@ -12,7 +12,7 @@ const ColumnInput = ({
 }) => {
   return (
     <td>
-      <MyInput
+      <MyInputTbl
         onEnter={onEnter}
         onblur={(e) => {
           if (!onBlurCheck(e, "tr")) editCancel();

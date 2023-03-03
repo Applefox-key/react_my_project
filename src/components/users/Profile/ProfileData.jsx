@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import cl from "./login.module.css";
+import cl from "../Login/login.module.css";
 const ProfileData = ({ userDataForm, setUserDataForm, onClick }) => {
   const [err, setErr] = useState("");
   return (

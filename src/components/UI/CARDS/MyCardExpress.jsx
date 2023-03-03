@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import cl from "./MyCardExpress.module.css";
-// import "./MyCard.module.css";
+
 import { CSSTransition } from "react-transition-group";
+import { addSpanToExpInPrase } from "../../../utils/texts";
 
 const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
@@ -16,10 +17,11 @@ const MyCardExpress = ({ item, hint }) => {
           onClick={() => setFlipped(!flipped)}>
           <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
-              <h1 className="display-3 fw-bold">{item.expression}</h1>
-              <h1 className="display-1">{item.phrase}</h1>
-              {/* <h1 className="display-4">{item.expression}</h1>
-              <h1 className="display-1">{item.phrase}</h1> */}
+              <div className="display-1 ">
+                {!item.expression
+                  ? item.phrase
+                  : addSpanToExpInPrase(item).map((row, i) => row)}
+              </div>
             </div>
           </CSSTransition>
           <CSSTransition in={flipped} timeout={1000} classNames="cardBack">

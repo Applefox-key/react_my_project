@@ -7,13 +7,14 @@ const HintCount = ({ hint }) => {
 
   return (
     <div className="hint1">
+      {" "}
+      <h5 className="">{hintForUser}</h5>
       <div className="d-flex circles-hint">
         <button className={cl1}></button>
         <button className={cl2}></button>
         {/* <button className="circle bg-primary"></button> */}
         {count === 3 && <button className={cl1}></button>}
       </div>
-      <h5 className="">{hintForUser}</h5>
     </div>
   );
 };

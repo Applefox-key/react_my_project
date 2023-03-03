@@ -114,6 +114,16 @@ const ExpressionsList = () => {
     <div className="mt-3 tableContainer">
       {dataModal ? dataModal : <></>}
       <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
+      {/* <div className="divAdvice">
+        YOU CAN SELECT A PART OF A PHRASE AND SET IT AS AN EXPRESSION  THE
+        EXPRESSION WILL BE HIGHLIGHTED DURING TRAINING
+      </div> */}
+      {editMode && (
+        <div className="divAdvice">
+          YOU CAN SELECT A PART OF A PHRASE AND SET IT AS AN EXPRESSION. THE
+          EXPRESSION WILL BE HIGHLIGHTED DURING TRAINING.
+        </div>
+      )}
       {!isLoading ? (
         <MyTable
           edit={editMode}

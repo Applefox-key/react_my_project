@@ -1,16 +1,14 @@
-import Login from "../components/users/Login";
 import Training from "../components/expressions/Training";
-import Profile from "../components/users/Profile";
+import Profile from "../components/users/Profile/Profile";
 
 import ExpressionsList from "../components/expressions/ExpressionsList";
-
-import CategoriesManager from "../components/CategorySelection/CategoriesManager";
-import About from "../components/About";
+import About from "../components/AboutPage/About";
+import MainPage from "../components/AboutPage/MainPage";
 
 export const publicRoutes = [
   // { path: "/login", element: <Login />, nameNav: "Login" },
-  { path: "/login/:email", element: <Login />, nameNav: "" },
-  { path: "/*", element: <Login />, nameNav: "" },
+  { path: "/login/:email", element: <MainPage />, nameNav: "" },
+  { path: "/*", element: <MainPage />, nameNav: "" },
 ];
 
 export const privateRoutes = [
@@ -24,5 +22,4 @@ export const privateRoutes = [
   { path: "/*", element: <Training />, nameNav: "" },
 
   { path: "/profile", element: <Profile />, nameNav: "Profile" },
-  { path: "/categories", element: <CategoriesManager />, nameNav: "" },
 ];

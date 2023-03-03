@@ -3,7 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 
 const ColumnHeadWithBtns = ({ btnsArray }) => {
   return (
-    <th className="d-flex justify-content-between">
+    <th className="d-flex justify-content-end">
       {btnsArray
         .filter((el) => el.nameMain)
         .map((btn, i) =>
@@ -12,11 +12,6 @@ const ColumnHeadWithBtns = ({ btnsArray }) => {
               key={i}
               variant="light"
               size="lg"
-              style={{
-                background: "transparent",
-                color: "white",
-                marginRight: "1rem",
-              }}
               onClick={(e) => {
                 e.stopPropagation();
                 btn.callback();

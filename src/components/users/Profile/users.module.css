@@ -2,6 +2,14 @@
   .avatarProfile{
    width: 100%;
   }
+  .profileForm{
+    display: flex;
+    width: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
 @media screen and (min-width: 600px) {
   .avatarDiv{
     max-width: 300px;

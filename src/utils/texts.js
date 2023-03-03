@@ -29,3 +29,20 @@ export const expressionsFromText = async (
     return;
   }
 };
+
+export const addSpanToExpInPrase = (item) => {
+  if (!item.expression) return [item.phrase];
+  const repT = item.phrase.replace(
+    new RegExp(item.expression, "gim"),
+    "Spanitemexpression"
+  );
+  let res = [""];
+  let arr = repT.split(" ");
+  arr.forEach((element, i) => {
+    if (element === "Spanitemexpression") {
+      res.push(<span className="expression">{item.expression}</span>);
+      if (arr.length - 1 !== i) res.push("");
+    } else res[res.length - 1] += " " + element;
+  });
+  return res;
+};

@@ -6,13 +6,12 @@ const MyTableHeader = ({ namesArray, btnsArray = [] }) => {
     <thead className="fs-5">
       <tr>
         <th key="c">#</th>
+
         {namesArray.map((item) => (
           <th key={item}>{item}</th>
         ))}
-        {btnsArray ? (
+        {btnsArray.length > 0 && (
           <ColumnHeadWithBtns key="btnA" btnsArray={btnsArray} />
-        ) : (
-          <></>
         )}
       </tr>
     </thead>

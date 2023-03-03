@@ -12,7 +12,8 @@ const ExpressionInfo = ({ visible, setVisible, expression }) => {
       subtitle={expression.phrase}
       showmodal={visible}
       setshowmodal={setVisible}
-      dialogClassName={"modal-max"}>
+      dialogClassName={"modal-max"}
+      stylesubt={{ maxWidth: "36rem" }}>
       <div className="d-flex ">
         <CardForList header="Study plan" subtitle="" list={studyPlan} />
         <CardForHistoryList header="History" subtitle="" list={history} />

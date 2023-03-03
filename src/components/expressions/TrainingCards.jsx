@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import OneCardE from "./OneCardE";
 
+import NoWork from "./NoWork";
 const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -49,7 +50,7 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
           </div>
         </>
       ) : (
-        <h1 className="display-1">there are no expressions for training!</h1>
+        <NoWork />
       )}
     </div>
   );

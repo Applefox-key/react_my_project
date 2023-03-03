@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import BackBtn from "../UI/BackBtn/BackBtn";
+import { useNavigate } from "react-router-dom";
 
 import ExpModalCommand from "./ExpModalCommand";
 
@@ -11,6 +11,7 @@ const ExpressionsMenu = ({ setExpressions, ...props }) => {
   const modal = (el) => {
     setMod(el);
   };
+  const router = useNavigate();
 
   return (
     <div className="d-flex   justify-content-between p-2">
@@ -34,9 +35,11 @@ const ExpressionsMenu = ({ setExpressions, ...props }) => {
           <Button variant="light" onClick={() => modal("file")}>
             Add from the file
           </Button>{" "}
+          <Button variant="light" onClick={() => router("/training")}>
+            Back to training
+          </Button>{" "}
         </ButtonGroup>
       </div>{" "}
-      <BackBtn size="lg" />
     </div>
   );
 };
