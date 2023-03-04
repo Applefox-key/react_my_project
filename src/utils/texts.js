@@ -39,8 +39,13 @@ export const addSpanToExpInPrase = (item) => {
   let res = [""];
   let arr = repT.split(" ");
   arr.forEach((element, i) => {
-    if (element === "Spanitemexpression") {
-      res.push(<span className="expression">{item.expression}</span>);
+    // if (element === "Spanitemexpression") {
+    if (element.includes("Spanitemexpression")) {
+      res.push(
+        <span className="expression">
+          {element.replace("Spanitemexpression", item.expression)}
+        </span>
+      );
       if (arr.length - 1 !== i) res.push("");
     } else res[res.length - 1] += " " + element;
   });
