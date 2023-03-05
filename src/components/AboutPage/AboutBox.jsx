@@ -5,7 +5,7 @@ const AboutBox = () => {
   return (
     <div className={cl.aboutBox}>
       <div className={cl.imgabout} />{" "}
-      <div className="d-flex">
+      <div className={cl.bookShelf}>
         {" "}
         <div className={cl.books}>
           {" "}
