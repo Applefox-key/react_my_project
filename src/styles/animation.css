@@ -213,3 +213,7 @@
     animation-duration: 500ms;
 } 
 
+.hintAnim{
+  animation: shakeX; 
+  animation-duration: 1500ms;
+}

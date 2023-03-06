@@ -28,6 +28,7 @@ const MyInputTbl = ({
         className="fs-4"
         style={{ caretColor: "auto" }}
         autoFocus
+        as={value.length < 82 ? "input" : "textarea"}
         aria-label={name}
         value={value}
         onBlur={onblur}

@@ -10,6 +10,8 @@
 }
 .divAdvice{
   color:#4461F2;
+  color:#696969;
+  color:#86B7FE;
   position:absolute;
   text-align: center;
   width: inherit;
@@ -77,20 +79,24 @@
 .popupBtn{
 
 
-  height: 2rem;
+  height: 2.1rem;
   margin-bottom: 1rem;
   text-align: center;
+  font-weight: 500 ;
   display: flex;
   align-items: center;
 
   font-size: 1rem;
   position: absolute;
-  left: 0%;
-  bottom: -1rem;
-  border: 1px solid green;
-  border-radius: 10px;
+  left: 0;
+  top:0;
+  border: 1px solid #0b3e86;
+  border-radius: 7px;
   color:white;
+  /* color:#296FD1; */
   background-color: #296FD1;
+  background-color:#3390FF;
+  opacity: 0.8;
 }
 .expression{
   font-weight: 600;

@@ -30,6 +30,7 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
     <div style={{ overflow: "hidden" }}>
       {items.length ? (
         <>
+          {" "}
           <OneCardE anim={anim} dir={direction} item={items[num]} />
           <div className="mt-3">
             <Button onClick={prew} disabled={num === 0 || !items.length}>
