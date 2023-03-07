@@ -3,10 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 
 const ColumnWithBtns = ({ btnsArray, content }) => {
   return (
-    <td
-      key="btnA"
-      // className="d-flex  align-items-center  justify-content-end"
-      style={{ maxWidth: "inherit" }}>
+    <td key="btnA" style={{ maxWidth: "inherit", textAlign: "center" }}>
       <div>
         {btnsArray
           .filter((el) => !el.nameMain)

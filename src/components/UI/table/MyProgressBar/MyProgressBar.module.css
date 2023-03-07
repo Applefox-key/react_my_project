@@ -1,0 +1,41 @@
+
+.outer, .outer1 {width: 55px;height: 25px;overflow:hidden}
+.inner{
+    width: 50px;
+    height: 50px;
+    border: 5px solid #cdcdcd;
+    border-left-color:  rgb(35, 52, 181);
+    border-bottom-color:  rgb(35, 52, 181);
+    /* transform: rotate(315deg); */
+    border-radius: 50%;
+    /* transform: rotate(360deg); */
+
+}
+.colorBlue{
+    border-left-color:  rgb(35, 52, 181);
+    border-bottom-color:  rgb(35, 52, 181);
+}.colorRed{
+    border-left-color:  red;
+    border-bottom-color:   red;
+}.colorOrange{
+    border-left-color: orange;
+    border-bottom-color:  orange;
+}
+.outer1{
+    transform: rotate(180deg) translateX(5px);
+
+}
+.stage{
+    font-size: large;
+    width: 50px;
+    position: absolute;
+    top: 27%;
+    left: 20%;
+    font-weight: 500;
+}
+
+.wrap{
+    position: absolute;
+    top: -0;
+    left: 10px;
+}

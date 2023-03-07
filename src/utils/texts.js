@@ -49,5 +49,6 @@ export const addSpanToExpInPrase = (item) => {
       if (arr.length - 1 !== i) res.push("");
     } else res[res.length - 1] += " " + element;
   });
-  return res;
+
+  return <>{res.map((row, i) => row)}</>;
 };

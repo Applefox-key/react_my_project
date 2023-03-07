@@ -318,7 +318,7 @@ tbody:hover td {
 
 tbody:hover tr:hover td {
   color: #444;
-  text-shadow: 0 1px 0 #fff;
+  /* text-shadow: 0 1px 0 #fff; */
 }
 
 

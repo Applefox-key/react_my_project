@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { expressionState } from "../../../utils/expressions";
 import ColumnInput from "./ColumnInput";
 import ColumnWithBtns from "./ColumnWithBtns";
+import MyProgressBar from "./MyProgressBar/MyProgressBar";
 
 const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
   const [editValue, setEditValue] = useState({ ...content }); //{ ...content }
   const editNames = edit ? edit.names : [];
 
   const editOk = (val = "") => {
-    edit.edit(val ? { ...val, id: editValue.id } : editValue);
+    // content.id === "new" ? "" : content
+    edit.edit(
+      val && editValue.id !== "new" ? { ...val, id: editValue.id } : editValue
+    );
   };
 
   const editCancel = () => {
@@ -50,9 +55,13 @@ const RowContent = ({ content, i, btnsArray, namesArray, edit }) => {
             key={column}
             autofocus={editNames[0] === column}
           />
-        ) : Object.prototype.toString.call(content[column]) ===
-          "[object Date]" ? (
-          <td key={column}>{content[column].toISOString().slice(0, 10)}</td>
+        ) : column === "stage" ? (
+          <td key={column}>
+            <MyProgressBar
+              stage={content[column]}
+              color={expressionState(content)}
+            />
+          </td>
         ) : (
           <td key={column}>{content[column]}</td>
         )

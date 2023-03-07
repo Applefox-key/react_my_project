@@ -8,7 +8,7 @@ import { addSpanToExpInPrase } from "../../../utils/texts";
 const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
   let studyPlan = item.studyPlan;
-
+  // <div key={item.id + "_" + i}>{row}</div>  : addSpanToExpInPrase(item).map((row, i) => row)}
   return (
     <div>
       <div className={cl["card-container"]}>
@@ -17,10 +17,8 @@ const MyCardExpress = ({ item, hint }) => {
           onClick={() => setFlipped(!flipped)}>
           <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
-              <div className="display-1 ">
-                {!item.expression
-                  ? item.phrase
-                  : addSpanToExpInPrase(item).map((row, i) => row)}
+              <div className="display-1 d-flex">
+                {!item.expression ? item.phrase : addSpanToExpInPrase(item)}
               </div>
             </div>
           </CSSTransition>
