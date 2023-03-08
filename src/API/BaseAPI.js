@@ -13,8 +13,8 @@ const BaseAPI = {
   async serverReq(method, url, isHeader, data = "", params = "") {
     let axiosConfig = {
       method: method,
-      url: "http://localhost:8000" + url,
-      // url: "http://34.214.160.243:8000" + url,
+      // url: "http://localhost:8000" + url,
+      url: "http://34.214.160.243:8000" + url,
     };
     if (params) axiosConfig.params = params;
     if (data) axiosConfig.data = { data: data };
