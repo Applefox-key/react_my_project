@@ -26,7 +26,7 @@ const About = () => {
           <h1 className={cl.h1login}>SHORT INSTRUCTION</h1> <br />
           <h2>Add a word to your list</h2> <br />
           <h2>Read it according the plan</h2> <br />
-          <h2>Spend only 90 seconds of yoyr time</h2>
+          <h2>Spend only 90 seconds of your time</h2>
         </div>{" "}
       </div>{" "}
       <div className="w-10">
