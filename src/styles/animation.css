@@ -217,3 +217,12 @@
   animation: shakeX; 
   animation-duration: 1500ms;
 }
+
+
+.page-appear {
+  animation: fadeIn;
+  animation-duration: 2000ms;
+}.page-appear-done {   
+  animation: fadeIn;
+  animation-duration: 2000ms;
+} 

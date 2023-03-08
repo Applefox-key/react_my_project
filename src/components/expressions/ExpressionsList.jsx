@@ -8,21 +8,36 @@ import BaseAPI from "../../API/BaseAPI";
 
 import ExpressionsMenu from "./ExpressionsMenu";
 import { usePopup } from "../../hooks/usePopup";
+import MyPagination from "../UI/AnimatedBtn/MyPagination/MyPagination";
+import { deleteExpressions } from "../../utils/expressions";
+import { CSSTransition } from "react-transition-group";
 
 const ExpressionsList = () => {
+  const limit = 10;
   const setPopup = usePopup();
   const [expressions, setExpressions] = useState();
   const [dataModal, setDataModal] = useState(false);
   const [editMode, setEditMode] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageTotal, setPageTotal] = useState(1);
   const [getExpression, isLoading] = useQuery(async () => {
-    const expressions = await BaseAPI.getTrainingListAll();
-    setExpressions(expressions);
+    if (page === 0) {
+      const expressions = await BaseAPI.getTrainingListAll();
+      setExpressions(expressions);
+    } else {
+      const [expressions, totalSrv] = await BaseAPI.getTrainingListOnePage(
+        limit,
+        page
+      );
+      setExpressions(expressions);
+      if (totalSrv !== pageTotal) setPageTotal(totalSrv);
+    }
   });
 
   useEffect(() => {
-    getExpression();
+    getExpression(limit, page);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [limit, page]);
 
   //modal content
   const modalExpressionInfo = (expression) => {
@@ -35,25 +50,16 @@ const ExpressionsList = () => {
     );
   };
   //actions
-  const expressionDelete = async (expression) => {
-    if (!window.confirm("Delete the expression?")) return;
-    let res = await BaseAPI.deleteExpression(expression.id);
+  const expressionsDelete = async (expression = "") => {
+    let res = deleteExpressions(expression);
     if (res.error) {
       setPopup.error("Somethig goes wrong.." + res.error);
       return;
     }
-    let arr = expressions.filter((elem) => elem.id !== expression.id);
+    let arr = expression
+      ? expressions.filter((elem) => elem.id !== expression.id)
+      : [];
     setExpressions(arr);
-  };
-
-  const deleteAllExpressions = async () => {
-    if (!window.confirm("Delete all expressions?")) return;
-    let res = await BaseAPI.deleteAllExpressions();
-    if (res.error) {
-      setPopup.error("Somethig goes wrong.." + res.error);
-      return;
-    }
-    setExpressions([]);
   };
 
   const editOn = (content) => {
@@ -64,33 +70,37 @@ const ExpressionsList = () => {
     });
   };
   const contentEdit = async (newV) => {
+    //value hasn't been changed
     if (!newV) {
       setEditMode(null);
       return;
     }
+    //adding new item has been canceled
     if (newV === "newCancel") {
       setEditMode(null);
       setExpressions(expressions.filter((el) => el.id !== "new"));
       return;
     }
+    //add new item
     if (newV.id === "new") {
       try {
         await BaseAPI.createExpression(newV.expression, newV.phrase);
-        setExpressions(await BaseAPI.getTrainingListAll());
+        await getExpression(limit, page);
         setEditMode(null);
         setPopup.success("expression was added");
-        return;
       } catch (error) {
         setPopup.error(error.message);
       }
+      return;
     }
+    //edit item
     try {
       await BaseAPI.editExpression(newV);
     } catch (error) {
       setPopup.error(error.message);
     }
     setEditMode(null);
-    getExpression();
+    await getExpression(limit, page);
   };
   const addRow = async () => {
     const newEl = {
@@ -101,33 +111,43 @@ const ExpressionsList = () => {
     setExpressions([newEl, ...expressions]);
     editOn(newEl);
   };
-
+  const btnsArray = [
+    { nameMain: "Add row", callback: addRow },
+    { nameMain: "Delete all", callback: expressionsDelete },
+    { name: "Plan", callback: modalExpressionInfo },
+    { name: "Delete", callback: expressionsDelete },
+  ];
   return (
     <div className="mt-3 tableContainer">
       {dataModal ? dataModal : <></>}
       <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
 
-      {editMode && (
-        <div className="divAdvice">
-          YOU CAN SELECT A PART OF A PHRASE AND SET IT AS AN EXPRESSION. THE
-          EXPRESSION WILL BE HIGHLIGHTED DURING TRAINING.
-        </div>
-      )}
       {!isLoading ? (
-        <MyTable
-          edit={editMode}
-          dataArray={expressions}
-          namesArray={["expression", "phrase", "stage"]}
-          onRowClick={editOn}
-          btnsArray={[
-            { nameMain: "Add row", callback: addRow },
-            { nameMain: "Delete all", callback: deleteAllExpressions },
-            // { name: "Edit", callback: editOn },
-            // { name: "expst", callback: expressionState, isnotbtn: true },
-            { name: "Plan", callback: modalExpressionInfo },
-            { name: "Delete", callback: expressionDelete },
-          ]}
-        />
+        <>
+          <MyPagination
+            total={pageTotal}
+            activeItem={page}
+            setActive={setPage}></MyPagination>{" "}
+          {editMode && (
+            <div className="divAdvice">
+              YOU CAN SELECT A PART OF A PHRASE AND SET IT AS AN EXPRESSION. THE
+              EXPRESSION WILL BE HIGHLIGHTED DURING TRAINING.
+            </div>
+          )}
+          <CSSTransition
+            appear={true}
+            in={true}
+            timeout={2000}
+            classNames="page">
+            <MyTable
+              edit={editMode}
+              dataArray={expressions}
+              namesArray={["expression", "phrase", "stage"]}
+              onRowClick={editOn}
+              btnsArray={btnsArray}
+            />
+          </CSSTransition>
+        </>
       ) : (
         <MySpinner />
       )}

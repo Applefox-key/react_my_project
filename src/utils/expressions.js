@@ -1,3 +1,5 @@
+import BaseAPI from "../API/BaseAPI";
+
 export const expressionState = (item) => {
   let days = item.exceededSkipsDays;
   let exceededSkipsCount = item.exceededSkipsCount;
@@ -7,4 +9,16 @@ export const expressionState = (item) => {
   if (exceededSkipsCount) color = "colorRed";
   if (days > 0) color = "colorOrange";
   return color;
+};
+
+export const deleteExpressions = async (expression = "") => {
+  let res;
+  if (expression) {
+    if (!window.confirm("Delete the expression?")) return;
+    res = await BaseAPI.deleteExpression(expression.id);
+  } else {
+    if (!window.confirm("Delete all expressions?")) return;
+    res = await BaseAPI.deleteAllExpressions();
+  }
+  return res;
 };

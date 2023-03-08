@@ -42,7 +42,6 @@ const MyInputTbl = ({
         onSelect={name !== "phrase" ? "" : Addbtn}
         onChange={(e) => {
           e.stopPropagation();
-          debugger;
           setValue(e.target.value);
           callback(e);
         }}
