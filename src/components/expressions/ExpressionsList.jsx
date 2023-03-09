@@ -8,9 +8,10 @@ import BaseAPI from "../../API/BaseAPI";
 
 import ExpressionsMenu from "./ExpressionsMenu";
 import { usePopup } from "../../hooks/usePopup";
-import MyPagination from "../UI/AnimatedBtn/MyPagination/MyPagination";
+import MyPagination from "../UI/MyPagination/MyPagination";
 import { deleteExpressions } from "../../utils/expressions";
 import { CSSTransition } from "react-transition-group";
+import MyFilter from "../UI/MyFilter/MyFilter";
 
 const ExpressionsList = () => {
   const limit = 10;
@@ -19,15 +20,19 @@ const ExpressionsList = () => {
   const [dataModal, setDataModal] = useState(false);
   const [editMode, setEditMode] = useState(null);
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("");
   const [pageTotal, setPageTotal] = useState(1);
   const [getExpression, isLoading] = useQuery(async () => {
     if (page === 0) {
-      const expressions = await BaseAPI.getTrainingListAll();
+      const expressions = await BaseAPI.getTrainingListAll(filter);
       setExpressions(expressions);
+      const totalSrv = Math.ceil(expressions.length / limit);
+      if (totalSrv !== pageTotal) setPageTotal(totalSrv);
     } else {
       const [expressions, totalSrv] = await BaseAPI.getTrainingListOnePage(
         limit,
-        page
+        page,
+        filter
       );
       setExpressions(expressions);
       if (totalSrv !== pageTotal) setPageTotal(totalSrv);
@@ -35,10 +40,18 @@ const ExpressionsList = () => {
   });
 
   useEffect(() => {
-    getExpression(limit, page);
+    getExpression(limit, page, filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, page]);
-
+  }, [limit, page, filter]);
+  //filter
+  const onFilter = async (value) => {
+    setFilter(value);
+    if (page !== 0) {
+      setPage(0);
+    } else {
+      await getExpression(limit, page, filter);
+    }
+  };
   //modal content
   const modalExpressionInfo = (expression) => {
     setDataModal(
@@ -85,7 +98,7 @@ const ExpressionsList = () => {
     if (newV.id === "new") {
       try {
         await BaseAPI.createExpression(newV.expression, newV.phrase);
-        await getExpression(limit, page);
+        await getExpression(limit, page, filter);
         setEditMode(null);
         setPopup.success("expression was added");
       } catch (error) {
@@ -100,7 +113,7 @@ const ExpressionsList = () => {
       setPopup.error(error.message);
     }
     setEditMode(null);
-    await getExpression(limit, page);
+    await getExpression(limit, page, filter);
   };
   const addRow = async () => {
     const newEl = {
@@ -120,10 +133,13 @@ const ExpressionsList = () => {
   return (
     <div className="mt-3 tableContainer">
       {dataModal ? dataModal : <></>}
-      <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
-
+      <div className="d-flex justify-content-between align-items-center flex-wrap">
+        <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
+        <MyFilter filter={filter} setFilter={onFilter} />
+      </div>
       {!isLoading ? (
         <>
+          {" "}
           <MyPagination
             total={pageTotal}
             activeItem={page}

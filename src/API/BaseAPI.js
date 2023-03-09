@@ -13,8 +13,8 @@ const BaseAPI = {
   async serverReq(method, url, isHeader, data = "", params = "") {
     let axiosConfig = {
       method: method,
-      // url: "http://localhost:8000" + url,
-      url: "http://34.214.160.243:8000" + url,
+      url: "http://localhost:8000" + url,
+      // url: "http://34.214.160.243:8000" + url,
     };
     if (params) axiosConfig.params = params;
     if (data) axiosConfig.data = { data: data };
@@ -98,14 +98,22 @@ const BaseAPI = {
     }
     return result.data;
   },
-  async getTrainingListAll() {
-    let result = await this.serverReq("get", "/expressions", true);
+  async getTrainingListAll(filter = "") {
+    let reqParams = { filter: filter };
+    let result = await this.serverReq(
+      "get",
+      "/expressions",
+      true,
+      "",
+      reqParams
+    );
     if (result.error) throw new Error(result.error);
     let expressions_ = result.data.map((item) => new Expression(item));
     return expressions_;
   },
-  async getTrainingListOnePage(limit, page) {
-    let reqParams = { page: page, limit: limit };
+  async getTrainingListOnePage(limit, page, filter = "") {
+    let reqParams = { page: page, limit: limit, filter: filter };
+
     let result = await this.serverReq(
       "get",
       "/expressions/page/" + page,
