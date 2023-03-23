@@ -57,6 +57,9 @@
 .err{
 	color: 	 red;
 	font-size: large;
+}.success{
+	color: 	 rgb(26, 152, 26);
+	font-size: large;
 }
 .lblInput{
   font-size: small;

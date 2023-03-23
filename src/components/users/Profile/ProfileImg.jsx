@@ -12,6 +12,7 @@ const ProfileImg = (props) => {
       // img: url.file ? url.file : url.img,
     });
   };
+
   return (
     <div className={cl.avatarDiv}>
       <AvatarGalery

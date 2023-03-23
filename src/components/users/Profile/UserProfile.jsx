@@ -7,6 +7,7 @@ import ProfileImg from "./ProfileImg";
 import ProfileData from "./ProfileData";
 
 import cl from "./users.module.css";
+
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState(false);
   const [userDataForm, setUserDataForm] = useState({
@@ -18,7 +19,8 @@ const UserProfile = ({ userData, onClick, btnName }) => {
 
   useEffect(() => {
     if (!userData) return;
-    setUserDataForm({ ...userData });
+    const ud = userData.img ? userData.img : imgProfile;
+    setUserDataForm({ ...userData, "img": ud });
   }, [userData]);
 
   return (

@@ -39,6 +39,7 @@ const SignUpBox = ({ setLoginMode }) => {
 
     if (!ok.error) {
       router("/login/" + email);
+      setLoginMode(1);
     } else {
       setErr(ok.error);
     }
@@ -83,7 +84,7 @@ const SignUpBox = ({ setLoginMode }) => {
         />
         <AnimatedBtn
           title="Back to login form"
-          onClick={() => setLoginMode(true)}
+          onClick={() => setLoginMode(1)}
         />
         <div className={cl.err}>{err}</div>
         <button className={cl.logbutton} onClick={newUser}>

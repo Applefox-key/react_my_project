@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import Logo from "../Logo";
+import ForgotBox from "../users/Login/ForgotBox";
 import LoginBox from "../users/Login/LoginBox";
 import SignUpBox from "../users/Login/SignUpBox";
 import cl from "./About.module.css";
-import AboutBox from "./AboutBox";
+import AboutBooks from "./AboutBooks";
 
 const MainPage = () => {
-  const [loginMode, setLoginMode] = useState(true);
+  const [loginMode, setLoginMode] = useState(1);
   const scollToRef = useRef();
   return (
-    <>
-      <div className="color_container"></div>
-      <div className={cl.text_container}>
+    <div className={cl.pagecontent}>
+      <div className={cl.imgabout} />
+      <div
+        className="d-flex flex-column justify-content-center"
+        style={{ width: "20%" }}>
         {" "}
         <div className={cl.text1}>Try the 90 seconds method</div>
         <div className={cl.text2}>Sign In to Learn Fast</div>
@@ -26,25 +29,20 @@ const MainPage = () => {
           Join Us
         </button>
       </div>
+      <div className="color_container"></div>
       <br />
-      <div className={cl.pagecontent}>
-        <AboutBox />
-
-        <div>
-          {" "}
-          <br ref={scollToRef} />
-          {loginMode ? (
-            <LoginBox setLoginMode={setLoginMode} />
-          ) : (
-            <SignUpBox setLoginMode={setLoginMode} />
-          )}
-          {/* <br ref={scollToRef} /> */}
-        </div>
+      <div style={{ zIndex: "600" }}>
+        {" "}
+        <br ref={scollToRef} />
+        {loginMode === 1 && <LoginBox setLoginMode={setLoginMode} />}
+        {loginMode === 2 && <SignUpBox setLoginMode={setLoginMode} />}
+        {loginMode === 3 && <ForgotBox setLoginMode={setLoginMode} />}
       </div>{" "}
+      <AboutBooks />
       <div className="w-10">
         <Logo />
       </div>
-    </>
+    </div>
   );
 };
 

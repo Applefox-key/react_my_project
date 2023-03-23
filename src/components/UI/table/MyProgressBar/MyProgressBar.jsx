@@ -4,7 +4,6 @@ import cl from "./MyProgressBar.module.css";
 const MyProgressBar = ({ stage = 0, color }) => {
   const progr1 = 315 + (stage * 40 < 180 ? stage * 40 : 180); //315 - 495
   const progr2 = 315 + (stage * 40 < 180 ? 0 : stage * 40 - 180); //315 - 495
-  console.log(color);
 
   return (
     <div className={cl.wrap}>

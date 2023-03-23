@@ -5,12 +5,13 @@ import Image from "react-bootstrap/Image";
 import { useState, useEffect } from "react";
 import { useQuery } from "../../../hooks/useQuery";
 import MySpinner from "../../UI/MySpinner";
+import imgProfile from "../../../img/profile.ico";
 
 const UserAvatar = (props) => {
   const [av, setAv] = useState();
   const [getData, isLoading] = useQuery(async () => {
     let userData = await BaseAPI.getUser();
-    if (userData) setAv(userData.img);
+    if (userData) setAv(userData.img ? userData.img : imgProfile);
   });
 
   useEffect(() => {

@@ -1,8 +1,10 @@
 /* PAGE STYLE */
 .imgabout{
-  background-image: url("../../img/standing_man.png");
+  background-image: url("../../img/standing_man.png") ;
+  background-repeat: no-repeat;
   height: 500px;
   width: 138px;background-size: contain;
+  
 }
 .pagecontent{   
    display: flex;
@@ -12,7 +14,7 @@
    justify-content: space-between;
 }
 .aboutBox{
-  width: 80%;
+  width: 76%;
   display: flex;
   justify-content: space-between;
 }
@@ -21,13 +23,14 @@
 /* TEXT BOX */
 .text_container{
     position: absolute;
-    left:15%;
-    top:40%;
+    left:7%;
+    top:10%;
 	width: 20%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
 }
 .text1{
 font-family: 'Phetsarath';
@@ -86,7 +89,10 @@ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     /* overflow: hidden; */
     color: white;
 }
-.books:hover {  
+/* .books:hover {  
+  width: 100%;
+} */
+.books_hover {  
   width: 100%;
 }
 .onebook {
@@ -109,7 +115,7 @@ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     border-left: 2px  rgba(255, 255, 255, 0.545) outset; */
     box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
 }
-.onebook:hover {
+.onebook_hover {
     flex: 7;
     width: 10rem;  
     align-items: flex-start;
@@ -129,14 +135,14 @@ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     letter-spacing: .1em;
     font-size: large;
 }
-.onebook:hover .bookdiv {
+.onebook_hover .bookdiv {
     transform: rotate(0); 
     text-align: center;
     color:black;
     background-color:white;
     height: 100%;
 }
-.onebook:hover .booktext {
+.onebook_hover .booktext {
     display: inline;
     text-align:start;
 }
@@ -203,7 +209,7 @@ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     .books{
       margin-left: 1rem;
     }
-    .onebook:hover {
+    .onebook_hover {
       flex: 5;
       width: 8rem;  
       font-size: small;

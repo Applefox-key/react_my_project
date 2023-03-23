@@ -138,6 +138,38 @@ const BaseAPI = {
     let expressions_ = result.data.map((item) => new Expression(item));
     return expressions_;
   },
+  async sendMailResetToken(login) {
+    let reqData = {
+      email: login,
+    };
+    let result = await this.serverReq("post", "/resetpassword", false, reqData);
+    if (result.error) throw new Error(result.error);
+    return { status: true };
+  },
+  async CheckResetToken(resetToken) {
+    let reqParams = { resetToken: resetToken };
+
+    let result = await this.serverReq(
+      "get",
+      "/resetpassword",
+      false,
+      "",
+      reqParams
+    );
+    if (result.error) throw new Error(result.error);
+    return { status: true };
+  },
+  async setNewPassword(password, resetToken) {
+    let reqData = { password: password, resetToken: resetToken };
+    let result = await this.serverReq(
+      "patch",
+      "/resetpassword",
+      false,
+      reqData
+    );
+    if (result.error) throw new Error(result.error);
+    return { status: true };
+  },
   async getUser() {
     let result = await this.serverReq("get", "/users", true);
     if (result.error) throw new Error(result.error);

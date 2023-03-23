@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import cl from "./About.module.css";
 
 const AboutBox = () => {
+  const [currentBook, setCurrentBook] = useState(1);
+  const switchBook = (book) => {
+    setCurrentBook(book === currentBook ? 0 : book);
+  };
   return (
     <div className={cl.aboutBox}>
       <div className={cl.imgabout} />{" "}
       <div className={cl.bookShelf}>
         {" "}
-        <div className={cl.books}>
+        <div className={cl.books + (currentBook ? " " + cl.books_hover : "")}>
           {" "}
-          <div className={cl.onebook}>
+          <div
+            onClick={() => switchBook(1)}
+            className={
+              cl.onebook + (currentBook === 1 ? " " + cl.onebook_hover : "")
+            }>
             <div className={cl.bookdiv}>
               <p>ABOUT</p>
 
@@ -26,7 +34,11 @@ const AboutBox = () => {
               </div>
             </div>
           </div>
-          <div className={cl.onebook}>
+          <div
+            onClick={() => switchBook(2)}
+            className={
+              cl.onebook + (currentBook === 2 ? " " + cl.onebook_hover : "")
+            }>
             <div className={cl.bookdiv}>
               <p>STRATEGY</p>
               <div className={cl.booktext}>
@@ -48,7 +60,11 @@ const AboutBox = () => {
               </div>
             </div>
           </div>
-          <div className={cl.onebook}>
+          <div
+            onClick={() => switchBook(3)}
+            className={
+              cl.onebook + (currentBook === 3 ? " " + cl.onebook_hover : "")
+            }>
             <div className={cl.bookdiv}>
               <p>PLAN</p>
               <div className={cl.booktext}>
@@ -67,7 +83,11 @@ const AboutBox = () => {
               </div>
             </div>
           </div>
-          <div className={cl.onebook}>
+          <div
+            onClick={() => switchBook(4)}
+            className={
+              cl.onebook + (currentBook === 4 ? " " + cl.onebook_hover : "")
+            }>
             <br />
             <div className={cl.bookdiv}>
               <p>INSTRUCTIONS</p>
