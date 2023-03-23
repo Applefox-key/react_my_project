@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BaseAPI from "../../../API/BaseAPI";
 import { usePopup } from "../../../hooks/usePopup";
-// import { useParams } from "react-router-dom";
-// import BaseAPI from "../../../API/BaseAPI";
 
-// import cl from "./user.module.css";
 import cl from "./login.module.css";
 
 const ForgotPassword = () => {
@@ -16,22 +13,25 @@ const ForgotPassword = () => {
   const { resetToken } = useParams();
   useEffect(() => {
     const checkToken = async (token) => {
-      const res = await BaseAPI.CheckResetToken(token);
-      return res;
+      try {
+        const res = await BaseAPI.CheckResetToken(token);
+        return res;
+      } catch (error) {
+        setErr("400");
+      }
     };
-
-    let res = checkToken(resetToken);
-    if (res.error) setErr("400");
+    checkToken(resetToken);
   }, [resetToken]);
   const router = useNavigate();
+
   const setnewpass = async () => {
-    const res = await BaseAPI.setNewPassword(password1, resetToken);
-    if (res.error) {
-      setErr(res.error);
-      return;
+    try {
+      await BaseAPI.setNewPassword(password1, resetToken);
+      setPopup.success("password was changed");
+      router("/login");
+    } catch (error) {
+      setErr(error);
     }
-    setPopup.success("password was changed");
-    router("/login");
   };
   return (
     <div className={cl.login_block}>

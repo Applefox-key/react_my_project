@@ -54,7 +54,8 @@ const BaseAPI = {
       name: ud.name,
       img: ud.img,
     };
-
+    if ((reqData.img = ""));
+    reqData.img = "/static/media/profile.dd82cd98f5e2825724fb.ico";
     return await this.serverReq("post", "/users", false, reqData);
   },
   async deleteCategory(catid) {
