@@ -23,7 +23,7 @@ const MainPage = () => {
         <button
           className={cl.text2 + " " + cl.btn}
           onClick={() => {
-            setLoginMode(false);
+            setLoginMode(2);
             scollToRef.current.scrollIntoView();
           }}>
           Join Us
