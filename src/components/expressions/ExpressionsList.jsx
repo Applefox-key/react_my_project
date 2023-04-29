@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "../../hooks/useQuery";
-
-import MyTable from "../UI/table/MyTable";
 import ExpressionInfo from "./ExpressionInfo";
 import MySpinner from "../UI/MySpinner";
 import BaseAPI from "../../API/BaseAPI";
-
 import ExpressionsMenu from "./ExpressionsMenu";
-import { usePopup } from "../../hooks/usePopup";
 import MyPagination from "../UI/MyPagination/MyPagination";
-import { deleteExpressions } from "../../utils/expressions";
-import { CSSTransition } from "react-transition-group";
 import MyFilter from "../UI/MyFilter/MyFilter";
+import ExpressionsTable from "./ExpressionsTable";
+import MyToggleBtnGroup from "../UI/MyToggleBtnGroup";
+import ExpressionsCards from "./ExpressionsCards";
+import { deleteExpressions } from "../../utils/expressions";
+import { usePopup } from "../../hooks/usePopup";
 
 const ExpressionsList = () => {
-  const limit = 10;
-  const setPopup = usePopup();
+  const limit = 20;
   const [expressions, setExpressions] = useState();
+  const [view, setView] = useState(0);
   const [dataModal, setDataModal] = useState(false);
-  const [editMode, setEditMode] = useState(null);
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState("");
   const [pageTotal, setPageTotal] = useState(1);
@@ -38,7 +36,8 @@ const ExpressionsList = () => {
       if (totalSrv !== pageTotal) setPageTotal(totalSrv);
     }
   });
-
+  const [editMode, setEditMode] = useState(null);
+  const setPopup = usePopup();
   useEffect(() => {
     getExpression(limit, page, filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,107 +61,127 @@ const ExpressionsList = () => {
       />
     );
   };
-  //actions
-  const expressionsDelete = async (expression = "") => {
-    let res = deleteExpressions(expression);
-    if (res.error) {
-      setPopup.error("Somethig goes wrong.." + res.error);
-      return;
-    }
-    let arr = expression
-      ? expressions.filter((elem) => elem.id !== expression.id)
-      : [];
-    setExpressions(arr);
-  };
 
   const editOn = (content) => {
-    setEditMode({
-      content: content,
-      names: ["expression", "phrase"],
-      edit: contentEdit,
-    });
+    if (!content) setEditMode(null);
+    else
+      setEditMode(
+        view === 1
+          ? {
+              id: content.id,
+              phrase: content.phrase,
+              expression: content.expression,
+            }
+          : {
+              content: content,
+              names: ["expression", "phrase"],
+              edit: expressionsActions.contentEdit,
+            }
+      );
   };
-  const contentEdit = async (newV) => {
-    //value hasn't been changed
-    if (!newV) {
-      setEditMode(null);
-      return;
-    }
-    //adding new item has been canceled
-    if (newV === "newCancel") {
-      setEditMode(null);
-      setExpressions(expressions.filter((el) => el.id !== "new"));
-      return;
-    }
-    //add new item
-    if (newV.id === "new") {
-      try {
-        await BaseAPI.createExpression(newV.expression, newV.phrase);
-        await getExpression(limit, page, filter);
+  const expressionsActions = {
+    //actions
+    async expressionsDelete(expression = "") {
+      let res = await deleteExpressions(expression);
+      if (res.error) {
+        setPopup.error("Somethig goes wrong.." + res.error);
+        return;
+      }
+      if (!res) return;
+      let arr = expression
+        ? expressions.filter((elem) => elem.id !== expression.id)
+        : [];
+      setExpressions(arr);
+    },
+
+    async contentEdit(newV) {
+      //value hasn't been changed
+      if (!newV) {
         setEditMode(null);
-        setPopup.success("expression was added");
+        return;
+      }
+      //adding new item has been canceled
+      if (newV === "newCancel") {
+        setEditMode(null);
+        setExpressions(expressions.filter((el) => el.id !== "new"));
+        return;
+      }
+      //add new item
+      if (newV.id === "new") {
+        try {
+          await BaseAPI.createExpression(newV.expression, newV.phrase);
+          await getExpression(limit, page, filter);
+          setEditMode(null);
+          setPopup.success("expression was added");
+        } catch (error) {
+          setPopup.error(error.message);
+        }
+        return;
+      }
+      //edit item
+      try {
+        await BaseAPI.editExpression(newV);
       } catch (error) {
         setPopup.error(error.message);
       }
-      return;
-    }
-    //edit item
-    try {
-      await BaseAPI.editExpression(newV);
-    } catch (error) {
-      setPopup.error(error.message);
-    }
-    setEditMode(null);
-    await getExpression(limit, page, filter);
+      setEditMode(null);
+      await getExpression(limit, page, filter);
+    },
+
+    async addNew() {
+      const newEl = {
+        id: "new",
+        expression: "",
+        phrase: "",
+      };
+      if (view === 0) setExpressions([newEl, ...expressions]);
+      editOn(newEl);
+    },
   };
-  const addRow = async () => {
-    const newEl = {
-      id: "new",
-      expression: "",
-      phrase: "",
-    };
-    setExpressions([newEl, ...expressions]);
-    editOn(newEl);
-  };
-  const btnsArray = [
-    { nameMain: "Add row", callback: addRow },
-    { nameMain: "Delete all", callback: expressionsDelete },
-    { name: "Plan", callback: modalExpressionInfo },
-    { name: "Delete", callback: expressionsDelete },
-  ];
+
   return (
     <div className="mt-3 tableContainer">
       {dataModal ? dataModal : <></>}
       <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <ExpressionsMenu setExpressions={setExpressions} addOne={addRow} />
-        <MyFilter filter={filter} setFilter={onFilter} />
+        <ExpressionsMenu
+          setExpressions={setExpressions}
+          addOne={expressionsActions.addNew}
+        />
+        <div>
+          <MyFilter filter={filter} setFilter={onFilter} />
+        </div>
       </div>
       {!isLoading ? (
         <>
-          {" "}
           <MyPagination
             total={pageTotal}
             activeItem={page}
             setActive={setPage}></MyPagination>{" "}
-          {editMode && (
-            <div className="divAdvice">
-              YOU CAN SELECT A PART OF A PHRASE AND SET IT AS AN EXPRESSION. THE
-              EXPRESSION WILL BE HIGHLIGHTED DURING TRAINING.
-            </div>
-          )}
-          <CSSTransition
-            appear={true}
-            in={true}
-            timeout={2000}
-            classNames="page">
-            <MyTable
-              edit={editMode}
-              dataArray={expressions}
-              namesArray={["expression", "phrase", "stage"]}
-              onRowClick={editOn}
-              btnsArray={btnsArray}
+          <br />
+          <MyToggleBtnGroup
+            arr={["table", "cards"]}
+            checked={view}
+            name={"md"}
+            onChange={(e) => {
+              setView(e.target.value - 1);
+            }}
+          />
+          {view === 0 ? (
+            <ExpressionsTable
+              expressions={expressions}
+              modalExpressionInfo={modalExpressionInfo}
+              editMode={editMode}
+              expressionsActions={expressionsActions}
+              editOn={editOn}
             />
-          </CSSTransition>
+          ) : (
+            <ExpressionsCards
+              expressions={expressions}
+              editMode={editMode}
+              expressionsActions={expressionsActions}
+              editOn={editOn}
+            />
+          )}
         </>
       ) : (
         <MySpinner />

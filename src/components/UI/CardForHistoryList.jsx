@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/esm/Card";
 import ListGroup from "react-bootstrap/esm/ListGroup";
 
-const CardForHistoryList = ({ header, subtitle, list }) => {
+const CardForHistoryList = ({ header, subtitle, list, mini }) => {
   const stylecss = (item) => {
     if (item.includes("skipped")) return { color: "red", fontWeight: "600" };
     if (item.includes("new try")) return { color: "green", fontWeight: "800" };
@@ -10,21 +10,31 @@ const CardForHistoryList = ({ header, subtitle, list }) => {
     return {};
   };
   return (
-    <Card>
-      <Card.Body>
-        <Card.Header as="h5">{header}</Card.Header>
-        <Card.Subtitle className="display-6">{subtitle}</Card.Subtitle>
-        <div className=" text-muted mt-2">
-          <ListGroup variant="flush">
-            {list.map((item, i) => (
-              <ListGroup.Item style={{ width: "max-content" }} key={i}>
-                <span style={stylecss(item)}>{item}</span>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+    <>
+      {mini ? (
+        <div className="info-plan">
+          {list.map((el) => (
+            <div style={stylecss(el)}>{el}</div>
+          ))}
         </div>
-      </Card.Body>
-    </Card>
+      ) : (
+        <Card>
+          <Card.Body>
+            <Card.Header as="h5">{header}</Card.Header>
+            <Card.Subtitle className="display-6">{subtitle}</Card.Subtitle>
+            <div className=" text-muted mt-2">
+              <ListGroup variant="flush">
+                {list.map((item, i) => (
+                  <ListGroup.Item style={{ width: "max-content" }} key={i}>
+                    <span style={stylecss(item)}>{item}</span>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            </div>
+          </Card.Body>
+        </Card>
+      )}
+    </>
   );
 };
 

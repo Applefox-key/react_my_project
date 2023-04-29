@@ -14,10 +14,10 @@ export const expressionState = (item) => {
 export const deleteExpressions = async (expression = "") => {
   let res;
   if (expression) {
-    if (!window.confirm("Delete the expression?")) return;
+    if (!window.confirm("Delete the expression?")) return false;
     res = await BaseAPI.deleteExpression(expression.id);
   } else {
-    if (!window.confirm("Delete all expressions?")) return;
+    if (!window.confirm("Delete all expressions?")) return false;
     res = await BaseAPI.deleteAllExpressions();
   }
   return res;
