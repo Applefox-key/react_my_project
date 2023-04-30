@@ -28,8 +28,10 @@ const ExpressionsCards = ({
   const closeModal = () => {
     if (copyBtn) setCopyBtn("");
     setCarrentEl(null);
-    editOn(null);
+
+    expressionsActions.contentEdit(editMode.id === "new" ? "newCancel" : "");
   };
+
   return (
     <div>
       {editMode && (
@@ -39,15 +41,20 @@ const ExpressionsCards = ({
             if (e.target === e.currentTarget) closeModal();
           }}>
           <div className="editCard-box">
-            <div className={isInfo ? "info-edit info_show" : "info-edit"}>
-              <div className="info-body">
-                <CardForList list={currentEl.studyPlan} mini={true} />
-                <CardForHistoryList list={currentEl.userHistory} mini={true} />
+            {currentEl && (
+              <div className={isInfo ? "info-edit info_show" : "info-edit"}>
+                <div className="info-body">
+                  <CardForList list={currentEl.studyPlan} mini={true} />
+                  <CardForHistoryList
+                    list={currentEl.userHistory}
+                    mini={true}
+                  />
+                </div>
+                <div className="info-title" onClick={() => setIsInfo(!isInfo)}>
+                  HISTORY AND PLAN <span>{!isInfo ? "🔻" : "🔺"}</span>
+                </div>
               </div>
-              <div className="info-title" onClick={() => setIsInfo(!isInfo)}>
-                HISTORY AND PLAN <span>{!isInfo ? "🔻" : "🔺"}</span>
-              </div>
-            </div>
+            )}
             <div className="express-box">
               <h3>EXPRESSION:</h3>
               <div className="fs-2 mb-3">{editMode.expression}</div>{" "}
@@ -76,6 +83,7 @@ const ExpressionsCards = ({
               <div className="phrase-box">
                 {/* <h3>PHRASE:</h3> */}
                 <textarea
+                  placeholder="phrase"
                   rows={
                     editMode.phrase ? Math.ceil(editMode.phrase.length / 50) : 7
                   }

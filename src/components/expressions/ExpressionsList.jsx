@@ -134,7 +134,8 @@ const ExpressionsList = () => {
         expression: "",
         phrase: "",
       };
-      if (view === 0) setExpressions([newEl, ...expressions]);
+      // if (view === 0) setExpressions([newEl, ...expressions]);
+      setExpressions([newEl, ...expressions]);
       editOn(newEl);
     },
   };
