@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import BaseAPI from "../../../API/BaseAPI";
 import { usePopup } from "../../../hooks/usePopup";
 
-import cl from "./login.module.css";
+import cl from "./login.module.scss";
 
 const ForgotPassword = () => {
   const setPopup = usePopup();

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cl from "./MyFilter.module.css";
 
 const MyFilter = ({ filter, setFilter }) => {
   const [value, setValue] = useState(filter);
-
+  useEffect(() => {
+    if (filter !== value) setValue(filter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
   return (
     <div style={{ position: "relative" }}>
       <div className={cl.container_input}>
-        {" "}
         <button
           className={cl.btn}
           onClick={(e) => {

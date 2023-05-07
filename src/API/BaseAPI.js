@@ -29,11 +29,11 @@ const BaseAPI = {
       return { error: error.response.data.error };
     }
   },
-  async createCategory(name, isPublic = false) {
+  async createLabel(name) {
     let reqData = {
       name: name,
     };
-    return await this.serverReq("post", "/categories/user", true, reqData);
+    return await this.serverReq("post", "/labels", true, reqData);
   },
   async createExpression(textW, textS) {
     let reqData = { list: [{ expression: textW, phrase: textS }] };
@@ -58,8 +58,8 @@ const BaseAPI = {
     reqData.img = "/static/media/profile.dd82cd98f5e2825724fb.ico";
     return await this.serverReq("post", "/users", false, reqData);
   },
-  async deleteCategory(catid) {
-    return await this.serverReq("delete", "/categories/" + catid, true);
+  async deleteLabel(catid) {
+    return await this.serverReq("delete", "/labels/" + catid, true);
   },
   async deleteCategoriesAll() {
     return await this.serverReq("delete", "/categories", true);
@@ -83,24 +83,23 @@ const BaseAPI = {
   async editExpression(expressionN) {
     if (
       !expressionN.hasOwnProperty("expression") &&
-      !expressionN.hasOwnProperty("phrase")
+      !expressionN.hasOwnProperty("phrase") &&
+      !expressionN.hasOwnProperty("labelid")
     )
       return { message: "nothing has changed" };
 
     return await this.serverReq("patch", "/expressions", true, expressionN);
   },
-  async getCategoriesList(isPublic = false) {
-    const result = isPublic
-      ? await this.serverReq("get", "/categories/public", true)
-      : await this.serverReq("get", "/categories/user", true);
+  async getLabelsList() {
+    const result = await this.serverReq("get", "/labels", true);
 
     if (result.error) {
       throw new Error(result.error);
     }
     return result.data;
   },
-  async getTrainingListAll(filter = "") {
-    let reqParams = { filter: filter };
+  async getTrainingListAll(filters = {}) {
+    let reqParams = { ...filters };
     let result = await this.serverReq(
       "get",
       "/expressions",
@@ -112,8 +111,8 @@ const BaseAPI = {
     let expressions_ = result.data.map((item) => new Expression(item));
     return expressions_;
   },
-  async getTrainingListOnePage(limit, page, filter = "") {
-    let reqParams = { page: page, limit: limit, filter: filter };
+  async getTrainingListOnePage(limit, page, filters = {}) {
+    let reqParams = { page: page, limit: limit, ...filters };
 
     let result = await this.serverReq(
       "get",
@@ -126,8 +125,9 @@ const BaseAPI = {
     let expressions_ = result.data.list.map((item) => new Expression(item));
     return [expressions_, Math.ceil(result.data.total[0].total / limit)];
   },
-  async getUnreadExpressions() {
+  async getUnreadExpressions(labelid = "") {
     let reqParams = { offset_ms: new Date().getTimezoneOffset() * 60 * 1000 };
+    if (labelid) reqParams.labelid = labelid;
     let result = await this.serverReq(
       "get",
       "/expressions/unread",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import cl from "./About.module.css";
+import cl from "./About.module.scss";
 
 const AboutBooks = () => {
   const [currentBook, setCurrentBook] = useState(1);

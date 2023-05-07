@@ -4,19 +4,37 @@ import { usePopup } from "../../hooks/usePopup";
 import { useQuery } from "../../hooks/useQuery";
 import MySpinner from "../UI/MySpinner";
 import TrainingCards from "./TrainingCards";
-import TrainingHeader from "./TrainingHeader";
+import { Badge } from "react-bootstrap";
+import SelectLabel from "../Labels/SelectLabel";
+import { useParams } from "react-router-dom";
 
 const Training = () => {
   const [list, setList] = useState();
+  const [label, setLabel] = useState("");
   const setPopup = usePopup();
+  const params = useParams();
 
-  const [getList, isLoading, error] = useQuery(async () => {
-    const data = await BaseAPI.getUnreadExpressions();
+  const [getList, isLoading, error] = useQuery(async ([labelid] = "") => {
+    const data = await BaseAPI.getUnreadExpressions(labelid);
     setList(data);
   });
+  const selectLabel = (val = "") => {
+    setLabel(val);
+    getList(val ? val.id : "");
+  };
 
+  const defineLabel = () => {
+    if (label) return label;
+    const labelid = params.labelid;
+    const labelName = params.labelName;
+    if (labelid) return { id: labelid, name: labelName };
+    return "";
+  };
   useEffect(() => {
-    getList();
+    const labelid = params.labelid;
+    const labelName = params.labelName;
+    if (labelid) setLabel({ id: labelid, name: labelName });
+    getList(labelid ? labelid : "");
     if (error) setPopup.error(error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -31,7 +49,21 @@ const Training = () => {
 
   return (
     <div className="mt-3 fs-3 ">
-      <TrainingHeader list={list} />
+      <div className="p-1">
+        <div className="training-label">
+          <SelectLabel
+            onSelect={selectLabel}
+            colCat={defineLabel()}
+            isOne={true}
+          />
+        </div>
+        <h3>
+          <Badge bg="warning" text="dark">
+            you have {list ? list.length : 0} expressions to read{" "}
+            {label ? " (label " + label.name + ")" : ""}
+          </Badge>
+        </h3>{" "}
+      </div>
       <div>
         {isLoading || !list ? (
           <MySpinner />

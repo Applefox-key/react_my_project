@@ -6,8 +6,9 @@ const MyToggleBtnGroup = ({ checked, arr, onChange, ...props }) => {
   return (
     <ToggleButtonGroup
       type="radio"
+      size="lg"
       defaultValue={checked + 1}
-      className="h-100 m-auto"
+      className="toggleBtn"
       {...props}>
       {arr.map((item, i) => (
         <ToggleButton

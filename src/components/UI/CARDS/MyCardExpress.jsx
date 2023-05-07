@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import cl from "./MyCardExpress.module.css";
+import cl from "./MyCardExpress.module.scss";
 
 import { CSSTransition } from "react-transition-group";
 import { addSpanToExpInPrase } from "../../../utils/texts";
@@ -9,6 +9,12 @@ const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
   let studyPlan = item.studyPlan;
   // <div key={item.id + "_" + i}>{row}</div>  : addSpanToExpInPrase(item).map((row, i) => row)}
+  const generateClass = (item) => {
+    if (item.phrase.length < 190) return "display-1";
+    if (item.phrase.length < 240) return "display-2";
+    if (item.phrase.length < 350) return "display-3";
+    if (item.phrase.length < 400) return "display-4";
+  };
   return (
     <div>
       <div className={cl["card-container"]}>
@@ -17,7 +23,7 @@ const MyCardExpress = ({ item, hint }) => {
           onClick={() => setFlipped(!flipped)}>
           <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
-              <div className="display-1">
+              <div className={generateClass(item)}>
                 {!item.expression ? item.phrase : addSpanToExpInPrase(item)}
               </div>
             </div>

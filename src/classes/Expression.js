@@ -5,13 +5,16 @@ export class Expression {
   #stage;
   #id;
   #history;
-
+  #labelid;
+  #label;
   constructor(expression) {
     this.#expression = expression.expression;
     this.#phrase = expression.phrase;
     this.#nextDate = new Date(expression.nextDate);
     this.#stage = expression.stage;
     this.#id = expression.id;
+    this.#labelid = expression.labelid;
+    this.#label = expression.label;
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
@@ -29,6 +32,12 @@ export class Expression {
   }
   get history() {
     return this.#history;
+  }
+  get labelid() {
+    return this.#labelid;
+  }
+  get label() {
+    return this.#label;
   }
   get historySort() {
     let history_ = this.#history;

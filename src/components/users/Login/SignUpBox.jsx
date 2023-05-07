@@ -4,7 +4,7 @@ import { useContext } from "react";
 import BaseAPI from "../../../API/BaseAPI";
 import { AuthContext } from "../../../context";
 
-import cl from "./login.module.css";
+import cl from "./login.module.scss";
 import AnimatedBtn from "../../UI/AnimatedBtn/AnimatedBtn";
 import { isEmailValid } from "../../../utils/validation";
 import { useNavigate, useParams } from "react-router-dom";

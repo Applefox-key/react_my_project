@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/App.css";
+import "./styles/App.scss";
 import "./styles/animation.css";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContext, PopupContext } from "./context";
 import BaseAPI from "./API/BaseAPI";
 import AppRouter from "./components/AppRouter";
+import { setTheme } from "./utils/colors";
 
 function App() {
   const [userAuth, setUserAuth] = useState({ isAuth: false, role: null });
   const [popupSettings, setPopupSettings] = useState([false, "", "success"]);
 
-  // useEffect(() => {
-  //   BaseAPI.createDB();
-  // }, []);
-
   const checkUserAuth = async () => {
     try {
       const user = await BaseAPI.getUser();
       if (user) setUserAuth({ isAuth: true, role: user.role });
+      setTheme();
     } catch (error) {}
   };
 

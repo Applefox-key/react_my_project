@@ -1,6 +1,6 @@
 import React from "react";
-import cl from "./About.module.css";
-import clLog from "../users/Login/login.module.css";
+import cl from "./About.module.scss";
+import clLog from "../users/Login/login.module.scss";
 import Logo from "../Logo";
 import AboutBox from "./AboutBox";
 

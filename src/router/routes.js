@@ -21,6 +21,12 @@ export const privateRoutes = [
   { path: "/about", element: <About />, nameNav: "About" },
   { path: "/training", element: <Training />, nameNav: "Training" },
   {
+    path: "/training/:labelid/:labelName",
+    element: <Training />,
+    nameNav: "",
+  },
+
+  {
     path: "/expressions",
     element: <ExpressionsList />,
     nameNav: "Expressions",

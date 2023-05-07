@@ -9,7 +9,9 @@ const MyInputTbl = ({
   onblur,
   onEnter = "",
 }) => {
-  const [value, setValue] = useState(content === null ? "" : content);
+  const [value, setValue] = useState(
+    content[name] === null ? "" : content[name]
+  );
   const [copyBtn, setCopyBtn] = useState("");
 
   const Addbtn = (e) => {
@@ -42,6 +44,7 @@ const MyInputTbl = ({
         onSelect={name !== "phrase" ? "" : Addbtn}
         onChange={(e) => {
           e.stopPropagation();
+
           setValue(e.target.value);
           callback(e);
         }}
@@ -51,9 +54,14 @@ const MyInputTbl = ({
       {copyBtn !== "" && (
         <button
           className="popupBtn"
-          onClick={() =>
-            onEnter({ id: content.id, phrase: value, expression: copyBtn })
-          }>
+          id="popupBtn"
+          onClick={() => {
+            onEnter({
+              id: content.id,
+              phrase: value,
+              expression: copyBtn,
+            });
+          }}>
           set selection as expression
         </button>
       )}

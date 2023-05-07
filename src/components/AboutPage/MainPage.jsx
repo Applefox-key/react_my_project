@@ -4,7 +4,7 @@ import Logo from "../Logo";
 import ForgotBox from "../users/Login/ForgotBox";
 import LoginBox from "../users/Login/LoginBox";
 import SignUpBox from "../users/Login/SignUpBox";
-import cl from "./About.module.css";
+import cl from "./About.module.scss";
 import AboutBooks from "./AboutBooks";
 
 const MainPage = () => {

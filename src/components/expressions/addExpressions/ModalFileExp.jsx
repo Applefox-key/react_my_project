@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
 import Popup from "../../UI/popup/Popup";
-import MyTable from "../../UI/table/MyTable";
 import { Button } from "react-bootstrap";
 import { expressionsFromTxtFile } from "../../../utils/files";
 import MyModal from "../../UI/MyModal";
 import BaseAPI from "../../../API/BaseAPI";
 import ModalFileExpBtns from "./ModalFileExpBtns";
 import { usePopup } from "../../../hooks/usePopup";
+import NewExpressionsList from "./NewExpressionsList";
 
 const ModalFileExp = ({ setVisible, setExpressions }) => {
   const [fileContent, setFileContent] = useState();
@@ -65,9 +65,10 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
               onClick={addToColection}>
               Add the content
             </Button>
-            <MyTable
-              dataArray={fileContent}
-              namesArray={["expression", "phrase"]}
+
+            <NewExpressionsList
+              dataArr={fileContent}
+              setDataArr={setFileContent}
             />
           </>
         )}

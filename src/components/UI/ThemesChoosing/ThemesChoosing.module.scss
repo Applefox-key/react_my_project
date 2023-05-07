@@ -1,0 +1,37 @@
+.radioWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 90%;
+}
+
+.radio-input {
+
+    width: 100%;
+    position: relative;
+    margin: 1rem;
+
+    input {
+        width: 2rem;
+        height: 2rem;
+
+
+    }
+
+    label {
+        font-size: 20px;
+        position: absolute;
+        left: 1rem;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        line-height: 1;
+        border: 1px solid var(--color-text-base);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+
+    .label-active {
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    }
+
+}

@@ -31,24 +31,36 @@ export const expressionsFromText = async (
 };
 
 export const addSpanToExpInPrase = (item) => {
-  if (!item.expression) return [item.phrase];
+  if (!item.expression || !item.phrase.includes(item.expression))
+    return <>{item.phrase}</>;
   const repT = item.phrase.replace(
-    new RegExp(item.expression.trim(), "gim"),
+    new RegExp(item.expression, "gim"),
     "Spanitemexpression"
   );
-  let res = [""];
-  let arr = repT.split(" ");
-  arr.forEach((element, i) => {
-    // if (element === "Spanitemexpression") {
-    if (element.includes("Spanitemexpression")) {
-      res.push(
-        <span className="expression">
-          {element.replace("Spanitemexpression", item.expression.trim())}
-        </span>
-      );
-      if (arr.length - 1 !== i) res.push("");
-    } else res[res.length - 1] += " " + element;
-  });
+  let arr = repT.split("Spanitemexpression");
 
-  return <>{res.map((row, i) => row)}</>;
+  let res = (
+    <>
+      {" "}
+      {arr[0]}
+      <span className="expression">{item.expression}</span>
+      {arr[1]}
+    </>
+  );
+  return res;
+  // let res = [""];
+  // let arr = repT.split(" ");
+  // arr.forEach((element, i) => {
+  //   // if (element === "Spanitemexpression") {
+  //   if (element.includes("Spanitemexpression")) {
+  //     res.push(
+  //       <span className="expression">
+  //         {element.replace("Spanitemexpression", " " + item.expression.trim())}
+  //       </span>
+  //     );
+  //     if (arr.length - 1 !== i) res.push("");
+  //   } else res[res.length - 1] += " " + element;
+  // });
+
+  // return <>{res.map((row, i) => row)}</>;
 };

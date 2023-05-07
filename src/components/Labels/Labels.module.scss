@@ -1,0 +1,226 @@
+.div_width {
+    width: 100%;
+    position: relative;
+
+    button {
+        padding-left: 3rem;
+        background-color: transparent;
+        border: none;
+        font-size: 1.8rem;
+
+        &::before {
+            display: none !important;
+        }
+
+        &::after {
+            display: none;
+        }
+
+    }
+}
+
+.max_content {
+    width: max-content;
+    min-width: 21rem;
+}
+
+.hoverScale {
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: ghostwhite;
+        transform: scale(1.2);
+        border: 1px solid rgb(167, 45, 233);
+    }
+}
+
+
+
+.active {
+    background-color: var(--background-color-medium);
+    border-radius: 5px;
+    transform: scale(1.1);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+
+.drop-item {
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+    font-size: 2rem;
+
+    &:hover {
+        background-color: var(--background-color-medium);
+        border-radius: 5px;
+        transform: scale(1.2);
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    }
+}
+
+.add-cat-btn {
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.5rem;
+
+    &:hover {
+        background-color: var(--background-color-medium);
+        border-radius: 5px;
+        transform: scale(1.2);
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    }
+}
+
+
+
+.filter_input {
+    border-bottom: 1px solid lightsteelblue;
+    display: flex;
+
+    input {
+        border: none;
+        height: 3rem;
+        font-size: medium;
+        width: 90%;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .filter_btn {
+        border: none;
+        height: 100%;
+        background-color: transparent;
+        line-height: 2;
+        font-size: 1.4rem;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.4);
+        }
+    }
+}
+
+.setting_btn {
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+    font-size: 2rem;
+    width: 100%;
+    height: 3rem;
+    border: none;
+    position: relative;
+    top: -10px;
+    left: -5px;
+    width: 100%;
+    font-size: 2rem;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color-medium);
+    border-radius: 4px;
+
+    &:hover {
+        background-color: var(--background-color-medium);
+        border-radius: 5px;
+        transform: scale(1.2);
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    }
+}
+
+.dropbtn {
+    font-size: 1.6rem;
+    position: relative;
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    .selCat {
+        color: chocolate;
+        font-style: italic;
+        padding-left: 5px;
+    }
+
+    span {
+        position: absolute;
+        top: -10px;
+        left: 6px;
+        margin-right: 0;
+        opacity: 0;
+        font-size: 25px;
+
+        &:hover {
+            color: blue;
+        }
+    }
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        background-color: var(--background-color-light);
+
+        span {
+            opacity: 1;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+.link {
+    text-align: end;
+    font-size: 1.3rem;
+    color: lightslategrey;
+
+    a {
+        font-size: 1.3rem;
+        text-align: end;
+    }
+}
+
+.labeltext {
+    color: var(--color-text-label);
+    display: flex;
+    background-color: var(--background-color-intense);
+    padding: 5px 15px;
+    border-radius: 0px 0.5rem 0.5rem 0;
+    width: 10rem;
+    height: 3rem;
+    transition: all 0.2s ease;
+
+
+    &:hover {
+        // border-radius: 5px 5px 5px 5px;
+        // outline: none;
+        border: 1px solid var(--color-marker);
+    }
+}
+
+.labelEmpty {
+    font-size: 22px;
+    width: 10rem;
+    height: 3rem;
+
+    background-color: var(--background-color-pale);
+    border-radius: 0px 0.5rem 0.5rem 0;
+    text-align: start;
+    line-height: 1;
+
+
+    &:hover {
+        border: 1px solid var(--color-marker);
+
+        &::after {
+            content: "pick a label";
+            font-size: 12px;
+            color: var(--color-text-inform);
+
+        }
+    }
+
+}

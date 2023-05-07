@@ -1,0 +1,141 @@
+.card-container {
+  padding: 0;
+  width: 50%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: auto;
+  margin: auto;
+  margin-bottom: 1rem;
+  left: 40px;
+  top: 40px;
+}
+
+.cardSize {
+  height: auto;
+  width: auto;
+  font-size: 20vw;
+}
+
+.studyPlan {
+  width: max-content;
+}
+
+.card-container .card-button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: transparent;
+  transform-style: preserve-3d;
+  perspective: 5000px;
+  border-radius: 15px;
+}
+
+.card-front,
+.card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.card-front {
+  background: var(--background-color-light);
+  color: var(--color-text-base);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.card-back {
+  background: var(--background-color-medium);
+  color: var(--color-text-base);
+}
+
+.hint {
+  text-align: end;
+
+}
+
+
+@media screen and (min-width: 600px) and (min-height: 600px) {
+  .card-container {
+    width: 50%;
+    height: 45rem;
+  }
+
+}
+
+@media screen and (min-width: 700px)and (min-height: 650px) {
+  .card-container {
+    width: 80%;
+    height: 45rem;
+  }
+
+}
+
+@media screen and (min-width: 1000px)and (max-height: 600px) {
+  .card-container {
+    width: 80%;
+    height: 45rem;
+  }
+
+}
+
+@media screen and (min-width: 600px) and (max-height: 500px) {
+  .card-container {
+    width: 80%;
+    height: 20rem;
+    /* font-size: small; */
+  }
+
+  .card-front {
+    font-size: 8rem;
+  }
+
+  .card-back {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: small;
+  }
+}
+
+@media screen and (max-width: 600px) and (min-height: 600px) {
+  .card-container {
+    width: 80%;
+    height: 60rem;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .card-container {
+    width: 80%;
+    height: 50rem;
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+  .card-container {
+    width: 50%;
+    height: 45rem;
+  }
+
+}

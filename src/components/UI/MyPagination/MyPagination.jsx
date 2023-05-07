@@ -1,16 +1,18 @@
 import React from "react";
 import cl from "./MyPagination.module.css";
 
-const MyPagination = ({ total, activeItem, setActive }) => {
+const MyPagination = ({ setPageParams, pageParams }) => {
   let items = [];
 
-  for (let number = 0; number <= total; number++) {
+  for (let number = 0; number <= pageParams.pageTotal; number++) {
     items.push(
       <div
-        className={cl.item + (number === activeItem ? " " + cl.itemActive : "")}
+        className={
+          cl.item + (number === pageParams.page ? " " + cl.itemActive : "")
+        }
         key={number}
-        active={number === activeItem}
-        onClick={() => setActive(number)}>
+        // active={number === pageParams.page}
+        onClick={() => setPageParams({ ...pageParams, page: number })}>
         {number === 0 ? "all" : number}
       </div>
     );

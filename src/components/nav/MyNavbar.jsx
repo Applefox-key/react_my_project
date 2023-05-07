@@ -4,12 +4,14 @@ import BaseAPI from "../../API/BaseAPI";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import MyNavLink from "./MyNavLink";
-import cl from "./MyNavbar.module.css";
+import cl from "./MyNavbar.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 import UserAvatar from "../users/Profile/UserAvatar";
+
 const MyNavbar = () => {
   const router = useNavigate();
   //get  elements with nameNav only
+
   const [routesArr, userAuth, setUserAuth] = useAuth(true);
 
   const logout = () => {
@@ -20,21 +22,20 @@ const MyNavbar = () => {
 
   return (
     <div className={[cl.nav, "bg-light"].join(" ")}>
-      <Nav activeKey="/about" className="justify-content-end pe-4 ">
+      <Nav activeKey="/about" className="justify-content-end pe-4 " size="lg">
         {routesArr
           .filter((el) => el.nameNav)
           .map((item, i) => (
             <Nav.Item key={i}>
               <MyNavLink root={item} />
             </Nav.Item>
-          ))}
-
+          ))}{" "}
         {userAuth.isAuth && (
           <div>
-            <UserAvatar style={{ width: "30px", height: "30px" }} />
+            <UserAvatar style={{ width: "30px", height: "30px" }} />{" "}
             <Button variant="outline-dark" size="lg" onClick={logout}>
               Logout
-            </Button>
+            </Button>{" "}
           </div>
         )}
       </Nav>
