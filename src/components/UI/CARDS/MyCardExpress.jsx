@@ -4,6 +4,7 @@ import cl from "./MyCardExpress.module.scss";
 
 import { CSSTransition } from "react-transition-group";
 import { addSpanToExpInPrase } from "../../../utils/texts";
+import Plan from "../../expressions/PlanAndHistory/Plan";
 
 const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
@@ -30,17 +31,9 @@ const MyCardExpress = ({ item, hint }) => {
           </CSSTransition>
           <CSSTransition in={flipped} timeout={1000} classNames="cardBack">
             <div className={cl["card-back"]}>
-              <div className="d-flex justify-content-around w-100">
-                <div className="w-50 d-flex flex-column  justify-content-between">
-                  <h1 className="display-4 mb-5">Study plan 🠒</h1>
-                  <h1>{hint}</h1>
-                </div>
-                <div className="text-start">
-                  {studyPlan.map((el, i) => (
-                    <div key={i}>{el}</div>
-                  ))}
-                </div>
-              </div>
+              <h1 className="display-4 mb-2 mt-0">Study plan</h1>
+              <Plan expression={item} />
+              <h1 className="mt-5">{hint}</h1>
             </div>
           </CSSTransition>
         </button>

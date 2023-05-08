@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import cl from "./SideBar.module.scss";
 import SideBarLabels from "./SideBarLabels";
 
-import ExpressionsMenuIcons from "../expressions/ExpressionsMenuIcons";
 import ThemesChoosing from "../UI/ThemesChoosing/ThemesChoosing";
+import ExpressionsMenuIcons from "./ExpressionsMenuIcons";
 const SideBar = ({ addOne, setExpressions, selectedid, onSelectLabel }) => {
   const [sideBar, setSideBar] = useState({ show: false });
   return (

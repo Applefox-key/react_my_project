@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { addSpanToExpInPrase } from "../../utils/texts";
-import { expressionState } from "../../utils/expressions";
+import { addSpanToExpInPrase } from "../../../utils/texts";
+import { expressionState } from "../../../utils/expressions";
 
 import EditWindow from "./EditWindow";
 import cl from "./ExpressionsList.module.scss";
 import InfoWindow from "./InfoWindow";
-import SelectLabel from "../Labels/SelectLabel";
-import ProgressColumn from "../UI/MyProgressBar/ProgressColumn";
+import SelectLabel from "../../Labels/SelectLabel";
+import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
 
-const ExpressionRows = ({
+const ExpressionItem = ({
   expressions,
   editElem,
   expressionsActions,
@@ -100,4 +100,4 @@ const ExpressionRows = ({
   );
 };
 
-export default ExpressionRows;
+export default ExpressionItem;

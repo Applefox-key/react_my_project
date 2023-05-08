@@ -12,8 +12,6 @@
     margin-top: 2rem;
 }
 
-
-
 .exressions-list-title {
     display: flex;
     justify-content: space-between;
@@ -70,35 +68,14 @@
         border-radius: 30px;
         font-size: initial;
 
-        .plan {
-            display: flex;
-            color: var(--color-text-base);
-
-            .planDay {
-                p {
-                    margin: 0;
-                    font-weight: 700;
-                }
-
-                display: flex;
-                flex-direction: column;
-                margin: 1rem;
-            }
+        @media screen and (max-width:900px) {
+            margin-top: 2rem;
         }
 
-        .history {
-            color: var(--color-text-base);
+        .history-box {
 
-            &::before {
-                content: "";
-                height: 5px;
-                width: 80%;
-                background-color: var(--background-color-intense);
-                display: block;
-                text-align: center;
-                margin: auto;
-                border-radius: 3px;
-            }
+            overflow: auto;
+            height: 17rem;
         }
     }
 

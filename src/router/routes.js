@@ -1,10 +1,10 @@
-import Training from "../components/expressions/Training";
 import Profile from "../components/users/Profile/Profile";
 
-import ExpressionsList from "../components/expressions/ExpressionsList";
+import ExpressionsList from "../components/expressions/ExpressionsList/ExpressionsList";
 import About from "../components/AboutPage/About";
 import MainPage from "../components/AboutPage/MainPage";
 import ForgotPassword from "../components/users/Login/ForgotPassword";
+import Training from "../components/expressions/Training/Training";
 
 export const publicRoutes = [
   // { path: "/login", element: <Login />, nameNav: "Login" },

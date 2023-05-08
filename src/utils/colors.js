@@ -54,8 +54,8 @@ export const themeArr = {
   },
   night: {
     "--background-color-base": "#434b78", //=
-    "--background-color-dark": "#00089b",
-    "--background-color-medium": "#170a5e",
+    "--background-color-dark": "#000670",
+    "--background-color-medium": "#180f46",
     "--background-color-light": "#211742", //+
     "--background-color-intense": "#296FD1",
     "--background-color-pale": "#070f44",

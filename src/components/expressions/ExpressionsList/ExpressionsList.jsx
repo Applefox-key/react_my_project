@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "../../hooks/useQuery";
-import MySpinner from "../UI/MySpinner";
-import BaseAPI from "../../API/BaseAPI";
-import MyPagination from "../UI/MyPagination/MyPagination";
-import MyFilter from "../UI/MyFilter/MyFilter";
-import MyToggleBtnGroup from "../UI/MyToggleBtnGroup";
+import { useQuery } from "../../../hooks/useQuery";
+import MySpinner from "../../UI/MySpinner";
+import BaseAPI from "../../../API/BaseAPI";
+import MyPagination from "../../UI/MyPagination/MyPagination";
+import MyFilter from "../../UI/MyFilter/MyFilter";
+import MyToggleBtnGroup from "../../UI/MyToggleBtnGroup";
 import { CgMenuGridR, CgMenu } from "react-icons/cg";
-import { deleteExpressions, setLabelToArr } from "../../utils/expressions";
-import { usePopup } from "../../hooks/usePopup";
+import { deleteExpressions, setLabelToArr } from "../../../utils/expressions";
+import { usePopup } from "../../../hooks/usePopup";
 
-import ExpressionRows from "./ExpressionRows";
+import ExpressionItem from "./ExpressionItem";
 import cl from "./ExpressionsList.module.scss";
-import SideBar from "../SideBar/SideBar";
+import SideBar from "../../SideBar/SideBar";
 
 const ExpressionsList = () => {
   const limit = 20;
@@ -243,7 +243,7 @@ const ExpressionsList = () => {
               setPageParams={setPageParams}
             />
 
-            <ExpressionRows
+            <ExpressionItem
               expressions={expressions}
               editElem={editElem}
               expressionsActions={expressionsActions}

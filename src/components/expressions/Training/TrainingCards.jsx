@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import OneCardE from "./OneCardE";
-
 import NoWork from "./NoWork";
 const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);

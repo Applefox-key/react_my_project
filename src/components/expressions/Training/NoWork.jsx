@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
-import pict from "../../img/sitting_man.png";
+import pict from "../../../img/sitting_man.png";
 
 const NoWork = () => {
   return (
