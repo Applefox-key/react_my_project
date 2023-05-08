@@ -1,13 +1,13 @@
 :root {
   --background-color-base: white;
-  --background-color-dark: #f4dbba;
-  --background-color-medium: antiquewhite;
-  --background-color-light: #FFFBF7; //rgb(255, 251, 247);
-  --background-color-intense: #fcd53f;
-  --background-color-pale: #fffbee;
-  --color-marker: orangered;
-  --color-text-label: #943600;
-  --color-text-inform: #d6d5d4;
+  --background-color-dark: #6a99db;
+  --background-color-medium: #d7e5fa;
+  --background-color-light: ghostwhite; //rgb(255, 251, 247);
+  --background-color-intense: #286CCB;
+  --background-color-pale: aliceblue;
+  --color-marker: #0d6af5;
+  --color-text-label: white;
+  --color-text-inform: lightblue;
   --color-text-base: black;
 
 }
@@ -30,9 +30,7 @@ body {
 }
 
 .divAdvice {
-  color: #4461F2;
-  color: #696969;
-  color: #86B7FE;
+
   color: #2334B5;
   position: absolute;
   text-align: center;
@@ -157,7 +155,7 @@ body {
   margin: auto;
   height: 2.8vc;
   align-items: flex-end;
-  /* flex-wrap: wrap; */
+  color: var(--color-text-base);
   text-align: center;
   justify-content: space-between;
   font-size: small;
@@ -245,8 +243,9 @@ body {
   height: 587.16px;
   left: 381.43px;
   top: 326.68px;
-  background: #4461F2;
+
   background: #296FD1;
+  // background: var(--background-color-intense);
   ;
   opacity: 0.45;
   filter: blur(158.5px);

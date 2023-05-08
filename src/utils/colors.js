@@ -64,7 +64,7 @@ export const themeArr = {
 export const getCurrentTheme = () => {
   const theme = localStorage.getItem("theme");
   if (theme) return theme;
-  return "biege";
+  return "blue";
 };
 
 export const setTheme = (theme = "") => {
@@ -72,7 +72,7 @@ export const setTheme = (theme = "") => {
   if (theme) localStorage.setItem("theme", theme);
   //if user doesn't choose the theme try get it from the local storage or set default value
   let localTheme = theme ? theme : getCurrentTheme();
-  if (localTheme === "biege" && !theme) return;
+  if (localTheme === "blue" && !theme) return;
   if (localTheme) {
     const colors = themeArr[localTheme];
     for (let key in colors) {

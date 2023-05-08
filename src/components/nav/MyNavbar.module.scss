@@ -16,9 +16,37 @@
   justify-content: end;
   z-index: 500;
 
+  button {
+    background-color: var(--background-color-base);
+    color: var(--color-text-base);
+
+    &:hover {
+      color: var(--color-marker);
+    }
+  }
 }
 
+.navLink,
+.navLinkActive {
+  display: block;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-base);
+  background-color: var(--background-color-base);
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 
+  &:hover {
+    // background-color: var(--background-color-dark);
+    color: var(--color-marker);
+  }
+}
+
+.navLinkActive {
+  background-color: var(--color-text-base);
+  color: var(--background-color-base)
+}
 
 @media screen and (min-width: 600px) {
 
