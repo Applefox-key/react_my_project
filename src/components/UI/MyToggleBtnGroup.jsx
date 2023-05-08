@@ -2,7 +2,6 @@ import React from "react";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 
 const MyToggleBtnGroup = ({ checked, arr, onChange, ...props }) => {
-  console.log(arr);
   return (
     <ToggleButtonGroup
       type="radio"

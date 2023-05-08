@@ -12,6 +12,8 @@
     margin-top: 2rem;
 }
 
+
+
 .exressions-list-title {
     display: flex;
     justify-content: space-between;
@@ -25,6 +27,12 @@
     .filter-summary {
         color: var(--color-marker);
         margin: auto;
+
+        span {
+            font-size: 18px;
+            font-weight: 500;
+
+        }
 
         button {
             color: var(--color-marker);
@@ -40,115 +48,6 @@
         }
     }
 
-}
-
-.oneItemRow {
-    position: relative;
-    font-size: 2rem;
-    margin: 1rem;
-    border-radius: 10px;
-    background-color: var(--background-color-light);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    transition: all 0.4s ease-in-out;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    width: 95%;
-
-    &:hover {
-        transform: scale(1.05);
-        z-index: 600;
-        background-color: var(--background-color-medium);
-    }
-
-    .atr {
-        position: relative;
-
-        .label_wrap {
-            width: 10rem;
-            margin-top: 0.5rem;
-
-            button {
-                border: var(--color-marker);
-                background-color: transparent;
-            }
-        }
-
-        .progress {
-            margin: 15px 0;
-            position: relative;
-            cursor: pointer;
-
-            &:hover {
-                &::after {
-                    content: "check your progress";
-                    position: absolute;
-                    font-size: 10px;
-                    width: 100%;
-                    left: 0;
-                    top: 10px;
-                    margin: 0;
-                }
-            }
-        }
-
-    }
-
-
-    .rowPhrase {
-        width: 85%;
-        text-align: start;
-    }
-
-    .exp-row-btns {
-        width: 5rem;
-        font-size: 14px;
-
-        span {
-            color: var(--color-text-inform);
-
-        }
-
-        button {
-            position: relative;
-            height: 4rem;
-            width: 4rem;
-            transition: all 0.2s ease-in-out;
-            border-radius: 50%;
-
-            &:hover {
-                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-                transform: translateY(-5px);
-                background-color: var(--background-color-light);
-            }
-        }
-    }
-
-    @media screen and (max-width:900px) {
-        flex-direction: column-reverse;
-        padding-bottom: 10px;
-
-        .exp-row-btns {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: flex-start;
-            align-content: center;
-            width: 100%;
-        }
-
-        .atr {
-            display: flex;
-            justify-content: space-between;
-            padding-right: 10px;
-            background-color: var(--background-color-pale);
-            ;
-        }
-
-        .rowPhrase {
-            width: 100%;
-            padding-left: 5px;
-        }
-    }
 }
 
 .modal-wrap {
@@ -173,8 +72,7 @@
 
         .plan {
             display: flex;
-
-
+            color: var(--color-text-base);
 
             .planDay {
                 p {
@@ -189,6 +87,8 @@
         }
 
         .history {
+            color: var(--color-text-base);
+
             &::before {
                 content: "";
                 height: 5px;
@@ -405,12 +305,11 @@
     }
 }
 
-.cardsContainer {
+.cardsContainer,
+.rowsContainer {
     width: 90%;
     margin: auto;
     margin-top: 2rem;
-    // margin-left: 2rem;
-
     background-color: var(--background-color-base);
     border-radius: 10px;
     display: flex;
@@ -418,15 +317,118 @@
 }
 
 .rowsContainer {
-    // width: 100%;
-    margin: auto;
-    margin-top: 2rem;
-    margin-left: 2rem;
+    // width: auto;
+    margin-left: 3rem;
+}
 
-    background-color: var(--background-color-base);
+.oneItemRow {
+    position: relative;
+    font-size: 2rem;
+    margin: 1rem;
     border-radius: 10px;
+    color: var(--color-text-base);
+    background-color: var(--background-color-light);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: all 0.4s ease-in-out;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 95%;
+
+    &:hover {
+        transform: scale(1.05);
+        z-index: 600;
+        background-color: var(--background-color-medium);
+    }
+
+    .atr {
+        position: relative;
+
+        .label_wrap {
+            width: 10rem;
+            margin-top: 0.5rem;
+
+            button {
+                border: var(--color-marker);
+                background-color: transparent;
+            }
+        }
+
+        .progress {
+            margin: 15px 0;
+            position: relative;
+            cursor: pointer;
+
+            &:hover {
+                &::after {
+                    content: "check your progress";
+                    position: absolute;
+                    font-size: 10px;
+                    width: 100%;
+                    left: 0;
+                    top: 10px;
+                    margin: 0;
+                }
+            }
+        }
+
+    }
+
+
+    .rowPhrase {
+        width: 85%;
+        text-align: start;
+    }
+
+    .exp-row-btns {
+        width: 5rem;
+        font-size: 14px;
+
+        span {
+            color: var(--color-text-inform);
+
+        }
+
+        button {
+            position: relative;
+            height: 4rem;
+            width: 4rem;
+            transition: all 0.2s ease-in-out;
+            border-radius: 50%;
+
+            &:hover {
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+                transform: translateY(-5px);
+                background-color: var(--background-color-light);
+            }
+        }
+    }
+
+    @media screen and (max-width:900px) {
+        flex-direction: column-reverse;
+        padding-bottom: 10px;
+
+        .exp-row-btns {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            align-content: center;
+            width: 100%;
+        }
+
+        .atr {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 10px;
+            background-color: var(--background-color-pale);
+            ;
+        }
+
+        .rowPhrase {
+            width: 100%;
+            padding-left: 5px;
+        }
+    }
 }
 
 .oneItemCard {
@@ -436,6 +438,7 @@
     margin: 1rem;
     border-radius: 10px;
     background-color: var(--background-color-light);
+    color: var(--color-text-base);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     transition: all 0.4s ease-in-out;
     display: flex;
@@ -534,4 +537,50 @@
     }
 
 
+}
+
+
+
+.applyBtn {
+    z-index: 1500;
+
+    button {
+        margin: 1rem 2rem;
+        margin-top: 0;
+        width: 15rem;
+        padding: 0 10px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 3px solid black;
+        background-color: var(--background-color-intense);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        transition: all 0.2s ease-in-out;
+        color: var(--color-text-base);
+
+        &:disabled {
+            opacity: 0.8;
+            cursor: not-allowed;
+        }
+
+        &:not([disabled]) {
+            &:hover {
+                border-color: var(--color-marker);
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+            }
+        }
+    }
+
+
+}
+
+.divIsChecked {
+    border: 3px solid var(--color-marker);
+    transform: scale(1.05);
+    z-index: 600;
+    background-color: var(--background-color-medium);
+}
+
+.listApply {
+    background-color: var(--background-color-opacity50);
+    width: 90%;
 }

@@ -4,7 +4,7 @@ import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
 // import CategorySetBtn from "./CategorySetBtn";
 
-const SelectLabel = ({ onSelect, colCat = "", isOne }) => {
+const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
   const [selected, setSelected] = useState(colCat);
   const [mode, setMode] = useState(false);
 
@@ -17,6 +17,7 @@ const SelectLabel = ({ onSelect, colCat = "", isOne }) => {
     <div className="w-100">
       <Dropdown show={mode} drop="start" onToggle={(val) => setMode(val)}>
         <Dropdown.Toggle
+          disabled={disabled}
           id="dropdown-custom-components"
           size="lg"
           variant="light">
@@ -24,7 +25,7 @@ const SelectLabel = ({ onSelect, colCat = "", isOne }) => {
             <div className={cl["labeltext"]}>{selected.name}</div>
           ) : (
             <div className={cl["labelEmpty"]}> 🏷️</div>
-          )}
+          )}{" "}
         </Dropdown.Toggle>
         {mode && (
           <SelectLabelBody

@@ -10,6 +10,7 @@ const LabelNew = ({ callback }) => {
     if (!name) return;
     await BaseAPI.createLabel(name);
     if (callback) await callback();
+    setIsEdit(false);
   };
   return (
     <div>

@@ -22,3 +22,10 @@ export const deleteExpressions = async (expression = "") => {
   }
   return res;
 };
+
+export const setLabelToArr = async (expressionsArr, labelid) => {
+  let res = expressionsArr.length
+    ? await BaseAPI.setLabelToExprArr(expressionsArr, labelid)
+    : "";
+  return res;
+};

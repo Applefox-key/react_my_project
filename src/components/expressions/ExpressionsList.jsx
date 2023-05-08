@@ -6,7 +6,7 @@ import MyPagination from "../UI/MyPagination/MyPagination";
 import MyFilter from "../UI/MyFilter/MyFilter";
 import MyToggleBtnGroup from "../UI/MyToggleBtnGroup";
 import { CgMenuGridR, CgMenu } from "react-icons/cg";
-import { deleteExpressions } from "../../utils/expressions";
+import { deleteExpressions, setLabelToArr } from "../../utils/expressions";
 import { usePopup } from "../../hooks/usePopup";
 
 import ExpressionRows from "./ExpressionRows";
@@ -17,14 +17,18 @@ const ExpressionsList = () => {
   const limit = 20;
   const [pageParams, setPageParams] = useState({ page: 1, pageTotal: 1 });
   const [expressions, setExpressions] = useState();
-
   const [view, setView] = useState(0); //table or cards
+  const [editElem, setEditElem] = useState(null);
+  const [applyMode, setApplyMode] = useState({
+    isOn: false,
+    list: [],
+    label: "",
+  });
   const [filters, setFilters] = useState({
     filter: "",
     labelid: "",
     label: "",
   });
-  const [editElem, setEditElem] = useState(null);
   const setPopup = usePopup();
 
   const [getExpression, isLoading] = useQuery(async () => {
@@ -47,11 +51,43 @@ const ExpressionsList = () => {
         setPageParams({ ...pageParams, pageTotal: totalSrv });
     }
   });
+
   useEffect(() => {
     getExpression(limit, pageParams.page, filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, pageParams.page, filters.filter, filters.labelid]);
 
+  //labels
+  const cancelApply = () => setApplyMode({ isOn: false, list: [], label: "" });
+  const onSelectLabel = async (value = "", apply = false) => {
+    if (apply) {
+      setApplyMode({ isOn: true, list: [], label: value });
+      return;
+    } else {
+      setFilters({
+        ...filters,
+        labelid: value ? value.id : "",
+        label: value ? value.name : "",
+      });
+      if (pageParams.page !== 0) {
+        setPageParams({ ...pageParams, page: 0 });
+      } else {
+        await getExpression(limit, pageParams.page, {
+          ...filters,
+          labelid: value.id,
+        });
+      }
+    }
+  };
+  const labelToArr = async () => {
+    setLabelToArr(applyMode.list, applyMode.label.id);
+    cancelApply();
+    if (pageParams.page !== 0) {
+      setPageParams({ ...pageParams, page: 0 });
+    } else {
+      await getExpression(limit, pageParams.page, filters);
+    }
+  };
   //filter
   const onFilter = async (value = "") => {
     setFilters({ ...filters, filter: value });
@@ -61,6 +97,7 @@ const ExpressionsList = () => {
       await getExpression(limit, pageParams.page, filters);
     }
   };
+  //edit mode ON-OFF
   const editOn = (content, exp = "") => {
     if (!content) setEditElem(null);
     else
@@ -71,25 +108,6 @@ const ExpressionsList = () => {
         labelid: content.labelid,
         label: content.label,
       });
-
-    // setEditMode(
-    //   view === 1
-    //     ? {
-    //         exp: exp ? exp : content,
-    //         obj: {
-    //           id: content.id,
-    //           phrase: content.phrase,
-    //           expression: content.expression,
-    //           labelid: content.labelid,
-    //           label: content.label,
-    //         },
-    //       }
-    //     : {
-    //         content: content,
-    //         names: ["expression", "phrase"],
-    //         edit: expressionsActions.contentEdit,
-    //       }
-    // );
   };
   //actions
   const expressionsActions = {
@@ -112,6 +130,7 @@ const ExpressionsList = () => {
         i + (pageParams.page ? pageParams.page - 1 : pageParams.page) * limit
       );
     },
+    ///edit phrase or cancel edit mode
     async contentEdit(newV) {
       //value hasn't been changed
       if (!newV) {
@@ -145,7 +164,7 @@ const ExpressionsList = () => {
       setEditElem(null);
       await getExpression(limit, pageParams.page, filters);
     },
-
+    //add new phrase
     async addNew() {
       const newEl = {
         id: "new",
@@ -155,25 +174,19 @@ const ExpressionsList = () => {
       setExpressions([newEl, ...expressions]);
       editOn(newEl);
     },
-  };
+    //add prase to the list for applying the label
+    addForApply(val) {
+      let listAp = applyMode.list.includes(val.id)
+        ? [...applyMode.list].filter((el) => el !== val.id)
+        : [...applyMode.list, val.id];
 
-  const onSelectLabel = async (value = "") => {
-    setFilters({
-      ...filters,
-      labelid: value ? value.id : "",
-      label: value ? value.name : "",
-    });
-    if (pageParams.page !== 0) {
-      setPageParams({ ...pageParams, page: 0 });
-    } else {
-      await getExpression(limit, pageParams.page, {
-        ...filters,
-        labelid: value.id,
+      setApplyMode({
+        ...applyMode,
+        list: listAp,
       });
-    }
+    },
   };
 
-  console.log(expressions);
   return (
     <div className={cl["main-list"]}>
       <SideBar
@@ -186,13 +199,24 @@ const ExpressionsList = () => {
         <div className={cl["exressions-list-title"]}>
           <MyFilter filter={filters.filter} setFilter={onFilter} />{" "}
           <div className={cl["filter-summary"]}>
-            {filters.label && (
-              <button onClick={() => onSelectLabel("")}>
-                🗙{filters.label}
-              </button>
-            )}
-            {filters.filter && (
-              <button onClick={() => onFilter("")}>🗙 {filters.filter}</button>
+            {applyMode.isOn ? (
+              <span>
+                {` SELECT PHRASES FOR LABEL ${applyMode.label.name} AND PRESS
+                APPLY`}
+              </span>
+            ) : (
+              <div>
+                {filters.label && (
+                  <button onClick={() => onSelectLabel("")}>
+                    🗙{filters.label}
+                  </button>
+                )}
+                {filters.filter && (
+                  <button onClick={() => onFilter("")}>
+                    🗙 {filters.filter}
+                  </button>
+                )}
+              </div>
             )}
           </div>
           <div>
@@ -205,20 +229,27 @@ const ExpressionsList = () => {
               }}
             />
           </div>
-        </div>
-
+        </div>{" "}
+        {applyMode.isOn && (
+          <div className={cl.applyBtn}>
+            <button onClick={labelToArr}>APPLY</button>
+            <button onClick={cancelApply}>CANCEL</button>
+          </div>
+        )}
         {!isLoading && expressions ? (
           <>
             <MyPagination
               pageParams={pageParams}
               setPageParams={setPageParams}
             />
+
             <ExpressionRows
               expressions={expressions}
               editElem={editElem}
               expressionsActions={expressionsActions}
               editOn={editOn}
               view={view}
+              applyMode={applyMode}
             />
           </>
         ) : (

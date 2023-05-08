@@ -160,6 +160,14 @@ const BaseAPI = {
     if (result.error) throw new Error(result.error);
     return { status: true };
   },
+  async setLabelToExprArr(expArr, labelid) {
+    if (!expArr.length || !labelid) return { message: "nothing has changed" };
+
+    return await this.serverReq("patch", "/expressions/labels/", true, {
+      list: expArr,
+      labelid: labelid,
+    });
+  },
   async setNewPassword(password, resetToken) {
     let reqData = { password: password, resetToken: resetToken };
     let result = await this.serverReq(

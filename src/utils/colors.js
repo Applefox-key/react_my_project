@@ -10,6 +10,7 @@ export const themeArr = {
     "--color-text-label": "white",
     "--color-text-inform": "lightblue",
     "--color-text-base": "black",
+    "--background-color-opacity50": "rgba(50, 90, 188, 0.5)",
   },
   biege: {
     "--background-color-base": "white",
@@ -22,6 +23,7 @@ export const themeArr = {
     "--color-text-label": "#943600",
     "--color-text-inform": "#d6d5d4",
     "--color-text-base": "black",
+    "--background-color-opacity50": "rgba(210, 203, 139, 0.5)",
   },
 
   vamp: {
@@ -32,10 +34,10 @@ export const themeArr = {
     "--background-color-intense": "#5a0000",
     "--background-color-pale": "#253644",
     "--color-marker": "#ff0000",
-    // "--color-marker": "#00ff1f",
     "--color-text-label": "white",
     "--color-text-inform": "#b44650",
     "--color-text-base": "#e7e7e7",
+    "--background-color-opacity50": "rgba(187, 127, 162, 0.5)",
   },
   halk: {
     "--background-color-base": "#3B4163", //=
@@ -48,6 +50,7 @@ export const themeArr = {
     "--color-text-label": "white",
     "--color-text-inform": "forestgreen",
     "--color-text-base": "#e7e7e7",
+    "--background-color-opacity50": "rgba(145, 152, 144, 0.5)",
   },
   night: {
     "--background-color-base": "#434b78", //=
@@ -60,6 +63,7 @@ export const themeArr = {
     "--color-text-label": "white",
     "--color-text-inform": "steelblue",
     "--color-text-base": "#e7e7e7",
+    "--background-color-opacity50": "rgba(90, 135, 224, 0.5)",
   },
 };
 export const getCurrentTheme = () => {

@@ -17,7 +17,7 @@ const ThemesChoosing = () => {
       <div className={cl.radioWrap}>
         {Object.keys(themeArr).map((el) => (
           <div>
-            <div class={cl["radio-input"]}>
+            <div className={cl["radio-input"]}>
               <input
                 checked={colorTheme === el}
                 value={el}

@@ -14,11 +14,27 @@ const ExpressionRows = ({
   expressionsActions,
   editOn,
   view,
+  applyMode,
 }) => {
   const [elInfo, setElInfo] = useState("");
 
+  const classGenerator = (el) => {
+    let part1 = view ? cl["oneItemCard"] : cl["oneItemRow"];
+    if (!applyMode.isOn || !applyMode.list.includes(el.id)) return part1;
+    let part2 = cl["divIsChecked"];
+    return [part1, part2].join(" ");
+  };
+
+  console.log(
+    [
+      view ? cl["cardsContainer"] : cl["rowsContainer"],
+      applyMode.isOn ? cl.applyMode : "",
+    ].join(" ")
+  );
+  console.log(applyMode.isOn);
+
   return (
-    <div>
+    <>
       {editElem && (
         <EditWindow
           editElem={editElem}
@@ -28,14 +44,22 @@ const ExpressionRows = ({
       )}
       {elInfo && <InfoWindow setVisible={setElInfo} expression={elInfo} />}
 
-      <div className={view ? cl["cardsContainer"] : cl["rowsContainer"]}>
+      <div
+        className={
+          (view ? cl["cardsContainer"] : cl["rowsContainer"]) +
+          (applyMode.isOn ? " " + cl.listApply : "")
+        }>
         {expressions.map((el, i) => (
           <div
             key={el.id}
-            className={view ? cl["oneItemCard"] : cl["oneItemRow"]}>
+            className={classGenerator(el)}
+            onClick={(e) => {
+              if (applyMode.isOn) expressionsActions.addForApply(el);
+            }}>
             <div className={cl.atr}>
               <div className={cl.label_wrap}>
                 <SelectLabel
+                  disabled={applyMode.isOn}
                   onSelect={(val) =>
                     expressionsActions.contentEdit({
                       id: el.id,
@@ -46,7 +70,6 @@ const ExpressionRows = ({
                   isOne={true}
                 />
               </div>
-
               <div onClick={(e) => setElInfo(el)} className={cl.progress}>
                 <ProgressColumn stage={el.stage} color={expressionState(el)} />
               </div>
@@ -54,24 +77,26 @@ const ExpressionRows = ({
             <div
               className={cl["rowPhrase"]}
               onClick={(e) => {
-                editOn(el);
+                if (!applyMode.isOn) editOn(el);
               }}>
               {addSpanToExpInPrase(el)}
             </div>
             <div className={cl["exp-row-btns"]}>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  expressionsActions.expressionsDelete(el);
-                }}>
-                ❌
-              </button>{" "}
+              {!applyMode.isOn && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    expressionsActions.expressionsDelete(el);
+                  }}>
+                  ❌
+                </button>
+              )}
               <span>{expressionsActions.ordNumber(i + 1)}</span>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@
   --color-text-label: white;
   --color-text-inform: lightblue;
   --color-text-base: black;
-
+  --background-color-opacity50: rgba(50, 90, 188, 0.5);
 }
 
 body {
@@ -25,8 +25,6 @@ body {
 .main_page {
   text-align: center;
   margin-top: 2rem;
-  /* display: contents;
-  justify-content: center; */
 }
 
 .divAdvice {

@@ -42,7 +42,11 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
       }}>
       <div className="d-flex justify-content-center align-items-center">
         <h3>LABELS</h3>
-        <LabelNew callback={getLabels} />
+        <LabelNew
+          callback={() => {
+            getLabels();
+          }}
+        />
       </div>
       {labels.map((el) => (
         <div
@@ -62,6 +66,16 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
           </button>
           {isMenu === el.id && (
             <div className={cl.miniMenu} id="miniMenu">
+              {
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelect(el, true);
+                    setIsMenu(false);
+                  }}>
+                  apply label
+                </button>
+              }
               <button
                 title="delete label"
                 onClick={(e) => {
