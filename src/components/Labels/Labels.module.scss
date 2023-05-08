@@ -50,6 +50,7 @@
     transition: all 0.3s ease-in-out;
 
     &:hover {
+        color: var(--color-text-base);
         background-color: var(--background-color-medium);
         border-radius: 5px;
         transform: scale(1.2);
