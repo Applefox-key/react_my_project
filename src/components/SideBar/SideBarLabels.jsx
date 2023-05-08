@@ -4,6 +4,7 @@ import { useQuery } from "../../hooks/useQuery";
 import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import LabelNew from "../Labels/LabelNew";
 
 const SideBarLabels = ({ onSelect, selectedid }) => {
   const [labels, setLabels] = useState([]);
@@ -39,7 +40,10 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
       onBlur={(e) => {
         if (!e.relatedTarget) setIsMenu("");
       }}>
-      <h3>Labels</h3>
+      <div className="d-flex justify-content-center align-items-center">
+        <h3>LABELS</h3>
+        <LabelNew callback={getLabels} />
+      </div>
       {labels.map((el) => (
         <div
           className={classGenerator(el)}

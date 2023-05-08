@@ -33,7 +33,7 @@ const ThemesChoosing = () => {
                   background: themeArr[el]["--background-color-intense"],
                   color: themeArr[el]["--color-text-label"],
                 }}>
-                {colorTheme === el ? "🗸" : ""}{" "}
+                {colorTheme === el ? "🗸" : ""} <span>{el}</span>
               </label>
             </div>
           </div>

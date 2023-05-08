@@ -1,16 +1,4 @@
 export const themeArr = {
-  biege: {
-    "--background-color-base": "white",
-    "--background-color-dark": "#f4dbba",
-    "--background-color-medium": "antiquewhite",
-    "--background-color-light": "#FFFBF7",
-    "--background-color-intense": "#fcd53f",
-    "--background-color-pale": "#fffbee",
-    "--color-marker": "orangered",
-    "--color-text-label": "#943600",
-    "--color-text-inform": "#d6d5d4",
-    "--color-text-base": "black",
-  },
   blue: {
     "--background-color-base": "white",
     "--background-color-dark": "#6a99db",
@@ -23,6 +11,19 @@ export const themeArr = {
     "--color-text-inform": "lightblue",
     "--color-text-base": "black",
   },
+  biege: {
+    "--background-color-base": "white",
+    "--background-color-dark": "#f4dbba",
+    "--background-color-medium": "antiquewhite",
+    "--background-color-light": "#FFFBF7",
+    "--background-color-intense": "#fcd53f",
+    "--background-color-pale": "#fffbee",
+    "--color-marker": "orangered",
+    "--color-text-label": "#943600",
+    "--color-text-inform": "#d6d5d4",
+    "--color-text-base": "black",
+  },
+
   vamp: {
     "--background-color-base": "#3B4163", //=
     "--background-color-dark": "#262234",
@@ -48,7 +49,7 @@ export const themeArr = {
     "--color-text-inform": "forestgreen",
     "--color-text-base": "#e7e7e7",
   },
-  darkblue: {
+  night: {
     "--background-color-base": "#434b78", //=
     "--background-color-dark": "#00089b",
     "--background-color-medium": "#170a5e",
