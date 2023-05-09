@@ -6,24 +6,23 @@
 }
 
 .radio-input {
-
     width: 100%;
     position: relative;
     margin: 1rem;
 
     input {
-        width: 2rem;
-        height: 2rem;
+        width: 3rem;
+        height: 3rem;
 
 
     }
 
     label {
-        font-size: 20px;
+        font-size: 26px;
         position: absolute;
         left: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
         line-height: 1;
         border: 1px solid var(--color-text-base);
@@ -33,7 +32,7 @@
         span {
             font-size: 10px;
             position: absolute;
-            top: 2rem;
+            top: 3rem;
             left: 0;
             color: var(--color-text-base);
         }

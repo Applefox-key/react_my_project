@@ -291,12 +291,10 @@
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-}
-
-.rowsContainer {
-    // width: auto;
     margin-left: 3rem;
 }
+
+
 
 .oneItemRow {
     position: relative;
@@ -456,8 +454,6 @@
                 background-color: transparent;
             }
 
-            // button {
-            //     background-color: transparent;
             &:hover {
                 border: var(--color-marker);
 
@@ -485,10 +481,7 @@
                 }
             }
         }
-
-
     }
-
 
     .rowPhrase {
 
@@ -524,11 +517,7 @@
             }
         }
     }
-
-
 }
-
-
 
 .applyBtn {
     z-index: 1500;

@@ -197,12 +197,10 @@
     height: 3rem;
     transition: all 0.2s ease;
 
-
     &:hover {
-        // border-radius: 5px 5px 5px 5px;
-        // outline: none;
-        border: 1px solid var(--color-marker);
+        background-color: var(--background-color-dark);
     }
+
 }
 
 .labelEmpty {
