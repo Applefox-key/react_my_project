@@ -1,6 +1,6 @@
 import React from "react";
 import MyModal from "../../UI/MyModal";
-import { expressionsFromText } from "../../../utils/texts";
+import { phrasessFromText } from "../../../utils/texts";
 import { useState } from "react";
 import Popup from "../../UI/popup/Popup";
 import ModalPasteBtns from "./ModalPasteBtns";
@@ -13,7 +13,7 @@ const ModalPasteList = ({ setVisible, onClick }) => {
   const [dataString, setDataString] = useState("");
   const setPopup = usePopup();
   const read = () => {
-    expressionsFromText(dataString, setDataArray, setPopup.advise);
+    phrasessFromText(dataString, setDataArray, setPopup.advice);
   };
 
   const back = () => {
@@ -51,6 +51,7 @@ const ModalPasteList = ({ setVisible, onClick }) => {
           read={read}
           add={addExpressions}
           back={back}
+          setDataArr={setDataArray}
         />
       }>
       <div className="modal-h50">

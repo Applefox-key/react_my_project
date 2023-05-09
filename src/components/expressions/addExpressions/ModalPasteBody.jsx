@@ -8,7 +8,7 @@ const ModalPasteBody = ({ dataArr, dataStr, setDataStr, setDataArr }) => {
       {!dataArr ? (
         <textarea
           value={dataStr}
-          placeholder="expression ; phrase"
+          placeholder="phrase"
           onChange={(e) => {
             setDataStr(e.target.value);
           }}

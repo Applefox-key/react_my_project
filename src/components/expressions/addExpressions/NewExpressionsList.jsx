@@ -1,20 +1,8 @@
 import React, { useState } from "react";
 import cl from "./addExpressions.module.scss";
-import SelectLabel from "../../Labels/SelectLabel";
 const NewExpressionsList = ({ dataArr, setDataArr }) => {
   const [copyBtn, setCopyBtn] = useState({ i: -1, text: "" });
-  const [label, setLabel] = useState({
-    id: "",
-    name: "",
-  });
-  const labelSelect = (val) => {
-    setLabel(val);
-    setDataArr(
-      dataArr.map((el) => {
-        return { ...el, labelid: val.id };
-      })
-    );
-  };
+
   const expressionSelect = () => {
     setDataArr(
       dataArr.map((el, num) =>
@@ -33,13 +21,12 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
     //selection is empty and copyBtn is not empty
     else if (!selectedText && copyBtn.i > -1) setCopyBtn({ i: -1, text: "" });
   };
-
+  const expressionDelete = (i) => {
+    if (!window.confirm("Delete the phrase?")) return false;
+    setDataArr(dataArr.filter((el) => el.id !== i));
+  };
   return (
     <>
-      <div className={cl["label-box"]}>
-        <SelectLabel isOne={true} onSelect={labelSelect} colCat={label} />
-        <span>label for all</span>
-      </div>
       {dataArr.map((el, i) => (
         <div className={cl.addingRow} key={i}>
           {i + 1} <span>{el.expression} </span>
@@ -50,9 +37,12 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
             }}>
             {el.phrase}
           </div>
+          <button className={cl.deleteBtn} onClick={() => expressionDelete(i)}>
+            ✕
+          </button>
           {copyBtn.i === i && (
             <button className="popupBtn" onClick={expressionSelect}>
-              set selection as expression
+              set as an expression
             </button>
           )}
         </div>

@@ -70,7 +70,11 @@ const ExpressionItem = ({
                   isOne={true}
                 />
               </div>
-              <div onClick={(e) => setElInfo(el)} className={cl.progress}>
+              <div
+                onClick={(e) => {
+                  if (!applyMode.isOn) setElInfo(el);
+                }}
+                className={cl.progress}>
                 <ProgressColumn stage={el.stage} color={expressionState(el)} />
               </div>
             </div>

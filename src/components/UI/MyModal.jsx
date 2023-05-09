@@ -17,9 +17,13 @@ const MyModal = ({
       </Modal.Header>
 
       <div className="d-flex justify-content-center align-items-center">
-        <h5 className="text-center" style={stylesubt}>
-          {subtitle}
-        </h5>
+        {typeof subtitle === "object" ? (
+          <div className="text-center w-100"> {subtitle}</div>
+        ) : (
+          <h5 className="text-center" style={stylesubt}>
+            {subtitle}
+          </h5>
+        )}
       </div>
 
       <Modal.Body>{children}</Modal.Body>
