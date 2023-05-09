@@ -3,6 +3,9 @@ import cl from "./SideBar.module.scss";
 import { useQuery } from "../../hooks/useQuery";
 import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
+import { RiDeleteRow } from "react-icons/ri";
+import { BiCloset } from "react-icons/bi";
+import { MdOutlineSettingsBackupRestore } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import LabelNew from "../Labels/LabelNew";
 import MySpinner from "../UI/MySpinner/MySpinner";
@@ -78,7 +81,7 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
                       onSelect(el, true);
                       setIsMenu(false);
                     }}>
-                    apply label
+                    <BiCloset /> apply label
                   </button>
                 }
                 <button
@@ -87,7 +90,8 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
                     e.stopPropagation();
                     deleteOne(el);
                   }}>
-                  delete label ❌
+                  <RiDeleteRow />
+                  delete label
                 </button>
                 <button
                   title=" to training"
@@ -95,7 +99,7 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
                     e.stopPropagation();
                     router(`/training/${el.id}/${el.name}`);
                   }}>
-                  to training
+                  <MdOutlineSettingsBackupRestore /> to training
                 </button>
               </div>
             )}
