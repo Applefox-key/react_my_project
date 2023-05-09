@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "../../../hooks/useQuery";
-import MySpinner from "../../UI/MySpinner";
 import BaseAPI from "../../../API/BaseAPI";
 import MyPagination from "../../UI/MyPagination/MyPagination";
 import MyFilter from "../../UI/MyFilter/MyFilter";
@@ -12,6 +11,7 @@ import { usePopup } from "../../../hooks/usePopup";
 import ExpressionItem from "./ExpressionItem";
 import cl from "./ExpressionsList.module.scss";
 import SideBar from "../../SideBar/SideBar";
+import MySpinner from "../../UI/MySpinner/MySpinner";
 
 const ExpressionsList = () => {
   const limit = 20;

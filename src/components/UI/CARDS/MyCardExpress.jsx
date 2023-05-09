@@ -8,8 +8,6 @@ import Plan from "../../expressions/PlanAndHistory/Plan";
 
 const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
-  let studyPlan = item.studyPlan;
-  // <div key={item.id + "_" + i}>{row}</div>  : addSpanToExpInPrase(item).map((row, i) => row)}
   const generateClass = (item) => {
     if (item.phrase.length < 190) return "display-1";
     if (item.phrase.length < 240) return "display-2";

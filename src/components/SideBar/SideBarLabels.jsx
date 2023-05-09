@@ -5,6 +5,7 @@ import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import LabelNew from "../Labels/LabelNew";
+import MySpinner from "../UI/MySpinner/MySpinner";
 
 const SideBarLabels = ({ onSelect, selectedid }) => {
   const [labels, setLabels] = useState([]);
@@ -25,6 +26,7 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
   };
   useEffect(() => {
     getLabels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const deleteOne = async (element) => {
     if (!window.confirm("Delete this label?")) return;
@@ -48,54 +50,58 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
           }}
         />
       </div>
-      {labels.map((el) => (
-        <div
-          className={classGenerator(el)}
-          key={el.id}
-          onClick={() => onSelect(el)}>
-          <div>
-            <span>✦</span>
-            {el.name}
-          </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMenu(isMenu ? "" : el.id);
-            }}>
-            <CiMenuKebab />
-          </button>
-          {isMenu === el.id && (
-            <div className={cl.miniMenu} id="miniMenu">
-              {
+      {isLoadingCat ? (
+        <MySpinner />
+      ) : (
+        labels.map((el) => (
+          <div
+            className={classGenerator(el)}
+            key={el.id}
+            onClick={() => onSelect(el)}>
+            <div>
+              <span>✦</span>
+              {el.name}
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMenu(isMenu ? "" : el.id);
+              }}>
+              <CiMenuKebab />
+            </button>
+            {isMenu === el.id && (
+              <div className={cl.miniMenu} id="miniMenu">
+                {
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelect(el, true);
+                      setIsMenu(false);
+                    }}>
+                    apply label
+                  </button>
+                }
                 <button
+                  title="delete label"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onSelect(el, true);
-                    setIsMenu(false);
+                    deleteOne(el);
                   }}>
-                  apply label
+                  delete label ❌
                 </button>
-              }
-              <button
-                title="delete label"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteOne(el);
-                }}>
-                delete label ❌
-              </button>
-              <button
-                title=" to training"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  router(`/training/${el.id}/${el.name}`);
-                }}>
-                to training
-              </button>
-            </div>
-          )}
-        </div>
-      ))}
+                <button
+                  title=" to training"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router(`/training/${el.id}/${el.name}`);
+                  }}>
+                  to training
+                </button>
+              </div>
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };

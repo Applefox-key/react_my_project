@@ -4,7 +4,7 @@ import BaseAPI from "../../../API/BaseAPI";
 import Image from "react-bootstrap/Image";
 import { useState, useEffect } from "react";
 import { useQuery } from "../../../hooks/useQuery";
-import MySpinner from "../../UI/MySpinner";
+import MySpinner from "../../UI/MySpinner/MySpinner";
 import imgProfile from "../../../img/profile.ico";
 
 const UserAvatar = (props) => {

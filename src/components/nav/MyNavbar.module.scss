@@ -7,6 +7,12 @@
   margin-bottom: 2.5rem;
 }
 
+.nav-top-string {
+  justify-content: flex-end;
+  padding-right: 2rem;
+  background-color: var(--background-color-base);
+}
+
 .nav {
 
   position: fixed;
@@ -17,8 +23,10 @@
   z-index: 500;
 
   button {
+    font-size: 20px;
     background-color: var(--background-color-base);
     color: var(--color-text-base);
+    border: none;
 
     &:hover {
       color: var(--color-marker);
@@ -30,7 +38,7 @@
 .navLinkActive {
   display: block;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--color-text-base);
   background-color: var(--background-color-base);

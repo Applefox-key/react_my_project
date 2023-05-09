@@ -14,12 +14,37 @@
   height: 100%;
   z-index: 1000;
   justify-content: space-between;
+
+  @media (max-width: 900px)and (max-height: 400px) {
+    flex-wrap: nowrap;
+  }
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 400px) {
+    flex-wrap: wrap;
+  }
 }
 
 .aboutBox {
   width: 76%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 900px)and (max-height: 400px) {
+    display: block;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 100%
+  }
+
+  @media screen and (max-width: 600px) {
+    display: inline
+  }
+
 }
 
 
@@ -34,6 +59,57 @@
   align-items: center;
   justify-content: center;
 
+  @media (max-width: 900px)and (max-height: 400px) {
+    width: max-content;
+    top: 25%;
+    left: 20%;
+  }
+
+  @media screen and (max-width: 800px) {
+    position: absolute;
+    left: 0%;
+    top: 10%;
+    width: 75%;
+  }
+
+  @media screen and (max-width: 700px) {
+    position: absolute;
+    left: 0%;
+    top: 10%;
+    width: 75%;
+  }
+
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    left: 40%;
+    top: 16%;
+    width: 75%;
+  }
+
+  @media screen and (max-width: 500px) {
+    position: absolute;
+    left: 30%;
+    top: 16%;
+    width: 70%;
+  }
+
+  @media screen and (max-width: 400px) {
+    position: absolute;
+    left: 30%;
+    top: 16%;
+    width: 70%;
+  }
+}
+
+.text_container_public {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (max-width:900px) {
+    width: 50%;
+  }
 }
 
 .text1 {
@@ -44,6 +120,18 @@
   line-height: 77px;
   color: var(--color-text-base);
   text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 500px) {
+    font-size: 40px;
+  }
+
+  @media screen and (max-width:900px) {
+    line-height: 40px;
+  }
+
+  @media (max-width: 900px)and (max-height: 400px) {
+    font-size: 30px;
+  }
 }
 
 .text2 {
@@ -54,22 +142,35 @@
   line-height: 42px;
   color: var(--color-text-base);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width:900px) {
+    line-height: 25px;
+  }
+
+  @media (max-width: 900px)and (max-height: 400px) {
+    font-size: 20px;
+  }
+
 }
 
 .btn {
   z-index: 500;
   border: none;
   background: transparent;
-  // color: #0A58CA;
   color: var(--color-marker);
   cursor: pointer;
   text-decoration: none;
-}
 
-.btn:hover {
-  font-size: 25px;
-  cursor: pointer;
-  color: var(--color-marker);
+  &:hover {
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--color-marker);
+  }
+
 }
 
 
@@ -77,6 +178,16 @@
 /* BOOK BOX */
 .bookShelf {
   display: flex;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+
+  @media (max-width: 900px)and (max-height: 400px) {
+    display: flex;
+    justify-content: flex-end;
+
+  }
 }
 
 .books {
@@ -87,25 +198,31 @@
   gap: 5px;
   padding: .4em;
   margin-top: 8rem;
-
   display: flex;
   justify-content: flex-end;
   backdrop-filter: blur(5px);
   background: #113653;
-  // background: #2029d0;
   background: var(--color-marker);
   border-bottom: 3px solid rgba(255, 255, 255, 0.440);
   border-left: 2px rgba(255, 255, 255, 0.545) outset;
   box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
-  /* overflow: hidden; */
   color: var(--color-text-base);
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+  }
 }
 
-/* .books:hover {  
-  width: 100%;
-} */
 .books_hover {
   width: 100%;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    width: 100%;
+    height: 364px;
+  }
 }
 
 .onebook {
@@ -115,33 +232,48 @@
   cursor: pointer;
   border-radius: 2px;
   transition: all .5s;
-  /* background: #114D72; */
-
   border: 1px solid rgba(255, 255, 255, 0.440);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  // background: #296FD1;
   background: var(--background-color-intense);
-  /* border-bottom: 3px solid rgba(255, 255, 255, 0.440);
-    border-bottom: 3px solid rgba(255, 255, 255, 0.440);
-    border-left: 2px  rgba(255, 255, 255, 0.545) outset; */
   box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+
+
 }
 
 .onebook_hover {
   flex: 7;
   width: 10rem;
   align-items: flex-start;
+
+  .bookdiv {
+    transform: rotate(0);
+    text-align: center;
+    color: black;
+    background-color: white;
+    height: 100%;
+  }
+
+  .booktext {
+    display: inline;
+    text-align: start;
+  }
+
+  @media screen and (max-width: 900px) {
+    flex: 5;
+    width: 100%;
+    font-size: small;
+    align-items: flex-start;
+  }
 }
 
 .booktext {
   display: none;
-}
 
-.booktext p {
-  margin-top: 2rem;
+  p {
+    margin-top: 2rem;
+  }
 }
 
 .bookdiv {
@@ -153,142 +285,11 @@
   color: var(--color-text-base);
   letter-spacing: .1em;
   font-size: large;
-}
 
-.onebook_hover .bookdiv {
-  transform: rotate(0);
-  text-align: center;
-  color: black;
-  background-color: white;
-  height: 100%;
-}
-
-.onebook_hover .booktext {
-  display: inline;
-  text-align: start;
-}
-
-@media (max-width: 900px)and (max-height: 400px) {
-  .box-form {
-    flex-flow: wrap;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-  }
-
-  .text_container {
-    width: max-content;
-    top: 25%;
-    left: 20%;
-  }
-
-  .text1 {
-    font-size: 30px;
-  }
-
-  .text2 {
-    font-size: 20px;
-  }
-
-  .aboutBox {
-    display: block;
-  }
-
-  .bookShelf {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .pagecontent {
-    flex-wrap: nowrap;
-  }
-}
-
-@media screen and (max-width: 800px) {
-
-  .text_container {
-    position: absolute;
-    left: 0%;
-    top: 10%;
-    width: 75%;
-  }
-
-  .aboutBox {
-    width: 100%
-  }
-}
-
-@media screen and (max-width: 700px) {
-
-  .text_container {
-    position: absolute;
-    left: 0%;
-    top: 10%;
-    width: 75%;
-  }
-
-}
-
-@media screen and (max-width: 600px) {
-  .aboutBox {
-    display: inline
-  }
-
-  .text_container {
-    position: absolute;
-    left: 40%;
-    top: 16%;
-    width: 75%;
-  }
-
-  .books {
-    margin-left: 1rem;
-  }
-
-  .onebook_hover {
-    flex: 5;
-    width: 8rem;
-    font-size: small;
-    align-items: flex-start;
-  }
-
-  .bookdiv {
+  @media screen and (max-width: 900px) {
     min-width: 10em;
     padding: .3em;
     font-size: small;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .text_container {
-    position: absolute;
-    left: 30%;
-    top: 16%;
-    width: 70%;
-  }
-
-  .text1 {
-    font-size: 40px;
-  }
-
-  .text2 {
-    font-size: 20px;
-  }
-
-  .pagecontent {
-    flex-wrap: wrap;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .text_container {
-    position: absolute;
-    left: 30%;
-    top: 16%;
-    width: 70%;
-  }
-
-  .pagecontent {
-    flex-wrap: wrap;
+    transform: rotate(0deg);
   }
 }

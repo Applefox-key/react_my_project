@@ -13,9 +13,10 @@ const MainPage = () => {
   return (
     <div className={cl.pagecontent}>
       <div className={cl.imgabout} />
-      <div
+      {/* <div
         className="d-flex flex-column justify-content-center"
-        style={{ width: "20%" }}>
+        style={{ width: "20%" }}> */}
+      <div className={cl.text_container_public}>
         {" "}
         <div className={cl.text1}>Try the 90 seconds method</div>
         <div className={cl.text2}>Sign In to Learn Fast</div>

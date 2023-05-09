@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import BaseAPI from "../../../API/BaseAPI";
 import { usePopup } from "../../../hooks/usePopup";
 import { useQuery } from "../../../hooks/useQuery";
-import MySpinner from "../../UI/MySpinner";
 import TrainingCards from "./TrainingCards";
 import { Badge } from "react-bootstrap";
 import SelectLabel from "../../Labels/SelectLabel";
 import { useParams } from "react-router-dom";
+import MySpinner from "../../UI/MySpinner/MySpinner";
 
 const Training = () => {
   const [list, setList] = useState();

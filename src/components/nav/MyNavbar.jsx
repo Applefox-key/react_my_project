@@ -22,7 +22,7 @@ const MyNavbar = () => {
 
   return (
     <div className={[cl.nav, "bg-light"].join(" ")}>
-      <Nav activeKey="/about" className="justify-content-end pe-4 " size="lg">
+      <Nav activeKey="/about" className={cl["nav-top-string"]} size="lg">
         {routesArr
           .filter((el) => el.nameNav)
           .map((item, i) => (

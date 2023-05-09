@@ -43,6 +43,10 @@ body {
   position: absolute;
   top: 0;
   z-index: 1600;
+
+  @media screen and (max-width:900px) {
+    top: 45px;
+  }
 }
 
 @keyframes scale {
@@ -210,8 +214,12 @@ body {
 }
 
 .circles-hint {
-  width: 10%;
+  width: fit-content;
   justify-content: end;
+
+  @media screen and (max-width:900px) {
+    flex-direction: column;
+  }
 }
 
 .circle {

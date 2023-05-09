@@ -64,6 +64,12 @@
 .card-back {
   background: var(--background-color-medium);
   color: var(--color-text-base);
+
+  @media screen and (max-width:900px) {
+
+    justify-content: flex-start;
+    padding-top: 3rem;
+  }
 }
 
 .hint {

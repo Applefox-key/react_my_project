@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import BaseAPI from "../../../API/BaseAPI";
 import UserProfile from "./UserProfile";
-import MySpinner from "../../UI/MySpinner";
+import MySpinner from "../../UI/MySpinner/MySpinner";
 import { useQuery } from "../../../hooks/useQuery";
 import { usePopup } from "../../../hooks/usePopup";
 
