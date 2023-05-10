@@ -42,7 +42,10 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
     <div
       className={cl["modal-wrap"]}
       onClick={(e) => {
-        if (e.target === e.currentTarget) closeModal();
+        const selection = window.getSelection();
+        const selectedText = selection.toString();
+
+        if (e.target === e.currentTarget && selectedText === "") closeModal();
       }}>
       <div className={cl["modal-box"]}>
         <div className={cl["top-edit-box"]}>
