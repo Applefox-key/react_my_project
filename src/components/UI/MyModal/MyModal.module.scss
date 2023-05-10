@@ -1,0 +1,43 @@
+.modal-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: antiquewhite;
+    width: 100%;
+
+    .modal-main {
+        position: relative;
+
+    }
+}
+
+.subtitle {
+    // d-flex justify-content-center align-items-center
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color-base);
+    color: var(--color-text-base);
+}
+
+.colorwrap,
+.header {
+    // background-color: var(--background-color-base);
+    // color: var(--color-text-base);
+
+    button {
+        color: var(--color-text-base);
+    }
+}
+
+.color {
+    background-color: var(--background-color-base);
+    color: var(--color-text-base);
+
+    textarea {
+        background-color: var(--background-color-light);
+        color: var(--color-text-base);
+    }
+}

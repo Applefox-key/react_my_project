@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Image from "react-bootstrap/Image";
-import MyModal from "../../UI/MyModal";
+import MyModal from "../../UI/MyModal/MyModal";
 import Button from "react-bootstrap/esm/Button";
 import { useQuery } from "../../../hooks/useQuery";
 import BaseAPI from "../../../API/BaseAPI";

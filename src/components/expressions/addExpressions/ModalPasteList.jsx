@@ -1,5 +1,5 @@
 import React from "react";
-import MyModal from "../../UI/MyModal";
+import MyModal from "../../UI/MyModal/MyModal";
 import { phrasessFromText } from "../../../utils/texts";
 import { useState } from "react";
 import Popup from "../../UI/popup/Popup";

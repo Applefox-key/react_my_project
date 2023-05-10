@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import MyModal from "../UI/MyModal";
+import MyModal from "../UI/MyModal/MyModal";
 import cl from "./Labels.module.scss";
 import BaseAPI from "../../API/BaseAPI";
 const LabelNew = ({ callback }) => {

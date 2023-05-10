@@ -9,8 +9,8 @@ const Plan = ({ expression }) => {
         {studyPlan.map((item, i) => (
           <div key={i} className={cl.planDay}>
             <p>{item[0]}</p>
-            {item[1].split(" ").map((el) => (
-              <span>{el}</span>
+            {item[1].split(" ").map((el, j) => (
+              <span key={i + "_" + j}>{el}</span>
             ))}
           </div>
         ))}

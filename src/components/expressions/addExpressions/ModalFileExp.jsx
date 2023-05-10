@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Popup from "../../UI/popup/Popup";
 import { Button } from "react-bootstrap";
 import { expressionsFromTxtFile } from "../../../utils/files";
-import MyModal from "../../UI/MyModal";
+import MyModal from "../../UI/MyModal/MyModal";
 import BaseAPI from "../../../API/BaseAPI";
 import ModalFileExpBtns from "./ModalFileExpBtns";
 import { usePopup } from "../../../hooks/usePopup";

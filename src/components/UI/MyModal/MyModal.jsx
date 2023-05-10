@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-
+import cl from "./MyModal.module.scss";
 const MyModal = ({
   children,
   showmodal,
@@ -11,12 +11,16 @@ const MyModal = ({
   ...props
 }) => {
   return (
-    <Modal show={showmodal} onHide={() => setshowmodal(false)} {...props}>
-      <Modal.Header closeButton>
+    <Modal
+      show={showmodal}
+      onHide={() => setshowmodal(false)}
+      {...props}
+      className={cl.color}>
+      <Modal.Header closeButton className={cl.header}>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
 
-      <div className="d-flex justify-content-center align-items-center">
+      <div className={cl.subtitle}>
         {typeof subtitle === "object" ? (
           <div className="text-center w-100"> {subtitle}</div>
         ) : (
@@ -26,7 +30,7 @@ const MyModal = ({
         )}
       </div>
 
-      <Modal.Body>{children}</Modal.Body>
+      <Modal.Body className={cl.color}>{children}</Modal.Body>
     </Modal>
   );
 };

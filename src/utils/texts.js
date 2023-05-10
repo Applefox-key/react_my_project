@@ -59,34 +59,27 @@ export const phrasessFromText = async (
 export const addSpanToExpInPrase = (item) => {
   if (!item.expression || !item.phrase.includes(item.expression))
     return <>{item.phrase}</>;
-  const repT = item.phrase.replace(
-    new RegExp(item.expression, "gim"),
-    "Spanitemexpression"
+  let phrase = item.phrase;
+  let expression = item.expression;
+  const regexPatternExp = expression.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
+  const repT = phrase.replace(
+    new RegExp(regexPatternExp, "gim"),
+    "Span#%!#" + item.expression + "Span#%!#"
   );
-  let arr = repT.split("Spanitemexpression");
 
-  let res = (
+  let arr = repT.split("Span#%!#");
+  let result = (
     <>
-      {" "}
-      {arr[0]}
-      <span className="expression">{item.expression}</span>
-      {arr[1]}
+      {arr.map((el, i) => {
+        return el === item.expression ? (
+          <span key={i} className="expression">
+            {item.expression}
+          </span>
+        ) : (
+          <>{el}</>
+        );
+      })}
     </>
   );
-  return res;
-  // let res = [""];
-  // let arr = repT.split(" ");
-  // arr.forEach((element, i) => {
-  //   // if (element === "Spanitemexpression") {
-  //   if (element.includes("Spanitemexpression")) {
-  //     res.push(
-  //       <span className="expression">
-  //         {element.replace("Spanitemexpression", " " + item.expression.trim())}
-  //       </span>
-  //     );
-  //     if (arr.length - 1 !== i) res.push("");
-  //   } else res[res.length - 1] += " " + element;
-  // });
-
-  // return <>{res.map((row, i) => row)}</>;
+  return result;
 };
