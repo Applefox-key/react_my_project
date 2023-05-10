@@ -36,12 +36,16 @@ const LoginBox = ({ setLoginMode }) => {
       setErr(error.message);
     }
   };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") login();
+  };
 
   return (
     <div className={cl.login_block}>
       <h1 className={cl.h1login}>Login</h1>{" "}
       <input
         className={cl.inputlogin}
+        onKeyPress={onKeyPress}
         type="text"
         value={email}
         placeholder="Username"
@@ -55,6 +59,7 @@ const LoginBox = ({ setLoginMode }) => {
         className={cl.inputlogin}
         type="password"
         value={password}
+        onKeyPress={onKeyPress}
         placeholder="Password"
         id="password"
         onChange={(e) => {
