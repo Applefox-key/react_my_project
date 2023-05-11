@@ -37,7 +37,7 @@ const MyInputTbl = ({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (!onEnter) return;
           if (e.key === "Enter") onEnter();
         }}

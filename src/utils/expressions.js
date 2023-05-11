@@ -1,10 +1,29 @@
 import BaseAPI from "../API/BaseAPI";
+import { IoWarningOutline } from "react-icons/io5";
+import { RiErrorWarningLine } from "react-icons/ri";
 
+export const expressionStateIcon = (item) => {
+  let days = item.exceededSkipsDays;
+  let exceededSkipsCount = item.exceededSkipsCount;
+  let result = <></>;
+  if (exceededSkipsCount)
+    result = (
+      <span>
+        <RiErrorWarningLine /> <IoWarningOutline />
+      </span>
+    );
+
+  if (days > 0)
+    result = (
+      <span>
+        <RiErrorWarningLine />
+      </span>
+    );
+  return result;
+};
 export const expressionState = (item) => {
   let days = item.exceededSkipsDays;
   let exceededSkipsCount = item.exceededSkipsCount;
-  //  if (exceededSkipsCount) return <button className="circle bg-danger" />;
-  // if (days > 0) return <button className="circle bg-warning" />;   return <></>;
   let color = "colorBlue";
   if (exceededSkipsCount) color = "colorRed";
   if (days > 0) color = "colorOrange";

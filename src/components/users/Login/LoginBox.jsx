@@ -14,8 +14,10 @@ const LoginBox = ({ setLoginMode }) => {
 
   // eslint-disable-next-line no-unused-vars
   const { userAuth, setUserAuth } = useContext(AuthContext);
-  const [email, setEmail] = useState(pageParam.email ? pageParam.email : "");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(
+    pageParam.email ? pageParam.email : "JohnDoe@test.test"
+  );
+  const [password, setPassword] = useState(pageParam.email ? "" : "JohnDoe");
   const [err, setErr] = useState("");
   const login = async (event) => {
     if (!isEmailValid(email)) {
@@ -45,7 +47,7 @@ const LoginBox = ({ setLoginMode }) => {
       <h1 className={cl.h1login}>Login</h1>{" "}
       <input
         className={cl.inputlogin}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyPress}
         type="text"
         value={email}
         placeholder="Username"
@@ -59,7 +61,7 @@ const LoginBox = ({ setLoginMode }) => {
         className={cl.inputlogin}
         type="password"
         value={password}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyPress}
         placeholder="Password"
         id="password"
         onChange={(e) => {

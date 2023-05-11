@@ -1,6 +1,7 @@
 .main-list {
     display: flex;
     background-color: var(--background-color-medium);
+    transition: all 0.4s ease-in-out;
 }
 
 .listContainer {
@@ -10,6 +11,7 @@
     color: var(--color-text-base);
     border-radius: 10px;
     margin-top: 2rem;
+    transition: all 0.4s ease-in-out;
 }
 
 .exressions-list-title {
@@ -334,6 +336,17 @@
             position: relative;
             cursor: pointer;
 
+            span {
+                position: absolute;
+                top: -16px;
+                left: 103px;
+                color: var(--color-marker);
+
+                @media screen and (max-width:900px) {
+                    left: 80px;
+                }
+            }
+
             &:hover {
                 &::after {
                     content: "check your progress";
@@ -343,6 +356,10 @@
                     left: 0;
                     top: 10px;
                     margin: 0;
+
+                    @media screen and (max-width:900px) {
+                        top: 30px;
+                    }
                 }
             }
         }
@@ -351,7 +368,7 @@
 
 
     .rowPhrase {
-        width: 85%;
+        width: 80%;
         text-align: start;
     }
 
@@ -468,6 +485,13 @@
             // margin: 15px 0;
             position: relative;
             cursor: pointer;
+
+            span {
+                position: absolute;
+                top: 0px;
+                left: -25px;
+                color: var(--color-marker);
+            }
 
             &:hover {
                 &::after {

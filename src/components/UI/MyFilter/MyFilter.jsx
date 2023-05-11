@@ -23,7 +23,7 @@ const MyFilter = ({ filter, setFilter }) => {
           name="text"
           value={value}
           className={cl.input}
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === "Enter") setFilter(value);
           }}
           onChange={(e) => {

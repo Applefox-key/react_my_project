@@ -53,9 +53,11 @@ const ThemesChoosing = () => {
                 style={{
                   // background: themeArr[el]["--background-color-intense"],
                   background: gradient(el),
+                  borderColor: themeArr[el]["--color-marker"],
                   color: themeArr[el]["--color-text-label"],
                 }}>
-                {colorTheme === el ? "🗸" : ""} <span>{el}</span>
+                {/* {colorTheme === el ? "🗸" : ""}  */}
+                <span>{el}</span>
               </label>
             </div>
           </div>

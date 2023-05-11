@@ -226,3 +226,25 @@
   animation: fadeIn;
   animation-duration: 2000ms;
 } 
+.sidebar-appear {
+  animation: fadeInLeft;
+  animation-duration: 500ms;
+}.sidebar-appear-done {   
+  animation: fadeInLeft;
+  animation-duration: 500ms;
+} .sidebar-enter {
+  animation: fadeInLeft;
+  animation-duration: 500ms;
+}.sidebar-enter-done {   
+  animation: fadeInLeft;
+  animation-duration: 500ms;
+}.sidebar-exit {
+  animation: fadeOutLeft;
+  animation-duration: 1500ms;
+}.sidebar-exit-activ {   
+  animation: fadeOutLeft;
+  animation-duration: 1500ms;
+} .sidebar-exit-done {   
+  animation: fadeOutLeft;
+  animation-duration: 1500ms;
+} 

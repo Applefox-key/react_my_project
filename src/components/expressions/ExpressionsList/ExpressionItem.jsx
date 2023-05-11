@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { addSpanToExpInPrase } from "../../../utils/texts";
-import { expressionState } from "../../../utils/expressions";
+import { expressionStateIcon } from "../../../utils/expressions";
 
 import EditWindow from "./EditWindow";
+
 import cl from "./ExpressionsList.module.scss";
 import InfoWindow from "./InfoWindow";
 import SelectLabel from "../../Labels/SelectLabel";
@@ -75,7 +76,10 @@ const ExpressionItem = ({
                   if (!applyMode.isOn) setElInfo(el);
                 }}
                 className={cl.progress}>
-                <ProgressColumn stage={el.stage} color={expressionState(el)} />
+                <ProgressColumn
+                  stage={el.stage}
+                  icon={expressionStateIcon(el)}
+                />
               </div>
             </div>
             <div

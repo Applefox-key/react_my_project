@@ -34,7 +34,7 @@ export const themeArr = {
     "--background-color-pale": "#C9BBB6",
     "--color-marker": "#FD520D",
     "--color-text-label": "black",
-    "--color-text-inform": "#E2E3DE",
+    "--color-text-inform": "#ef9b77",
     "--color-text-base": "black",
     "--background-color-opacity50": "rgba(243, 226, 219, 0.5)",
   },
@@ -51,6 +51,20 @@ export const themeArr = {
     "--color-text-base": "black",
     "--background-color-opacity50": "rgba(116, 92, 92, 0.5)",
   },
+  grey: {
+    "--background-color-base": "#b2b9bf",
+    "--background-color-dark": "#6b625b",
+    "--background-color-medium": "#d6cdc6",
+    "--background-color-light": "#e1e0de",
+    "--background-color-intense": "#b1917f",
+    "--background-color-pale": "#d6cdc6",
+    "--color-marker": "#6b625b",
+    "--color-text-label": "white",
+    "--color-text-inform": "#b2b7ba",
+    "--color-text-base": "#6b625b",
+    "--background-color-opacity50": "rgb(218, 208, 196, 0.5)",
+  },
+
   vamp: {
     "--background-color-base": "#41434F", //=
     "--background-color-dark": "#000000",
@@ -79,7 +93,7 @@ export const themeArr = {
   },
   night: {
     "--background-color-base": "#434b78", //=
-    "--background-color-dark": "#000670",
+    "--background-color-dark": "#35395f",
     "--background-color-medium": "#180f46",
     "--background-color-light": "#211742", //+
     "--background-color-intense": "#10376e",
