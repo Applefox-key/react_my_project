@@ -189,13 +189,17 @@
 
 .labeltext {
     color: var(--color-text-label);
-    display: flex;
+    // display: flex;
     background-color: var(--background-color-intense);
     padding: 5px 15px;
     border-radius: 0px 0.5rem 0.5rem 0;
     width: 10rem;
     height: 3rem;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 11rem;
+    overflow: hidden;
 
     &:hover {
         background-color: var(--background-color-dark);
