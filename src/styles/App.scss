@@ -114,6 +114,10 @@ body {
   cursor: pointer;
 }
 
+.color-base {
+  color: var(--color-text-base);
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
