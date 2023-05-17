@@ -3,6 +3,43 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     width: 90%;
+    position: relative;
+}
+
+
+.planet {
+    font-size: 26px;
+    position: relative;
+    left: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    line-height: 1;
+    border: 1px solid var(--color-text-base);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transition: all 0.2s ease-in-out;
+    margin: 10px 5px;
+
+    span {
+        font-size: 10px;
+        position: absolute;
+        top: 3rem;
+        left: 0;
+        color: var(--color-text-base);
+    }
+
+    &:hover {
+        scale: (1.1);
+        // box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+}
+
+.planet-active {
+    box-shadow: 0px 3px 12px var(--color-text-label), 0px -4px 12px #c5c5c5;
+    outline: 2px solid var(--color-marker);
+    scale: (1.1);
+
 }
 
 .radio-input {

@@ -49,7 +49,7 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
       }}>
       <div className={cl["modal-box"]}>
         <div className={cl["top-edit-box"]}>
-          <span>edit phrase</span>
+          {/* <span>edit phrase</span> */}
           {copyBtn && (
             <button className={cl["popupBtn"]} onClick={setSelection}>
               set selection as expression
@@ -63,6 +63,8 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
           </button>{" "}
         </div>
         <div className={cl["edit-body"]}>
+          {" "}
+          <div className={cl["expressionStr"]}>{valueExp}</div>
           <div
             className={cl["phrase-box"]}
             onClick={clickOnPhrase}
@@ -73,7 +75,7 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
               value={value}
             />
           </div>
-          <div className={cl["expressionStr"]}>{valueExp}</div>
+          {/* <div className={cl["expressionStr"]}>{valueExp}</div> */}
           <span>select part of phrase to set it as an expression</span>{" "}
           <button
             className={cl["edit-save-btn"]}

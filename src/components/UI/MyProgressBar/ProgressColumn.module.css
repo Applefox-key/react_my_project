@@ -8,6 +8,7 @@
 
 .oneStage, .oneStage0{
     background-color: chartreuse;
+    background-color: var(--color-marker);
     border: 0.5px solid gray;
     width: 10px;
     height: 10px;
