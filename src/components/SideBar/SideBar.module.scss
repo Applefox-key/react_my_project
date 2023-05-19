@@ -4,6 +4,9 @@
     width: fit-content;
     background-color: var(--background-color-medium);
     display: flex;
+    position: sticky;
+    align-self: flex-start;
+    top: 2rem;
 
 }
 
@@ -54,6 +57,7 @@
     text-shadow: 0px 0px 1px rgba(66, 68, 90, 1);
     position: relative;
     color: var(--color-text-base);
+    cursor: pointer;
 
     span {
         color: var(--color-marker);

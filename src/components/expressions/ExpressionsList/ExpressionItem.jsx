@@ -10,6 +10,7 @@ import SelectLabel from "../../Labels/SelectLabel";
 import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
 
 const ExpressionItem = ({
+  handleDrop,
   expressions,
   editElem,
   expressionsActions,
@@ -44,7 +45,6 @@ const ExpressionItem = ({
         />
       )}
       {elInfo && <InfoWindow setVisible={setElInfo} expression={elInfo} />}
-
       <div
         className={
           (view ? cl["cardsContainer"] : cl["rowsContainer"]) +
@@ -54,6 +54,12 @@ const ExpressionItem = ({
           <div
             key={el.id}
             className={classGenerator(el)}
+            onDrop={(e) => handleDrop(e, el)}
+            // onDragEnter={(e) => handleDrop(e, el)}
+            onDragEnter={(e) => e.preventDefault()}
+            onDragOver={(e) => e.preventDefault()}
+            // onDragOver={(e) => handleDrop(e, el)}
+            onDragLeave={(e) => e.preventDefault()}
             onClick={(e) => {
               if (applyMode.isOn) expressionsActions.addForApply(el);
             }}>

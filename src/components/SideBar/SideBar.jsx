@@ -4,7 +4,13 @@ import SideBarLabels from "./SideBarLabels";
 
 import ThemesChoosing from "../UI/ThemesChoosing/ThemesChoosing";
 import ExpressionsMenuIcons from "./ExpressionsMenuIcons";
-const SideBar = ({ addOne, setExpressions, selectedid, onSelectLabel }) => {
+const SideBar = ({
+  addOne,
+  setExpressions,
+  selectedid,
+  onSelectLabel,
+  handleDragStart,
+}) => {
   const [sideBar, setSideBar] = useState({ show: false });
   return (
     <div className={cl["sideBar-wrap"]}>
@@ -17,7 +23,11 @@ const SideBar = ({ addOne, setExpressions, selectedid, onSelectLabel }) => {
       {sideBar.show && (
         <div className={cl["sideBar-wide"]}>
           <ThemesChoosing />
-          <SideBarLabels onSelect={onSelectLabel} selectedid={selectedid} />
+          <SideBarLabels
+            onSelect={onSelectLabel}
+            selectedid={selectedid}
+            handleDragStart={handleDragStart}
+          />
         </div>
       )}
     </div>

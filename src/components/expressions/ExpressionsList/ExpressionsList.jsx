@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "../../../hooks/useQuery";
 import BaseAPI from "../../../API/BaseAPI";
 import MyPagination from "../../UI/MyPagination/MyPagination";
@@ -79,6 +79,7 @@ const ExpressionsList = () => {
       }
     }
   };
+  const dragDrop = useRef(null);
   const labelToArr = async () => {
     setLabelToArr(applyMode.list, applyMode.label.id);
     cancelApply();
@@ -186,10 +187,25 @@ const ExpressionsList = () => {
       });
     },
   };
+  const handleDragStart = (e, item) => {
+    // e.preventDefault();
+    dragDrop.current = item;
+  };
+  const handleDrop = (e, el) => {
+    e.preventDefault();
+    const item = dragDrop.current;
+    if (!item || el.id === item) return;
+
+    expressionsActions.contentEdit({
+      id: el.id,
+      labelid: item ? item : "",
+    });
+  };
 
   return (
     <div className={cl["main-list"]}>
       <SideBar
+        handleDragStart={handleDragStart}
         setExpressions={setExpressions}
         addOne={expressionsActions.addNew}
         onSelectLabel={onSelectLabel}
@@ -244,6 +260,7 @@ const ExpressionsList = () => {
             />
 
             <ExpressionItem
+              handleDrop={handleDrop}
               expressions={expressions}
               editElem={editElem}
               expressionsActions={expressionsActions}

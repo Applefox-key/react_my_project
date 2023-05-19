@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import LabelNew from "../Labels/LabelNew";
 import MySpinner from "../UI/MySpinner/MySpinner";
 
-const SideBarLabels = ({ onSelect, selectedid }) => {
+const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
   const [labels, setLabels] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
   const [getLabels, isLoadingCat] = useQuery(async () => {
@@ -60,6 +60,8 @@ const SideBarLabels = ({ onSelect, selectedid }) => {
           <div
             className={classGenerator(el)}
             key={el.id}
+            draggable
+            onDragStart={(e) => handleDragStart(e, el.id)}
             onClick={() => onSelect(el)}>
             <div>
               <span>✦</span>
