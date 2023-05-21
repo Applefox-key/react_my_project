@@ -16,8 +16,9 @@ const ModalPasteList = ({ setVisible, onClick }) => {
     phrasessFromText(dataString, setDataArray, setPopup.advice);
   };
 
-  const back = () => {
-    setDataArray();
+  const back = (e, close = false) => {
+    if (close) setVisible(false);
+    else setDataArray();
   };
 
   const addExpressions = async () => {
