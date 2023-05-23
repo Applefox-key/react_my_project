@@ -27,6 +27,12 @@
         &:hover {
             background-color: var(--background-color-medium);
         }
+
+        @media screen and (max-height:600px) {
+            width: 4rem;
+            height: 4rem;
+            margin: 0;
+        }
     }
 }
 
@@ -43,6 +49,21 @@
 
     h3 {
         margin: 0;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    .checkboxL {
+        font-size: 1.5rem;
+        width: 100%;
+    }
+
+    .checkbox {
+        width: 1.5rem;
+        height: 1.5rem;
+
     }
 
 
@@ -79,6 +100,7 @@
 
 .link-box-active {
     background-color: var(--background-color-dark); // #eed8bc;
+    background-color: var(--color-text-inform);
     color: var(--color-text-label);
 }
 
@@ -105,5 +127,27 @@
         &:hover {
             transform: scale(1.2);
         }
+    }
+}
+
+.titleString {
+    background-color: var(--background-color-intense);
+    width: 17rem;
+}
+
+.btnPlus {
+    width: 4rem;
+    height: 4rem;
+    font-size: 20px;
+    line-height: 1;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 500;
+    color: var(--color-text-base);
+
+    &:hover {
+        background-color: var(--background-color-dark);
+        color: var(--color-text-label);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 }

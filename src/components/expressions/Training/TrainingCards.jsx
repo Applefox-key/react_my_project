@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import OneCardE from "./OneCardE";
 import NoWork from "./NoWork";
+import { getSettings, setSettings } from "../../../utils/settings";
+import CountBtns from "./CountBtn";
 const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);
   const [direction, setDirection] = useState(0);
   const [anim, setShowAnim] = useState(false);
+  const [showBtn, setshowBtn] = useState(0);
 
+  const setSett = (e) => {
+    setshowBtn(1 - showBtn);
+    setSettings(1 - showBtn);
+  };
+  useEffect(() => {
+    setshowBtn(getSettings());
+  }, []);
   const next = () => {
     if (direction !== 0) setDirection(0);
     setShowAnim(!anim);
@@ -26,33 +36,49 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
   };
 
   return (
-    <div style={{ overflow: "hidden" }}>
-      {items.length ? (
-        <>
-          {" "}
-          <OneCardE anim={anim} dir={direction} item={items[num]} />
-          <div className="mt-3">
-            <Button onClick={prew} disabled={num === 0 || !items.length}>
-              {"❰ PREW"}
-            </Button>{" "}
-            <Button
-              variant="warning"
-              onClick={(e) => {
-                update(items[num]);
-              }}>
-              {"has been read"}
-            </Button>{" "}
-            <Button
-              onClick={next}
-              disabled={items.length - 1 === num || !items.length}>
-              {"NEXT ❱"}
-            </Button>
-          </div>
-        </>
-      ) : (
-        <NoWork />
+    <>
+      {" "}
+      {!!showBtn && items[num] && (
+        <CountBtns
+          item={items[num]}
+          // count={items[num] ? items[num].hintForReading[2] : ""}
+          doneFn={(e) => {
+            update(items[num]);
+          }}
+        />
       )}
-    </div>
+      <div style={{ overflow: "hidden" }}>
+        {items.length ? (
+          <>
+            <OneCardE
+              anim={anim}
+              dir={direction}
+              item={items[num]}
+              setSett={setSett}
+            />{" "}
+            <div className="mt-3">
+              <Button onClick={prew} disabled={num === 0 || !items.length}>
+                {"❰ PREW"}
+              </Button>{" "}
+              <Button
+                variant="warning"
+                onClick={(e) => {
+                  update(items[num]);
+                }}>
+                {"has been read"}
+              </Button>{" "}
+              <Button
+                onClick={next}
+                disabled={items.length - 1 === num || !items.length}>
+                {"NEXT ❱"}
+              </Button>
+            </div>
+          </>
+        ) : (
+          <NoWork />
+        )}
+      </div>
+    </>
   );
 };
 

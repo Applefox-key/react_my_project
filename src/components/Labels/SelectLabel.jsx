@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
-// import CategorySetBtn from "./CategorySetBtn";
 
 const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
   const [selected, setSelected] = useState(colCat);

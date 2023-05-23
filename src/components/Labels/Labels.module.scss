@@ -235,12 +235,11 @@
 .btnPlus {
     width: 4rem;
     height: 4rem;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1;
     text-align: center;
     border-radius: 50%;
     font-weight: 500;
-    // padding: 5px;
     color: var(--color-text-base);
 
     &:hover {
@@ -269,6 +268,7 @@
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         transition: all 0.2s ease-in-out;
         color: var(--color-text-base);
+        box-shadow: inset #fff 0 0 0px 2px;
 
         &:disabled {
             opacity: 0.8;
@@ -277,7 +277,8 @@
 
         &:not([disabled]) {
             &:hover {
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                box-shadow: inset var(--color-marker) 0 0 0px 2px;
+                // box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
             }
         }
 

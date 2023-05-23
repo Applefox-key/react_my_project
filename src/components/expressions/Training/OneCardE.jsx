@@ -3,7 +3,7 @@ import MyCardExpress from "../../UI/CARDS/MyCardExpress";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import HintCount from "./HintCount";
 
-const OneCardE = ({ anim, dir, item }) => {
+const OneCardE = ({ anim, dir, item, setSett }) => {
   const hintForUser = item ? item.hintForReading : "";
 
   return (
@@ -15,7 +15,8 @@ const OneCardE = ({ anim, dir, item }) => {
           style={{ display: dir === 0 ? "block" : "none" }}>
           <CSSTransition key={!anim} timeout={500} classNames="card">
             <div>
-              <HintCount hint={hintForUser}></HintCount>
+              <HintCount hint={hintForUser} setSett={setSett}></HintCount>
+
               <MyCardExpress item={item} hint={hintForUser[0]} />
             </div>
           </CSSTransition>

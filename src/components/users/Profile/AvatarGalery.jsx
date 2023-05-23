@@ -50,37 +50,37 @@ const AvatarGalery = ({ visible, setVisible, fileChange, userid }) => {
       subtitle={"Сlick on the picture or choose your own"}
       showmodal={visible}
       setshowmodal={setVisible}>
-      <div className="d-flex mt-3">
-        <Form.Control type="file" onChange={fromFile} size="lg" />
-      </div>
-
-      <div className="d-flex p-2 flex-wrap justify-content-between">
-        <div className={cl.previewBlock}>
-          <Image rounded src={choice.img} className={cl.imgPreview} />
-          <div className={cl.btn}>
-            <Button variant="secondary" onClick={defaultImg}>
-              CLEAR
-            </Button>{" "}
-            <Button onClick={fromGallery}>SELECT</Button>
-          </div>
+      <div>
+        <div className="d-flex mt-3">
+          <Form.Control type="file" onChange={fromFile} size="lg" />
         </div>
-
-        {isLoading ? (
-          <MySpinner />
-        ) : (
-          <>
-            {avatarUrlList.map((elem) => (
-              <Image
-                key={elem.name}
-                className={cl.imgGallary}
-                src={elem.url}
-                onClick={(e) => {
-                  setChoice({ img: elem.url });
-                }}
-              />
-            ))}
-          </>
-        )}
+        <div className="d-flex p-2 flex-wrap justify-content-between">
+          <div className={cl.previewBlock}>
+            <Image rounded src={choice.img} className={cl.imgPreview} />
+            <div className={cl.btn}>
+              <Button variant="secondary" onClick={defaultImg}>
+                CLEAR
+              </Button>{" "}
+              <Button onClick={fromGallery}>SELECT</Button>
+            </div>
+          </div>
+          {isLoading ? (
+            <MySpinner />
+          ) : (
+            <>
+              {avatarUrlList.map((elem) => (
+                <Image
+                  key={elem.name}
+                  className={cl.imgGallary}
+                  src={elem.url}
+                  onClick={(e) => {
+                    setChoice({ img: elem.url });
+                  }}
+                />
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </MyModal>
   );

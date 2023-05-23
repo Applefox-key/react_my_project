@@ -165,6 +165,8 @@ body {
   text-align: center;
   justify-content: space-between;
   font-size: small;
+  position: relative;
+  z-index: 3;
 }
 
 .hintT {
@@ -220,10 +222,26 @@ body {
 .circles-hint {
   width: fit-content;
   justify-content: end;
+  position: absolute;
+  right: 0;
 
-  @media screen and (max-width:900px) {
-    flex-direction: column;
+  &:hover {
+    &::after {
+      content: "click to hide or show count button";
+      background-color: var(--color-text-base);
+      color: var(--background-color-base);
+      position: absolute;
+      top: 15px;
+      border-radius: 5px;
+
+      width: 24rem;
+      font-size: 10px;
+    }
   }
+
+  // @media screen and (max-width:900px)and (max-width:900px) {
+  //   flex-direction: column;
+  // }
 }
 
 .circle {
@@ -243,6 +261,52 @@ body {
   left: 0;
   width: min-content;
   margin-left: 3rem;
+}
+
+.countBtns {
+  position: absolute;
+  // top: 133px;
+  // left: 1086px;
+  z-index: 1300;
+  // border: 1px solid red;
+  width: 8rem;
+  height: 8rem;
+
+  div {
+
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background-color: #0d6efd;
+    right: -5px;
+    bottom: -5px;
+    // border-top-left-radius: 100%;
+    border-radius: 0 50% 50%;
+    cursor: grab;
+
+  }
+
+  button {
+    font-size: 45px;
+    // background-color: #ffc107;
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    transition: all 0.4s ease-in-out;
+    // box-shadow: 6px 6px 12px #ffffff,
+    //   -6px -6px 12px #c5c5c5;
+    box-shadow: var(--color-text-base) 0px 1px 2px 0px, var(--color-text-base) 0px 2px 6px 2px;
+    color: var(--color-text-base);
+
+    &:hover {
+      background-color: #ffc107;
+      color: black;
+      box-shadow: inset #fff 0 0 10px 5px,
+        #fff 0 0 10px 5px;
+      scale: 1.1;
+    }
+
+  }
 }
 
 

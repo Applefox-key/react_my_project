@@ -5,13 +5,19 @@ import MyPagination from "../../UI/MyPagination/MyPagination";
 import MyFilter from "../../UI/MyFilter/MyFilter";
 import MyToggleBtnGroup from "../../UI/MyToggleBtnGroup";
 import { CgMenuGridR, CgMenu } from "react-icons/cg";
-import { deleteExpressions, setLabelToArr } from "../../../utils/expressions";
+import {
+  deleteExpressions,
+  deleteSomeExpressions,
+  setLabelToArr,
+} from "../../../utils/expressions";
 import { usePopup } from "../../../hooks/usePopup";
 
 import ExpressionItem from "./ExpressionItem";
 import cl from "./ExpressionsList.module.scss";
 import SideBar from "../../SideBar/SideBar";
 import MySpinner from "../../UI/MySpinner/MySpinner";
+import ApplyPannel from "./ApplyPannel";
+import FiltersSummary from "./FiltersSummary";
 
 const ExpressionsList = () => {
   const limit = 20;
@@ -19,17 +25,22 @@ const ExpressionsList = () => {
   const [expressions, setExpressions] = useState();
   const [view, setView] = useState(0); //table or cards
   const [editElem, setEditElem] = useState(null);
+  const setPopup = usePopup();
+  const dragDrop = useRef(null);
   const [applyMode, setApplyMode] = useState({
     isOn: false,
     list: [],
     label: "",
+    title: "",
+    btnName: "",
+    btnFn: "",
   });
   const [filters, setFilters] = useState({
     filter: "",
     labelid: "",
     label: "",
+    stage: "",
   });
-  const setPopup = usePopup();
 
   const [getExpression, isLoading] = useQuery(async () => {
     if (pageParams.page === 0) {
@@ -55,43 +66,40 @@ const ExpressionsList = () => {
   useEffect(() => {
     getExpression(limit, pageParams.page, filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, pageParams.page, filters.filter, filters.labelid]);
+  }, [limit, pageParams.page, filters.filter, filters.labelid, filters.stage]);
 
-  //labels
-  const cancelApply = () => setApplyMode({ isOn: false, list: [], label: "" });
-  const onSelectLabel = async (value = "", apply = false) => {
-    if (apply) {
-      setApplyMode({ isOn: true, list: [], label: value });
-      return;
-    } else {
-      setFilters({
-        ...filters,
-        labelid: value ? value.id : "",
-        label: value ? value.name : "",
-      });
-      if (pageParams.page !== 0) {
-        setPageParams({ ...pageParams, page: 0 });
-      } else {
-        await getExpression(limit, pageParams.page, {
-          ...filters,
-          labelid: value.id,
+  const filterChange = async (filterObj) => {
+    const { filterName, isApply, value } = filterObj;
+    if (filterName === "label") {
+      const valName = value ? value.name : "REMOVING";
+      if (isApply) {
+        applyOnOF({
+          label: value,
+          btnName: "APPLY",
+          btnFn: labelToArr,
+          title: ` SELECT PHRASES FOR LABEL ${valName} AND PRESS  APPLY`,
         });
+        return;
+      } else {
+        const newFilters = {
+          ...filters,
+          labelid: value ? value.id : "",
+          label: value ? value.name : "",
+        };
+        setFilters(newFilters);
       }
+    } else {
+      setFilters({ ...filters, [filterName]: value });
     }
-  };
-  const dragDrop = useRef(null);
-  const labelToArr = async () => {
-    setLabelToArr(applyMode.list, applyMode.label.id);
-    cancelApply();
     if (pageParams.page !== 0) {
       setPageParams({ ...pageParams, page: 0 });
-    } else {
-      await getExpression(limit, pageParams.page, filters);
     }
   };
-  //filter
-  const onFilter = async (value = "") => {
-    setFilters({ ...filters, filter: value });
+
+  //set label to the expression
+  const labelToArr = async (data) => {
+    setLabelToArr(data.list, data.label.id);
+    applyOnOF();
     if (pageParams.page !== 0) {
       setPageParams({ ...pageParams, page: 0 });
     } else {
@@ -109,9 +117,48 @@ const ExpressionsList = () => {
         labelid: content.labelid,
         label: content.label,
       });
+  }; //apply mode ON-OFF
+  const applyOnOF = (obj = {}) =>
+    setApplyMode({
+      isOn: obj.btnName,
+      list: [],
+      label: "",
+      title: "",
+      btnName: "",
+      btnFn: "",
+      checkAll: false,
+      ...obj,
+    });
+  //apply mode check all or nothing
+  const checkAll = () => {
+    const value = !applyMode.checkAll;
+    setApplyMode({
+      ...applyMode,
+      checkAll: value,
+      list: value ? expressions.map((el) => el.id) : [],
+    });
   };
-  //actions
+  //actions with expressions
   const expressionsActions = {
+    //apply mode for deleting
+    async deleteMode() {
+      applyOnOF({
+        title: `SELECT PHRASES TO DELETE AND PRESS DELETE`,
+        btnName: "DELETE",
+        btnFn: expressionsActions.deleteSome,
+      });
+    }, //delete some expression
+    async deleteSome(data) {
+      const ids = data.list;
+      let res = await deleteSomeExpressions(ids);
+      if (res.error) {
+        setPopup.error("Somethig goes wrong.." + res.error);
+        return;
+      }
+      if (!res) return;
+      let arr = expressions.filter((elem) => !ids.includes(elem.id));
+      setExpressions(arr);
+    },
     //delete expression
     async expressionsDelete(expression = "") {
       let res = await deleteExpressions(expression);
@@ -187,14 +234,16 @@ const ExpressionsList = () => {
       });
     },
   };
+  //drag and drop
   const handleDragStart = (e, item) => {
     // e.preventDefault();
     dragDrop.current = item;
   };
   const handleDrop = (e, el) => {
     e.preventDefault();
+
     const item = dragDrop.current;
-    if (!item || el.id === item) return;
+    if (el.id === item) return;
 
     expressionsActions.contentEdit({
       id: el.id,
@@ -207,49 +256,33 @@ const ExpressionsList = () => {
       <SideBar
         handleDragStart={handleDragStart}
         setExpressions={setExpressions}
-        addOne={expressionsActions.addNew}
-        onSelectLabel={onSelectLabel}
-        selectedid={filters.labelid}
+        expressionsActions={expressionsActions}
+        filterChange={filterChange}
+        filters={filters}
       />
       <div className={cl["listContainer"]}>
-        <div className={cl["exressions-list-title"]}>
-          <MyFilter filter={filters.filter} setFilter={onFilter} />{" "}
-          <div className={cl["filter-summary"]}>
-            {applyMode.isOn ? (
-              <span>
-                {` SELECT PHRASES FOR LABEL ${applyMode.label.name} AND PRESS
-                APPLY`}
-              </span>
-            ) : (
-              <div>
-                {filters.label && (
-                  <button onClick={() => onSelectLabel("")}>
-                    🗙{filters.label}
-                  </button>
-                )}
-                {filters.filter && (
-                  <button onClick={() => onFilter("")}>
-                    🗙 {filters.filter}
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-          <div>
-            <MyToggleBtnGroup
-              arr={[<CgMenu />, <CgMenuGridR />]}
-              checked={view}
-              name={"md"}
-              onChange={(e) => {
-                setView(e.target.value - 1);
-              }}
-            />
-          </div>
-        </div>{" "}
-        {applyMode.isOn && (
-          <div className={cl.applyBtn}>
-            <button onClick={labelToArr}>APPLY</button>
-            <button onClick={cancelApply}>CANCEL</button>
+        {applyMode.isOn ? (
+          <ApplyPannel
+            checkAll={checkAll}
+            applyMode={applyMode}
+            applyOnOF={applyOnOF}
+          />
+        ) : (
+          <div className={cl["exressions-list-title"]}>
+            <div>
+              <MyFilter filter={filters.filter} filterChange={filterChange} />
+            </div>
+            <FiltersSummary filterChange={filterChange} filters={filters} />
+            <div>
+              <MyToggleBtnGroup
+                arr={[<CgMenu />, <CgMenuGridR />]}
+                checked={view}
+                name={"md"}
+                onChange={(e) => {
+                  setView(e.target.value - 1);
+                }}
+              />
+            </div>
           </div>
         )}
         {!isLoading && expressions ? (

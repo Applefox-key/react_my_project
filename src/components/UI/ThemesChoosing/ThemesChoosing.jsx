@@ -31,7 +31,7 @@ const ThemesChoosing = () => {
 
   return (
     <div>
-      <h3>COLOR THEMES</h3>
+      <h5>COLOR THEMES</h5>
       <div className={cl.radioWrap}>
         {Object.keys(themeArr).map((el) => (
           <div

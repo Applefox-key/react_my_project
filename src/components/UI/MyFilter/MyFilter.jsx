@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import cl from "./MyFilter.module.css";
 
-const MyFilter = ({ filter, setFilter }) => {
+const MyFilter = ({ filter, filterChange }) => {
   const [value, setValue] = useState(filter);
   useEffect(() => {
     if (filter !== value) setValue(filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
+
+  const setFn = (val) => {
+    filterChange({ value: val, isApply: false, filterName: "filter" });
+  };
   return (
     <div style={{ position: "relative" }}>
       <div className={cl.container_input}>
         <button
           className={cl.btn}
           onClick={(e) => {
-            setFilter(value);
+            setFn(value);
           }}>
           🔎
         </button>
@@ -24,7 +28,7 @@ const MyFilter = ({ filter, setFilter }) => {
           value={value}
           className={cl.input}
           onKeyDown={(e) => {
-            if (e.key === "Enter") setFilter(value);
+            if (e.key === "Enter") setFn(value);
           }}
           onChange={(e) => {
             setValue(e.target.value);
@@ -35,7 +39,7 @@ const MyFilter = ({ filter, setFilter }) => {
         className={cl.wrap}
         onClick={(e) => {
           setValue("");
-          setFilter("");
+          setFn("");
         }}>
         〤
       </button>

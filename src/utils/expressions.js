@@ -41,7 +41,14 @@ export const deleteExpressions = async (expression = "") => {
   }
   return res;
 };
-
+export const deleteSomeExpressions = async (idsArr = []) => {
+  let res;
+  if (idsArr.length) {
+    if (!window.confirm("Delete the expressions?")) return false;
+    res = await BaseAPI.deleteSomeExpressions(idsArr);
+  }
+  return res;
+};
 export const setLabelToArr = async (expressionsArr, labelid) => {
   let res = expressionsArr.length
     ? await BaseAPI.setLabelToExprArr(expressionsArr, labelid)

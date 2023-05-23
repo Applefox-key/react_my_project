@@ -316,8 +316,6 @@
 
 }
 
-
-
 .oneItemRow {
     position: relative;
     font-size: 2rem;
@@ -336,6 +334,15 @@
         transform: scale(1.05);
         z-index: 600;
         background-color: var(--background-color-medium);
+    }
+
+    .done {
+        color: var(--color-marker);
+        position: absolute;
+        right: 10px;
+        top: 17px;
+        font-size: 3rem;
+
     }
 
     .atr {
@@ -474,6 +481,15 @@
         background-color: var(--background-color-medium);
     }
 
+    .done {
+        color: var(--color-marker);
+        position: absolute;
+        right: 170px;
+        top: -13px;
+        font-size: 3rem;
+
+    }
+
     .atr {
 
         display: flex;
@@ -564,12 +580,26 @@
 }
 
 .applyBtn {
+    background-color: var(--background-color-base);
+    position: sticky;
+    margin-top: 3rem;
+    top: 1rem;
     z-index: 1500;
 
+    span {
+        position: absolute;
+        color: var(--color-marker);
+        margin: auto;
+        top: -3rem;
+        font-size: 18px;
+        font-weight: 500;
+
+    }
+
     button {
-        margin: 1rem 2rem;
+
         margin-top: 0;
-        width: 15rem;
+        width: 12rem;
         padding: 0 10px;
         font-size: 20px;
         border-radius: 5px;
@@ -592,6 +622,18 @@
         }
     }
 
+    .selectAllfalse {
+        width: 5rem;
+        margin: 1rem 1rem;
+    }
+
+    .selectAlltrue {
+        width: 5rem;
+        margin: 1rem 1rem;
+        color: var(--color-marker);
+        border-color: var(--color-marker);
+        background-color: var(--background-color-light);
+    }
 
 }
 
@@ -605,4 +647,5 @@
 .listApply {
     background-color: var(--background-color-opacity50);
     width: 90%;
+    padding-left: 3rem;
 }

@@ -70,6 +70,11 @@ const BaseAPI = {
   async deleteAllExpressions() {
     return await this.serverReq("delete", "/expressions", true);
   },
+  async deleteSomeExpressions(idsArr) {
+    return await this.serverReq("delete", "/expressions/some", true, {
+      list: idsArr,
+    });
+  },
   async editCategory(newParam, catId) {
     if (!newParam || !catId) return { message: "nothing has changed" };
 
@@ -161,7 +166,7 @@ const BaseAPI = {
     return { status: true };
   },
   async setLabelToExprArr(expArr, labelid) {
-    if (!expArr.length || !labelid) return { message: "nothing has changed" };
+    if (!expArr.length) return { message: "nothing has changed" };
 
     return await this.serverReq("patch", "/expressions/labels/", true, {
       list: expArr,

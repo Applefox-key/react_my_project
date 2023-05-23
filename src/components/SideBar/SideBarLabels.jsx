@@ -4,13 +4,16 @@ import { useQuery } from "../../hooks/useQuery";
 import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
 import { RiDeleteRow } from "react-icons/ri";
+import { HiOutlineFilter } from "react-icons/hi";
+import { AiOutlineClear } from "react-icons/ai";
 import { BiCloset } from "react-icons/bi";
 import { MdOutlineSettingsBackupRestore } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import LabelNew from "../Labels/LabelNew";
 import MySpinner from "../UI/MySpinner/MySpinner";
+import ProgressColumnFilter from "../UI/MyProgressBar/ProgressColumnFilter";
 
-const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
+const SideBarLabels = ({ filterChange, filters, handleDragStart }) => {
   const [labels, setLabels] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
   const [getLabels, isLoadingCat] = useQuery(async () => {
@@ -19,7 +22,7 @@ const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
   });
   const router = useNavigate();
   const classGenerator = (item) => {
-    const active_id = !selectedid ? "" : selectedid;
+    const active_id = !filters.labelid ? "" : filters.labelid;
     const item_id = item.id;
 
     return [
@@ -37,21 +40,50 @@ const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
     let arr = labels.filter((elem) => elem.id !== element.id);
     setLabels(arr);
   };
+  const selectFn = (val, isApl = false) => {
+    filterChange({ value: val, isApply: isApl, filterName: "label" });
+  };
 
   return (
     <div
-      className={cl["sideBar-wide"]}
+      // className={cl["sideBar-wide"]}
       tabIndex={-1}
       onBlur={(e) => {
         if (!e.relatedTarget) setIsMenu("");
       }}>
-      <div className="d-flex justify-content-center align-items-center">
-        <h3>LABELS</h3>
-        <LabelNew
-          callback={() => {
-            getLabels();
-          }}
-        />
+      <div className="d-flex justify-content-center align-items-center flex-column">
+        <ProgressColumnFilter
+          stage={filters.stage}
+          filterChange={filterChange}
+        />{" "}
+        <br /> <h3 className={cl.titleString}>LABELS</h3>
+        <div className="d-flex align-items-center">
+          {/* <h3>LABELS</h3> */}
+          <LabelNew
+            callback={() => {
+              getLabels();
+            }}
+          />
+          <button
+            className={cl.btnPlus}
+            title="show items without labels"
+            onClick={(e) => selectFn({ name: "no label", id: "null" })}>
+            <HiOutlineFilter />
+          </button>
+          <button
+            className={cl.btnPlus}
+            title="clear the labels"
+            draggable
+            onDragStart={(e) => handleDragStart(e, "")}
+            onClick={(e) => {
+              e.stopPropagation();
+              selectFn("", true);
+              setIsMenu(false);
+            }}>
+            {" "}
+            <AiOutlineClear />
+          </button>
+        </div>
       </div>
       {isLoadingCat ? (
         <MySpinner />
@@ -62,7 +94,7 @@ const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
             key={el.id}
             draggable
             onDragStart={(e) => handleDragStart(e, el.id)}
-            onClick={() => onSelect(el)}>
+            onClick={() => selectFn(el)}>
             <div>
               <span>✦</span>
               {el.name}
@@ -80,7 +112,7 @@ const SideBarLabels = ({ onSelect, selectedid, handleDragStart }) => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onSelect(el, true);
+                      selectFn(el, true);
                       setIsMenu(false);
                     }}>
                     <BiCloset /> apply label

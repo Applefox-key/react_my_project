@@ -27,14 +27,6 @@ const ExpressionItem = ({
     return [part1, part2].join(" ");
   };
 
-  console.log(
-    [
-      view ? cl["cardsContainer"] : cl["rowsContainer"],
-      applyMode.isOn ? cl.applyMode : "",
-    ].join(" ")
-  );
-  console.log(applyMode.isOn);
-
   return (
     <>
       {editElem && (
@@ -63,6 +55,10 @@ const ExpressionItem = ({
             onClick={(e) => {
               if (applyMode.isOn) expressionsActions.addForApply(el);
             }}>
+            {/* <div className={cl.done}>
+              {" "}
+              <GiCutDiamond />
+            </div> */}
             <div className={cl.atr}>
               <div className={cl.label_wrap}>
                 <SelectLabel

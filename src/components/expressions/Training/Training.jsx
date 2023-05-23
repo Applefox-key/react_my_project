@@ -10,6 +10,7 @@ import MySpinner from "../../UI/MySpinner/MySpinner";
 
 const Training = () => {
   const [list, setList] = useState();
+
   const [label, setLabel] = useState("");
   const setPopup = usePopup();
   const params = useParams();
@@ -36,6 +37,7 @@ const Training = () => {
     if (labelid) setLabel({ id: labelid, name: labelName });
     getList(labelid ? labelid : "");
     if (error) setPopup.error(error);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,7 +70,9 @@ const Training = () => {
         {isLoading || !list ? (
           <MySpinner />
         ) : (
-          <TrainingCards items={list} expressionUpdate={expressionUpdate} />
+          <>
+            <TrainingCards items={list} expressionUpdate={expressionUpdate} />
+          </>
         )}
       </div>
     </div>
