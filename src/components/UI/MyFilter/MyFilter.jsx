@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import cl from "./MyFilter.module.css";
-
+import { GrFormClose } from "react-icons/gr";
 const MyFilter = ({ filter, filterChange }) => {
   const [value, setValue] = useState(filter);
   useEffect(() => {
@@ -41,7 +41,8 @@ const MyFilter = ({ filter, filterChange }) => {
           setValue("");
           setFn("");
         }}>
-        〤
+        {/* 〤 */}
+        <GrFormClose />
       </button>
     </div>
   );

@@ -7,11 +7,9 @@ const LabelItems = ({ list, add, selected, onSelect }) => {
     const active_id = !selected ? "" : selected.id;
     const item_id = item.id;
 
-    return [
-      cl["drop-item"],
-      active_id === item_id ? cl["active"] : "",
-      "fs-4",
-    ].join(" ");
+    return [cl["drop-item"], active_id === item_id ? cl["active"] : ""].join(
+      " "
+    );
   };
 
   return (

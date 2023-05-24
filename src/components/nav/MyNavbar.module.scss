@@ -11,6 +11,11 @@
   justify-content: flex-end;
   padding-right: 2rem;
   background-color: var(--background-color-base);
+
+  @media screen and (max-width: 900px) {
+    padding-right: 0rem;
+  }
+
 }
 
 .nav {
@@ -23,14 +28,38 @@
   z-index: 500;
 
   button {
-    font-size: 16px;
+    font-size: 20px;
     background-color: var(--background-color-base);
     color: var(--color-text-base);
     border: none;
 
+    @media screen and (max-width: 900px) {
+      font-size: 14px;
+    }
+
     &:hover {
       color: var(--color-marker);
     }
+  }
+
+  @media screen and (min-width: 600px) {
+    font-size: large;
+  }
+
+  @media screen and (max-width: 600px) {
+    position: relative;
+    font-size: small;
+    padding-right: 0rem;
+    // width: fit-content;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 600px) and (max-height: 600px) {
+    font-size: small;
+    padding-right: 0rem;
+    display: contents;
+    margin-bottom: 0;
   }
 }
 
@@ -46,42 +75,21 @@
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 
   &:hover {
-    // background-color: var(--background-color-dark);
     color: var(--color-marker);
+  }
+
+  @media screen and (max-width: 900px) {
+    font-size: 14px;
+    padding: 5px 7px;
+
   }
 }
 
 .navLinkActive {
   background-color: var(--color-text-base);
-  color: var(--background-color-base)
-}
+  color: var(--background-color-base);
 
-@media screen and (min-width: 600px) {
-
-  .nav {
-    font-size: large;
-  }
-}
-
-
-@media screen and (max-width: 600px) {
-  .nav {
-    position: relative;
-    font-size: small;
-    padding-right: 0rem;
-    width: fit-content;
-    flex-wrap: wrap;
-    margin-bottom: 0;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-height: 600px) {
-  .nav {
-    /* position: fixed; */
-    font-size: small;
-    padding-right: 0rem;
-    /* width: fit-content; */
-    display: contents;
-    margin-bottom: 0;
+  &:hover {
+    color: var(--background-color-base);
   }
 }

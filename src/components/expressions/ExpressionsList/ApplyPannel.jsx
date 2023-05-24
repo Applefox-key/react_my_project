@@ -3,9 +3,6 @@ import cl from "./ExpressionsList.module.scss";
 import { TbListCheck } from "react-icons/tb";
 
 const ApplyPannel = ({ applyMode, applyOnOF, checkAll }) => {
-  // console.log("selectAll" + applyMode.checkAll);
-  console.log(applyMode);
-
   return (
     <div className={cl.applyBtn}>
       <span>{applyMode.title}</span>

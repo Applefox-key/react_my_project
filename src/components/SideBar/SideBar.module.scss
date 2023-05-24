@@ -21,8 +21,9 @@
         width: 5rem;
         height: 5rem;
         font-size: 20px;
-        margin: 5px 0;
+        // margin: 5px 0;
         color: var(--color-text-label);
+        margin: 0;
 
         &:hover {
             background-color: var(--background-color-medium);

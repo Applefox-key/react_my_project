@@ -17,8 +17,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-color-base);
+    // background-color: var(--background-color-base);
     color: var(--color-text-base);
+    background-color: var(--background-color-light);
 
     button {
 
@@ -38,10 +39,14 @@
 
 .colorwrap,
 .header {
-    // background-color: var(--background-color-base);
-    // color: var(--color-text-base);
+    background-color: var(--background-color-intense);
+    color: var(--color-text-label);
 
     button {
+        background-color: aliceblue;
+    }
+
+    .btn-close {
         color: var(--color-text-base);
     }
 }
@@ -49,9 +54,23 @@
 .color {
     background-color: var(--background-color-base);
     color: var(--color-text-base);
+}
+
+.colorBody {
+    background-color: var(--background-color-light);
+    color: var(--color-text-base);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    textarea,
+    input {
+        margin-top: 5px;
+        border-color: var(--color-marker);
+        color: var(--color-text-base);
+        outline-color: var(--color-marker);
+    }
 
     textarea {
         background-color: var(--background-color-light);
-        color: var(--color-text-base);
     }
 }

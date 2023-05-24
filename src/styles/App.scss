@@ -44,8 +44,10 @@ body {
   top: 0;
   z-index: 1600;
 
+
   @media screen and (max-width:900px) {
-    top: 45px;
+    top: 35px;
+    width: 100%;
   }
 }
 
@@ -265,10 +267,7 @@ body {
 
 .countBtns {
   position: absolute;
-  // top: 133px;
-  // left: 1086px;
   z-index: 1300;
-  // border: 1px solid red;
   width: 8rem;
   height: 8rem;
 
@@ -283,7 +282,7 @@ body {
     // border-top-left-radius: 100%;
     border-radius: 0 50% 50%;
     cursor: grab;
-
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   }
 
   button {
@@ -292,9 +291,8 @@ body {
     border-radius: 50%;
     width: 7rem;
     height: 7rem;
-    transition: all 0.4s ease-in-out;
-    // box-shadow: 6px 6px 12px #ffffff,
-    //   -6px -6px 12px #c5c5c5;
+    transition: all 0.2s ease-in-out;
+
     box-shadow: var(--color-text-base) 0px 1px 2px 0px, var(--color-text-base) 0px 2px 6px 2px;
     color: var(--color-text-base);
 
@@ -340,6 +338,10 @@ body {
   display: none !important;
 }
 
+#dropdown-custom-components::after {
+  display: none !important;
+}
+
 .redBorder {
   border: 1px solid red;
   min-width: 100px;
@@ -355,6 +357,11 @@ body {
 
   height: 100%;
   margin: auto;
+
+  @media screen and (max-width:900px) {
+    margin-top: 1rem;
+
+  }
 }
 
 .toggleBtn label {

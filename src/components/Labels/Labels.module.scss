@@ -13,7 +13,7 @@
         }
 
         &::after {
-            display: none;
+            display: none !important;
         }
 
     }
@@ -23,6 +23,7 @@
     width: max-content;
     min-width: 21rem;
 }
+
 
 .hoverScale {
     transition: all 0.3s ease-in-out;
@@ -45,9 +46,11 @@
 }
 
 .drop-item {
-    margin: 5px;
+    margin: 1px;
     font-size: 2rem;
     transition: all 0.3s ease-in-out;
+    font-size: calc(1.275rem + .3vw);
+    padding: 2px 5px;
 
     &:hover {
         color: var(--color-text-base);
@@ -55,6 +58,11 @@
         border-radius: 5px;
         transform: scale(1.2);
         box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    }
+
+    @media screen and (max-width:900px) {
+        margin: 0;
+        padding: 2px 5px;
     }
 }
 
@@ -87,6 +95,11 @@
         &:focus {
             outline: none;
         }
+
+        @media screen and (max-width:900px) {
+            font-size: 12px;
+            height: 2rem;
+        }
     }
 
     .filter_btn {
@@ -101,6 +114,8 @@
             transform: scale(1.4);
         }
     }
+
+
 }
 
 .setting_btn {
@@ -185,6 +200,11 @@
         font-size: 1.3rem;
         text-align: end;
     }
+
+    @media screen and (max-width:900px) {
+        font-size: 12px;
+        height: 2rem;
+    }
 }
 
 .labeltext {
@@ -211,7 +231,7 @@
     font-size: 22px;
     width: 10rem;
     height: 3rem;
-
+    color: var(--color-text-inform);
     background-color: var(--background-color-pale);
     border-radius: 0px 0.5rem 0.5rem 0;
     text-align: start;

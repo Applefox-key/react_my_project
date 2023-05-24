@@ -64,7 +64,7 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
         </div>
         <div className={cl["edit-body"]}>
           {" "}
-          <div className={cl["expressionStr"]}>{valueExp}</div>
+          {valueExp && <div className={cl["expressionStr"]}>{valueExp}</div>}
           <div
             className={cl["phrase-box"]}
             onClick={clickOnPhrase}

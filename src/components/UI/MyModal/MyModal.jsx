@@ -20,17 +20,19 @@ const MyModal = ({
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
 
-      <div className={cl.subtitle}>
-        {typeof subtitle === "object" ? (
-          <div className="text-center w-100"> {subtitle}</div>
-        ) : (
-          <h5 className="text-center" style={stylesubt}>
-            {subtitle}
-          </h5>
-        )}
-      </div>
+      {subtitle && (
+        <div className={cl.subtitle}>
+          {typeof subtitle === "object" ? (
+            <div className="text-center w-100"> {subtitle}</div>
+          ) : (
+            <h5 className="text-center" style={stylesubt}>
+              {subtitle}
+            </h5>
+          )}
+        </div>
+      )}
 
-      <Modal.Body className={cl.color}>{children}</Modal.Body>
+      <Modal.Body className={cl.colorBody}>{children}</Modal.Body>
     </Modal>
   );
 };

@@ -37,6 +37,7 @@ const SideBar = ({
             <SideBarSettings />
           ) : (
             <SideBarLabels
+              showHide={showHide}
               filterChange={filterChange}
               filters={filters}
               handleDragStart={handleDragStart}

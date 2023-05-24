@@ -118,9 +118,9 @@ const ExpressionsList = () => {
         label: content.label,
       });
   }; //apply mode ON-OFF
-  const applyOnOF = (obj = {}) =>
+  const applyOnOF = (obj = {}) => {
     setApplyMode({
-      isOn: obj.btnName,
+      isOn: !!obj.btnName,
       list: [],
       label: "",
       title: "",
@@ -129,6 +129,7 @@ const ExpressionsList = () => {
       checkAll: false,
       ...obj,
     });
+  };
   //apply mode check all or nothing
   const checkAll = () => {
     const value = !applyMode.checkAll;
@@ -272,8 +273,10 @@ const ExpressionsList = () => {
             <div>
               <MyFilter filter={filters.filter} filterChange={filterChange} />
             </div>
-            <FiltersSummary filterChange={filterChange} filters={filters} />
-            <div>
+            {(filters.filter || filters.labelid || filters.stage) && (
+              <FiltersSummary filterChange={filterChange} filters={filters} />
+            )}
+            <div className={cl.viewSwitcher}>
               <MyToggleBtnGroup
                 arr={[<CgMenu />, <CgMenuGridR />]}
                 checked={view}

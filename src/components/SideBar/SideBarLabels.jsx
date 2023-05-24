@@ -13,7 +13,12 @@ import LabelNew from "../Labels/LabelNew";
 import MySpinner from "../UI/MySpinner/MySpinner";
 import ProgressColumnFilter from "../UI/MyProgressBar/ProgressColumnFilter";
 
-const SideBarLabels = ({ filterChange, filters, handleDragStart }) => {
+const SideBarLabels = ({
+  filterChange,
+  filters,
+  handleDragStart,
+  showHide,
+}) => {
   const [labels, setLabels] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
   const [getLabels, isLoadingCat] = useQuery(async () => {
@@ -78,6 +83,8 @@ const SideBarLabels = ({ filterChange, filters, handleDragStart }) => {
             onClick={(e) => {
               e.stopPropagation();
               selectFn("", true);
+              if (window.screen.availWidth < 900) showHide("labels");
+
               setIsMenu(false);
             }}>
             {" "}
@@ -113,6 +120,7 @@ const SideBarLabels = ({ filterChange, filters, handleDragStart }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       selectFn(el, true);
+                      if (window.screen.availWidth < 900) showHide("labels");
                       setIsMenu(false);
                     }}>
                     <BiCloset /> apply label
