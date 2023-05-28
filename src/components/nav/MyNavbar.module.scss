@@ -7,6 +7,32 @@
   margin-bottom: 2.5rem;
 }
 
+.countBadge {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  font-size: 14px;
+  padding: 0 0px;
+
+  font-family: sans-serif;
+  font-weight: 700;
+
+  color: var(--color-marker);
+  background-color: var(--background-color-light);
+  border: 1px solid var(--color-marker);
+
+  border-radius: 5px;
+  height: 17px;
+  line-height: 1.2;
+
+  @media screen and (max-width:900px) {
+    font-size: 12px;
+    font-weight: 400;
+    height: 14px;
+    line-height: 1.1;
+  }
+}
+
 .nav-top-string {
   justify-content: flex-end;
   padding-right: 2rem;
@@ -73,6 +99,7 @@
   background-color: var(--background-color-base);
   text-decoration: none;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+  position: relative;
 
   &:hover {
     color: var(--color-marker);
