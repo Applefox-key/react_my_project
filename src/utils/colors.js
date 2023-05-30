@@ -144,19 +144,7 @@ export const themeArr = {
     "--color-text-base": "black",
     "--background-color-opacity50": "rgb(249 241 202 , 0.5)",
   },
-  black: {
-    "--background-color-base": "#0e0e18",
-    "--background-color-dark": "#0b0a0f",
-    "--background-color-medium": "#1a2224",
-    "--background-color-light": "#1c2225",
-    "--background-color-intense": "#011e16",
-    "--background-color-pale": "#252c2f",
-    "--color-marker": "#b1838e",
-    "--color-text-label": "#94979a",
-    "--color-text-inform": "#434340",
-    "--color-text-base": "#86909b",
-    "--background-color-opacity50": "rgb(75, 75, 75,  0.5)",
-  },
+
   vamp: {
     "--background-color-base": "#41434F", //=
     "--background-color-dark": "#000000",
@@ -170,19 +158,7 @@ export const themeArr = {
     "--color-text-base": "#e7e7e7",
     "--background-color-opacity50": "rgba(187, 127, 162, 0.5)",
   },
-  halk: {
-    "--background-color-base": "#2B2F2B", //=
-    "--background-color-dark": "#262234",
-    "--background-color-medium": "black",
-    "--background-color-light": "#262234", //+
-    "--background-color-intense": "#012c29",
-    "--background-color-pale": "#253644",
-    "--color-marker": "#00ff1f",
-    "--color-text-label": "white",
-    "--color-text-inform": "forestgreen",
-    "--color-text-base": "#e7e7e7",
-    "--background-color-opacity50": "rgba(145, 152, 144, 0.5)",
-  },
+
   night: {
     "--background-color-base": "#434b78", //=
     "--background-color-dark": "#35395f",
@@ -209,6 +185,20 @@ export const themeArr = {
     "--color-text-base": "#e7e7e7",
     "--background-color-opacity50": "rgba(54, 103, 117, 0.5)",
   },
+  halk: {
+    "--background-color-base": "#2B2F2B", //=
+    "--background-color-dark": "#262234",
+    "--background-color-medium": "black",
+    "--background-color-light": "#262234", //+
+    "--background-color-intense": "#012c29",
+    "--background-color-pale": "#253644",
+    "--color-marker": "#00ff1f",
+    "--color-text-label": "white",
+    "--color-text-inform": "forestgreen",
+    "--color-text-base": "#e7e7e7",
+    "--background-color-opacity50": "rgba(145, 152, 144, 0.5)",
+  },
+
   gold: {
     "--background-color-base": "#0e0e18",
     "--background-color-dark": "#0b0a0f",
@@ -221,6 +211,45 @@ export const themeArr = {
     "--color-text-inform": "#a7a7a5",
     "--color-text-base": "#7a8189",
     "--background-color-opacity50": "rgb(105, 105, 68, 0.5)",
+  },
+  black: {
+    "--background-color-base": "#0e0e18",
+    "--background-color-dark": "#0b0a0f",
+    "--background-color-medium": "#1a2224",
+    "--background-color-light": "#1c2225",
+    "--background-color-intense": "#011e16",
+    "--background-color-pale": "#252c2f",
+    "--color-marker": "#b1838e",
+    "--color-text-label": "#94979a",
+    "--color-text-inform": "#434340",
+    "--color-text-base": "#86909b",
+    "--background-color-opacity50": "rgb(75, 75, 75,  0.5)",
+  },
+  dream: {
+    "--background-color-base": "#111111",
+    "--background-color-dark": "#111111",
+    "--background-color-medium": "#111111",
+    "--background-color-light": "#1e1e1e",
+    "--background-color-intense": "#22162a",
+    "--background-color-pale": "#2c1f39",
+    "--color-marker": "#7e1aad",
+    "--color-text-label": "#9a949a",
+    "--color-text-inform": "#331b44",
+    "--color-text-base": "#7a8189",
+    "--background-color-opacity50": "rgb(65, 37, 70, 0.5)",
+  },
+  deep: {
+    "--background-color-base": "#0b0a0f",
+    "--background-color-dark": "#0b0a0f",
+    "--background-color-medium": "#0b0a0f",
+    "--background-color-light": "#011e16",
+    "--background-color-intense": "#011e16",
+    "--background-color-pale": "#023432",
+    "--color-marker": "#03645f",
+    "--color-text-label": "#94979a",
+    "--color-text-inform": "#2d504c",
+    "--color-text-base": "#7a8189",
+    "--background-color-opacity50": "rgb(138, 225, 243, 0.5)",
   },
 };
 export const getCurrentTheme = () => {

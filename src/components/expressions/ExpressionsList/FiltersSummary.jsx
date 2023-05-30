@@ -1,5 +1,6 @@
 import React from "react";
 import cl from "./ExpressionsList.module.scss";
+import { MdClear } from "react-icons/md";
 const FiltersSummary = ({ filters, filterChange }) => {
   const clearFn = (name) => {
     filterChange({
@@ -12,18 +13,17 @@ const FiltersSummary = ({ filters, filterChange }) => {
     <div className={cl["filter-summary"]}>
       {filters.label && (
         <button onClick={() => clearFn("label")}>
-          {" "}
-          🗙 label: {filters.label}
+          {<MdClear className="" />} label: {filters.label}
         </button>
       )}
       {filters.filter && (
         <button onClick={() => clearFn("filter")}>
-          🗙 text: {filters.filter}
+          {<MdClear className="" />} text: {filters.filter}
         </button>
       )}
       {filters.stage !== "" && (
         <button onClick={() => clearFn("stage")}>
-          🗙 progress: {filters.stage}
+          {<MdClear className="" />} progress: {filters.stage}
         </button>
       )}
     </div>
