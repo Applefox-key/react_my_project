@@ -51,12 +51,19 @@
 
     @media screen and (max-width:900px) {
         justify-content: center;
+        flex-direction: column;
     }
 
     .viewSwitcher {
         @media screen and (max-width:900px) {
-            display: none;
+            scale: 0.8;
+
+            label:nth-child(4) {
+                display: none;
+            }
         }
+
+
     }
 }
 
@@ -328,7 +335,7 @@
     }
 }
 
-.oneItemRow {
+.oneItemRow0 {
     position: relative;
     font-size: 2rem;
     margin: 1rem;
@@ -475,6 +482,176 @@
         .rowPhrase {
             width: 100%;
             padding-left: 5px;
+        }
+    }
+}
+
+.oneItemRow2 {
+    position: relative;
+    font-size: 2rem;
+    // margin: 1rem;
+    border-radius: 0px;
+    color: var(--color-text-base);
+    background-color: var(--background-color-light);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    &:hover {
+        transform: scale(1.05);
+        z-index: 600;
+        border-radius: 5px;
+        background-color: var(--background-color-medium);
+    }
+
+    .done {
+        color: var(--color-marker);
+        position: absolute;
+        right: 10px;
+        top: 17px;
+        font-size: 3rem;
+
+    }
+
+    .atr {
+        position: relative;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        .label_wrap {
+            width: 10rem;
+
+            button {
+                border: var(--color-marker);
+                background-color: transparent;
+            }
+
+        }
+
+        .progress {
+            position: relative;
+            cursor: pointer;
+            margin-left: 2rem;
+
+            span {
+                position: absolute;
+                top: -7px;
+                right: 0;
+                color: red;
+                font-size: 17px;
+
+                @media screen and (max-width:900px) {
+                    left: 80px;
+
+                }
+            }
+
+            &:hover {
+                &::after {
+                    content: "check your progress";
+                    position: absolute;
+                    font-size: 10px;
+                    width: 100%;
+                    left: 0;
+                    top: 25px;
+                    margin: 0;
+
+                    @media screen and (max-width:900px) {
+                        top: 0px;
+                    }
+                }
+            }
+
+            @media screen and (max-width:900px) {
+                margin: 0;
+
+            }
+        }
+
+    }
+
+
+    .rowPhrase {
+        width: 80%;
+        text-align: start;
+        padding-left: 10px;
+    }
+
+    .exp-row-btns {
+        width: 7rem;
+        font-size: 14px;
+        display: flex;
+        flex-direction: row-reverse;
+        // flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+            color: var(--color-text-inform);
+
+        }
+
+        button {
+            position: relative;
+            height: 4rem;
+            width: 4rem;
+            transition: all 0.2s ease-in-out;
+            border-radius: 50%;
+
+            &:hover {
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+                transform: translateY(-5px);
+                background-color: var(--background-color-light);
+                background-color: var(--background-color-intense);
+            }
+        }
+    }
+
+    @media screen and (max-width:900px) {
+        flex-direction: column-reverse;
+        padding-bottom: 10px;
+
+        .exp-row-btns {
+            display: flex;
+            flex-direction: row-reverse;
+            align-content: center;
+            width: 100%;
+            font-size: 12px;
+            background-color: var(--background-color-pale);
+
+            button {
+                height: 2.2rem;
+            }
+
+            span {
+                padding-left: 10px;
+            }
+        }
+
+        .atr {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 10px;
+            position: absolute;
+            top: -7px;
+            width: 25rem;
+            scale: (0.7);
+
+            align-items: flex-start;
+
+            .progress {
+                height: 15px;
+            }
+        }
+
+        .rowPhrase {
+            width: 100%;
+            padding-left: 5px;
+            font-size: 12px;
         }
     }
 }

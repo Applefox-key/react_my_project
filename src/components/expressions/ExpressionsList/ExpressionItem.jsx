@@ -21,11 +21,13 @@ const ExpressionItem = ({
   const [elInfo, setElInfo] = useState("");
 
   const classGenerator = (el) => {
-    let part1 = view ? cl["oneItemCard"] : cl["oneItemRow"];
+    let part1 = view === 1 ? cl["oneItemCard"] : cl["oneItemRow" + view];
     if (!applyMode.isOn || !applyMode.list.includes(el.id)) return part1;
     let part2 = cl["divIsChecked"];
     return [part1, part2].join(" ");
   };
+  console.log(view);
+  console.log(view === 1 ? "cardsContainer" : "rowsContainer");
 
   return (
     <>
@@ -39,7 +41,7 @@ const ExpressionItem = ({
       {elInfo && <InfoWindow setVisible={setElInfo} expression={elInfo} />}
       <div
         className={
-          (view ? cl["cardsContainer"] : cl["rowsContainer"]) +
+          (view === 1 ? cl["cardsContainer"] : cl["rowsContainer"]) +
           (applyMode.isOn ? " " + cl.listApply : "")
         }>
         {expressions.map((el, i) => (

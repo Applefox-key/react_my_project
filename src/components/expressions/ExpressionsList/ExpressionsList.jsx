@@ -18,6 +18,7 @@ import SideBar from "../../SideBar/SideBar";
 import MySpinner from "../../UI/MySpinner/MySpinner";
 import ApplyPannel from "./ApplyPannel";
 import FiltersSummary from "./FiltersSummary";
+import { CiViewTable } from "react-icons/ci";
 
 const ExpressionsList = () => {
   const limit = 20;
@@ -278,7 +279,7 @@ const ExpressionsList = () => {
             )}
             <div className={cl.viewSwitcher}>
               <MyToggleBtnGroup
-                arr={[<CgMenu />, <CgMenuGridR />]}
+                arr={[<CgMenu />, <CgMenuGridR />, <CiViewTable />]}
                 checked={view}
                 name={"md"}
                 onChange={(e) => {

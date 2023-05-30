@@ -9,10 +9,9 @@ export const expressionStateIcon = (item) => {
   if (exceededSkipsCount)
     result = (
       <span>
-        <RiErrorWarningLine /> <IoWarningOutline />
+        <IoWarningOutline />
       </span>
     );
-
   if (days > 0)
     result = (
       <span>
