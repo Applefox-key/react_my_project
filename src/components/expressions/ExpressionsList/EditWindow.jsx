@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import cl from "./ExpressionsList.module.scss";
+import { logDOM } from "@testing-library/react";
 const EditWindow = ({ editElem, expressionsActions, editOn }) => {
   const [copyBtn, setCopyBtn] = useState("");
   const [value, setValue] = useState(editElem.phrase);
@@ -64,24 +65,31 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
         </div>
         <div className={cl["edit-body"]}>
           {" "}
-          {valueExp && <div className={cl["expressionStr"]}>{valueExp}</div>}
+          <div
+            className={
+              valueExp ? cl["expressionStr"] : cl["expressionStrEmpty"]
+            }>
+            {valueExp ? valueExp : "...select the part you want to remember"}
+          </div>
+          {/* {valueExp && <div className={cl["expressionStr"]}>{valueExp}</div>} */}
           <div
             className={cl["phrase-box"]}
             onClick={clickOnPhrase}
             onTouchEnd={clickOnPhrase}>
             <textarea
+              placeholder="....write a phrase to remember"
               autoFocus
               onChange={(e) => setValue(e.target.value)}
               value={value}
             />
           </div>
           {/* <div className={cl["expressionStr"]}>{valueExp}</div> */}
-          <span>select part of phrase to set it as an expression</span>{" "}
+          {/* <span>select part of phrase to set it as an expression</span> */}
           <button
             className={cl["edit-save-btn"]}
             title="Save changes"
             onClick={save}>
-            ✔️
+            Save changes
           </button>{" "}
         </div>{" "}
       </div>{" "}

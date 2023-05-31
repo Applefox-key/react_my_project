@@ -31,6 +31,10 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
         <div className={cl.addingRow} key={i}>
           {i + 1} <span>{el.expression} </span>
           <div
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              clickOnPhrase(i);
+            }}
             onClick={(e) => {
               e.stopPropagation();
               clickOnPhrase(i);
