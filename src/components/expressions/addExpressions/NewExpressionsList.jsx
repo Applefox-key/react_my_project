@@ -21,21 +21,25 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
     //selection is empty and copyBtn is not empty
     else if (!selectedText && copyBtn.i > -1) setCopyBtn({ i: -1, text: "" });
   };
+
   const expressionDelete = (i) => {
     if (!window.confirm("Delete the phrase?")) return false;
     setDataArr(dataArr.filter((el) => el.id !== i));
   };
+
   return (
     <>
       {dataArr.map((el, i) => (
         <div className={cl.addingRow} key={i}>
           {i + 1} <span>{el.expression} </span>
           <div
+            data-num={i}
             onTouchEnd={(e) => {
               e.stopPropagation();
               clickOnPhrase(i);
             }}
             onClick={(e) => {
+              console.log(e);
               e.stopPropagation();
               clickOnPhrase(i);
             }}>

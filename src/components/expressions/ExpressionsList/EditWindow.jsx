@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import cl from "./ExpressionsList.module.scss";
-import { logDOM } from "@testing-library/react";
 const EditWindow = ({ editElem, expressionsActions, editOn }) => {
   const [copyBtn, setCopyBtn] = useState("");
   const [value, setValue] = useState(editElem.phrase);
@@ -15,11 +14,9 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
   const clickOnPhrase = (e) => {
     e.stopPropagation();
     const selection = window.getSelection();
-    const selectedText = selection.toString();
-    if (selectedText === "") {
-      setCopyBtn("");
-      return;
-    }
+    const selectedText = selection.toString().trim();
+
+    if (selectedText === copyBtn) return;
     setCopyBtn(selectedText);
   };
 
