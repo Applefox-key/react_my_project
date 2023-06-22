@@ -243,10 +243,15 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                padding-bottom: 0;
+
+                div {
+                    display: contents;
+                }
 
                 textarea {
                     background-color: var(--background-color-medium);
-                    border-radius: 15px;
+                    border-radius: 15px 15px 0 0;
                     width: 100%;
                     text-align: justify;
                     min-height: 15rem;
@@ -255,23 +260,28 @@
                     outline: 0px none transparent;
                     color: var(--color-text-base);
                     border: none;
-                    margin-bottom: 2rem;
+                    // margin-bottom: 2rem;
                     overflow-y: auto;
                     border: 1px solid var(--color-marker);
-                    word-wrap: break-word // height: fit-content;
+                    word-wrap: break-word; // height: fit-content;
+
+
                 }
 
-                // &::after {
-                //     content: "";
-                //     height: 5px;
-                //     width: 80%;
-                //     background-color: var(--background-color-intense);
-                //     display: block;
-                //     text-align: center;
-                //     margin: auto;
-                //     border-radius: 3px;
-                //     margin-bottom: 3rem;
-                // }
+                input {
+                    width: 100%;
+                    background-color: var(--background-color-light);
+                    border-radius: 0 0 15px 15px;
+                    text-align: justify;
+                    caret-color: var(--color-text-base);
+                    outline: 0px none transparent;
+                    color: var(--color-text-base);
+                    border: 1px solid var(--color-marker);
+                    border-top: none;
+                    font-weight: 200;
+                    display: inline-block;
+                    position: relative;
+                }
             }
 
             .expressionStr {
@@ -300,13 +310,12 @@
 
             .edit-save-btn {
                 font-weight: 600;
-                margin: auto;
+                margin: 1rem auto;
                 font-size: 14px;
                 width: 95%;
                 height: 4rem;
                 padding: 0 10px;
-                position: relative;
-                // width: fit-content;
+                position: unset;
                 background-color: var(--background-color-intense);
                 color: var(--color-text-label);
                 border: 1px solid var(--color-marker);
@@ -323,9 +332,6 @@
                 padding: 0 10px;
             }
         }
-
-
-
     }
 }
 

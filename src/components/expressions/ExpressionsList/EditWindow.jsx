@@ -5,7 +5,7 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
   const [copyBtn, setCopyBtn] = useState("");
   const [value, setValue] = useState(editElem.phrase);
   const [valueExp, seValueExp] = useState(editElem.expression);
-
+  const [note, setNote] = useState(editElem.note);
   const closeModal = () => {
     if (copyBtn) setCopyBtn("");
     expressionsActions.contentEdit(editElem.id === "new" ? "newCancel" : "");
@@ -27,6 +27,7 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
       ...editElem,
       phrase: value,
       expression: valueExp,
+      note: note,
     });
     editOn();
   };
@@ -35,7 +36,6 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
     seValueExp(copyBtn);
     setCopyBtn("");
   };
-
   return (
     <div
       className={cl["modal-wrap"]}
@@ -69,19 +69,25 @@ const EditWindow = ({ editElem, expressionsActions, editOn }) => {
             {valueExp ? valueExp : "...select the part you want to remember"}
           </div>
           {/* {valueExp && <div className={cl["expressionStr"]}>{valueExp}</div>} */}
-          <div
-            className={cl["phrase-box"]}
-            onClick={clickOnPhrase}
-            onTouchEnd={clickOnPhrase}>
-            <textarea
-              placeholder="....write a phrase to remember"
-              autoFocus
-              onChange={(e) => setValue(e.target.value)}
-              value={value}
+          <div className={cl["phrase-box"]}>
+            <div onClick={clickOnPhrase} onTouchEnd={clickOnPhrase}>
+              <textarea
+                placeholder="....write a phrase to remember"
+                autoFocus
+                onChange={(e) => setValue(e.target.value)}
+                value={value}
+              />{" "}
+            </div>
+            <input
+              title="pop-up note"
+              placeholder="....write a pop-up note"
+              onChange={(e) => {
+                e.preventDefault();
+                setNote(e.target.value);
+              }}
+              value={note}
             />
-          </div>
-          {/* <div className={cl["expressionStr"]}>{valueExp}</div> */}
-          {/* <span>select part of phrase to set it as an expression</span> */}
+          </div>{" "}
           <button
             className={cl["edit-save-btn"]}
             title="Save changes"

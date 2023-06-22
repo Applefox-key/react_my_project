@@ -56,7 +56,6 @@ const ExpressionsList = () => {
         pageParams.page,
         filters
       );
-
       setExpressions(expressions);
 
       if (totalSrv !== pageParams.pageTotal)
@@ -117,6 +116,7 @@ const ExpressionsList = () => {
         expression: content.expression,
         labelid: content.labelid,
         label: content.label,
+        note: content.note,
       });
   }; //apply mode ON-OFF
   const applyOnOF = (obj = {}) => {

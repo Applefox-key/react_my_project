@@ -26,8 +26,6 @@ const ExpressionItem = ({
     let part2 = cl["divIsChecked"];
     return [part1, part2].join(" ");
   };
-  console.log(view);
-  console.log(view === 1 ? "cardsContainer" : "rowsContainer");
 
   return (
     <>

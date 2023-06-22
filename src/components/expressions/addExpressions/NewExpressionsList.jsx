@@ -39,7 +39,6 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
               clickOnPhrase(i);
             }}
             onClick={(e) => {
-              console.log(e);
               e.stopPropagation();
               clickOnPhrase(i);
             }}>

@@ -89,7 +89,8 @@ const BaseAPI = {
     if (
       !expressionN.hasOwnProperty("expression") &&
       !expressionN.hasOwnProperty("phrase") &&
-      !expressionN.hasOwnProperty("labelid")
+      !expressionN.hasOwnProperty("labelid") &&
+      !expressionN.hasOwnProperty("note")
     )
       return { message: "nothing has changed" };
 
@@ -113,6 +114,7 @@ const BaseAPI = {
       reqParams
     );
     if (result.error) throw new Error(result.error);
+
     let expressions_ = result.data.map((item) => new Expression(item));
     return expressions_;
   },

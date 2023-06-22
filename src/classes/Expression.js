@@ -7,6 +7,7 @@ export class Expression {
   #history;
   #labelid;
   #label;
+  #note;
   constructor(expression) {
     this.#expression = expression.expression;
     this.#phrase = expression.phrase;
@@ -15,6 +16,7 @@ export class Expression {
     this.#id = expression.id;
     this.#labelid = expression.labelid;
     this.#label = expression.label;
+    this.#note = expression.note;
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
@@ -39,6 +41,9 @@ export class Expression {
   get label() {
     return this.#label;
   }
+  get note() {
+    return this.#note;
+  }
   get historySort() {
     let history_ = this.#history;
     history_.sort((a, b) => {
@@ -59,7 +64,7 @@ export class Expression {
   }
 
   get exceededSkipsDays() {
-    if (!this.started) return 0;
+    if (!this.started || this.#stage === 9) return 0;
     let today = new Date();
     // let dt = this.#nextDate;
 
@@ -72,9 +77,8 @@ export class Expression {
     return diffInDays < 0 ? 0 : diffInDays;
   }
   get exceededSkipsCount() {
-    if (!this.started) return false;
-
     let st = this.#stage;
+    if (!this.started || st === 9) return false;
 
     const diffInDays = this.exceededSkipsDays;
     switch (diffInDays) {
@@ -134,14 +138,6 @@ export class Expression {
     try {
       let history_ = this.historySort;
 
-      // history_.sort((a, b) => {
-      //   let a_ =
-      //     typeof a.date === "number" ? a.date : new Date(a.date).getTime();
-      //   let b_ =
-      //     typeof b.date === "number" ? b.date : new Date(b.date).getTime();
-      //   return b_ - a_ === 0 ? (a.action > b.action ? -1 : 1) : b_ - a_;
-      // });
-
       history_.forEach((item) => {
         let day = new Date(item.date).toString().slice(0, 10);
         result.push(`${item.action}: ${day}`);
@@ -157,13 +153,25 @@ export class Expression {
       let stage_ = this.#stage;
       let nextDate_ = new Date(this.#nextDate);
       let result = [];
+      if (stage_ > 0) {
+        let history_ = this.historySort;
+        let count = 0;
+        for (let i = 0; i < history_.length; i++) {
+          if (history_[i].action.includes("read")) {
+            let day = new Date(history_[i].date).toString().slice(0, 10);
+            result.unshift(`Day ${stage_ - count}: ${day} ✔`);
+            count++;
+          }
+          if (count === stage_) break;
+        }
+      }
 
       if (!this.started) nextDate_ = new Date();
       let ShowDate = new Date(nextDate_);
-      ShowDate.setDate(
-        ShowDate.getDate() - (stage_ < 7 ? stage_ : stage_ < 8 ? 13 : 27)
-      );
-      for (let i = 0; i < 9; i++) {
+      // ShowDate.setDate(
+      //   ShowDate.getDate() - (stage_ < 7 ? stage_ : stage_ < 8 ? 13 : 27)
+      // );
+      for (let i = stage_; i < 9; i++) {
         let nd = new Date().setHours(0, 0, 0, 0);
         let sd = new Date(ShowDate).setHours(0, 0, 0, 0);
         result.push(
@@ -228,13 +236,12 @@ export class Expression {
         })`,
         date: this.nextDate.getTime(),
       });
-
     expression.history.push({ action: act, date: new Date().getTime() });
     if (expression.stage < 6) {
       expressionNextDate.setTime(expressionNextDate.getTime() + oneDayinMs);
     } else if (expression.stage < 7) {
       expressionNextDate.setTime(expressionNextDate.getTime() + 7 * oneDayinMs);
-    } else {
+    } else if (expression.stage < 8) {
       expressionNextDate.setTime(
         expressionNextDate.getTime() + 14 * oneDayinMs
       );
