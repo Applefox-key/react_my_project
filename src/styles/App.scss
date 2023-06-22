@@ -153,29 +153,33 @@ body {
 .expression {
   font-weight: 600;
   color: var(--color-marker);
-  // position: relative;
+  position: relative;
 
-  &:hover:not([data-note="emptynull"]) {
+  &:not([data-note="emptynull"])::before {
+    content: "✦";
+    position: absolute;
+    top: -8px;
+    width: fit-content;
+    transition: all 0.2s ease-in-out;
+    font-size: 12px;
+  }
 
-    // &:not([data-note="emptynull"]) {
-    &::before {
+  &:hover {
+    position: unset;
+
+    &:not([data-note="emptynull"])::before {
       content: attr(data-note);
-      position: absolute;
-      top: -30px;
-      // right: 50%;
       font-size: 15px;
-      // min-width: 0;
+      top: -20px;
       width: fit-content;
-      // max-width: 100%;
       border-radius: 5px;
       padding: 2px 5px;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-      background-color: var(--background-color-light);
-      color: var(--color-marker);
       color: var(--background-color-light);
       background-color: var(--color-marker);
     }
   }
+
 }
 
 .pict {
