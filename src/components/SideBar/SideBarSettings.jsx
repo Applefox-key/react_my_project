@@ -9,11 +9,11 @@ const SideBarSettings = () => {
 
   const setSett = (e) => {
     setValue(1 - value);
-    setSettings(1 - value);
+    setSettings("countBtn", 1 - value);
   };
 
   useEffect(() => {
-    setValue(getSettings());
+    setValue(getSettings("countBtn"));
   }, []);
   return (
     <div>

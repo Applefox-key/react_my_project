@@ -21,7 +21,6 @@ const CountBtns = ({ doneFn, item }) => {
         y: window.visualViewport.height * 0.05,
       }}>
       <div className="countBtns">
-        {" "}
         <div />
         <button id="cbtn" onClick={countDec}>
           {countValue}

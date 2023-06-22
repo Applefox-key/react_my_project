@@ -557,7 +557,8 @@
                 position: absolute;
                 top: -7px;
                 right: 0;
-                color: red;
+                // color: red;
+                color: var(--color-marker);
                 font-size: 17px;
 
                 @media screen and (max-width:900px) {

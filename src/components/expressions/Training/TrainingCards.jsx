@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import OneCardE from "./OneCardE";
 import NoWork from "./NoWork";
@@ -8,15 +8,13 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);
   const [direction, setDirection] = useState(0);
   const [anim, setShowAnim] = useState(false);
-  const [showBtn, setshowBtn] = useState(0);
+  const [showBtn, setshowBtn] = useState(getSettings("countBtn", 0));
 
   const setSett = (e) => {
     setshowBtn(1 - showBtn);
-    setSettings(1 - showBtn);
+    setSettings("countBtn", 1 - showBtn);
   };
-  useEffect(() => {
-    setshowBtn(getSettings());
-  }, []);
+
   const next = () => {
     if (direction !== 0) setDirection(0);
     setShowAnim(!anim);

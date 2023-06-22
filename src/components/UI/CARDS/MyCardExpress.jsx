@@ -22,7 +22,7 @@ const MyCardExpress = ({ item, hint }) => {
           onClick={() => setFlipped(!flipped)}>
           <CSSTransition in={!flipped} timeout={1000} classNames="cardFront">
             <div className={cl["card-front"]}>
-              <div className={generateClass(item)}>
+              <div className={"relative " + generateClass(item)}>
                 {!item.expression ? item.phrase : addSpanToExpInPrase(item)}
               </div>
             </div>

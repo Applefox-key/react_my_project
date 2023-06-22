@@ -72,7 +72,10 @@ export const addSpanToExpInPrase = (item) => {
     <>
       {arr.map((el, i) => {
         return el === item.expression ? (
-          <span key={i} className="expression" data-note={item.note}>
+          <span
+            key={i}
+            className="expression"
+            data-note={item.note ? item.note : "emptynull"}>
             {item.expression}
           </span>
         ) : (

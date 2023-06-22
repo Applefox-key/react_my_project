@@ -19,12 +19,13 @@ import MySpinner from "../../UI/MySpinner/MySpinner";
 import ApplyPannel from "./ApplyPannel";
 import FiltersSummary from "./FiltersSummary";
 import { CiViewTable } from "react-icons/ci";
+import { getSettings, setSettings } from "../../../utils/settings";
 
 const ExpressionsList = () => {
   const limit = 20;
   const [pageParams, setPageParams] = useState({ page: 1, pageTotal: 1 });
   const [expressions, setExpressions] = useState();
-  const [view, setView] = useState(0); //table or cards
+  const [view, setView] = useState(getSettings("listView", 0)); //table or cards
   const [editElem, setEditElem] = useState(null);
   const setPopup = usePopup();
   const dragDrop = useRef(null);
@@ -283,6 +284,7 @@ const ExpressionsList = () => {
                 checked={view}
                 name={"md"}
                 onChange={(e) => {
+                  setSettings("listView", e.target.value - 1);
                   setView(e.target.value - 1);
                 }}
               />

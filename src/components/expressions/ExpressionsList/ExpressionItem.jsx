@@ -47,18 +47,12 @@ const ExpressionItem = ({
             key={el.id}
             className={classGenerator(el)}
             onDrop={(e) => handleDrop(e, el)}
-            // onDragEnter={(e) => handleDrop(e, el)}
             onDragEnter={(e) => e.preventDefault()}
             onDragOver={(e) => e.preventDefault()}
-            // onDragOver={(e) => handleDrop(e, el)}
             onDragLeave={(e) => e.preventDefault()}
             onClick={(e) => {
               if (applyMode.isOn) expressionsActions.addForApply(el);
             }}>
-            {/* <div className={cl.done}>
-              {" "}
-              <GiCutDiamond />
-            </div> */}
             <div className={cl.atr}>
               <div className={cl.label_wrap}>
                 <SelectLabel

@@ -85,6 +85,8 @@ export class Expression {
       case 0:
         return false;
       case 1: {
+        //one day and stage is more then 7 then it is ok
+        if (st > 7) return false;
         //check the history
         let his = this.historySort;
         // his.reverse();
@@ -95,6 +97,20 @@ export class Expression {
           else if (act.includes("new try")) break;
         }
 
+        return count > 0;
+      }
+      case 2: {
+        //two day and stage is more then 7 then it is ok
+        if (st <= 7) return true;
+        //check the history
+        let his = this.historySort;
+        // his.reverse();
+        let count = 0;
+        for (let i = 0; i < st; i++) {
+          let act = his[i].action;
+          if (act.includes("late")) count++;
+          else if (act.includes("new try")) break;
+        }
         return count > 0;
       }
       default:
@@ -249,6 +265,7 @@ export class Expression {
 
     expression.nextDate = expressionNextDate.getTime();
     ++expression.stage;
+
     return expression;
   }
 }

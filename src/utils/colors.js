@@ -1,3 +1,5 @@
+import { getSettings, setSettings } from "./settings";
+
 export const themeArr = {
   sky: {
     "--background-color-base": "white",
@@ -253,14 +255,13 @@ export const themeArr = {
   },
 };
 export const getCurrentTheme = () => {
-  const theme = localStorage.getItem("theme");
-  if (theme) return theme;
-  return "sky";
+  const theme = getSettings("theme", "sky");
+  return theme;
 };
 
 export const setTheme = (theme = "") => {
   //if user choose the theme - save his choise to the local storage
-  if (theme) localStorage.setItem("theme", theme);
+  if (theme) setSettings("theme", theme);
   //if user doesn't choose the theme try get it from the local storage or set default value
   let localTheme = theme ? theme : getCurrentTheme();
   if (localTheme === "sky" && !theme) return;

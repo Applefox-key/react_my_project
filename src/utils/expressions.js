@@ -1,6 +1,5 @@
 import BaseAPI from "../API/BaseAPI";
-import { IoWarningOutline } from "react-icons/io5";
-import { RiErrorWarningLine } from "react-icons/ri";
+import { TbMoodConfuzed, TbMoodSad2 } from "react-icons/tb";
 
 export const expressionStateIcon = (item) => {
   let days = item.exceededSkipsDays;
@@ -9,13 +8,13 @@ export const expressionStateIcon = (item) => {
   if (exceededSkipsCount)
     result = (
       <span>
-        <IoWarningOutline />
+        <TbMoodSad2 />
       </span>
     );
   if (days > 0)
     result = (
       <span>
-        <RiErrorWarningLine />
+        <TbMoodConfuzed />
       </span>
     );
   return result;
