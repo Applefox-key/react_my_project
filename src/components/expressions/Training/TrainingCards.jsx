@@ -54,12 +54,12 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
               item={items[num]}
               setSett={setSett}
             />{" "}
-            <div className="mt-3">
+            <div className="training-btn">
               <Button onClick={prew} disabled={num === 0 || !items.length}>
                 {"❰ PREW"}
               </Button>{" "}
               <Button
-                variant="warning"
+                className="color_button"
                 onClick={(e) => {
                   update(items[num]);
                 }}>

@@ -75,15 +75,10 @@ const BaseAPI = {
       list: idsArr,
     });
   },
-  async editCategory(newParam, catId) {
-    if (!newParam || !catId) return { message: "nothing has changed" };
+  async editLabel(newParam, id) {
+    if (!newParam || !id) return { message: "nothing has changed" };
 
-    return await this.serverReq(
-      "patch",
-      "/categories/" + catId,
-      true,
-      newParam
-    );
+    return await this.serverReq("patch", "/labels/" + id, true, newParam);
   },
   async editExpression(expressionN) {
     if (

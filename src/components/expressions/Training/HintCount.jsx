@@ -2,8 +2,10 @@ import React from "react";
 
 const HintCount = ({ hint, setSett }) => {
   const [hintForUser, od, count] = hint;
-  const cl1 = od ? "circle bg-danger" : "circle bg-warning";
-  const cl2 = od ? "circle bg-dark" : "circle bg-primary";
+  // const cl1 = od ? "circle bg-danger" : "circle bg-warning";
+  // const cl2 = od ? "circle bg-dark" : "circle bg-primary";
+  const cl1 = od ? "circle darkHint" : "circle ";
+  const cl2 = od ? "circle darkHint" : "circle";
 
   return (
     <>

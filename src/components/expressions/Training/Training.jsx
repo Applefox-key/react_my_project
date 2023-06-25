@@ -3,7 +3,6 @@ import BaseAPI from "../../../API/BaseAPI";
 import { usePopup } from "../../../hooks/usePopup";
 import { useQuery } from "../../../hooks/useQuery";
 import TrainingCards from "./TrainingCards";
-import { Badge } from "react-bootstrap";
 import SelectLabel from "../../Labels/SelectLabel";
 import { useParams } from "react-router-dom";
 import MySpinner from "../../UI/MySpinner/MySpinner";
@@ -60,10 +59,10 @@ const Training = () => {
           />
         </div>
         <h3>
-          <Badge bg="warning" text="dark">
+          <div className="colorhint">
             you have {list ? list.length : 0} expressions to read{" "}
             {label ? " (label " + label.name + ")" : ""}
-          </Badge>
+          </div>
         </h3>{" "}
       </div>
       <div>

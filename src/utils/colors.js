@@ -109,7 +109,7 @@ export const themeArr = {
   },
   violet: {
     "--background-color-base": "#cdb2dd",
-    "--background-color-dark": "#af4cb9",
+    "--background-color-dark": "#7D3384",
     "--background-color-medium": "#f7c3f4",
     "--background-color-light": "#f6eaf4",
     "--background-color-intense": "#d76bc1",
@@ -145,6 +145,19 @@ export const themeArr = {
     "--color-text-inform": "#a6bb70",
     "--color-text-base": "black",
     "--background-color-opacity50": "rgb(249 241 202 , 0.5)",
+  },
+  mint: {
+    "--background-color-base": "#eaf4fe",
+    "--background-color-dark": "#6d7778",
+    "--background-color-medium": "#d1dfe8",
+    "--background-color-light": "#ffffff",
+    "--background-color-intense": "#5dda96",
+    "--background-color-pale": "#D2F0DF",
+    "--color-marker": "#3ddb84",
+    "--color-text-label": "#231c23",
+    "--color-text-inform": "#69e6c4",
+    "--color-text-base": "#697476",
+    "--background-color-opacity50": "rgba(107,227,193,.5)",
   },
 
   vamp: {

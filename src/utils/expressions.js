@@ -7,13 +7,13 @@ export const expressionStateIcon = (item) => {
   let result = <></>;
   if (exceededSkipsCount)
     result = (
-      <span>
+      <span title="you have deviated greatly from the plan">
         <TbMoodSad2 />
       </span>
     );
   if (days > 0)
     result = (
-      <span>
+      <span title="you deviated from the plan">
         <TbMoodConfuzed />
       </span>
     );

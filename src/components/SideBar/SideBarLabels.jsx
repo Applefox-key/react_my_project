@@ -3,13 +3,13 @@ import cl from "./SideBar.module.scss";
 import { useQuery } from "../../hooks/useQuery";
 import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
-import { RiDeleteRow } from "react-icons/ri";
+import { TiDeleteOutline } from "react-icons/ti";
 import { HiOutlineFilter } from "react-icons/hi";
 import { AiOutlineClear } from "react-icons/ai";
 import { BiCloset } from "react-icons/bi";
 import { MdOutlineSettingsBackupRestore } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import LabelNew from "../Labels/LabelNew";
+import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";
 import ProgressColumnFilter from "../UI/MyProgressBar/ProgressColumnFilter";
 
@@ -51,7 +51,6 @@ const SideBarLabels = ({
 
   return (
     <div
-      // className={cl["sideBar-wide"]}
       tabIndex={-1}
       onBlur={(e) => {
         if (!e.relatedTarget) setIsMenu("");
@@ -64,7 +63,9 @@ const SideBarLabels = ({
         <br /> <h3 className={cl.titleString}>LABELS</h3>
         <div className="d-flex align-items-center">
           {/* <h3>LABELS</h3> */}
-          <LabelNew
+
+          <LabelEdit
+            isNew={true}
             callback={() => {
               getLabels();
             }}
@@ -115,24 +116,29 @@ const SideBarLabels = ({
             </button>
             {isMenu === el.id && (
               <div className={cl.miniMenu} id="miniMenu">
-                {
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      selectFn(el, true);
-                      if (window.screen.availWidth < 900) showHide("labels");
-                      setIsMenu(false);
-                    }}>
-                    <BiCloset /> apply label
-                  </button>
-                }
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    selectFn(el, true);
+                    if (window.screen.availWidth < 900) showHide("labels");
+                    setIsMenu(false);
+                  }}>
+                  <BiCloset /> apply label
+                </button>
+
+                <LabelEdit
+                  label={el}
+                  callback={() => {
+                    getLabels();
+                  }}
+                />
                 <button
                   title="delete label"
                   onClick={(e) => {
                     e.stopPropagation();
                     deleteOne(el);
                   }}>
-                  <RiDeleteRow />
+                  <TiDeleteOutline />
                   delete label
                 </button>
                 <button

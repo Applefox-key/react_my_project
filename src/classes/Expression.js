@@ -184,9 +184,6 @@ export class Expression {
 
       if (!this.started) nextDate_ = new Date();
       let ShowDate = new Date(nextDate_);
-      // ShowDate.setDate(
-      //   ShowDate.getDate() - (stage_ < 7 ? stage_ : stage_ < 8 ? 13 : 27)
-      // );
       for (let i = stage_; i < 9; i++) {
         let nd = new Date().setHours(0, 0, 0, 0);
         let sd = new Date(ShowDate).setHours(0, 0, 0, 0);
@@ -241,6 +238,7 @@ export class Expression {
     }
 
     let act = diffInDays === 0 ? "read by the plan" : "read late";
+    if (expression.stage === 8) act = act + " FINISH!";
     if (expression.history === undefined) {
       expression.history = [];
       expression.history.push({ action: "add", date: new Date().getTime() });
