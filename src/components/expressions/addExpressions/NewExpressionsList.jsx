@@ -43,7 +43,8 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
               clickOnPhrase(i);
             }}>
             {el.phrase}
-          </div>
+          </div>{" "}
+          <p>{el.note}</p>
           <button className={cl.deleteBtn} onClick={() => expressionDelete(i)}>
             ✕
           </button>

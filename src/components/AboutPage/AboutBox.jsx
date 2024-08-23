@@ -8,7 +8,7 @@ const AboutBox = () => {
   };
   return (
     <div className={cl.aboutBox}>
-      <div className={cl.imgabout} />{" "}
+      {/* <div className={cl.imgabout} />{" "} */}
       <div className={cl.bookShelf}>
         {" "}
         <div className={cl.books + (currentBook ? " " + cl.books_hover : "")}>

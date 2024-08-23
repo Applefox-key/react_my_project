@@ -9,14 +9,23 @@ import AppRouter from "./components/AppRouter";
 import { setTheme } from "./utils/colors";
 
 function App() {
-  const [userAuth, setUserAuth] = useState({ isAuth: false, role: null });
+  const [userAuth, setUserAuth] = useState({
+    isAuth: false,
+    role: null,
+    set: {},
+  });
   const [popupSettings, setPopupSettings] = useState([false, "", "success"]);
 
   const checkUserAuth = async () => {
     try {
       const user = await BaseAPI.getUser();
-      if (user) setUserAuth({ isAuth: true, role: user.role });
-      setTheme();
+      if (user)
+        setUserAuth({
+          isAuth: true,
+          role: user.role,
+          set: JSON.parse(user.settings).theme,
+        });
+      setTheme("", user.settings.theme);
     } catch (error) {}
   };
 

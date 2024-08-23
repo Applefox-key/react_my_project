@@ -5,7 +5,6 @@ const Logo = () => {
   return (
     <div>
       <footer className="footer">
-        {/* ©  */}
         <Image src={logo} style={{ width: "3%" }} />
       </footer>
     </div>

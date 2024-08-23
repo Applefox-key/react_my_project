@@ -19,7 +19,7 @@ const LoginBox = ({ setLoginMode }) => {
   );
   const [password, setPassword] = useState(pageParam.email ? "" : "JohnDoe");
   const [err, setErr] = useState("");
-  const login = async (event) => {
+  const login = async () => {
     if (!isEmailValid(email)) {
       setErr("email is invalid");
       return;

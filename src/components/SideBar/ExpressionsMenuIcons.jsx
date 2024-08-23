@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
 import { TbTextPlus } from "react-icons/tb";
-import { TfiImport } from "react-icons/tfi";
+import { TfiImport, TfiExport } from "react-icons/tfi";
+import { FiUploadCloud, FiDownloadCloud } from "react-icons/fi";
 import { AiOutlineRollback, AiOutlineDelete } from "react-icons/ai";
 import ExpModalCommand from "./ExpModalCommand";
 
@@ -13,6 +14,7 @@ const ExpressionsMenuIcons = ({ setExpressions, expressionsActions }) => {
     setMod(el);
   };
   const router = useNavigate();
+
   return (
     <>
       {mod ? (
@@ -31,10 +33,13 @@ const ExpressionsMenuIcons = ({ setExpressions, expressionsActions }) => {
         <TbTextPlus />
       </button>
       <button title="Add from the file" onClick={() => modal("file")}>
-        <TfiImport />
+        <FiUploadCloud />
       </button>{" "}
       <button title="Delete" onClick={expressionsActions.deleteMode}>
         <AiOutlineDelete />
+      </button>{" "}
+      <button title="Download" onClick={expressionsActions.downloadMode}>
+        <FiDownloadCloud />
       </button>{" "}
       <button title="Back to training" onClick={() => router("/training")}>
         <AiOutlineRollback />

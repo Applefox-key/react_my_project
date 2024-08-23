@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import { Expression } from "../classes/Expression.js";
 import * as fbHelpers from "../utils/serverFireBaseHlp/fbHelpers";
 import axios from "axios";
@@ -209,7 +210,9 @@ const BaseAPI = {
     return result;
   },
   async updateUser(ud) {
-    let reqData = { ...ud };
+    let reqData = ud.hasOwnProperty("settings")
+      ? { ...ud, settings: JSON.stringify(ud.settings) }
+      : { ...ud };
     if (ud.img.includes("blob")) {
       let img = await fbHelpers.setImgToStorage(ud.id, ud.file);
       reqData = { ...ud, img: img };

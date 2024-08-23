@@ -159,6 +159,19 @@ export const themeArr = {
     "--color-text-base": "#697476",
     "--background-color-opacity50": "rgba(107,227,193,.5)",
   },
+  stone: {
+    "--background-color-base": "white",
+    "--background-color-dark": "#2b2e4d",
+    "--background-color-medium": "#c2e6d2",
+    "--background-color-light": "ghostwhite",
+    "--background-color-intense": "#158267",
+    "--background-color-pale": "aliceblue",
+    "--color-marker": "#4db4b2",
+    "--color-text-label": "white",
+    "--color-text-inform": "lightblue",
+    "--color-text-base": "#535b5c",
+    "--background-color-opacity50": "rgb(201 255 240 / 50%)",
+  },
 
   vamp: {
     "--background-color-base": "#41434F", //=
@@ -267,19 +280,31 @@ export const themeArr = {
     "--background-color-opacity50": "rgb(138, 225, 243, 0.5)",
   },
 };
+export const userThemesDefault = (user_set) => {
+  return {
+    one: themeArr.simple,
+    two: themeArr.simple,
+    three: themeArr.simple,
+    four: themeArr.simple,
+    ...user_set,
+  };
+};
+
 export const getCurrentTheme = () => {
   const theme = getSettings("theme", "sky");
   return theme;
 };
 
-export const setTheme = (theme = "") => {
+export const setTheme = (theme = "", usersTheme = "") => {
   //if user choose the theme - save his choise to the local storage
   if (theme) setSettings("theme", theme);
   //if user doesn't choose the theme try get it from the local storage or set default value
   let localTheme = theme ? theme : getCurrentTheme();
   if (localTheme === "sky" && !theme) return;
   if (localTheme) {
-    const colors = themeArr[localTheme];
+    const colors = themeArr.hasOwnProperty(localTheme)
+      ? themeArr[localTheme]
+      : usersTheme[localTheme];
     for (let key in colors) {
       document.documentElement.style.setProperty(key, colors[key]);
     }

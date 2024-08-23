@@ -10,9 +10,7 @@ const AppRouter = () => {
   return (
     <div>
       <MyNavbar />
-      {/* <div style={{ marginTop: "2.5rem" }} /> */}
       <Popup />
-
       <div className="main_page">
         <Routes>
           {routesArr.map((item, i) => (

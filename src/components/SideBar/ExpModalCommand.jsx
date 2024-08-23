@@ -18,7 +18,7 @@ const ExpModalCommand = ({ mod, setMod, setExpressions }) => {
           setVisible={setMod}
           setExpressions={setExpressions}
         />
-      )}{" "}
+      )}
     </div>
   );
 };

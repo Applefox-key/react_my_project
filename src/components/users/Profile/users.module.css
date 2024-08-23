@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-
+  margin-top: 13rem;
 
 }
 
@@ -17,7 +17,7 @@
 
 @media screen and (min-width: 600px) {
   .avatarDiv {
-    margin: 8rem auto auto;
+    /* margin: 8rem auto auto; */
     max-width: 300px;
     text-align: center;
 

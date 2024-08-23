@@ -20,6 +20,7 @@ import ApplyPannel from "./ApplyPannel";
 import FiltersSummary from "./FiltersSummary";
 import { CiViewTable } from "react-icons/ci";
 import { getSettings, setSettings } from "../../../utils/settings";
+import { createFilesData } from "../../../utils/files";
 
 const ExpressionsList = () => {
   const limit = 20;
@@ -143,6 +144,25 @@ const ExpressionsList = () => {
   };
   //actions with expressions
   const expressionsActions = {
+    //download expressions
+    createFile(data) {
+      const selectedList = createFilesData(
+        expressions.filter((el) => data.list.includes(el.id))
+      );
+      const fileURL = window.URL.createObjectURL(selectedList);
+      const link = document.createElement("a");
+      link.href = fileURL;
+      link.download = "expressions.txt";
+      link.click();
+      link.remove();
+    },
+    async downloadMode() {
+      applyOnOF({
+        title: `SELECT PHRASES TO DOWNLOAD AND PRESS THE BUTTON`,
+        btnName: "GET",
+        btnFn: expressionsActions.createFile,
+      });
+    },
     //apply mode for deleting
     async deleteMode() {
       applyOnOF({
@@ -150,12 +170,13 @@ const ExpressionsList = () => {
         btnName: "DELETE",
         btnFn: expressionsActions.deleteSome,
       });
-    }, //delete some expression
+    },
+    //delete some expression
     async deleteSome(data) {
       const ids = data.list;
       let res = await deleteSomeExpressions(ids);
       if (res.error) {
-        setPopup.error("Somethig goes wrong.." + res.error);
+        setPopup.error("Something goes wrong.." + res.error);
         return;
       }
       if (!res) return;

@@ -6,6 +6,7 @@ const ApplyPannel = ({ applyMode, applyOnOF, checkAll }) => {
   return (
     <div className={cl.applyBtn}>
       <span>{applyMode.title}</span>
+
       <button
         onClick={() =>
           applyMode.btnFn({ list: applyMode.list, label: applyMode.label })

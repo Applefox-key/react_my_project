@@ -10,6 +10,11 @@
     caret-color: transparent;
     color: var(--color-text-base);
 
+    p {
+        background-color: var(--background-color-medium);
+        font-style: italic;
+    }
+
     div {
         padding-left: 8rem;
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cl from "./ThemesChoosing.module.scss";
 import { getCurrentTheme, setTheme, themeArr } from "../../../utils/colors";
+import UserThemes from "./UserThemes";
 
 const ThemesChoosing = () => {
   const [colorTheme, setColorTheme] = useState("");
@@ -51,6 +52,8 @@ const ThemesChoosing = () => {
           </div>
         ))}
       </div>
+
+      <UserThemes />
     </div>
   );
 };
