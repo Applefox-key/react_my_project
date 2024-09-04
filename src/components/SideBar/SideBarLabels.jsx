@@ -4,14 +4,16 @@ import { useQuery } from "../../hooks/useQuery";
 import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
 import { TiDeleteOutline } from "react-icons/ti";
-import { HiOutlineFilter } from "react-icons/hi";
-import { AiOutlineClear } from "react-icons/ai";
 import { BiCloset } from "react-icons/bi";
-import { MdOutlineSettingsBackupRestore } from "react-icons/md";
+import {
+  MdOutlineLabelOff,
+  MdOutlineSettingsBackupRestore,
+} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";
 import ProgressColumnFilter from "../UI/MyProgressBar/ProgressColumnFilter";
+import { RiFilterOffLine } from "react-icons/ri";
 
 const SideBarLabels = ({
   filterChange,
@@ -55,43 +57,54 @@ const SideBarLabels = ({
       onBlur={(e) => {
         if (!e.relatedTarget) setIsMenu("");
       }}>
-      <div className="d-flex justify-content-center align-items-center flex-column">
+      <div className="d-flex justify-content-center  flex-column">
         <ProgressColumnFilter
           stage={filters.stage}
           filterChange={filterChange}
-        />{" "}
-        <br /> <h3 className={cl.titleString}>LABELS</h3>
+        />
+
+        <h2 className="w-100">LABELS</h2>
         <div className="d-flex align-items-center">
-          {/* <h3>LABELS</h3> */}
-
-          <LabelEdit
-            isNew={true}
-            callback={() => {
-              getLabels();
-            }}
-          />
-          <button
-            className={cl.btnPlus}
-            title="show items without labels"
-            onClick={(e) => selectFn({ name: "no label", id: "null" })}>
-            <HiOutlineFilter />
-          </button>
-          <button
-            className={cl.btnPlus}
-            title="clear the labels"
-            draggable
-            onDragStart={(e) => handleDragStart(e, "")}
-            onClick={(e) => {
-              e.stopPropagation();
-              selectFn("", true);
-              if (window.screen.availWidth < 900) showHide("labels");
-
-              setIsMenu(false);
-            }}>
-            {" "}
-            <AiOutlineClear />
-          </button>
+          <div className="d-flex justify-content-start w-100">
+            <LabelEdit
+              isNew={true}
+              callback={() => {
+                getLabels();
+              }}
+            />
+            <button
+              className={cl.btnPlus}
+              title="clear the labels"
+              draggable
+              onDragStart={(e) => handleDragStart(e, "")}
+              onClick={(e) => {
+                e.stopPropagation();
+                selectFn("", true);
+                if (window.screen.availWidth < 900) showHide("labels");
+                setIsMenu(false);
+              }}>
+              <MdOutlineLabelOff />
+            </button>
+          </div>
+          {!!filters.labelid && (
+            <button
+              className={cl.btnPlus}
+              title="clear filter by labels"
+              onClick={(e) => selectFn()}>
+              <RiFilterOffLine />
+            </button>
+          )}
         </div>
+      </div>
+
+      <div
+        className={classGenerator({ id: "null" })}
+        onClick={(e) => selectFn({ name: "no label", id: "null" })}>
+        <div>
+          <span>✦</span>
+          no labels
+        </div>
+        <CiMenuKebab />
       </div>
       {isLoadingCat ? (
         <MySpinner />

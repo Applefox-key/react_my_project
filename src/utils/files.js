@@ -3,8 +3,9 @@ export const expressionsFromTxtFile = async (file, callbackForResult) => {
   if (file.type !== "text/plain") throw new Error("wrong file type");
   const text = await file.text();
   const contArr = text.split(/\r?\n/).filter((item) => item.trim());
+
   const expressionArr = contArr.map((row) => {
-    let [w, s, n] = row.replace("  ", " ").split(";");
+    let [w, s, n] = row.replace(/  +/g, " ").split(";");
     return { expression: w ? w : "", phrase: s ? s : "", note: n ? n : "" };
   });
 
@@ -21,7 +22,7 @@ export const createFilesData = (list) => {
         valueOrEmpty(el.phrase) +
         valueOrEmpty(el.note)
     )
-    .join("\r");
+    .join("\r\n");
 
   const data = new Blob([content], { type: "text/plain" });
   return data;

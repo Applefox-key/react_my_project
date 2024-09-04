@@ -17,7 +17,6 @@ const ModalPasteBtns = ({ dataArray, read, add, back, setDataArr }) => {
   };
   return (
     <div className="pt-2 ">
-      {" "}
       {!dataArray ? (
         <>
           <Button size="lg" onClick={read}>
@@ -29,19 +28,18 @@ const ModalPasteBtns = ({ dataArray, read, add, back, setDataArr }) => {
         </>
       ) : (
         <div className={cl.titleBtns}>
-          <div className={cl["label-box"]}>
-            <span>label for all rows</span>{" "}
+          <div>
             <SelectLabel isOne={true} onSelect={labelSelect} colCat={label} />
+            <span>label for all rows</span>
           </div>{" "}
           <div>
-            {" "}
-            <Button size="lg" onClick={back}>
+            <Button size="lg" className="m-2" onClick={back}>
               Step back
             </Button>{" "}
-            <Button size="lg" onClick={add}>
+            <Button size="lg" className="m-2" onClick={add}>
               Add exprassions and phrase
             </Button>
-            <Button size="lg" onClick={(e) => back(e, true)}>
+            <Button size="lg" className="m-2" onClick={(e) => back(e, true)}>
               Cancel
             </Button>
           </div>

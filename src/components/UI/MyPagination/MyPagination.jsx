@@ -1,5 +1,5 @@
 import React from "react";
-import cl from "./MyPagination.module.css";
+import cl from "./MyPagination.module.scss";
 
 const MyPagination = ({ setPageParams, pageParams }) => {
   let items = [];

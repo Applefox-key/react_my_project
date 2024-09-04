@@ -17,8 +17,8 @@ const LabelItems = ({ list, add, selected, onSelect }) => {
       {list.length ? (
         list.map((item) => (
           <DropdownItem
-            className={classGenerator(item)}
             key={item.id}
+            className={classGenerator(item)}
             onClick={() => {
               onSelect(item);
             }}>

@@ -1,58 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 import cl from "./addExpressions.module.scss";
+import ExpressionBody from "../ExpressionsList/ExpressionBody";
+
 const NewExpressionsList = ({ dataArr, setDataArr }) => {
-  const [copyBtn, setCopyBtn] = useState({ i: -1, text: "" });
-
-  const expressionSelect = () => {
+  const expressionSelect = (i, newV) => {
     setDataArr(
-      dataArr.map((el, num) =>
-        num === copyBtn.i ? { ...el, expression: copyBtn.text } : el
-      )
+      dataArr.map((el, num) => (num === i ? { ...el, expression: newV } : el))
     );
-    setCopyBtn({ i: -1, text: "" });
   };
 
-  const clickOnPhrase = (i) => {
-    const selection = window.getSelection();
-    const selectedText = selection.toString();
-    //selection is not empty and is new
-    if (selectedText && (selectedText !== copyBtn.text || i !== copyBtn.i))
-      setCopyBtn({ i: i, text: selectedText });
-    //selection is empty and copyBtn is not empty
-    else if (!selectedText && copyBtn.i > -1) setCopyBtn({ i: -1, text: "" });
-  };
-
-  const expressionDelete = (i) => {
+  const expressionDelete = (inum) => {
     if (!window.confirm("Delete the phrase?")) return false;
-    setDataArr(dataArr.filter((el) => el.id !== i));
+    setDataArr(dataArr.filter((el, i) => i !== inum));
   };
 
   return (
     <>
       {dataArr.map((el, i) => (
         <div className={cl.addingRow} key={i}>
-          {i + 1} <span>{el.expression} </span>
-          <div
-            data-num={i}
-            onTouchEnd={(e) => {
-              e.stopPropagation();
-              clickOnPhrase(i);
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              clickOnPhrase(i);
-            }}>
-            {el.phrase}
-          </div>{" "}
-          <p>{el.note}</p>
-          <button className={cl.deleteBtn} onClick={() => expressionDelete(i)}>
-            ✕
-          </button>
-          {copyBtn.i === i && (
-            <button className="popupBtn" onClick={expressionSelect}>
-              set as an expression
+          <div className={cl.addingRowHead}>
+            <span>{i + 1}</span>
+            {(!el || !el.phrase || !el.expression) &&
+              "please specify the phrase to remember"}
+
+            <button
+              className={cl.deleteBtn}
+              onClick={() => expressionDelete(i)}>
+              ✕
             </button>
-          )}
+          </div>
+
+          <ExpressionBody
+            smallSize
+            values={{ phrase: el.phrase, expression: el.expression }}
+            setters={{ setExpression: (val) => expressionSelect(i, val) }}
+          />
         </div>
       ))}
     </>

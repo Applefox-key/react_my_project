@@ -7,33 +7,36 @@
   margin-bottom: 2.5rem;
 }
 
+
 .countBadge {
   position: absolute;
   top: 0px;
-  right: 1px;
+  right: -1px;
   font-size: 14px;
-  padding: 0 0px;
+  padding: 0 2px;
 
   font-family: sans-serif;
   font-weight: 700;
-
-  color: var(--color-marker);
-  background-color: var(--background-color-light);
   border: 1px solid var(--color-marker);
-
+  color: var(--color-text-label);
+  background-color: var(--background-color-intense);
   border-radius: 5px;
   height: 17px;
   line-height: 1.2;
 
+  text-shadow: 0.5px 0.5px black;
+  box-shadow: var(--color-marker) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  z-index: 20;
+
   @media screen and (max-width:900px) {
     font-size: 12px;
-    font-weight: 400;
     height: 14px;
     line-height: 1.1;
   }
 }
 
 .nav-top-string {
+  padding-top: 4px;
   justify-content: flex-end;
   padding-right: 2rem;
   background-color: var(--background-color-base);
@@ -93,13 +96,14 @@
 .navLinkActive {
   display: block;
   padding: 5px 10px;
-  font-size: 20px;
+  margin: 0 1 20px;
   font-weight: 400;
   color: var(--color-text-base);
   background-color: var(--background-color-base);
   text-decoration: none;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
   position: relative;
+  border-radius: 20px;
 
   &:hover {
     color: var(--color-marker);
@@ -113,10 +117,14 @@
 }
 
 .navLinkActive {
-  background-color: var(--color-text-base);
+  // background-color: var(--color-text-base);
   color: var(--background-color-base);
+  color: var(--color-marker);
+  font-weight: 600;
+  text-shadow: 1px 1px black;
 
   &:hover {
-    color: var(--background-color-base);
+    cursor: auto;
+    // color: var(--background-color-intense);
   }
 }

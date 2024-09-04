@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import cl from "./SideBar.module.scss";
 import SideBarLabels from "./SideBarLabels";
-import { RiPriceTag3Line } from "react-icons/ri";
+import { RiListSettingsLine, RiPriceTag3Line } from "react-icons/ri";
 import ExpressionsMenuIcons from "./ExpressionsMenuIcons";
 import SideBarSettings from "./SideBarSettings";
+import { CSSTransition } from "react-transition-group";
+
 const SideBar = ({
-  setExpressions,
+  applyMode,
   expressionsActions,
   filters,
   filterChange,
@@ -17,33 +19,39 @@ const SideBar = ({
     if (name === sideBar.name) setSideBar({ show: false });
     else setSideBar({ show: true, name: name });
   };
-
+  const check = () => {
+    if (applyMode.isOn) applyMode.applyOnOF();
+  };
   return (
     <div className={cl["sideBar-wrap"]}>
-      <div className={cl["sideBar-narrow"]}>
-        <button onClick={() => showHide("settings")}>☰</button>{" "}
+      <div className={cl["sideBar-narrow"]} onClick={check}>
+        <button onClick={() => showHide("settings")}>
+          <RiListSettingsLine />
+        </button>
         <button onClick={() => showHide("labels")}>
           <RiPriceTag3Line />
         </button>
-        <ExpressionsMenuIcons
-          setExpressions={setExpressions}
-          expressionsActions={expressionsActions}
-        />
+        <ExpressionsMenuIcons expressionsActions={expressionsActions} />
       </div>
       {sideBar.show && (
-        <div className={cl["sideBar-wide"]}>
-          {" "}
-          {sideBar.name === "settings" ? (
-            <SideBarSettings />
-          ) : (
-            <SideBarLabels
-              showHide={showHide}
-              filterChange={filterChange}
-              filters={filters}
-              handleDragStart={handleDragStart}
-            />
-          )}
-        </div>
+        <CSSTransition
+          appear={true}
+          in={true}
+          timeout={500}
+          classNames="sidebar">
+          <div className={cl["sideBar-wide"]}>
+            {sideBar.name === "settings" ? (
+              <SideBarSettings />
+            ) : (
+              <SideBarLabels
+                showHide={showHide}
+                filterChange={filterChange}
+                filters={filters}
+                handleDragStart={handleDragStart}
+              />
+            )}
+          </div>
+        </CSSTransition>
       )}
     </div>
   );

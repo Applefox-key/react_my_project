@@ -9,11 +9,11 @@ import { usePopup } from "../../../hooks/usePopup";
 import NewExpressionsList from "./NewExpressionsList";
 
 const ModalFileExp = ({ setVisible, setExpressions }) => {
-  const [fileContent, setFileContent] = useState();
+  const [fileContent, setFileContent] = useState(null);
   const setPopup = usePopup();
   const inputFileName = useRef();
 
-  const FileChange = async (e) => {
+  const fileChange = async (e) => {
     try {
       await expressionsFromTxtFile(e.target.files[0], setFileContent);
     } catch (error) {
@@ -30,16 +30,14 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       let res = await BaseAPI.getTrainingListAll();
       setPopup.success("The changes have been saved");
       setExpressions(res);
-
       setVisible(false);
-      setFileContent([]);
+      setFileContent(null);
       inputFileName.current.value = "";
     } catch (error) {
       setPopup.error(error.message);
       return;
     }
   };
-
   return (
     <MyModal
       showmodal={true}
@@ -52,11 +50,9 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       <div>
         <Popup />{" "}
       </div>
-      <ModalFileExpBtns inputFileName={inputFileName} FileChange={FileChange} />
+      <ModalFileExpBtns inputFileName={inputFileName} fileChange={fileChange} />
       <div className="modal-h50">
-        {!fileContent ? (
-          <></>
-        ) : (
+        {!!fileContent && (
           <>
             <Button
               size="lg"
@@ -65,7 +61,6 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
               onClick={addToColection}>
               Add the content
             </Button>
-
             <NewExpressionsList
               dataArr={fileContent}
               setDataArr={setFileContent}

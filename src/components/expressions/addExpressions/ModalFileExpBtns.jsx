@@ -3,7 +3,7 @@ import { InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 
-const ModalFileExpBtns = ({ inputFileName, FileChange }) => {
+const ModalFileExpBtns = ({ inputFileName, fileChange }) => {
   return (
     <div className="d-flex">
       <InputGroup>
@@ -12,7 +12,7 @@ const ModalFileExpBtns = ({ inputFileName, FileChange }) => {
           className="mt-1"
           ref={inputFileName}
           type="file"
-          onChange={FileChange}
+          onChange={fileChange}
         />
       </InputGroup>{" "}
       <OverlayTrigger

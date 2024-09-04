@@ -55,7 +55,7 @@ const ModalPasteList = ({ setVisible, onClick }) => {
           setDataArr={setDataArray}
         />
       }>
-      <div className="modal-h50">
+      <div>
         <div>
           <Popup />{" "}
         </div>

@@ -33,6 +33,9 @@
 
         padding: 0 20px 0 50px;
         outline: none;
+        color: var(--color-text-base);
+        background: var(--background-color-light);
+        border: 1px solid var(--color-marker);
     }
 
     .logbutton {

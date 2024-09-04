@@ -2,7 +2,7 @@ import React from "react";
 import cl from "./ExpressionsList.module.scss";
 import { TbListCheck } from "react-icons/tb";
 
-const ApplyPannel = ({ applyMode, applyOnOF, checkAll }) => {
+const ApplyPannel = ({ applyMode, checkAll }) => {
   return (
     <div className={cl.applyBtn}>
       <span>{applyMode.title}</span>
@@ -18,7 +18,7 @@ const ApplyPannel = ({ applyMode, applyOnOF, checkAll }) => {
         onClick={checkAll}>
         <TbListCheck />
       </button>
-      <button onClick={applyOnOF}>CANCEL</button>
+      <button onClick={applyMode.applyOnOF}>CANCEL</button>
     </div>
   );
 };

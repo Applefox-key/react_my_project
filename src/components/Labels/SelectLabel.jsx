@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
-// import { IoPricetagOutline } from "react-icons/io5";
+
 const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
   const [selected, setSelected] = useState(colCat);
   const [mode, setMode] = useState(false);
 
   const onSelectLabel = (value = "") => {
+    if (selected.id === value.id) return;
     setSelected(value);
     onSelect(value);
   };
-
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target.id !== "labelBox" && mode) {
+        setMode(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
-    <div className="w-100">
+    <div className="w-100" id="labelBox">
       <Dropdown show={mode} onToggle={(val) => setMode(val)}>
         <Dropdown.Toggle
           disabled={disabled}
@@ -21,12 +33,9 @@ const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
           size="lg"
           variant="light">
           {selected.name ? (
-            <div className={cl["labeltext"]}>{selected.name}</div>
+            <span className={cl["labeltext"]}>{selected.name}</span>
           ) : (
-            <div className={cl["labelEmpty"]}>
-              🏷️
-              {/* <IoPricetagOutline /> */}
-            </div>
+            <span className={cl["labelEmpty"]}>🏷️</span>
           )}{" "}
         </Dropdown.Toggle>
         {mode && (

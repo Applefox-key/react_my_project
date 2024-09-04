@@ -44,7 +44,7 @@
     height: 100vh;
     width: 20rem;
     background-color: var(--background-color-medium);
-    padding-top: 3.5rem;
+    padding-top: 1.5rem;
     color: var(--color-text-base);
     transition: all 0.4s ease-in-out;
 
@@ -54,17 +54,49 @@
 
     h2 {
         margin: 0;
+        text-align: end;
+        padding-right: 6px;
+        font-size: larger;
+        font-family: system-ui;
+        position: relative;
+        text-align: -webkit-right;
+        width: fit-content;
+        color: var(--color-text-label);
+        background-color: var(--background-color-intense);
+        border-radius: 10px;
+        padding: 0 5px;
+        width: 100%;
+
+        &:after {
+            box-shadow: 0 2px 4px #0006, 0 7px 13px -3px #0000004d, inset 0 -3px 0 #0003;
+            content: "";
+            width: 94%;
+            margin: 5px 0 0 15px;
+            height: 2px;
+            position: absolute;
+            bottom: -3px;
+            left: -7px;
+        }
+    }
+
+    .checkbox_wrap {
+        display: flex;
+        margin: 5px;
     }
 
     .checkboxL {
+        margin-left: 5px;
         font-size: 1.5rem;
-        width: 100%;
+        width: 85%;
+        margin-bottom: 1rem;
+        text-align: justify;
+        font-style: italic;
     }
 
     .checkbox {
         width: 1.5rem;
         height: 1.5rem;
-
+        accent-color: var(--background-color-intense);
     }
 
 

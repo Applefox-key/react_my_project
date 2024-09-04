@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
 import { TbTextPlus } from "react-icons/tb";
-import { TfiImport, TfiExport } from "react-icons/tfi";
+import { RiArrowGoBackLine } from "react-icons/ri";
 import { FiUploadCloud, FiDownloadCloud } from "react-icons/fi";
-import { AiOutlineRollback, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import ExpModalCommand from "./ExpModalCommand";
 
-const ExpressionsMenuIcons = ({ setExpressions, expressionsActions }) => {
+const ExpressionsMenuIcons = ({ expressionsActions }) => {
   const [mod, setMod] = useState(false);
   const modal = (el) => {
     setMod(el);
@@ -21,7 +21,7 @@ const ExpressionsMenuIcons = ({ setExpressions, expressionsActions }) => {
         <ExpModalCommand
           mod={mod}
           setMod={setMod}
-          setExpressions={setExpressions}
+          setExpressions={expressionsActions.setExpressions}
         />
       ) : (
         <></>
@@ -42,7 +42,7 @@ const ExpressionsMenuIcons = ({ setExpressions, expressionsActions }) => {
         <FiDownloadCloud />
       </button>{" "}
       <button title="Back to training" onClick={() => router("/training")}>
-        <AiOutlineRollback />
+        <RiArrowGoBackLine />
       </button>{" "}
     </>
   );

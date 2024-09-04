@@ -1,10 +1,10 @@
 import React from "react";
-
+import cl from "./addExpressions.module.scss";
 import NewExpressionsList from "./NewExpressionsList";
 
 const ModalPasteBody = ({ dataArr, dataStr, setDataStr, setDataArr }) => {
   return (
-    <div className="h-100">
+    <div className={cl["modal-paste"]}>
       {!dataArr ? (
         <textarea
           value={dataStr}
@@ -12,7 +12,7 @@ const ModalPasteBody = ({ dataArr, dataStr, setDataStr, setDataArr }) => {
           onChange={(e) => {
             setDataStr(e.target.value);
           }}
-          className="w-100 h-100 fs-4"
+          className="w-100 fs-4 vh80"
         />
       ) : (
         <NewExpressionsList dataArr={dataArr} setDataArr={setDataArr} />

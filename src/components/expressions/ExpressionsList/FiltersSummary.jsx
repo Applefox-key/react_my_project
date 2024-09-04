@@ -4,7 +4,7 @@ import { MdClear } from "react-icons/md";
 const FiltersSummary = ({ filters, filterChange }) => {
   const clearFn = (name) => {
     filterChange({
-      value: "",
+      value: null,
       isApply: false,
       filterName: name,
     });
@@ -21,7 +21,7 @@ const FiltersSummary = ({ filters, filterChange }) => {
           {<MdClear className="" />} text: {filters.filter}
         </button>
       )}
-      {filters.stage !== "" && (
+      {filters.stage !== null && (
         <button onClick={() => clearFn("stage")}>
           {<MdClear className="" />} progress: {filters.stage}
         </button>

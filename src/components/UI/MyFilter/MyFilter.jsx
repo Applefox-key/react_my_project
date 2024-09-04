@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import cl from "./MyFilter.module.css";
-import { GrFormClose } from "react-icons/gr";
+import cl from "./MyFilter.module.scss";
+import { CgSearch } from "react-icons/cg";
 const MyFilter = ({ filter, filterChange }) => {
   const [value, setValue] = useState(filter);
   useEffect(() => {
@@ -9,7 +9,7 @@ const MyFilter = ({ filter, filterChange }) => {
   }, [filter]);
 
   const setFn = (val) => {
-    filterChange({ value: val, isApply: false, filterName: "filter" });
+    filterChange({ value: val, filterName: "filter" });
   };
   return (
     <div style={{ position: "relative" }}>
@@ -19,13 +19,14 @@ const MyFilter = ({ filter, filterChange }) => {
           onClick={(e) => {
             setFn(value);
           }}>
-          🔎
+          {/* 🔎 */}
+          <CgSearch />
         </button>
         <input
           type="text"
           placeholder="Search"
           name="text"
-          value={value}
+          value={value || ""}
           className={cl.input}
           onKeyDown={(e) => {
             if (e.key === "Enter") setFn(value);
@@ -41,8 +42,7 @@ const MyFilter = ({ filter, filterChange }) => {
           setValue("");
           setFn("");
         }}>
-        {/* 〤 */}
-        <GrFormClose />
+        〤{/* <GrFormClose /> */}
       </button>
     </div>
   );

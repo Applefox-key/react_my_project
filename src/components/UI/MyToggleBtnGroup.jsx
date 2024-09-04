@@ -12,8 +12,9 @@ const MyToggleBtnGroup = ({ checked, arr, onChange, ...props }) => {
       {arr.map((item, i) => (
         <ToggleButton
           variant="light"
+          className={checked === i ? "schema-tgb-active" : "schema-tgb"}
           checked={checked === i}
-          id={item + (i + 1)}
+          id={"tgb" + (i + 1)}
           key={i}
           value={i + 1}
           onChange={onChange}>

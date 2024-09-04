@@ -56,7 +56,7 @@ export async function setImgToStorage(userKey, file) {
     });
 
     if (task) {
-      console.log("Uploaded a blob or file!");
+      // console.log("Uploaded a blob or file!");
       let curl = await getDownloadURL(task.task.snapshot.ref);
       if (curl) return curl;
     }

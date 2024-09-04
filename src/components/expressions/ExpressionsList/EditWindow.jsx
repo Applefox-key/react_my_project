@@ -1,101 +1,64 @@
 import React, { useState } from "react";
-
+import { IoMdClose } from "react-icons/io";
 import cl from "./ExpressionsList.module.scss";
-const EditWindow = ({ editElem, expressionsActions, editOn }) => {
+import Draggable from "react-draggable";
+import ExpressionBody from "./ExpressionBody";
+
+const EditWindow = ({ editMode, expressionsActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
-  const [value, setValue] = useState(editElem.phrase);
-  const [valueExp, seValueExp] = useState(editElem.expression);
-  const [note, setNote] = useState(editElem.note);
-  const closeModal = () => {
+  const [phrase, setPhrase] = useState(editMode.editElem.phrase);
+  const [expression, setExpression] = useState(editMode.editElem.expression);
+  const [note, setNote] = useState(editMode.editElem.note);
+  const closeModal = (e) => {
+    if (e) e.stopPropagation();
     if (copyBtn) setCopyBtn("");
-    expressionsActions.contentEdit(editElem.id === "new" ? "newCancel" : "");
+    expressionsActions.contentEdit(
+      editMode.editElem.id === "new" ? "newCancel" : ""
+    );
   };
-  //show or hide selection button
-  const clickOnPhrase = (e) => {
-    e.stopPropagation();
-    const selection = window.getSelection();
-    const selectedText = selection.toString().trim();
-
-    if (selectedText === copyBtn) return;
-    setCopyBtn(selectedText);
-  };
-
   //save expression on Server
   const save = () => {
     if (copyBtn) setCopyBtn("");
     expressionsActions.contentEdit({
-      ...editElem,
-      phrase: value,
-      expression: valueExp,
+      ...editMode.editElem,
+      phrase: phrase,
+      expression: expression,
       note: note,
     });
-    editOn();
+    editMode.setEdit();
   };
-  //set selection as new expression
-  const setSelection = () => {
-    seValueExp(copyBtn);
-    setCopyBtn("");
-  };
+
   return (
     <div
       className={cl["modal-wrap"]}
       onClick={(e) => {
         const selection = window.getSelection();
         const selectedText = selection.toString();
-
         if (e.target === e.currentTarget && selectedText === "") closeModal();
       }}>
-      <div className={cl["modal-box"]}>
-        <div className={cl["top-edit-box"]}>
-          {/* <span>edit phrase</span> */}
-          {copyBtn && (
-            <button className={cl["popupBtn"]} onClick={setSelection}>
-              set selection as expression
+      <Draggable handle=".handle">
+        <div className={cl["modal-box"]}>
+          <div className={["handle", cl["top-edit-box"]].join(" ")}>
+            EDIT PRASE
+            <button
+              className={cl["edit-close-btn"]}
+              title="Clouse without changes"
+              onClick={closeModal}>
+              <IoMdClose />
             </button>
-          )}
-          <button
-            className={cl["edit-close-btn"]}
-            title="Clouse without changes"
-            onClick={closeModal}>
-            ❌
-          </button>{" "}
-        </div>
-        <div className={cl["edit-body"]}>
-          {" "}
-          <div
-            className={
-              valueExp ? cl["expressionStr"] : cl["expressionStrEmpty"]
-            }>
-            {valueExp ? valueExp : "...select the part you want to remember"}
           </div>
-          {/* {valueExp && <div className={cl["expressionStr"]}>{valueExp}</div>} */}
-          <div className={cl["phrase-box"]}>
-            <div onClick={clickOnPhrase} onTouchEnd={clickOnPhrase}>
-              <textarea
-                placeholder="....write a phrase to remember"
-                autoFocus
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-              />{" "}
-            </div>
-            <input
-              title="pop-up note"
-              placeholder="....write a pop-up note"
-              onChange={(e) => {
-                e.preventDefault();
-                setNote(e.target.value);
-              }}
-              value={note}
-            />
-          </div>{" "}
+          <ExpressionBody
+            values={{ phrase, expression, note }}
+            setters={{ setPhrase, setNote, setExpression }}
+          />
           <button
             className={cl["edit-save-btn"]}
             title="Save changes"
             onClick={save}>
-            Save changes
+            SAVE CHANGES
           </button>{" "}
-        </div>{" "}
-      </div>{" "}
+        </div>
+      </Draggable>
     </div>
   );
 };

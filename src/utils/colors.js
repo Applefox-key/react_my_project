@@ -127,7 +127,7 @@ export const themeArr = {
     "--background-color-light": "#dbd2c7",
     "--background-color-intense": "#8d7a74",
     "--background-color-pale": "#b3aa9e",
-    "--color-marker": "#714c39",
+    "--color-marker": "#010101",
     "--color-text-label": "#ffffff",
     "--color-text-inform": "#714c39",
     "--color-text-base": "#000000",

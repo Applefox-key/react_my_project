@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export const expressionsFromText = async (
   text,
   callbackForResult,
@@ -73,13 +75,13 @@ export const addSpanToExpInPrase = (item) => {
       {arr.map((el, i) => {
         return el === item.expression ? (
           <span
-            key={i}
+            key={"ph" + i}
             className="expression"
             data-note={item.note ? item.note : "emptynull"}>
             {item.expression}
           </span>
         ) : (
-          <>{el}</>
+          <Fragment key={"ph" + i}>{el}</Fragment>
         );
       })}
     </>

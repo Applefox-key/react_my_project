@@ -47,8 +47,8 @@ const UserThemes = () => {
   };
 
   return (
-    <div>
-      <h5>YOUR THEMES</h5>
+    <>
+      <h2 className="mt-3">YOUR COLOR THEMES</h2>
       {editItem && (
         <ThemeEdit
           item={editItem}
@@ -76,7 +76,7 @@ const UserThemes = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

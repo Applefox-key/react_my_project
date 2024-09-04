@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import { addSpanToExpInPrase } from "../../../utils/texts";
 import { expressionStateIcon } from "../../../utils/expressions";
-
 import EditWindow from "./EditWindow";
-
 import cl from "./ExpressionsList.module.scss";
 import InfoWindow from "./InfoWindow";
 import SelectLabel from "../../Labels/SelectLabel";
 import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
 
-const ExpressionItem = ({
-  handleDrop,
-  expressions,
-  editElem,
-  expressionsActions,
-  editOn,
-  view,
-  applyMode,
-}) => {
+const ExpressionItem = ({ modes, actions, expressions }) => {
+  const { editMode, view, applyMode } = modes;
+  const { expressionsActions, handleDrop } = actions;
   const [elInfo, setElInfo] = useState("");
 
   const classGenerator = (el) => {
@@ -26,14 +18,21 @@ const ExpressionItem = ({
     let part2 = cl["divIsChecked"];
     return [part1, part2].join(" ");
   };
+  const dropEventsPrevent = {
+    onDragEnter: (e) => e.preventDefault(),
+    onDragOver: (e) => e.preventDefault(),
+    onDragLeave: (e) => e.preventDefault(),
+  };
+  const addEl = (el) => {
+    if (applyMode.isOn) applyMode.addToApply(el);
+  };
 
   return (
     <>
-      {editElem && (
+      {editMode.editElem && (
         <EditWindow
-          editElem={editElem}
+          editMode={editMode}
           expressionsActions={expressionsActions}
-          editOn={editOn}
         />
       )}
       {elInfo && <InfoWindow setVisible={setElInfo} expression={elInfo} />}
@@ -44,34 +43,30 @@ const ExpressionItem = ({
         }>
         {expressions.map((el, i) => (
           <div
-            key={el.id}
             className={classGenerator(el)}
+            key={"ex" + el.id}
+            {...dropEventsPrevent}
             onDrop={(e) => handleDrop(e, el)}
-            onDragEnter={(e) => e.preventDefault()}
-            onDragOver={(e) => e.preventDefault()}
-            onDragLeave={(e) => e.preventDefault()}
-            onClick={(e) => {
-              if (applyMode.isOn) expressionsActions.addForApply(el);
-            }}>
+            onClick={(e) => addEl(e, el)}>
             <div className={cl.atr}>
               <div className={cl.label_wrap}>
                 <SelectLabel
+                  isOne={true}
                   disabled={applyMode.isOn}
+                  colCat={{ id: el.labelid, name: el.label }}
                   onSelect={(val) =>
                     expressionsActions.contentEdit({
                       id: el.id,
                       labelid: val ? val.id : "",
                     })
                   }
-                  colCat={{ id: el.labelid, name: el.label }}
-                  isOne={true}
                 />
               </div>
               <div
+                className={cl.progress}
                 onClick={(e) => {
                   if (!applyMode.isOn) setElInfo(el);
-                }}
-                className={cl.progress}>
+                }}>
                 <ProgressColumn
                   stage={el.stage}
                   icon={expressionStateIcon(el)}
@@ -81,7 +76,7 @@ const ExpressionItem = ({
             <div
               className={cl["rowPhrase"]}
               onClick={(e) => {
-                if (!applyMode.isOn) editOn(el);
+                if (!applyMode.isOn) editMode.setEdit(el);
               }}>
               {addSpanToExpInPrase(el)}
             </div>
