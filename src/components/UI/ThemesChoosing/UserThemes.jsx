@@ -50,11 +50,13 @@ const UserThemes = () => {
     <>
       <h2 className="mt-3">YOUR COLOR THEMES</h2>
       {editItem && (
-        <ThemeEdit
-          item={editItem}
-          colors={userThemesList[editItem]}
-          callback={closeEditMode}
-        />
+        <div>
+          <ThemeEdit
+            item={editItem}
+            colors={userThemesList[editItem]}
+            callback={closeEditMode}
+          />
+        </div>
       )}
       <div className={cl.radioWrap}>
         {Object.keys(userThemesList).map((el) => (
@@ -72,7 +74,9 @@ const UserThemes = () => {
               color: "grey" && userThemesList[el]["--color-text-label"],
             }}>
             <span>{el}</span>
-            <button onClick={() => setEditItem(el)}>edit</button>
+            {!editItem && (
+              <button onClick={() => setEditItem(el)}>...edit</button>
+            )}
           </div>
         ))}
       </div>

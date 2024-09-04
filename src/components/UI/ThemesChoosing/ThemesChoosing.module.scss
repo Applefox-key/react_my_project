@@ -33,11 +33,12 @@
     button {
         display: none;
         position: absolute;
-        top: -10px;
-        left: 10px;
-        font-size: 12px;
+        top: -20px;
+        left: -10px;
+        font-size: 15px;
         padding: 2px 5px;
-        border-radius: 3px;
+        border: 3px solid rgb(250, 146, 0);
+        border-radius: 5px;
         color: var(--color-text-base);
         background-color: var(--background-color-light);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
@@ -160,19 +161,37 @@
     position: absolute;
     background-color: var(--background-color-light);
     color: var(--color-text-base);
-    border: 1px solid red;
+    // border: 1px solid red;
+    border: 3px solid rgb(250, 146, 0);
+    border-radius: 5px;
     border-radius: 10px;
-    width: 150px;
-    left: 100px;
-    top: 112px;
+    width: 200px;
+    left: 50px;
+    top: 95px;
     z-index: 500;
     text-align: end;
+    font-size: 14px;
+
+    span {
+        width: 100%;
+        background: var(--background-color-dark);
+        background: rgb(250, 146, 0);
+        color: var(--color-text-label);
+        font-size: 15px;
+        display: block;
+        text-align: start;
+        padding-left: 5px;
+        border-radius: 5px 5px 0 0;
+        margin-bottom: 5px;
+    }
 
     button {
         width: 100%;
         background: var(--background-color-dark);
+        background: rgb(250, 146, 0);
         color: var(--color-text-label);
         font-size: 15px;
+        border-radius: 0 0 5px 5px;
 
         &:hover {
             background-color: var(--color-text-label);

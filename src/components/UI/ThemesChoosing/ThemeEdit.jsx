@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cl from "./ThemesChoosing.module.scss";
 
 const ThemeEdit = ({ callback, item, colors }) => {
@@ -20,36 +20,12 @@ const ThemeEdit = ({ callback, item, colors }) => {
     ["--color-text-inform", "info text"],
     ["--color-text-base", "base text"],
   ];
+  console.log(item);
 
-  // {
-  //   "--background-color-base": "white",
-  //   "--background-color-dark": "#6a99db",
-  //   "--background-color-medium": "#C8E1FF",
-  //   "--background-color-light": "ghostwhite",
-  //   "--background-color-intense": "#286CCB",
-  //   "--background-color-pale": "aliceblue",
-  //   "--color-marker": "#0d6af5",
-  //   "--color-text-label": "white",
-  //   "--color-text-inform": "lightblue",
-  //   "--color-text-base": "black",
-  //   "--background-color-opacity50": "rgba(50, 90, 188, 0.5)",
-  // }
-  // const addNew = async () => {
-  //   if (!name) return;
-  //   await BaseAPI.createLabel(name);
-  //   if (callback) await callback();
-  //   setIsEdit(false);
-  // };
-  // const edit = async () => {
-  //   if (!name) return;
-  //   await BaseAPI.editLabel({ name: name }, label.id);
-  //   if (callback) await callback();
-  //   setIsEdit(false);
-  // };
   return (
     <div className={cl.editColorsWrap}>
       <div className={cl.editColors}>
-        <button onClick={(e) => callback(theme, item)}>save & apply</button>
+        <span>USER THEME: {item}</span>
         <button className={cl.btnClose} onClick={(e) => callback()}>
           x
         </button>
@@ -65,37 +41,7 @@ const ThemeEdit = ({ callback, item, colors }) => {
             />
           </div>
         ))}
-
-        {/* {!item ? (
-          <button className={cl.btnPlus} onClick={() => setIsEdit(true)}>
-            <FaPlus />
-          </button>
-        ) : (
-          <button className={cl.btnEdit} onClick={() => setIsEdit(true)}>
-            <CiEdit /> edit label
-          </button>
-        )} */}
-        {/* <MyModal
-          show={true}
-          setshowmodal={callback}
-          title={item ? "EDIT LABEL" : "NEW LABEL"}
-          dialogClassName={cl.editTheme}>
-          <div>
-            {" "}
-            <input
-              type="color"
-              id="colorBack"
-              onChange={(e) =>
-                changeTheme("--background-color-base", e.target.value)
-              }
-              value={theme["--background-color-base"]}
-              title="Choose your background color"
-            />
-            <button disabled={!theme} className={cl.btnNL}>
-              {item ? "SAVE" : "ADD"}
-            </button>
-          </div>
-        </MyModal> */}
+        <button onClick={(e) => callback(theme, item)}>save & apply</button>
       </div>
     </div>
   );
