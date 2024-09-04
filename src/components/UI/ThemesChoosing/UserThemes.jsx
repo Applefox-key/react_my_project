@@ -31,10 +31,7 @@ const UserThemes = () => {
       "grey" && userThemesList[el]["--color-text-inform"],
       "grey" && userThemesList[el]["--color-marker"],
     ];
-
-    // return `linear-gradient(90deg, ${gradientColors.join(", ")})`;
     return `linear-gradient(to bottom, ${gradientColors.join(", ")})`;
-    // return `radial-gradient(circle at center, ${gradientColors.join(", ")})`;
   };
 
   const closeEditMode = async (newColors = "", el = "") => {
