@@ -16,7 +16,8 @@ const BaseAPI = {
       method: method,
       // url: "http://localhost:8000" + url,
       // url: "http://34.214.160.243:8000" + url,
-      url: "https://api.learnapp.me" + url,
+      // url: "https://api.learnapp.me" + url,
+      url: "https://api.learnapp.pro" + url,
     };
     if (params) axiosConfig.params = params;
     if (data) axiosConfig.data = { data: data };
