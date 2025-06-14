@@ -57,54 +57,53 @@ const SideBarLabels = ({
       onBlur={(e) => {
         if (!e.relatedTarget) setIsMenu("");
       }}>
-      <div className="d-flex justify-content-center  flex-column">
+      <div className={cl.subLine}>
         <ProgressColumnFilter
           stage={filters.stage}
           filterChange={filterChange}
         />
-
-        <h2 className="w-100">LABELS</h2>
-        <div className="d-flex align-items-center">
-          <div className="d-flex justify-content-start w-100">
-            <LabelEdit
-              isNew={true}
-              callback={() => {
-                getLabels();
-              }}
-            />
-            <button
-              className={cl.btnPlus}
-              title="clear the labels"
-              draggable
-              onDragStart={(e) => handleDragStart(e, "")}
-              onClick={(e) => {
-                e.stopPropagation();
-                selectFn("", true);
-                if (window.screen.availWidth < 900) showHide("labels");
-                setIsMenu(false);
-              }}>
-              <MdOutlineLabelOff />
-            </button>
-          </div>
+        <h2>LABELS IN THE LIST</h2>
+        <div className={cl.lblSide}>
+          <button
+            className={cl.btnPlus}
+            title="clear the labels "
+            draggable
+            onDragStart={(e) => handleDragStart(e, "")}
+            onClick={(e) => {
+              e.stopPropagation();
+              selectFn("", true);
+              if (window.screen.availWidth < 900) showHide("labels");
+              setIsMenu(false);
+            }}>
+            <MdOutlineLabelOff />
+            Clear Tags
+          </button>
           {!!filters.labelid && (
             <button
               className={cl.btnPlus}
               title="clear filter by labels"
               onClick={(e) => selectFn()}>
-              <RiFilterOffLine />
+              <RiFilterOffLine /> FILTER by "{filters.label}"
             </button>
           )}
-        </div>
+        </div>{" "}
+        <h2>CHOOSE FOR FILTER OR EDIT</h2>
       </div>
 
+      <LabelEdit
+        isNew={true}
+        callback={() => {
+          getLabels();
+        }}
+      />
       <div
-        className={classGenerator({ id: "null" })}
+        className={cl["link-box1"]}
         onClick={(e) => selectFn({ name: "no label", id: "null" })}>
         <div>
           <span>✦</span>
           no labels
         </div>
-        <CiMenuKebab />
+        {/* <CiMenuKebab /> */}
       </div>
       {isLoadingCat ? (
         <MySpinner />

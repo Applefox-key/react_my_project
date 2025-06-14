@@ -7,8 +7,9 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import { FiUploadCloud, FiDownloadCloud } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import ExpModalCommand from "./ExpModalCommand";
+import cl from "./SideBar.module.scss";
 
-const ExpressionsMenuIcons = ({ expressionsActions }) => {
+const SideBarManage = ({ expressionsActions }) => {
   const [mod, setMod] = useState(false);
   const modal = (el) => {
     setMod(el);
@@ -16,7 +17,7 @@ const ExpressionsMenuIcons = ({ expressionsActions }) => {
   const router = useNavigate();
 
   return (
-    <>
+    <div className={cl.sideM}>
       {mod ? (
         <ExpModalCommand
           mod={mod}
@@ -27,25 +28,22 @@ const ExpressionsMenuIcons = ({ expressionsActions }) => {
         <></>
       )}
       <button title="add one" onClick={expressionsActions.addNew}>
-        <GoPlus />
+        <GoPlus /> ADD ONE PHRASE
       </button>
-      {/* <button title="add some" onClick={() => modal("list")}>
-        <TbTextPlus />
+      <button title="add some" onClick={() => modal("list")}>
+        <TbTextPlus /> ADD FROM LIST
       </button>
       <button title="Add from the file" onClick={() => modal("file")}>
-        <FiUploadCloud />
+        <FiUploadCloud /> ADD FROM FILE
       </button>{" "}
       <button title="Delete" onClick={expressionsActions.deleteMode}>
-        <AiOutlineDelete />
+        <AiOutlineDelete /> DELETE PRASES
       </button>{" "}
       <button title="Download" onClick={expressionsActions.downloadMode}>
         <FiDownloadCloud />
-      </button>{" "} */}
-      <button title="Back to training" onClick={() => router("/training")}>
-        <RiArrowGoBackLine />
+        DOWNLOAD PRASES
       </button>{" "}
-    </>
+    </div>
   );
 };
-
-export default ExpressionsMenuIcons;
+export default SideBarManage;

@@ -207,6 +207,7 @@
     }
 }
 
+
 .labeltext {
     color: var(--color-text-label);
     // display: flex;
@@ -257,14 +258,19 @@
 }
 
 .btnPlus {
-    width: 4rem;
+    // width: 4rem;
     height: 4rem;
-    font-size: 20px;
+    font-size: 13px;
     line-height: 1;
-    text-align: center;
-    border-radius: 50%;
+    text-align: left;
+    // border-radius: 50%;
     font-weight: 500;
     color: var(--color-text-base);
+    width: 100%;
+
+    svg {
+        margin-right: 10px;
+    }
 
     &:hover {
         background-color: var(--background-color-dark);

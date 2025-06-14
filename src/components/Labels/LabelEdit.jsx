@@ -22,10 +22,11 @@ const LabelEdit = ({ callback, label = null }) => {
     setIsEdit(false);
   };
   return (
-    <div>
+    <>
       {!label ? (
         <button className={cl.btnPlus} onClick={() => setIsEdit(true)}>
           <FaPlus />
+          ADD NEW LABEL
         </button>
       ) : (
         <button className={cl.btnEdit} onClick={() => setIsEdit(true)}>
@@ -55,7 +56,7 @@ const LabelEdit = ({ callback, label = null }) => {
           </div>
         </MyModal>
       )}
-    </div>
+    </>
   );
 };
 

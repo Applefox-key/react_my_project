@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import cl from "./SideBar.module.scss";
 import SideBarLabels from "./SideBarLabels";
-import { RiListSettingsLine, RiPriceTag3Line } from "react-icons/ri";
-import ExpressionsMenuIcons from "./ExpressionsMenuIcons";
+import {
+  RiArrowGoBackLine,
+  RiListSettingsLine,
+  RiPriceTag3Line,
+} from "react-icons/ri";
+
 import SideBarSettings from "./SideBarSettings";
 import { CSSTransition } from "react-transition-group";
+import SideBarManage from "./SideBarManage";
+import { useNavigate } from "react-router-dom";
+import { GoPlus } from "react-icons/go";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 const SideBar = ({
   applyMode,
@@ -22,16 +30,26 @@ const SideBar = ({
   const check = () => {
     if (applyMode.isOn) applyMode.applyOnOF();
   };
+  const router = useNavigate();
   return (
     <div className={cl["sideBar-wrap"]}>
       <div className={cl["sideBar-narrow"]} onClick={check}>
-        <button onClick={() => showHide("settings")}>
-          <RiListSettingsLine />
+        <button onClick={() => showHide("manage")}>
+          <HiOutlineDotsHorizontal />
+        </button>{" "}
+        <button title="add one" onClick={expressionsActions.addNew}>
+          <GoPlus />
         </button>
         <button onClick={() => showHide("labels")}>
           <RiPriceTag3Line />
         </button>
-        <ExpressionsMenuIcons expressionsActions={expressionsActions} />
+        {/* <ExpressionsMenuIcons expressionsActions={expressionsActions} />{" "} */}
+        <button onClick={() => showHide("settings")}>
+          <RiListSettingsLine />
+        </button>{" "}
+        <button title="Back to training" onClick={() => router("/training")}>
+          <RiArrowGoBackLine />
+        </button>{" "}
       </div>
       {sideBar.show && (
         <CSSTransition
@@ -40,9 +58,11 @@ const SideBar = ({
           timeout={500}
           classNames="sidebar">
           <div className={cl["sideBar-wide"]}>
-            {sideBar.name === "settings" ? (
-              <SideBarSettings />
-            ) : (
+            {sideBar.name === "settings" && <SideBarSettings />}{" "}
+            {sideBar.name === "manage" && (
+              <SideBarManage expressionsActions={expressionsActions} />
+            )}{" "}
+            {sideBar.name === "labels" && (
               <SideBarLabels
                 showHide={showHide}
                 filterChange={filterChange}
