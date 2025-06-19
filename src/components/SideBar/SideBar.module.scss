@@ -63,6 +63,17 @@
             margin: 0;
         }
     }
+
+    .btnA {
+        color: var(--color-marker);
+        font-weight: 700;
+
+
+        svg {
+            outline: 2px solid var(--color-marker);
+            background-color: var(--background-color-medium);
+        }
+    }
 }
 
 

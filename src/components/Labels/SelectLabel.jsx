@@ -3,7 +3,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
 
-const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
+const SelectLabel = ({
+  onSelect,
+  colCat = "",
+  isOne,
+  disabled,
+  lgSize = false,
+}) => {
   const [selected, setSelected] = useState(colCat);
   const [mode, setMode] = useState(false);
 
@@ -33,9 +39,11 @@ const SelectLabel = ({ onSelect, colCat = "", isOne, disabled }) => {
           size="lg"
           variant="light">
           {selected.name ? (
-            <span className={cl["labeltext"]}>{selected.name}</span>
+            <span className={cl["labeltext" + (lgSize ? "Lg" : "")]}>
+              {selected.name}
+            </span>
           ) : (
-            <span className={cl["labelEmpty"]}>🏷️</span>
+            <span className={cl["labelEmpty" + (lgSize ? "Lg" : "")]}>🏷️</span>
           )}{" "}
         </Dropdown.Toggle>
         {mode && (

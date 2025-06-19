@@ -57,6 +57,14 @@
     margin: 0;
   }
 }
+.sideBar-narrow .btnA {
+  color: var(--color-marker);
+  font-weight: 700;
+}
+.sideBar-narrow .btnA svg {
+  outline: 2px solid var(--color-marker);
+  background-color: var(--background-color-medium);
+}
 
 .sideBar-wide {
   z-index: 600;

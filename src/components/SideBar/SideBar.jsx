@@ -34,17 +34,23 @@ const SideBar = ({
   return (
     <div className={cl["sideBar-wrap"]}>
       <div className={cl["sideBar-narrow"]} onClick={check}>
-        <button onClick={() => showHide("manage")}>
+        <button
+          onClick={() => showHide("manage")}
+          className={sideBar && sideBar.name === "manage" ? cl.btnA : ""}>
           <HiOutlineDotsHorizontal />
         </button>{" "}
         <button title="add one" onClick={expressionsActions.addNew}>
           <GoPlus />
         </button>
-        <button onClick={() => showHide("labels")}>
+        <button
+          onClick={() => showHide("labels")}
+          className={sideBar && sideBar.name === "labels" ? cl.btnA : ""}>
           <RiPriceTag3Line />
         </button>
         {/* <ExpressionsMenuIcons expressionsActions={expressionsActions} />{" "} */}
-        <button onClick={() => showHide("settings")}>
+        <button
+          onClick={() => showHide("settings")}
+          className={sideBar && sideBar.name === "settings" ? cl.btnA : ""}>
           <RiListSettingsLine />
         </button>{" "}
         <button title="Back to training" onClick={() => router("/training")}>

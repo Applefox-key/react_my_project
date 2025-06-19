@@ -208,7 +208,8 @@
 }
 
 
-.labeltext {
+.labeltext,
+.labeltextLg {
     color: var(--color-text-label);
     // display: flex;
     // background-color: var(--background-color-intense);
@@ -222,15 +223,16 @@
     width: 11rem;
     overflow: hidden;
 
-    &:hover {
-        // background-color: var(--background-color-dark);
-    }
+    // &:hover {
+    //     // background-color: var(--background-color-dark);
+    // }
 
 }
 
-.labelEmpty {
-    font-size: 22px;
-    width: 10rem;
+.labelEmpty,
+.labelEmptyLg {
+    font-size: 12px;
+    width: 11rem;
     height: 3rem;
     color: var(--color-text-label);
     // background-color: var(--background-color-pale);
@@ -238,11 +240,14 @@
     text-align: start;
     line-height: 1;
     padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 
     &::after {
         content: "pick a label";
         font-size: 12px;
-        font-size: 20px;
+
         color: var(--color-text-label);
     }
 
@@ -256,6 +261,21 @@
     //     // }
     // }
 
+}
+
+.labeltextLg,
+.labelEmptyLg {
+    font-size: 22px;
+    width: 14rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+
+        font-size: 20px;
+
+    }
 }
 
 .btnPlus {

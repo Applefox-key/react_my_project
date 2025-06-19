@@ -55,7 +55,8 @@ const Training = () => {
           <SelectLabel
             onSelect={selectLabel}
             colCat={defineLabel()}
-            isOne={true}
+            isOne
+            lgSize
           />
         </div>
 
