@@ -3,6 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import cl from "./ExpressionsList.module.scss";
 import Draggable from "react-draggable";
 import ExpressionBody from "./ExpressionBody";
+import SoundBtn from "../../users/VoiceBtn/SoundBtn";
 
 const EditWindow = ({ editMode, expressionsActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
@@ -10,8 +11,11 @@ const EditWindow = ({ editMode, expressionsActions }) => {
   const [expression, setExpression] = useState(editMode.editElem.expression);
   const [note, setNote] = useState(editMode.editElem.note);
   const closeModal = (e) => {
+    console.log(1);
+
     if (e) e.stopPropagation();
     if (copyBtn) setCopyBtn("");
+
     expressionsActions.contentEdit(
       editMode.editElem.id === "new" ? "newCancel" : ""
     );
@@ -39,24 +43,34 @@ const EditWindow = ({ editMode, expressionsActions }) => {
       <Draggable handle=".handle">
         <div className={cl["modal-box"]}>
           <div className={["handle", cl["top-edit-box"]].join(" ")}>
-            EDIT PRASE
+            <div>EDIT PHRASE</div>
+            <SoundBtn text={phrase} />
             <button
               className={cl["edit-close-btn"]}
               title="Clouse without changes"
               onClick={closeModal}>
               <IoMdClose />
-            </button>
+            </button>{" "}
           </div>
+
           <ExpressionBody
             values={{ phrase, expression, note }}
             setters={{ setPhrase, setNote, setExpression }}
           />
-          <button
-            className={cl["edit-save-btn"]}
-            title="Save changes"
+          <div className={cl["edit-bottom"]}>
+            <button
+              className={cl["edit-save-btn"]}
+              title="Save changes"
+              onClick={save}>
+              SAVE CHANGES
+            </button>{" "}
+          </div>
+          {/* <button
+            className={cl["edit-cancel-btn"]}
+            title="Cancel changes"
             onClick={save}>
             SAVE CHANGES
-          </button>{" "}
+          </button> */}
         </div>
       </Draggable>
     </div>

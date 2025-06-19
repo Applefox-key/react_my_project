@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MyPagination from "../../UI/MyPagination/MyPagination";
 import MyFilter from "../../UI/MyFilter/MyFilter";
 import MyToggleBtnGroup from "../../UI/MyToggleBtnGroup";
-import { CgMenuGridR, CgMenu } from "react-icons/cg";
+import { CgMenuGridR } from "react-icons/cg";
 import ExpressionItem from "./ExpressionItem";
 import cl from "./ExpressionsList.module.scss";
 import SideBar from "../../SideBar/SideBar";
@@ -84,13 +84,14 @@ const ExpressionsList = () => {
             <div>
               <MyFilter filter={filters.filter} filterChange={filterChange} />
             </div>
+
             <MyPagination
               pageParams={pageParams}
               setPageParams={setPageParams}
             />
             <div className={cl.viewSwitcher}>
               <MyToggleBtnGroup
-                arr={[<CgMenu />, <CgMenuGridR />, <CiViewTable />]}
+                arr={[<CgMenuGridR />, <CiViewTable />]}
                 checked={view}
                 name={"md"}
                 onChange={toggleBtnHandle}

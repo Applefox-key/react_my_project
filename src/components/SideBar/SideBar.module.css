@@ -1,0 +1,203 @@
+.sideBar-wrap {
+  height: 95vh;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: var(--background-color-medium);
+  display: flex;
+  position: sticky;
+  align-self: flex-start;
+  top: 3rem;
+}
+
+.sideM {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.sideM button {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.sideM svg {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.lblSide {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  flex-direction: column;
+}
+
+.sideBar-narrow {
+  height: 100%;
+  width: 5rem;
+  padding-top: 5rem;
+  z-index: 700;
+  background-color: var(--background-color-dark);
+}
+.sideBar-narrow button {
+  width: 5rem;
+  height: 5rem;
+  font-size: 20px;
+  color: var(--color-text-label);
+  margin: 0;
+}
+.sideBar-narrow button:hover {
+  background-color: var(--background-color-medium);
+}
+@media screen and (max-height: 600px) {
+  .sideBar-narrow button {
+    width: 4rem;
+    height: 4rem;
+    margin: 0;
+  }
+}
+
+.sideBar-wide {
+  z-index: 600;
+  height: 100vh;
+  width: 20rem;
+  background-color: var(--background-color-medium);
+  padding-top: 1.5rem;
+  color: var(--color-text-base);
+  transition: all 0.4s ease-in-out;
+}
+.sideBar-wide h3 {
+  margin: 0;
+}
+.sideBar-wide h2 {
+  margin: 0;
+  text-align: end;
+  padding-right: 6px;
+  font-size: larger;
+  font-family: system-ui;
+  position: relative;
+  text-align: -webkit-right;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--color-text-label);
+  background-color: var(--background-color-intense);
+  padding: 0 5px;
+  width: 100%;
+}
+.sideBar-wide .checkbox_wrap {
+  display: flex;
+  margin: 5px;
+}
+.sideBar-wide .checkboxL {
+  margin-left: 5px;
+  font-size: 1.5rem;
+  width: 85%;
+  margin-bottom: 1rem;
+  text-align: justify;
+  font-family: sans-serif;
+}
+.sideBar-wide .checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  accent-color: var(--background-color-intense);
+}
+
+.link-box, .link-box1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  margin: 5px 0;
+  font-size: 16px;
+  text-shadow: 0px 0px 1px rgb(66, 68, 90);
+  position: relative;
+  color: var(--color-text-base);
+  cursor: pointer;
+}
+.link-box span, .link-box1 span {
+  color: var(--color-marker);
+  margin: 0 0.5rem;
+}
+.link-box button, .link-box1 button {
+  color: var(--color-text-base);
+}
+.link-box button:hover, .link-box1 button:hover {
+  background-color: var(--background-color-medium);
+}
+.link-box:hover, .link-box1:hover {
+  background-color: var(--color-text-inform);
+}
+
+.link-box1 {
+  font-style: italic;
+}
+
+.link-box-active {
+  background-color: var(--background-color-dark);
+  background-color: var(--color-text-inform);
+  color: var(--color-text-label);
+}
+
+.miniMenu {
+  background-color: var(--color-text-inform);
+  color: var(--color-text-base);
+  position: absolute;
+  top: 110%;
+  right: 2px;
+  z-index: 3;
+  width: 80%;
+  padding: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.miniMenu button {
+  color: var(--color-text-base);
+  margin: 5px 10px;
+  transition: all 0.2s ease-in-out;
+  text-align: start;
+}
+.miniMenu button:hover {
+  transform: scale(1.2);
+}
+
+.titleString {
+  background-color: var(--background-color-intense);
+  width: 17rem;
+}
+
+.subLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.subLine h2 {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px 5px;
+}
+
+.btnPlus {
+  width: 100%;
+  height: 4rem;
+  font-size: 13px;
+  line-height: 1;
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-text-base);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.btnPlus svg {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.btnPlus:hover {
+  background-color: var(--background-color-dark);
+  color: var(--color-text-label);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}/*# sourceMappingURL=SideBar.module.css.map */

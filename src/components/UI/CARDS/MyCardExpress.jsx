@@ -5,15 +5,13 @@ import cl from "./MyCardExpress.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { addSpanToExpInPrase } from "../../../utils/texts";
 import Plan from "../../expressions/PlanAndHistory/Plan";
+import { useStretchingText } from "../../../hooks/useStretchingText";
 
 const MyCardExpress = ({ item, hint }) => {
   const [flipped, setFlipped] = useState(false);
-  const generateClass = (item) => {
-    if (item.phrase.length < 190) return "display-1";
-    if (item.phrase.length < 240) return "display-2";
-    if (item.phrase.length < 350) return "display-3";
-    if (item.phrase.length < 400) return "display-4";
-  };
+  useStretchingText("planFont");
+  useStretchingText("relativeF");
+
   return (
     <div>
       <div className={cl["card-container"]}>
@@ -26,7 +24,7 @@ const MyCardExpress = ({ item, hint }) => {
             classNames="cardFront"
             key="front">
             <div className={cl["card-front"]}>
-              <div className={"relative " + generateClass(item)}>
+              <div className={"relativeF"}>
                 {!item.expression ? item.phrase : addSpanToExpInPrase(item)}
               </div>
             </div>
@@ -37,9 +35,11 @@ const MyCardExpress = ({ item, hint }) => {
             classNames="cardBack"
             key="back">
             <div className={cl["card-back"]}>
-              <h1 className="display-4 mb-2 mt-0">Study plan</h1>
-              <Plan expression={item} />
-              <h1 className="mt-5">{hint}</h1>
+              <h1 className="plan-back">Study plan</h1>
+              <div className={cl.back}>
+                <Plan expression={item} />
+              </div>
+              <div className="back-hint">{hint}</div>
             </div>
           </CSSTransition>
         </button>

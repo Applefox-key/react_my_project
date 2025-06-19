@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import cl from "./ExpressionsList.module.scss";
 import { AiOutlineClear } from "react-icons/ai";
 import { TiArrowRightOutline } from "react-icons/ti";
+import VoiceBtns from "../../users/VoiceBtn/VoiceBtns";
 
 const ExpressionBody = ({ smallSize = false, values, setters }) => {
   const { phrase, expression, note } = values;
@@ -20,8 +21,19 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
     setExpression(copyBtn);
     setCopyBtn("");
   };
+  const textRef = useRef();
   return (
     <div className={cl["expression-body"]}>
+      {!!textRef && (
+        <div
+          className={cl["phrase-edit-voice"]}
+          // className={
+          //   textRef.current.id === "question" ? "voiceEdit qv" : "voiceEdit av"
+          // }
+        >
+          <VoiceBtns textRef={textRef} />
+        </div>
+      )}
       <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
         <div
           className={
@@ -43,6 +55,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           )}
         </div>
         <textarea
+          ref={textRef}
           onClick={clickOnPhrase}
           onTouchEnd={clickOnPhrase}
           placeholder="....write a phrase to remember"
@@ -53,6 +66,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           }
           value={phrase}
         />
+
         <input
           title="pop-up note"
           placeholder="....write a pop-up note"

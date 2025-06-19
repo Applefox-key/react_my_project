@@ -19,9 +19,9 @@ const MyPagination = ({ setPageParams, pageParams }) => {
   }
 
   return (
-    <div className="m-auto">
-      <div className={cl.wrap}>{items}</div>
-    </div>
+    // <div className="m-auto">
+    <div className={cl.wrap}>{items}</div>
+    // </div>
   );
 };
 

@@ -4,7 +4,7 @@ import { usePopup } from "../../../hooks/usePopup";
 import { useQuery } from "../../../hooks/useQuery";
 import TrainingCards from "./TrainingCards";
 import SelectLabel from "../../Labels/SelectLabel";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MySpinner from "../../UI/MySpinner/MySpinner";
 
 const Training = () => {
@@ -47,10 +47,10 @@ const Training = () => {
     if (newList.length === 0) setPopup.success("GOOD JOB!");
     setList(newList);
   };
-
+  const route = useNavigate();
   return (
-    <div className="mt-3 fs-3 ">
-      <div className="p-1">
+    <div className="training-field">
+      <div className="training-menu">
         <div className="training-label">
           <SelectLabel
             onSelect={selectLabel}
@@ -58,13 +58,17 @@ const Training = () => {
             isOne={true}
           />
         </div>
-        <h3>
-          <div className="colorhint">
-            you have {list ? list.length : 0} expressions to read{" "}
-            {label ? " (label " + label.name + ")" : ""}
-          </div>
-        </h3>{" "}
+
+        <div className="colorhint">
+          you have {list ? list.length : 0} expressions to read{" "}
+          {label ? " (label " + label.name + ")" : ""}
+        </div>
+
+        <button onClick={() => route("/expressions")} className="btn-back">
+          BACK
+        </button>
       </div>
+
       <div>
         {isLoading || !list ? (
           <MySpinner />

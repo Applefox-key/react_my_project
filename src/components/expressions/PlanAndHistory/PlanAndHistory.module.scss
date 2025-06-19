@@ -20,22 +20,24 @@
 
     }
 
-    &::after {
-        content: "";
-        height: 5px;
-        width: 80%;
-        background-color: var(--background-color-intense);
-        display: block;
-        text-align: center;
-        margin: auto;
-        border-radius: 3px;
-    }
+    // &::after {
+    //     content: "";
+    //     height: 5px;
+    //     width: 80%;
+    //     background-color: var(--background-color-intense);
+    //     display: block;
+    //     text-align: center;
+    //     margin: auto;
+    //     border-radius: 3px;
+    // }
 
     @media screen and (max-width:900px) {
         font-size: 10px;
     }
 
 }
+
+
 
 
 .history {

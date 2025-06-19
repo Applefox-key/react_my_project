@@ -11,13 +11,13 @@ const History = ({ expression }) => {
     return {};
   };
   return (
-    <div className={cl.history}>
+    <ul className={cl.history}>
       {history.map((item, i) => (
-        <div key={i} className={cl.historyRow}>
-          <div style={stylecss(item)}>{item}</div>
-        </div>
+        <li key={i} className={cl.historyRow} style={stylecss(item)}>
+          {item}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

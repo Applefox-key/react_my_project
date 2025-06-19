@@ -13,7 +13,8 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
   const [elInfo, setElInfo] = useState("");
 
   const classGenerator = (el) => {
-    let part1 = view === 1 ? cl["oneItemCard"] : cl["oneItemRow" + view];
+    // let part1 = view === 1 ? cl["oneItemCard"] : cl["oneItemRow" + view];
+    let part1 = view === 0 ? cl["oneItemCard"] : cl["oneItemRow2"];
     if (!applyMode.isOn || !applyMode.list.includes(el.id)) return part1;
     let part2 = cl["divIsChecked"];
     return [part1, part2].join(" ");
@@ -49,7 +50,8 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
             onDrop={(e) => handleDrop(e, el)}
             onClick={(e) => addEl(e, el)}>
             <div className={cl.atr}>
-              <div className={cl.label_wrap}>
+              <span>{expressionsActions.ordNumber(i + 1)}</span>
+              {/* <div className={cl.label_wrap}>
                 <SelectLabel
                   isOne={true}
                   disabled={applyMode.isOn}
@@ -61,7 +63,7 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
                     })
                   }
                 />
-              </div>
+              </div> */}
               <div
                 className={cl.progress}
                 onClick={(e) => {
@@ -83,14 +85,27 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
             <div className={cl["exp-row-btns"]}>
               {!applyMode.isOn && (
                 <button
+                  className={cl.btnClose}
                   onClick={(e) => {
                     e.stopPropagation();
                     expressionsActions.expressionsDelete(el);
                   }}>
                   ❌
                 </button>
-              )}
-              <span>{expressionsActions.ordNumber(i + 1)}</span>
+              )}{" "}
+              <div className={cl.label_wrap}>
+                <SelectLabel
+                  isOne={true}
+                  disabled={applyMode.isOn}
+                  colCat={{ id: el.labelid, name: el.label }}
+                  onSelect={(val) =>
+                    expressionsActions.contentEdit({
+                      id: el.id,
+                      labelid: val ? val.id : "",
+                    })
+                  }
+                />
+              </div>
             </div>
           </div>
         ))}

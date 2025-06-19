@@ -84,6 +84,24 @@
     transition: opacity 500ms, transform 500ms;
   }
 
+
+ .cardfade-enter {
+  animation: fadeIn;
+  animation-duration: 800ms;
+  }.cardfade-enter-active {
+     animation: fadeIn;
+  animation-duration: 800ms;
+  }
+
+  .cardfade-exit {
+      animation: fadeOut;
+  animation-duration: 800ms;
+  }.cardfade-exit-active {
+     animation: fadeOut;
+  animation-duration: 800ms;
+  }
+
+
   .card_left-enter {
     opacity: 0;
     transform: translateX(-100%);

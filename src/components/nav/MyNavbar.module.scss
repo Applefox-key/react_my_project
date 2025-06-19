@@ -10,23 +10,27 @@
 
 .countBadge {
   position: absolute;
-  top: 0px;
-  right: -1px;
+  // top: 0px;
+  // right: -1px;
   font-size: 14px;
   padding: 0 2px;
-
-  font-family: sans-serif;
-  font-weight: 700;
+  // 
+  // font-family: sans-serif;
+  // font-weight: 700;
   border: 1px solid var(--color-marker);
-  color: var(--color-text-label);
-  background-color: var(--background-color-intense);
-  border-radius: 5px;
+  // color: var(--color-text-label);
+  // background-color: var(--background-color-intense);
+  border-radius: 50%;
   height: 17px;
   line-height: 1.2;
-
-  text-shadow: 0.5px 0.5px black;
-  box-shadow: var(--color-marker) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // text-shadow: 0.5px 0.5px black;
+  // box-shadow: var(--color-marker) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   z-index: 20;
+  top: 0px;
+  left: 80%;
 
   @media screen and (max-width:900px) {
     font-size: 12px;
@@ -35,11 +39,48 @@
   }
 }
 
+.subN {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.headerLogo {
+  width: max-content;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  text-transform: none;
+
+  a {
+    color: unset;
+    text-decoration: unset;
+  }
+
+  h1 {
+    font-family: 'Kurale';
+    color: var(--main-color);
+
+
+    &::after {
+      content: "";
+      width: 146px;
+      height: 2px;
+      background-image: linear-gradient(to right, var(--color-marker), var(--background-color-intense));
+      display: block;
+      border-radius: 4px;
+      position: relative;
+      bottom: 3px;
+    }
+  }
+}
+
 .nav-top-string {
   padding-top: 4px;
-  justify-content: flex-end;
+  // justify-content: flex-end;
   padding-right: 2rem;
   background-color: var(--background-color-base);
+  justify-content: space-between;
 
   @media screen and (max-width: 900px) {
     padding-right: 0rem;
@@ -55,19 +96,24 @@
   left: 0;
   justify-content: end;
   z-index: 500;
+  text-transform: lowercase;
 
   button {
     font-size: 20px;
     background-color: var(--background-color-base);
     color: var(--color-text-base);
     border: none;
+    padding: 0;
 
     @media screen and (max-width: 900px) {
       font-size: 14px;
     }
 
     &:hover {
-      color: var(--color-marker);
+      border: 3px solid var(--color-marker);
+      background-color: var(--color-marker);
+      color: var(--background-color-light);
+
     }
   }
 
@@ -96,7 +142,7 @@
 .navLinkActive {
   display: block;
   padding: 5px 10px;
-  margin: 0 1 20px;
+  margin: 0px;
   font-weight: 400;
   color: var(--color-text-base);
   background-color: var(--background-color-base);
@@ -116,14 +162,31 @@
   }
 }
 
+.nav-item {
+  position: relative;
+  background: transparent;
+}
+
 .navLinkActive {
   // background-color: var(--color-text-base);
-  color: var(--background-color-base);
-  color: var(--color-marker);
+  // color: var(--background-color-base);
+  // color: var(--color-marker);
   font-weight: 600;
-  text-shadow: 1px 1px black;
+  // text-shadow: 1px 1px black;
+
+  &::after {
+    content: "";
+    width: 100%;
+    background: var(--color-marker);
+    height: 2px;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+  }
+
 
   &:hover {
+    color: var(--color-text-base);
     cursor: auto;
     // color: var(--background-color-intense);
   }

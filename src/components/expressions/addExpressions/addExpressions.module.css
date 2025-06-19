@@ -1,0 +1,81 @@
+.modal-paste {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.addingRow {
+  width: 80%;
+  border: 3px solid var(--color-marker);
+  background-color: var(--background-color-light);
+  font-size: 18px;
+  margin: 1rem 0;
+  border-radius: 5px;
+  position: relative;
+  caret-color: transparent;
+  color: var(--color-text-base);
+  border-radius: 18px 18px 35px 35px;
+}
+.addingRow .addingRowHead {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: -1px;
+}
+.addingRow .addingRowHead span,
+.addingRow .addingRowHead button {
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 3rem;
+  text-align: center;
+  background-color: var(--color-marker);
+  border-radius: 50%;
+  z-index: 5;
+}
+.addingRow .addingRowHead button:hover {
+  background-color: var(--background-color-light);
+}
+
+.titleBtns {
+  padding: 1rem 2rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+}
+.titleBtns span {
+  font-weight: 500;
+  color: var(--color-marker);
+  width: 22rem;
+  right: -100%;
+  font-size: 14px;
+}
+@media screen and (max-width: 900px) {
+  .titleBtns span {
+    width: 100%;
+  }
+}
+
+.label-box {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  text-align: start;
+}
+.label-box span {
+  width: 10rem;
+  position: absolute;
+  bottom: -0.5rem;
+  left: 4rem;
+  font-size: 12px;
+}
+@media screen and (max-width: 900px) {
+  .label-box span {
+    display: none;
+  }
+}/*# sourceMappingURL=addExpressions.module.css.map */

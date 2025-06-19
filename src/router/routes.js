@@ -18,7 +18,7 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
-  { path: "/about", element: <About />, nameNav: "About" },
+  { path: "/about", element: <About />, nameNav: "" },
   { path: "/training", element: <Training />, nameNav: "Training" },
   {
     path: "/training/:labelid/:labelName",
@@ -33,5 +33,9 @@ export const privateRoutes = [
   },
   { path: "/*", element: <Training />, nameNav: "" },
 
-  { path: "/profile", element: <Profile />, nameNav: "Profile" },
+  {
+    path: "/profile",
+    element: <Profile />,
+    nameNav: "",
+  },
 ];

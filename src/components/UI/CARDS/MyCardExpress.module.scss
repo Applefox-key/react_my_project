@@ -64,6 +64,13 @@
 .card-back {
   background: var(--background-color-medium);
   color: var(--color-text-base);
+  justify-content: flex-start;
+
+  .back {
+    width: 85%;
+    height: 90%;
+
+  }
 
   @media screen and (max-width:900px) {
 
@@ -71,6 +78,8 @@
     padding-top: 3rem;
   }
 }
+
+
 
 .hint {
   text-align: end;
@@ -115,6 +124,8 @@
 
   .card-back {
     font-size: 1rem;
+
+
   }
 
   h1 {

@@ -1,0 +1,28 @@
+.planWrap .plan {
+  display: flex;
+  color: var(--color-text-base);
+}
+.planWrap .plan .planDay {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.planWrap .plan .planDay p {
+  margin: 0;
+  font-weight: 700;
+}
+@media screen and (max-width: 900px) {
+  .planWrap .plan .planDay {
+    margin: 0.4rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .planWrap {
+    font-size: 10px;
+  }
+}
+
+.history {
+  color: var(--color-text-base);
+  overflow: auto;
+}/*# sourceMappingURL=PlanAndHistory.module.css.map */

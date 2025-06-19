@@ -1,0 +1,289 @@
+.voice-main {
+    position: relative;
+
+    .voice-wrap {
+        position: absolute;
+        padding-right: 25px;
+
+        .langs {
+            position: absolute;
+            right: 0px;
+            top: -15px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 15px;
+            transition: all 0.2s ease-in-out;
+            height: 30px;
+
+            .lang,
+            .langElfalse,
+            .langEltrue {
+                // position: absolute;
+                // right: -15px;
+                // top: -15px;
+                border-radius: 50%;
+                border: 2px solid var(--main-color-int);
+                height: 30px;
+                width: 30px;
+                background: var(--background-second);
+                color: var(--wrap-color);
+                transition: all 0.2s ease-in-out;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+
+            p {
+                display: inline;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                padding: 0;
+                margin: 0;
+            }
+
+            &:hover {
+                background: var(--background-color-base);
+                color: var(--color-text-base);
+                box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5), -4px -4px 6px 0 rgba(116, 125, 136, 0.5), inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+            }
+
+
+        }
+
+        .roundBtn,
+        .start-record-btn,
+        .stop-record-btn,
+        #start-record-btn,
+        #stop-record-btn {
+            position: relative;
+            margin: 0 5px;
+            border: none;
+            background: var(--background-second);
+            color: var(--main-color-int);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            min-width: 4rem;
+            min-height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            transition: all 0.2s ease-in-out;
+            color: inherit;
+
+            &:hover {
+                background-color: var(--wrap-color);
+                color: white;
+            }
+        }
+
+        .langs {
+            .langElfalse {
+                // display: none;
+                visibility: hidden;
+                display: flex;
+                height: 0;
+                scale: 0;
+                transition: all 0.7s ease-in-out;
+            }
+
+            .langEltrue {
+                display: flex;
+                // background-color: var(--background-note);
+                // color: var(--main-back);           
+
+                background-color: var(--color-marker);
+                color: var(--background-color-base);
+                // border: 1px solid var(--color-marker);
+            }
+
+            &:hover {
+                .langElfalse {
+                    scale: 1;
+                    // display: flex;
+                    visibility: visible;
+                    height: 30px;
+                }
+            }
+        }
+
+
+    }
+
+    &:hover {
+        .voice-wrap .langs {
+            display: flex;
+            height: fit-content;
+        }
+    }
+}
+
+.voice-hide {
+    visibility: hidden;
+    width: 0;
+}
+
+.voice-mainBox {
+    position: relative;
+    width: 4rem;
+    z-index: 4000;
+    // position: absolute;
+    // bottom: 40px;
+    // left: 50%;
+    // top: -40px;
+    // left: 45%;
+    display: flex;
+    height: 3rem;
+
+    &:hover {
+        .langs {
+            opacity: 0.7;
+            display: flex;
+            padding: 0;
+
+            .langEltrue {
+                scale: 0.8;
+                background-color: var(--background-color-intense);
+                color: var(--color-text-label);
+                border: 1px solid var(--background-color-base);
+            }
+        }
+    }
+
+    .langs {
+        z-index: 3500;
+        position: absolute;
+        left: 30px;
+        top: 0px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 15px;
+        transition: all 0.2s ease-in-out;
+        height: 30px;
+        width: 50px;
+        flex-wrap: wrap;
+
+
+
+        backdrop-filter: blur(13px);
+        background-attachment: fixed;
+        // box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+        opacity: 0.95;
+        // background-color: var(--background-second);
+        background: transparent;
+
+        // background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0.1) 95%, rgba(0, 0, 0, 0) 100%);
+        padding-right: 7px;
+
+        .lang,
+        .langElfalse,
+        .langEltrue {
+            z-index: 500;
+            // position: absolute;
+            // right: -15px;
+            // top: -15px;
+            border-radius: 50%;
+            // border: 2px solid var(--background-second);
+            border: 1px solid var(--background-color-base);
+            height: 30px;
+            width: 40px;
+            // background: var(--color-accent);
+            // color: var(--wrap-color);
+            transition: all 0.2s ease-in-out;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .langElfalse {
+            display: none;
+            visibility: hidden;
+            // display: flex;
+            height: 0;
+            scale: 0;
+            // background-color: var(--back-first);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .langEltrue {
+            display: flex;
+            // background-color: var(--wrap-color);
+            // color: var(--background-second);
+        }
+
+        p {
+            display: inline;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+        }
+
+        &:hover {
+            background-color: var(--background-color-base);
+            opacity: 1;
+            color: var(--color-text-base);
+            box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5), -4px -4px 6px 0 rgba(116, 125, 136, 0.5), inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+
+
+
+            flex-wrap: wrap;
+            flex-direction: row;
+            height: -moz-fit-content;
+            height: 200px;
+            max-height: 200px;
+            max-width: -moz-fit-content;
+            width: 150px;
+            padding: 5px;
+            overflow-y: auto;
+
+            opacity: 1;
+
+            .langElfalse {
+                scale: 1;
+                // display: flex;
+                visibility: visible;
+                height: 30px;
+                display: flex;
+                transition: all 0.1s ease-in-out;
+
+                &:hover {
+                    background-color: var(--background-color-dark);
+                    color: var(--background-second);
+                    opacity: 0.7;
+
+                }
+            }
+
+            .langEltrue {
+                scale: 1;
+                background-color: var(--background-color-dark);
+                // color: var(--background-second);
+            }
+        }
+
+
+    }
+
+
+    .btnVoice {
+
+        // color: var(--background-color-pale);
+        color: inherit;
+
+        &:hover {
+            box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5), -4px -4px 6px 0 rgba(116, 125, 136, 0.5), inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+            // box-shadow: none;
+        }
+    }
+}
+
+button {
+    color: inherit;
+}

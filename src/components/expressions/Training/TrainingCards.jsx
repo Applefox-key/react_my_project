@@ -4,6 +4,8 @@ import OneCardE from "./OneCardE";
 import NoWork from "./NoWork";
 import { getSettings, setSettings } from "../../../utils/settings";
 import CountBtns from "./CountBtn";
+import HintCount from "./HintCount";
+
 const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -32,10 +34,9 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
     setShowAnim(!anim);
     expressionUpdate(expr);
   };
-
+  // const hintForUser = item[num] ? item[num].hintForReading : "";
   return (
     <>
-      {" "}
       {!!showBtn && items[num] && (
         <CountBtns
           item={items[num]}
@@ -48,13 +49,20 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
       <div style={{ overflow: "hidden" }}>
         {items.length ? (
           <>
+            <HintCount
+              hint={items[num] ? items[num].hintForReading : ""}
+              phrase={items[num] ? items[num].phrase : ""}
+              setSett={setSett}
+            />
+
             <OneCardE
               anim={anim}
               dir={direction}
               item={items[num]}
               setSett={setSett}
-            />{" "}
+            />
             <div className="training-btn">
+              {" "}
               <Button onClick={prew} disabled={num === 0 || !items.length}>
                 {"❰ PREW"}
               </Button>{" "}
