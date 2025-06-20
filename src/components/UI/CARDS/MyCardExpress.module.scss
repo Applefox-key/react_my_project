@@ -52,8 +52,8 @@
 }
 
 .card-front {
-  background: var(--background-color-light);
-  color: var(--color-text-base);
+  background: var(--background-card);
+  color: var(--color-card);
   position: absolute;
   top: 0;
   left: 0;
@@ -62,8 +62,8 @@
 }
 
 .card-back {
-  background: var(--background-color-medium);
-  color: var(--color-text-base);
+  background: var(--background-menu);
+  color: var(--color-menu);
   justify-content: flex-start;
 
   .back {

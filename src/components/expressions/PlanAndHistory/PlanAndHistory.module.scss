@@ -1,7 +1,7 @@
 .planWrap {
     .plan {
         display: flex;
-        color: var(--color-text-base);
+        color: var(--color-card);
 
         .planDay {
             p {
@@ -24,7 +24,7 @@
     //     content: "";
     //     height: 5px;
     //     width: 80%;
-    //     background-color: var(--background-color-intense);
+    //     background-color: var(--background-label);
     //     display: block;
     //     text-align: center;
     //     margin: auto;
@@ -41,13 +41,13 @@
 
 
 .history {
-    color: var(--color-text-base);
+    color: var(--color-card);
     overflow: auto;
     // &::before {
     //     content: "";
     //     height: 5px;
     //     width: 80%;
-    //     background-color: var(--background-color-intense);
+    //     background-color: var(--background-label);
     //     display: block;
     //     text-align: center;
     //     margin: auto;

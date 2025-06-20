@@ -17,7 +17,7 @@
     height: 3rem;
     border-radius: 50%;
     line-height: 1;
-    border: 1px solid var(--color-text-base);
+    border: 1px solid var(--color-card);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     transition: all 0.2s ease-in-out;
     margin: 10px 5px;
@@ -27,7 +27,7 @@
         position: absolute;
         top: 3rem;
         left: 0;
-        color: var(--color-text-base);
+        color: var(--color-card);
     }
 
     button {
@@ -39,8 +39,8 @@
         padding: 2px 5px;
         border: 3px solid rgb(250, 146, 0);
         border-radius: 5px;
-        color: var(--color-text-base);
-        background-color: var(--background-color-light);
+        color: var(--color-card);
+        background-color: var(--background-card);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
     }
@@ -57,7 +57,7 @@
 }
 
 .planet-active {
-    box-shadow: 0px 3px 12px var(--color-text-label), 0px -4px 12px #c5c5c5;
+    box-shadow: 0px 3px 12px var(--color-label), 0px -4px 12px #c5c5c5;
     outline: 2px solid var(--color-marker);
     scale: (1.1);
 
@@ -83,7 +83,7 @@
         height: 3rem;
         border-radius: 50%;
         line-height: 1;
-        border: 1px solid var(--color-text-base);
+        border: 1px solid var(--color-card);
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         transition: all 0.2s ease-in-out;
 
@@ -92,7 +92,7 @@
             position: absolute;
             top: 3rem;
             left: 0;
-            color: var(--color-text-base);
+            color: var(--color-card);
         }
 
         &:hover {
@@ -103,7 +103,7 @@
 
     .label-active {
         // box-shadow: 0px 3px 12px #ffffff, 0px -4px 12px #c5c5c5;
-        box-shadow: 0px 3px 12px var(--color-text-label), 0px -4px 12px #c5c5c5;
+        box-shadow: 0px 3px 12px var(--color-label), 0px -4px 12px #c5c5c5;
         outline: 2px solid var(--color-marker);
         scale: (1.2);
         // box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -125,12 +125,12 @@
         width: 50%;
         height: 2.5rem;
         margin: 10px 25%;
-        border: 1px solid var(--background-color-dark);
+        border: 1px solid var(--background-sidebar);
         border-radius: 5px;
-        background-color: var(--background-color-intense);
+        background-color: var(--background-label);
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         transition: all 0.2s ease-in-out;
-        color: var(--color-text-base);
+        color: var(--color-card);
         box-shadow: inset #fff 0 0 0px 2px;
 
         &:disabled {
@@ -159,8 +159,8 @@
 
 .editColors {
     position: absolute;
-    background-color: var(--background-color-light);
-    color: var(--color-text-base);
+    background-color: var(--background-card);
+    color: var(--color-card);
     // border: 1px solid red;
     border: 3px solid rgb(250, 146, 0);
     border-radius: 5px;
@@ -174,9 +174,9 @@
 
     span {
         width: 100%;
-        background: var(--background-color-dark);
+        background: var(--background-sidebar);
         background: rgb(250, 146, 0);
-        color: white;
+        color: var(--color-sidebar);
         font-size: 15px;
         display: block;
         text-align: start;
@@ -187,15 +187,15 @@
 
     button {
         width: 100%;
-        background: var(--background-color-dark);
+        background: var(--background-sidebar);
         background: rgb(250, 146, 0);
-        color: white;
+        color: var(--color-sidebar);
         font-size: 15px;
         border-radius: 0 0 5px 5px;
 
         &:hover {
-            background-color: var(--color-text-label);
-            color: var(--background-color-dark);
+            background-color: var(--color-sidebar);
+            color: var(--background-sidebar);
         }
     }
 
@@ -206,8 +206,8 @@
         width: 3rem;
         height: 3rem;
         font-size: 30px;
-        background: var(--background-color-dark);
-        color: var(--color-text-label);
+        background: var(--background-sidebar);
+        color: var(--color-sidebar);
         border: 1px solid red;
         line-height: 0;
         padding-bottom: 9px;

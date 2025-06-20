@@ -1,20 +1,29 @@
 :root {
-  --background-color-base: white;
-  --background-color-dark: #6a99db;
-  --background-color-medium: #d7e5fa;
-  --background-color-light: ghostwhite; //rgb(255, 251, 247);
-  --background-color-intense: #286CCB;
-  --background-color-pale: aliceblue;
+  --background-base: white;
+
+  --background-sidebar: #6a99db;
+
+  --background-menu: #d7e5fa;
+
+  --background-card: ghostwhite; //rgb(255, 251, 247);
+
+  --background-label: #286CCB; //label-back
+  --background-info: aliceblue;
+
   --color-marker: #0d6af5;
-  --color-text-label: white;
-  --color-text-inform: lightblue;
-  --color-text-base: black;
+  --color-card: black;
+  --color-menu: black;
+  --color-base: black;
+  --color-sidebar: white;
+
+  --color-label: white; //label-color
+  --color-info: lightblue;
   --background-color-opacity50: rgba(50, 90, 188, 0.5);
 }
 
 body {
-  background-color: var(--background-color-base);
-  color: var(--text-color-base)
+  background-color: var(--background-base);
+  color: var(--color-base);
 }
 
 .App {
@@ -58,7 +67,7 @@ button {
   position: relative;
 
   @media screen and (max-width:900px) {
-
+    font-size: 12px;
     // top: 35px;
     // width: 100%;
     // position: sticky;
@@ -142,7 +151,7 @@ button {
 }
 
 .color-base {
-  color: var(--color-text-base);
+  color: var(--color-card);
 }
 
 .noMsg {
@@ -214,7 +223,7 @@ button {
       border-radius: 5px;
       padding: 2px 5px;
       box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-      color: var(--background-color-light);
+      color: var(--background-card);
       background-color: var(--color-marker);
       z-index: 700;
     }
@@ -240,9 +249,21 @@ button {
   width: 100%;
 }
 
+.hintText {
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    text-align: left;
+  }
+}
+
 .hintSound {
   position: absolute;
   top: 25px;
+
+  @media screen and (max-width: 600px) {
+    top: -5px;
+    font-size: 24px;
+  }
 
   .lang {
     color: black;
@@ -261,7 +282,7 @@ button {
   margin: auto;
   height: 2.8vc;
   // align-items: flex-end;
-  color: var(--color-text-base);
+  color: var(--color-card);
   text-align: center;
   justify-content: space-between;
   font-size: small;
@@ -345,8 +366,8 @@ button {
   &:hover {
     &::after {
       content: "click to hide or show count button";
-      background-color: var(--color-text-base);
-      color: var(--background-color-base);
+      background-color: var(--color-base);
+      color: var(--background-base);
       position: absolute;
       top: 15px;
       border-radius: 5px;
@@ -361,7 +382,7 @@ button {
   // }
 }
 
-s .circle {
+.circle {
   margin-left: 0.2rem;
   margin-bottom: 0.2rem;
   height: 15px;
@@ -377,8 +398,8 @@ s .circle {
 .darkHint {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   background-color: red;
-  border: 1px solid var(--color-text-base);
-  color: var(--color-text-label);
+  border: 1px solid var(--color-card);
+  color: var(--color-label);
 }
 
 .training-btn {
@@ -388,37 +409,37 @@ s .circle {
   padding: 1rem;
 
   button {
-    border: 3px solid var(--background-color-intense);
+    border: 3px solid var(--background-label);
     transition: all 0.2s ease-in-out;
     font-size: 1rem;
     font-weight: 400;
-    background-color: var(--background-color-intense);
-    color: var(--color-text-label);
+    background-color: var(--background-label);
+    color: var(--color-label);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
     &:hover {
       transform: scale(1.05);
       border: 3px solid var(--color-marker);
-      background-color: var(--background-color-dark);
-      color: var(--color-text-label);
+      background-color: var(--background-sidebar);
+      color: var(--color-sidebar);
     }
 
     &:disabled {
-      background-color: var(--background-color-pale);
-      color: var(--color-text-inform);
-      border: 3px solid var(--background-color-medium);
+      background-color: var(--background-info);
+      color: var(--color-info);
+      border: 3px solid var(--background-menu);
     }
   }
 
   .color_button {
     border: 3px solid var(--color-marker);
     background-color: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
 
     &:hover {
-      border: 3px solid var(--background-color-intense);
-      background-color: var(--background-color-light);
+      border: 3px solid var(--background-label);
+      background-color: var(--background-card);
       color: var(--color-marker);
     }
   }
@@ -429,7 +450,7 @@ s .circle {
 .colorhint {
   border: 3px solid var(--color-marker);
   background-color: var(--color-marker);
-  color: var(--background-color-light);
+  color: var(--background-card);
   width: fit-content;
   margin: auto;
   border-radius: 5px;
@@ -483,14 +504,14 @@ s .circle {
     height: 7rem;
     transition: all 0.2s ease-in-out;
 
-    box-shadow: var(--color-text-base) 0px 1px 2px 0px, var(--color-text-base) 0px 2px 6px 2px;
-    color: var(--color-text-base);
+    box-shadow: var(--color-card) 0px 1px 2px 0px, var(--color-card) 0px 2px 6px 2px;
+    color: var(--color-card);
 
     &:hover {
       // background-color: #ffc107;
-      background-color: var(--background-color-intense);
+      background-color: var(--background-label);
       color: black;
-      color: var(--color-text-label);
+      color: var(--color-label);
       box-shadow: inset #fff 0 0 10px 5px,
         #fff 0 0 10px 5px;
       scale: 1.1;
@@ -509,7 +530,7 @@ s .circle {
   top: 326.68px;
 
   background: #296FD1;
-  // background: var(--background-color-intense);
+  // background: var(--background-label);
   ;
   opacity: 0.45;
   filter: blur(158.5px);
@@ -548,14 +569,19 @@ s .circle {
   line-height: 1.4;
 
 
-  background-color: var(--background-color-intense);
-  color: var(--color-text-label);
+  background-color: var(--background-label);
+  color: var(--color-label);
 
   &:hover {
 
     border: 3px solid var(--color-marker);
     background-color: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 10rem;
+    margin-left: 5px;
   }
 }
 
@@ -564,17 +590,16 @@ s .circle {
   // height: 100%;
   padding: 0 5px;
   height: 3rem;
-  color: var(--color-text-inform);
-  background-color: var(--background-color-pale);
-  color: var(--color-text-label);
-  background-color: var(--background-color-intense);
+  color: var(--color-label);
+  background-color: var(--background-label);
 
   // position: absolute;
   // top: 0;
   &:hover {
     border: 3px solid var(--color-marker);
     background-color: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
+
   }
 }
 
@@ -619,23 +644,23 @@ s .circle {
   .btn:first-child:active,
   :not(.btn-check)+.btn:active {
     background: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
 
   }
 
   .schema-tgb-active {
-    background: var(--background-color-base);
+    background: var(--background-base);
     color: var(--color-marker);
   }
 
   .schema-tgb {
-    background: var(--background-color-base);
-    color: var(--color-text-base);
+    background: var(--background-base);
+    color: var(--color-base);
     border-color: var(--color-marker);
 
     &:hover {
       background: var(--color-marker);
-      color: var(--background-color-light);
+      color: var(--background-card);
       opacity: 0.6;
     }
   }
@@ -660,7 +685,7 @@ s .circle {
   justify-content: space-between;
   align-items: center;
   font-size: 10px;
-  background-color: var(--background-color-intense);
+  background-color: var(--background-label);
   z-index: 3;
   // width: 1.5rem;
   height: 1.5rem;
@@ -673,8 +698,8 @@ s .circle {
   }
 
   &:hover {
-    background-color: var(--background-color-dark);
-    color: var(--color-text-label);
+    background-color: var(--background-sidebar);
+    color: var(--color-sidebar);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
 }
@@ -694,7 +719,7 @@ s .circle {
 
 .dropdown-menu.show {
 
-  border: 3px solid var(--background-color-intense);
+  border: 3px solid var(--background-label);
 }
 
 .unfilter-wrap {
@@ -714,14 +739,14 @@ s .circle {
   text-align: center;
   border-radius: 50%;
   font-weight: 500;
-  color: var(--color-text-base);
+  color: var(--color-card);
   // position: absolute;
   // left: 0;
   // top: 0px;
 
   &:hover {
-    background-color: var(--background-color-dark);
-    color: var(--color-text-label);
+    background-color: var(--background-sidebar);
+    color: var(--color-sidebar);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
 }

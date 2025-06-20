@@ -11,7 +11,7 @@ const HintCount = ({ hint, phrase, setSett }) => {
   return (
     <>
       <div className="hint1" onClick={setSett}>
-        <div>{hintForUser}</div>
+        <div className="hintText">{hintForUser}</div>
         <div className="hintSound">
           <SoundBtn text={phrase} />
         </div>

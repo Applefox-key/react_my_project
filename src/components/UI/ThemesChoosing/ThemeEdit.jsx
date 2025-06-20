@@ -9,16 +9,19 @@ const ThemeEdit = ({ callback, item, colors }) => {
   };
 
   const themeVar = [
-    ["--background-color-base", "base background"],
-    ["--background-color-dark", "sidebar background"],
-    ["--background-color-medium", "menu background"],
-    ["--background-color-light", "card background"],
-    ["--background-color-intense", "label background"],
-    ["--background-color-pale", "info background"],
+    ["--background-base", "base background"],
+    ["--color-base", "base text"],
+    ["--background-card", "card background"],
+    ["--color-card", "card text"],
     ["--color-marker", "text marker"],
-    ["--color-text-label", "label text"],
-    ["--color-text-inform", "info text"],
-    ["--color-text-base", "base text"],
+    ["--background-sidebar", "sidebar background"],
+    ["--color-sidebar", "sidebar text"],
+    ["--background-menu", "menu background"],
+    ["--color-menu", "menu text"],
+    ["--background-label", "label background"],
+    ["--color-label", "label text"],
+    ["--background-info", "info background"],
+    ["--color-info", "info text"],
   ];
   console.log(item);
 
@@ -30,7 +33,7 @@ const ThemeEdit = ({ callback, item, colors }) => {
           x
         </button>
         {themeVar.map((el, i) => (
-          <div>
+          <div key={i}>
             <label htmlFor={"color" + i}>{el[1]}</label>{" "}
             <input
               type="color"

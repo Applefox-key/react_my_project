@@ -3,12 +3,12 @@
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    border-top: 5px solid var(--background-color-intense);
+    border-top: 5px solid var(--background-label);
     margin: 0 auto;
     // margin-top: 8rem;
     font-size: large;
-    background: var(--background-color-base);
-    color: var(--color-text-base);
+    background: var(--background-base);
+    color: var(--color-base);
 
 
     .h1login {
@@ -33,19 +33,19 @@
 
         padding: 0 20px 0 50px;
         outline: none;
-        color: var(--color-text-base);
-        background: var(--background-color-light);
+        color: var(--color-card);
+        background: var(--background-card);
         border: 1px solid var(--color-marker);
     }
 
     .logbutton {
         width: 100%;
         height: 40px;
-        background: var(--background-color-intense);
+        background: var(--background-label);
         box-sizing: border-box;
         border-radius: 5px;
         border: 1px solid #79d1ee;
-        color: var(--color-text-base);
+        color: var(--color-label);
         font-weight: bold;
         text-transform: uppercase;
         font-size: 14px;
@@ -54,7 +54,8 @@
         cursor: pointer;
 
         &:hover {
-            background: var(--background-color-dark);
+            background: var(--background-sidebar);
+            color: var(--color-sidebar);
         }
 
     }

@@ -24,11 +24,11 @@ const UserThemes = () => {
 
   const gradient = (el) => {
     let gradientColors = [
-      "white" && userThemesList[el]["--background-color-light"],
-      "grey" && userThemesList[el]["--background-color-intense"],
-      "grey" && userThemesList[el]["--background-color-medium"],
-      "grey" && userThemesList[el]["--background-color-dark"],
-      "grey" && userThemesList[el]["--color-text-inform"],
+      "white" && userThemesList[el]["--background-card"],
+      "grey" && userThemesList[el]["--background-label"],
+      "grey" && userThemesList[el]["--background-menu"],
+      "grey" && userThemesList[el]["--background-sidebar"],
+      "grey" && userThemesList[el]["--color-info"],
       "grey" && userThemesList[el]["--color-marker"],
     ];
     return `linear-gradient(to bottom, ${gradientColors.join(", ")})`;
@@ -68,7 +68,7 @@ const UserThemes = () => {
             style={{
               background: gradient(el),
               borderColor: "grey" && userThemesList[el]["--color-marker"],
-              color: "grey" && userThemesList[el]["--color-text-label"],
+              color: "grey" && userThemesList[el]["--color-label"],
             }}>
             <span>{el}</span>
             {!editItem && (

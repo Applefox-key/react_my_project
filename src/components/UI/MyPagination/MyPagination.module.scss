@@ -32,26 +32,26 @@
     // border-top: 1px solid #e8e8e8;
     // border-bottom: 1px solid #e8e8e8;
     border: 1px solid var(--color-marker);
-    background: var(--background-color-base);
-    color: var(--color-text-base);
+    background: var(--background-base);
+    color: var(--color-base);
 }
 
 .itemActive {
     // color: #445565 !important;
     // background-color: #e3e7eb;
     // border-color: #ced4da;
-    background: var(--background-color-intense);
-    color: var(--color-text-label);
+    background: var(--background-label);
+    color: var(--color-label);
     cursor: none;
     background: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
 }
 
 .item:hover {
     // background-color: #f4f4f4;
     background: var(--color-marker);
-    color: var(--background-color-light);
+    color: var(--background-card);
     opacity: 0.6;
 }
 
-// color: var(--color-text-label);
+// color: var(--color-label);

@@ -17,48 +17,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // background-color: var(--background-color-base);
-    color: var(--color-text-base);
-    background-color: var(--background-color-light);
+    color: var(--color-card);
+    background-color: var(--background-card);
 
     button {
 
-        border: 3px solid var(--background-color-dark);
-        background-color: var(--background-color-intense);
-        // box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        border: 3px solid var(--background-sidebar);
+        background-color: var(--background-label);
         transition: all 0.2s ease-in-out;
-        color: var(--color-text-label);
+        color: var(--color-label);
 
         &:hover {
-            border: 3px solid var(--background-color-intense);
-            background-color: var(--background-color-medium);
-            color: var(--color-text-base);
+            border: 3px solid var(--background-label);
+            background-color: var(--background-menu);
+            color: var(--color-menu);
         }
     }
 }
 
 .colorwrap,
 .header {
-    background-color: var(--background-color-intense);
-    color: var(--color-text-label);
+    background-color: var(--background-label);
+    color: var(--color-label);
 
     button {
         background-color: aliceblue;
     }
 
     .btn-close {
-        color: var(--color-text-base);
+        color: var(--color-card);
     }
 }
 
 .color {
-    background-color: var(--background-color-base);
-    color: var(--color-text-base);
+    background-color: var(--background-base);
+    color: var(--color-base);
 }
 
 .colorBody {
-    background-color: var(--background-color-light);
-    color: var(--color-text-base);
+    background-color: var(--background-card);
+    color: var(--color-card);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 
@@ -66,11 +64,11 @@
     input {
         margin-top: 5px;
         border-color: var(--color-marker);
-        color: var(--color-text-base);
+        color: var(--color-card);
         outline-color: var(--color-marker);
     }
 
     textarea {
-        background-color: var(--background-color-light);
+        background-color: var(--background-card);
     }
 }

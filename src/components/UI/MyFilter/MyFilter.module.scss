@@ -21,13 +21,13 @@
   border: solid 1px #333;
   transition: all .2s ease-in-out;
   outline: none;
-  caret-color: var(--color-text-label);
+  caret-color: var(--color-label);
   border: 1px solid var(--color-marker);
-  background: var(--background-color-base);
-  color: var(--color-text-base);
+  background: var(--background-base);
+  color: var(--color-base);
 
   &::placeholder {
-    color: var(--color-text-base);
+    color: var(--color-base);
     opacity: 0.8;
     font-style: italic;
 
@@ -51,7 +51,7 @@
   transition: all 0.4s ease-in-out;
 
   svg {
-    color: var(--color-text-base);
+    color: var(--color-card);
     opacity: 0.8;
   }
 }
@@ -64,7 +64,7 @@
   height: 100%;
   width: 3rem;
   transition: all 0.4s ease-in-out;
-  color: var(--color-text-base);
+  color: var(--color-card);
   opacity: 0.8;
 
 
