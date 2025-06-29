@@ -153,7 +153,12 @@ export const useExpressions = (applyMode, editMode, filters) => {
       //add new item
       if (newV.id === "new") {
         try {
-          await BaseAPI.createExpression(newV.expression, newV.phrase);
+          await BaseAPI.createExpression(
+            newV.expression,
+            newV.phrase,
+            newV.labelid,
+            newV.note
+          );
           await this.getExpression();
           editMode.setEdit(null);
           setPopup.success("expression was added");
@@ -177,6 +182,7 @@ export const useExpressions = (applyMode, editMode, filters) => {
         id: "new",
         expression: "",
         phrase: "",
+        note: "",
       };
       setExpressions([newEl, ...expressions]);
       editMode.setEdit(newEl);

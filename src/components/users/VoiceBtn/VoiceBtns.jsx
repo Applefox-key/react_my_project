@@ -5,7 +5,7 @@ import cl from "./VoiceBtns.module.scss";
 import { useOutsideClick } from "../../../hooks/useOutSideClick";
 import { startV, stopV } from "../../../utils/voice";
 
-const VoiceBtns = ({ textRef, disable }) => {
+const VoiceBtns = ({ textRef, disable, onchange = null }) => {
   const langArr = useMemo(() => ["en", "ru", "pl", "ua"], []);
   const [lang, setLang] = useState("en");
   const btnRef = useRef(null);
@@ -13,7 +13,7 @@ const VoiceBtns = ({ textRef, disable }) => {
   const startBtn = useRef(null);
   const onClick = () => {
     if (stopBtn.current.style.display === "none") {
-      startV(textRef, lang || "");
+      startV(textRef, lang || "", true);
       stopBtn.current.style.display = "inline";
       startBtn.current.style.display = "none";
     } else if (startBtn.current.style.display === "none") {

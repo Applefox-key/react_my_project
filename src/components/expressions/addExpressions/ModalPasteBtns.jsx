@@ -16,7 +16,7 @@ const ModalPasteBtns = ({ dataArray, read, add, back, setDataArr }) => {
     );
   };
   return (
-    <div className="pt-2 ">
+    <div className="modal-btn pt-2 ">
       {!dataArray ? (
         <>
           <Button size="lg" onClick={read}>
@@ -28,22 +28,22 @@ const ModalPasteBtns = ({ dataArray, read, add, back, setDataArr }) => {
         </>
       ) : (
         <div className={cl.titleBtns}>
-          <div>
+          <div className={cl.lbl}>
             <SelectLabel isOne={true} onSelect={labelSelect} colCat={label} />
-            <span>label for all rows</span>
+            {/* <span> for all rows</span> */}
           </div>{" "}
           <div>
             <Button size="lg" className="m-2" onClick={back}>
               Step back
             </Button>{" "}
             <Button size="lg" className="m-2" onClick={add}>
-              Add exprassions and phrase
+              Add
             </Button>
             <Button size="lg" className="m-2" onClick={(e) => back(e, true)}>
               Cancel
             </Button>
           </div>
-          <span>
+          <span className={cl.spu}>
             select the part of the phrase you wanted to remember for each row
           </span>
         </div>

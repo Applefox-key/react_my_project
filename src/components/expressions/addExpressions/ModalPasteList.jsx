@@ -46,6 +46,7 @@ const ModalPasteList = ({ setVisible, onClick }) => {
       size="md"
       dialogClassName="h100"
       title={"Adding"}
+      bodyCl="visibleO"
       subtitle={
         <ModalPasteBtns
           dataArray={dataArray}
@@ -55,17 +56,20 @@ const ModalPasteList = ({ setVisible, onClick }) => {
           setDataArr={setDataArray}
         />
       }>
-      <div>
-        <div>
-          <Popup />{" "}
-        </div>
-        <ModalPasteBody
-          dataArr={dataArray}
-          dataStr={dataString}
-          setDataStr={setDataString}
-          setDataArr={setDataArray}
-        />
-      </div>
+      {/* <ModalPasteBtns
+        dataArray={dataArray}
+        read={read}
+        add={addExpressions}
+        back={back}
+        setDataArr={setDataArray}
+      /> */}
+      <Popup />
+      <ModalPasteBody
+        dataArr={dataArray}
+        dataStr={dataString}
+        setDataStr={setDataString}
+        setDataArr={setDataArray}
+      />
     </MyModal>
   );
 };

@@ -467,7 +467,27 @@ button {
   }
 }
 
+.visibleO {
+  overflow: visible !important;
+}
 
+.modal-btn {
+  text-align: right;
+
+  button {
+
+    border: 3px solid var(--background-sidebar);
+    background-color: var(--background-label);
+    transition: all 0.2s ease-in-out;
+    color: var(--color-label);
+
+    &:hover {
+      border: 3px solid var(--background-label);
+      background-color: var(--background-menu);
+      color: var(--color-menu);
+    }
+  }
+}
 
 .training_header {
   position: absolute;

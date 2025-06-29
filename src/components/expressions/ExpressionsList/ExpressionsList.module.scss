@@ -350,7 +350,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    // height: 100%;
+    height: fit-content;
     text-align: center;
     font-size: 2rem;
     margin-left: 0;
@@ -433,14 +434,22 @@
 
     .phrase-box-sm {
         padding: 0;
+        flex-direction: row;
+        min-height: fit-content;
+
+        @media screen and (max-width:900px) {
+            flex-direction: column;
+
+        }
 
         textarea {
-            min-height: 10rem;
+            min-height: 3rem;
             height: fit-content;
         }
 
         input {
-            border-radius: 0 0 28px 28px
+            border-radius: 0; // 0 28px 28px;
+            min-height: 3rem;
         }
 
     }

@@ -8,6 +8,7 @@ const MyModal = ({
   title = "",
   subtitle = "",
   stylesubt,
+  bodyCl = "",
   ...props
 }) => {
   return (
@@ -32,7 +33,9 @@ const MyModal = ({
         </div>
       )}
 
-      <Modal.Body className={cl.colorBody}>{children}</Modal.Body>
+      <Modal.Body className={[cl.colorBody, bodyCl].join(" ")}>
+        {children}
+      </Modal.Body>
     </Modal>
   );
 };

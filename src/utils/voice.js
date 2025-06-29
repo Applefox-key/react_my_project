@@ -9,8 +9,8 @@ const isMobileDevice =
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
     navigator.userAgent
   );
-
-export const startV = (textarea, lang = "") => {
+let oldval = "";
+export const startV = (textarea, lang = "", isadd = false) => {
   if (!textarea || !textarea.current) {
     console.error("Textarea reference is not valid.");
     return;
@@ -19,6 +19,7 @@ export const startV = (textarea, lang = "") => {
     console.warn("Speech recognition is already running.");
     return;
   }
+  if (isadd) oldval = textarea.current.value;
   let interimTranscript = "";
   let finalTranscript = "";
   // textarea.current.value = "";
@@ -37,7 +38,10 @@ export const startV = (textarea, lang = "") => {
         else interimTranscript += transcript;
       }
     }
-    if (textarea) textarea.current.value = finalTranscript + interimTranscript;
+
+    if (textarea)
+      textarea.current.value =
+        (isadd ? oldval + " " : "") + finalTranscript + interimTranscript;
   };
 
   try {
@@ -58,6 +62,7 @@ export const stopV = (textarea, onchange = null) => {
   recognition.stop();
   console.warn("Stop speech recognition");
   isRecording = false;
+
   if (textarea && textarea.current.value) {
     if (onchange) onchange(textarea.current.value);
   }

@@ -37,8 +37,17 @@ const BaseAPI = {
     };
     return await this.serverReq("post", "/labels", true, reqData);
   },
-  async createExpression(textW, textS) {
-    let reqData = { list: [{ expression: textW, phrase: textS }] };
+  async createExpression(textW, textS, labelid = "", note = "") {
+    let reqData = {
+      list: [
+        {
+          expression: textW,
+          phrase: textS,
+          ...(labelid ? { labelid } : {}),
+          ...(note ? { note } : {}),
+        },
+      ],
+    };
     return await this.serverReq("post", "/expressions", true, reqData);
   },
   async createExpressionFromArray(arr) {

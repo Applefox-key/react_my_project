@@ -24,7 +24,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
   const textRef = useRef();
   return (
     <div className={cl["expression-body"]}>
-      {!!textRef && (
+      {!!textRef && !smallSize && (
         <div
           className={cl["phrase-edit-voice"]}
           // className={

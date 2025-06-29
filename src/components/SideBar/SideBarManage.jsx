@@ -14,14 +14,12 @@ const SideBarManage = ({ expressionsActions }) => {
   };
   return (
     <div className={cl.sideM}>
-      {mod ? (
+      {mod && (
         <ExpModalCommand
           mod={mod}
           setMod={setMod}
           setExpressions={expressionsActions.setExpressions}
         />
-      ) : (
-        <></>
       )}
       <button title="add one" onClick={expressionsActions.addNew}>
         <GoPlus /> ADD ONE PHRASE
@@ -31,7 +29,7 @@ const SideBarManage = ({ expressionsActions }) => {
       </button>
       <button title="Add from the file" onClick={() => modal("file")}>
         <FiUploadCloud /> ADD FROM FILE
-      </button>{" "}
+      </button>
       <button title="Delete" onClick={expressionsActions.deleteMode}>
         <AiOutlineDelete /> DELETE PRASES
       </button>{" "}

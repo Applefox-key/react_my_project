@@ -4,10 +4,15 @@ import cl from "./ExpressionsList.module.scss";
 import Draggable from "react-draggable";
 import ExpressionBody from "./ExpressionBody";
 import SoundBtn from "../../users/VoiceBtn/SoundBtn";
+import SelectLabel from "../../Labels/SelectLabel";
 
 const EditWindow = ({ editMode, expressionsActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
   const [phrase, setPhrase] = useState(editMode.editElem.phrase);
+  const [label, setLabel] = useState({
+    id: editMode.editElem.labelid,
+    name: editMode.editElem.label,
+  });
   const [expression, setExpression] = useState(editMode.editElem.expression);
   const [note, setNote] = useState(editMode.editElem.note);
   const closeModal = (e) => {
@@ -28,6 +33,7 @@ const EditWindow = ({ editMode, expressionsActions }) => {
       phrase: phrase,
       expression: expression,
       note: note,
+      labelid: label.id,
     });
     editMode.setEdit();
   };
@@ -58,6 +64,18 @@ const EditWindow = ({ editMode, expressionsActions }) => {
             setters={{ setPhrase, setNote, setExpression }}
           />
           <div className={cl["edit-bottom"]}>
+            <div className={cl.label_wrap}>
+              <SelectLabel
+                isOne={true}
+                colCat={label}
+                onSelect={(val) =>
+                  setLabel({
+                    name: val ? val.name : "",
+                    id: val ? val.id : "",
+                  })
+                }
+              />
+            </div>
             <button
               className={cl["edit-save-btn"]}
               title="Save changes"
