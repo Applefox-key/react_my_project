@@ -9,6 +9,7 @@ const InfoWindow = ({ setVisible, expression }) => {
     <div
       className={cl["modal-wrap"]}
       onClick={(e) => {
+        e.stopPropagation();
         if (e.target === e.currentTarget) setVisible("");
       }}>
       <div className={cl["modal-info"]}>

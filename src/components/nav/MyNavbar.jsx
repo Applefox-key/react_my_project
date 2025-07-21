@@ -22,6 +22,8 @@ const MyNavbar = () => {
   };
 
   const isHideNav = window.location.pathname.includes("/training");
+  console.log(routesArr);
+
   return (
     <div className={[cl.nav, "bg-light"].join(" ")}>
       <Nav activeKey="/about" className={cl["nav-top-string"]} size="lg">

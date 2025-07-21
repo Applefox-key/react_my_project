@@ -24,7 +24,7 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
     onDragOver: (e) => e.preventDefault(),
     onDragLeave: (e) => e.preventDefault(),
   };
-  const addEl = (el) => {
+  const addEl = (e, el) => {
     if (applyMode.isOn) applyMode.addToApply(el);
   };
 
@@ -92,7 +92,7 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
                   }}>
                   ❌
                 </button>
-              )}{" "}
+              )}
               <div className={cl.label_wrap}>
                 <SelectLabel
                   isOne={true}

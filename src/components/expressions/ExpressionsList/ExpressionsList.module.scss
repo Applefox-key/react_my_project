@@ -11,7 +11,8 @@
     }
 }
 
-.listContainer {
+.listContainer,
+.filtersBox {
     width: 90%;
     margin: auto;
     background-color: var(--background-base);
@@ -22,6 +23,23 @@
     min-height: 90vh;
 }
 
+.filtersBox {
+    margin-top: 0;
+    min-height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+
+    position: relative;
+    font-size: 2rem;
+    border-radius: 0px;
+    color: var(--color-card);
+    background-color: var(--background-card);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: all 0.4s ease-in-out;
+    align-items: center;
+    // width: 100%;
+
+}
 
 
 .exressions-list-title {
@@ -33,6 +51,34 @@
     margin: 5px 10px;
     margin-bottom: 1rem;
     font-size: 14px;
+
+    button {
+        margin-top: 0;
+        /* min-width: 4rem; */
+        padding: 0 5px;
+        max-height: 3rem;
+        font-size: 12px;
+        border-radius: 5px;
+        // background-color: var(--background-sidebar);
+        // box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        transition: all 0.2s ease-in-out;
+        // color: var(--color-sidebar);
+        text-transform: capitalize;
+
+        svg {
+            font-size: 18px;
+        }
+
+        &:hover {
+            background-color: var(--background-menu);
+        }
+    }
+
+    svg {
+        font-size: 18px;
+    }
+
+
 
     .filter-summary {
         color: var(--color-marker);
@@ -597,7 +643,7 @@
 
     &:hover {
 
-        transform: scale(1.05);
+        // transform: scale(1.05);
         z-index: 600;
         background-color: var(--background-menu);
         color: var(--color-menu);
@@ -769,7 +815,7 @@
     flex-direction: row-reverse;
 
     &:hover {
-        transform: scale(1.05);
+        // transform: scale(1.05);
         z-index: 600;
         border-radius: 5px;
         background-color: var(--background-menu);
@@ -927,7 +973,7 @@
 
         &:hover {
             flex-direction: column;
-            transform: scale(1.05);
+            // transform: scale(1.05);
             z-index: 600;
             border-radius: 5px;
             background-color: var(--background-menu);
@@ -1025,7 +1071,7 @@
     text-align: left;
 
     &:hover {
-        transform: scale(1.05);
+        // transform: scale(1.05);
         z-index: 600;
         background-color: var(--background-menu);
         color: var(--color-menu);
@@ -1230,16 +1276,155 @@
 
 }
 
+.applybox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    margin-top: 3rem;
+    top: 1rem;
+    z-index: 1500;
+    // display: flex;
+    // background-color: var(--color-info);
+
+    span {
+        position: absolute;
+        color: var(--color-marker);
+        margin: auto;
+        top: -3rem;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: var(--background-base);
+        width: 100%;
+        text-align: center;
+        left: 0;
+
+        @media screen and (max-width:900px) {
+            font-size: 10px;
+            top: -1rem;
+        }
+    }
+
+    button {
+
+        margin-top: 0;
+        /* min-width: 4rem; */
+        padding: 0 5px;
+        max-height: 3rem;
+        font-size: 18px;
+        border-radius: 5px;
+        background-color: var(--background-sidebar);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        transition: all 0.2s ease-in-out;
+        color: var(--color-sidebar);
+        text-transform: capitalize;
+
+        &:disabled {
+            opacity: 0.8;
+            cursor: not-allowed;
+        }
+
+        &:not([disabled]) {
+            &:hover {
+                border-color: var(--color-marker);
+                // box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                box-shadow: inset var(--color-marker) 0 0 0px 1px;
+            }
+        }
+    }
+
+    .selectAllfalse {
+        // width: 5rem;
+        margin: 1rem 1rem;
+    }
+
+    .selectAlltrue {
+        // width: 5rem;
+        margin: 1rem 1rem;
+        color: var(--color-marker);
+        border-color: var(--color-marker);
+        background-color: var(--background-card);
+        background-color: var(--background-sidebar);
+        color: var(--color-sidebar);
+        border: 2px solid var(--color-sidebar);
+        ;
+    }
+
+}
+
+.applyModeBtn,
+.applyModeChildren {}
+
+.applyModeChildren {
+    button {
+        margin: 5px;
+    }
+}
+
 .divIsChecked {
-    border: 3px solid var(--color-marker);
-    transform: scale(1.05);
+    // border: 3px solid var(--color-marker);
+    // transform: scale(1.05);
     z-index: 600;
     background-color: var(--background-menu);
     color: var(--color-menu);
+    background-image: linear-gradient(45deg, var(--background-menu), var(--background-sidebar));
+}
+
+
+
+.oneFolder {
+    position: relative;
+    font-size: 2rem;
+    border-radius: 0px;
+    color: var(--color-card);
+    background-color: var(--background-card);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 5px;
+    background: var(--background-menu);
+
+    .rowsContainer {
+        margin: 0;
+        width: 100%;
+    }
+
+    .oneItemRow2 {
+        width: 100%;
+        // justify-content: flex-end;
+        padding: 0 15px;
+
+        button svg path,
+        rect {
+            stroke: var(--color-card);
+        }
+
+    }
+
+    .folderName {
+        width: 100%;
+        border-bottom: 2px solid var(--background-sidebar);
+        display: flex;
+        width: 100%;
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+
 }
 
 .listApply {
     background-color: var(--background-color-opacity50);
     width: 100%;
     justify-content: center;
+
+    .folderName {
+
+        justify-content: space-between;
+
+    }
+
 }

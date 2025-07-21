@@ -13,10 +13,10 @@ const BaseAPI = {
   async serverReq(method, url, isHeader, data = "", params = "") {
     let axiosConfig = {
       method: method,
-      // url: "http://localhost:8000" + url,
+      url: "http://localhost:8000" + url,
       // url: "http://34.214.160.243:8000" + url,
       // url: "https://api.learnapp.me" + url,
-      url: "https://api.learnapp.pro" + url,
+      // url: "https://api.learnapp.pro" + url,
     };
     if (params) axiosConfig.params = params;
     if (data) axiosConfig.data = { data: data };
@@ -122,6 +122,23 @@ const BaseAPI = {
     if (result.error) throw new Error(result.error);
 
     let expressions_ = result.data.map((item) => new Expression(item));
+    return expressions_;
+  },
+  async getTrainingListByFolders(filters = {}) {
+    let reqParams = { ...filters };
+    let result = await this.serverReq(
+      "get",
+      "/expressions/byfolders",
+      true,
+      "",
+      reqParams
+    );
+    if (result.error) throw new Error(result.error);
+
+    let expressions_ = result.data.map((group) => ({
+      ...group,
+      items: group.items.map((item) => new Expression(item)),
+    }));
     return expressions_;
   },
   async getTrainingListOnePage(limit, page, filters = {}) {

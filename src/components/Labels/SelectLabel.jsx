@@ -1,41 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
+import { useOutsideClick } from "../../hooks/useOutSideClick";
 
 const SelectLabel = ({
   onSelect,
   colCat = "",
   isOne,
   disabled,
+  id = "labelBox",
   lgSize = false,
 }) => {
   const [selected, setSelected] = useState(colCat);
   const [mode, setMode] = useState(false);
+  console.log("colCat ", colCat);
 
   const onSelectLabel = (value = "") => {
     if (selected.id === value.id) return;
     setSelected(value);
     onSelect(value);
   };
+
+  const ref = useRef();
+  useOutsideClick(ref, () => setMode(false));
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (event.target.id !== "labelBox" && mode) {
-        setMode(false);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!colCat) setSelected("");
+  }, [colCat]);
+  // useEffect(() => {
+  //   const handleOutsideClick = (event) => {
+  //     event.stopPropagation();
+  //     if (event.target.id !== id && mode) {
+  //       setMode(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleOutsideClick);
+  //   return () => {
+  //     document.removeEventListener("click", handleOutsideClick);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   return (
-    <div className="w-100" id="labelBox">
+    <div className="w-100" id={id} ref={ref}>
       <Dropdown show={mode} onToggle={(val) => setMode(val)}>
         <Dropdown.Toggle
           disabled={disabled}
-          id="dropdown-custom-components"
+          className="dropdown-custom-components"
+          // id={"dropdown-custom-components" + id}
           size="lg"
           variant="light">
           {selected.name ? (

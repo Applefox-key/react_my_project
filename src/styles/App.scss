@@ -419,7 +419,7 @@ button {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
     &:hover {
-      transform: scale(1.05);
+      // transform: scale(1.05);
       border: 3px solid var(--color-marker);
       background-color: var(--background-sidebar);
       color: var(--color-sidebar);
@@ -605,7 +605,8 @@ button {
   }
 }
 
-#dropdown-custom-components {
+#dropdown-custom-components,
+.dropdown-custom-components {
   padding: 0;
   // height: 100%;
   padding: 0 5px;
@@ -621,15 +622,17 @@ button {
     color: var(--background-card);
 
   }
+
+  &::before {
+    display: none !important;
+  }
+
+  &::after {
+    display: none !important;
+  }
 }
 
-#dropdown-custom-components::before {
-  display: none !important;
-}
 
-#dropdown-custom-components::after {
-  display: none !important;
-}
 
 .redBorder {
   border: 1px solid red;
@@ -742,13 +745,29 @@ button {
   border: 3px solid var(--background-label);
 }
 
-.unfilter-wrap {
+.unfilter-wrap,
+.unfilter-wrap-small {
   position: relative;
   display: flex;
   // padding-right: 1rem;
   width: 100%;
   justify-content: flex-start;
   align-items: center;
+}
+
+.unfilter-wrap-small {
+
+  width: 11rem;
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  height: 10px;
+
+  &:first-child {
+    width: 15rem;
+  }
+
+
 }
 
 .btnPlus {

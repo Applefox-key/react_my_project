@@ -1,5 +1,6 @@
 .wrapProgress,
-.wrapProgressLG {
+.wrapProgressLG,
+.wrapProgressSm {
     width: 10rem;
     margin: 15px 0;
     display: flex;
@@ -14,10 +15,15 @@
     height: 15px;
     position: relative;
     margin-bottom: 1rem;
+}
 
-
-
-
+.wrapProgressSm {
+    width: 17rem;
+    margin: auto;
+    margin-top: 12px;
+    height: 15px;
+    position: relative;
+    margin-bottom: 1rem;
 }
 
 .oneStage,
@@ -35,6 +41,16 @@
 }
 
 .lg {
+    width: 15px;
+    height: 15px;
+
+    &:hover {
+        scale: 1.05;
+        background-color: var(--color-marker);
+    }
+}
+
+.sm {
     width: 15px;
     height: 15px;
 

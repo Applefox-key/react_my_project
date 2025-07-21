@@ -16,8 +16,6 @@ const EditWindow = ({ editMode, expressionsActions }) => {
   const [expression, setExpression] = useState(editMode.editElem.expression);
   const [note, setNote] = useState(editMode.editElem.note);
   const closeModal = (e) => {
-    console.log(1);
-
     if (e) e.stopPropagation();
     if (copyBtn) setCopyBtn("");
 
@@ -42,6 +40,7 @@ const EditWindow = ({ editMode, expressionsActions }) => {
     <div
       className={cl["modal-wrap"]}
       onClick={(e) => {
+        e.stopPropagation();
         const selection = window.getSelection();
         const selectedText = selection.toString();
         if (e.target === e.currentTarget && selectedText === "") closeModal();

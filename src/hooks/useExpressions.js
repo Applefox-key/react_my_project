@@ -25,6 +25,7 @@ export const useExpressions = (applyMode, editMode, filters) => {
         if (pageParams.page === 0) {
           const expressions = await BaseAPI.getTrainingListAll(filters);
           setExpressions(expressions);
+
           const totalSrv = Math.ceil(expressions.length / limit);
           if (totalSrv !== pageParams.pageTotal)
             setPageParams({ ...pageParams, pageTotal: totalSrv });
