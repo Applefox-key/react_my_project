@@ -8,9 +8,13 @@ import SelectLabel from "../../Labels/SelectLabel";
 import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
 import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
 import BtnIsChecked from "../../UI/Btns/BtnIsChecked";
+import ExprStatus from "./ExprStatus";
+import { statusArr } from "../../../constants/statusConst";
 
-const ExpressionItemSimple = ({ actions, expression, modes }) => {
+const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
   const { editMode, applyMode } = modes;
+  console.log("num", num);
+  console.log("num j", (num % 4) + 1);
 
   // const [editMode, setEditMode] = useState(false);
   const { expressionsActions, handleDrop } = actions;
@@ -79,6 +83,10 @@ const ExpressionItemSimple = ({ actions, expression, modes }) => {
                 />
               </div>
             </div>
+            {/* <ExprStatus stat="new" inPool={false} /> */}
+            {/* <ExprStatus stat="active" inPool={true} /> */}
+            {/* <ExprStatus stat="paused" inPool={false} />*/}
+
             <div className={cl.atr}>
               {/* <span>{expressionsActions.ordNumber(i + 1)}</span> */}
               <div
@@ -102,6 +110,7 @@ const ExpressionItemSimple = ({ actions, expression, modes }) => {
             }}>
             {addSpanToExpInPrase(expression)}
           </div>
+          <ExprStatus short stat={statusArr[num % 4]} inPool={num % 2 === 0} />
         </div>
       </div>
     </>

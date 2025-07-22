@@ -127,6 +127,7 @@ const ExpressionsListFolders = () => {
                         actions={{ expressionsActions, handleDrop }}
                         expression={ex}
                         modes={{ editMode, applyMode }}
+                        num={j}
                       />
                     ))}
                   </>

@@ -3,6 +3,9 @@ import cl from "./ExpressionsList.module.scss";
 import { AiOutlineClear } from "react-icons/ai";
 import { TiArrowRightOutline } from "react-icons/ti";
 import VoiceBtns from "../../users/VoiceBtn/VoiceBtns";
+import ExprStatus from "./ExprStatus";
+import { statusArr } from "../../../constants/statusConst";
+import SoundBtn from "../../users/VoiceBtn/SoundBtn";
 
 const ExpressionBody = ({ smallSize = false, values, setters }) => {
   const { phrase, expression, note } = values;
@@ -23,37 +26,29 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
   };
   const textRef = useRef();
   return (
-    <div className={cl["expression-body"]}>
-      {!!textRef && !smallSize && (
-        <div
-          className={cl["phrase-edit-voice"]}
-          // className={
-          //   textRef.current.id === "question" ? "voiceEdit qv" : "voiceEdit av"
-          // }
-        >
-          <VoiceBtns textRef={textRef} />
-        </div>
-      )}
-      <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
-        <div
-          className={
-            expression ? cl["expressionStr"] : cl["expressionStrEmpty"]
-          }>
-          {copyBtn && (
-            <button className={cl["popupBtn"]} onClick={setSelection}>
-              set selection as expression
-              <TiArrowRightOutline />
-            </button>
-          )}
-          {expression ? expression : "...select the part you want to remember"}
-          {!!expression && (
-            <button
-              className={cl.buttonClear}
-              onClick={() => setExpression("")}>
-              <AiOutlineClear />
-            </button>
-          )}
-        </div>
+    // <div className={[cl["expression-body-box"]]}>
+    <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
+      <span className={cl.title}>Expression to memorize</span>
+      <div
+        className={expression ? cl["expressionStr"] : cl["expressionStrEmpty"]}>
+        {copyBtn && (
+          <button className={cl["popupBtn"]} onClick={setSelection}>
+            set selection as expression
+            <TiArrowRightOutline />
+          </button>
+        )}
+        {expression ? (
+          <mark>{expression}</mark>
+        ) : (
+          "...select the part you want to remember"
+        )}
+        {!!expression && (
+          <button className={cl.buttonClear} onClick={() => setExpression("")}>
+            <AiOutlineClear />
+          </button>
+        )}
+      </div>
+      <div className={cl.textVoice}>
         <textarea
           ref={textRef}
           onClick={clickOnPhrase}
@@ -66,20 +61,34 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           }
           value={phrase}
         />
-
-        <input
-          title="pop-up note"
-          placeholder="....write a pop-up note"
-          readOnly={typeof setPhrase !== "function"}
-          onChange={(e) => {
-            if (typeof setNote !== "function") return;
-            e.preventDefault();
-            setNote(e.target.value);
-          }}
-          value={note}
-        />
+        {!!textRef && !smallSize && (
+          <div className={cl["phrase-sounds"]}>
+            <SoundBtn text={phrase} />
+            <div className={cl["phrase-edit-voice"]}>
+              <VoiceBtns textRef={textRef} />
+            </div>
+          </div>
+        )}
       </div>
+      <ExprStatus
+        stat={statusArr[Math.floor(Math.random() * 4)]}
+        inPool={Math.floor(Math.random() * 2) % 2 === 0}
+      />{" "}
+      <span className={cl.title}>....write a pop-up note</span>
+      <input
+        className={cl.note}
+        title="pop-up note"
+        placeholder="....write a pop-up note"
+        readOnly={typeof setPhrase !== "function"}
+        onChange={(e) => {
+          if (typeof setNote !== "function") return;
+          e.preventDefault();
+          setNote(e.target.value);
+        }}
+        value={note}
+      />
     </div>
+    // </div>
   );
 };
 

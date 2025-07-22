@@ -5,6 +5,8 @@ import Draggable from "react-draggable";
 import ExpressionBody from "./ExpressionBody";
 import SoundBtn from "../../users/VoiceBtn/SoundBtn";
 import SelectLabel from "../../Labels/SelectLabel";
+import { statusArr } from "../../../constants/statusConst";
+import ExprStatus from "./ExprStatus";
 
 const EditWindow = ({ editMode, expressionsActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
@@ -38,7 +40,7 @@ const EditWindow = ({ editMode, expressionsActions }) => {
 
   return (
     <div
-      className={cl["modal-wrap"]}
+      className={cl["modal-edit-wrap"]}
       onClick={(e) => {
         e.stopPropagation();
         const selection = window.getSelection();
@@ -47,22 +49,20 @@ const EditWindow = ({ editMode, expressionsActions }) => {
       }}>
       <Draggable handle=".handle">
         <div className={cl["modal-box"]}>
-          <div className={["handle", cl["top-edit-box"]].join(" ")}>
+          <div className={["handle", cl["head-edit-box"]].join(" ")}>
             <div>EDIT PHRASE</div>
-            <SoundBtn text={phrase} />
             <button
               className={cl["edit-close-btn"]}
               title="Clouse without changes"
               onClick={closeModal}>
               <IoMdClose />
-            </button>{" "}
-          </div>
-
+            </button>
+          </div>{" "}
           <ExpressionBody
             values={{ phrase, expression, note }}
             setters={{ setPhrase, setNote, setExpression }}
           />
-          <div className={cl["edit-bottom"]}>
+          <div className={cl["footer-edit-box"]}>
             <div className={cl.label_wrap}>
               <SelectLabel
                 isOne={true}

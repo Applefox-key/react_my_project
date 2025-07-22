@@ -27,6 +27,8 @@ const InfoWindow = ({ setVisible, expression }) => {
             </div>
           </div>
           <Plan expression={expression} />
+          {expression.status},
+          {expression.inPool ? "in pool to study" : "not in pool"}
         </div>
         <div className={cl["history-box"]}>
           <History expression={expression} />

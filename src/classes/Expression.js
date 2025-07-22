@@ -1,3 +1,5 @@
+// status	string	"new", "active", "paused", "completed"
+// inPool	boolean	user added phrase to the potential tasks pool
 export class Expression {
   #expression;
   #phrase;
@@ -8,6 +10,8 @@ export class Expression {
   #labelid;
   #label;
   #note;
+  #status;
+  #inPool;
   constructor(expression) {
     this.#expression = expression.expression;
     this.#phrase = expression.phrase;
@@ -17,6 +21,8 @@ export class Expression {
     this.#labelid = expression.labelid;
     this.#label = expression.label;
     this.#note = expression.note;
+    this.#status = expression.status || "new";
+    this.#inPool = !!expression.inPool;
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
@@ -43,6 +49,12 @@ export class Expression {
   }
   get note() {
     return this.#note;
+  }
+  get status() {
+    return this.#status;
+  }
+  get inPool() {
+    return this.#inPool;
   }
   get historySort() {
     let history_ = this.#history;
