@@ -9,6 +9,7 @@
 
   --background-label: #286CCB; //label-back
   --background-info: aliceblue;
+  --background-marker: #fff3cd;
 
   --color-marker: #0d6af5;
   --color-card: black;
@@ -42,7 +43,7 @@ button {
 
 .main_page {
   text-align: center;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   position: relative;
 }
 
@@ -66,8 +67,20 @@ button {
   height: max-content;
   position: relative;
 
+  button {
+    height: 3.5rem;
+  }
+
   @media screen and (max-width:900px) {
     font-size: 12px;
+    max-width: 19rem;
+    width: fit-content;
+
+    button {
+      height: 4rem;
+
+    }
+
     // top: 35px;
     // width: 100%;
     // position: sticky;
@@ -187,6 +200,7 @@ button {
 .expression {
   font-weight: 600;
   color: var(--color-marker);
+  background-color: var(--background-marker);
   // position: relative;
 
 
@@ -250,9 +264,10 @@ button {
 }
 
 .hintText {
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     width: 100%;
     text-align: left;
+    font-size: 25px;
   }
 }
 
@@ -260,9 +275,11 @@ button {
   position: absolute;
   top: 25px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     top: -5px;
     font-size: 24px;
+    scale: 1.5;
+    left: 50%;
   }
 
   .lang {
@@ -274,6 +291,8 @@ button {
   width: fit-content;
   height: fit-content;
   overflow: hidden;
+
+
 }
 
 .hint1 {
@@ -348,8 +367,8 @@ button {
 
   .hint1 {
     // width: 80%;
-
-    font-size: 10px;
+    flex-direction: column-reverse;
+    font-size: 20px;
 
   }
 }
@@ -411,7 +430,7 @@ button {
   button {
     border: 3px solid var(--background-label);
     transition: all 0.2s ease-in-out;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 400;
     background-color: var(--background-label);
     color: var(--color-label);
@@ -429,6 +448,10 @@ button {
       background-color: var(--background-info);
       color: var(--color-info);
       border: 3px solid var(--background-menu);
+    }
+
+    @media screen and (max-width:900px) {
+      font-size: 2rem;
     }
   }
 
@@ -460,7 +483,9 @@ button {
 
   @media screen and (max-width:900px) {
     padding: 1px 1px;
-    width: 160px;
+    width: fit-content;
+    margin: 0;
+    max-width: 160px;
     // top: 35px;
     // width: 100%;
     // position: sticky;
@@ -563,7 +588,7 @@ button {
 }
 
 .training-field {
-  margin-top: -2rem
+  margin-top: 1rem;
 }
 
 .training-menu {
@@ -576,6 +601,14 @@ button {
 
   // }
 
+}
+
+
+
+.profMenu {
+  width: 17rem;
+  right: 5rem;
+  top: 0rem;
 }
 
 .btn-back {
@@ -600,8 +633,9 @@ button {
   }
 
   @media screen and (max-width: 900px) {
-    width: 10rem;
-    margin-left: 5px;
+    width: 15rem;
+    height: 4rem;
+    // margin-left: 5px;
   }
 }
 
@@ -611,8 +645,13 @@ button {
   // height: 100%;
   padding: 0 5px;
   height: 3rem;
-  color: var(--color-label);
-  background-color: var(--background-label);
+  // color: var(--color-label);
+  // background-color: var(--background-label);
+  width: fit-content;
+  border: 2px solid var(--background-label);
+  background: var(--background-card);
+  color: var(--color-card);
+  display: block;
 
   // position: absolute;
   // top: 0;
@@ -740,9 +779,37 @@ button {
 
 }
 
-.dropdown-menu.show {
 
+.avatar-toggle {
+  all: unset;
+  background-color: red;
+}
+
+.dropdown-toggle.btn.show {
+  color: var(--background-base);
+  background-color: var(--color-base);
+}
+
+.dropdown-item:active {
+  // color: red;
+  text-decoration: none;
+  background-color: var(--background-base);
+  color: var(--color-base);
+
+}
+
+.dropdown-menu.show {
   border: 3px solid var(--background-label);
+}
+
+.profile-menu {
+  width: 15rem;
+  font-size: 16px;
+
+  @media screen and (max-width: 900px) {
+    font-size: 20px;
+  }
+
 }
 
 .unfilter-wrap,
@@ -757,16 +824,34 @@ button {
 
 .unfilter-wrap-small {
 
-  width: 11rem;
+  width: 22rem;
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
   height: 10px;
 
   &:first-child {
-    width: 15rem;
+    width: 22rem;
+    margin-left: 1rem;
   }
 
+  @media screen and (max-width:900px) {
+    // width: fit-content;
+    width: 22rem;
+    height: 2rem;
+
+    &:first-child {
+      width: 2rem;
+      margin-left: 0rem;
+    }
+
+
+
+    div div {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
 
 }
 
@@ -779,9 +864,6 @@ button {
   border-radius: 50%;
   font-weight: 500;
   color: var(--color-card);
-  // position: absolute;
-  // left: 0;
-  // top: 0px;
 
   &:hover {
     background-color: var(--background-sidebar);
@@ -790,139 +872,25 @@ button {
   }
 }
 
-.status-wrap {
-  position: relative;
-  display: flex;
+.iconNew {
+  font-size: 37px;
+  font-size: 37px;
+  position: absolute;
+  bottom: -6px;
+}
 
+.iconStat {
+  font-size: 18px;
+}
 
-  position: relative;
-  display: flex;
-  // width: 130px;
-  margin-right: 15px;
-  font-size: 15px;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 10px 0px;
-  // margin-bottom: 10px;
-  margin-bottom: 30px;
-
-  p {
-    font-weight: 600;
-  }
-
-  .status-box {
-    width: 50%;
-    margin-left: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    // justify-content: flex-start;
-
-    // d-flex align-items-center gap-1
-    button {
-      font-size: inherit;
-      border: 1px solid grey;
-      width: 100%;
-      text-align: left;
-
-    }
-
-    div {
-      width: 100%;
-      font-size: inherit;
-    }
-  }
-
-  .pool-box {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 20px;
-
-    .pool-ico {
-      // position: absolute;
-      // text-align: end;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 150px;
-      padding: 4.55px 0;
-    }
-  }
-
+.textStat {
+  font-size: 13px;
+  font-family: fantasy;
 
 }
 
-.btnSwitch {
-  font-size: 12px;
-  position: relative;
-  right: 0;
-  display: inline-block;
-  width: 2em;
-  height: 1.5em;
-  z-index: 1000;
-  bottom: unset;
-  // scale: 0.8;
-  // top: 5px;
-
-  @media print {
-    display: none;
-  }
-
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    background-color: #76bd42;
-  }
-
-  // div {
-  //     position: absolute;
-  // }
-
-  /* The slider */
-  .slider {
-    // --background: #28096b;
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--background);
-    transition: .5s;
-    border-radius: 30px;
-    background-color: #a4aead;
-
-    &:hover {
-      // background-color: #2196f3;
-      outline: 1px solid var(--wrap-color);
-    }
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 1em;
-    width: 1em;
-    border-radius: 50%;
-    left: 3px;
-    bottom: 16.4%;
-    box-shadow: inset 8px -4px 0px 0px #ffffff;
-
-    transition: .5s;
-    box-shadow: inset 15px -4px 0px 15px #ffffff;
-
-  }
-
-  input:checked+.slider {
-    background-color: #76bd42;
-  }
-
-  input:checked+.slider:before {
-    left: 38% // transform: translateX(100%);
-
+.stat-inf {
+  .textStat {
+    font-size: 18px;
   }
 }

@@ -1,5 +1,5 @@
 // status	string	"new", "active", "paused", "completed"
-// inPool	boolean	user added phrase to the potential tasks pool
+// inQueue	boolean	user added phrase to the potential tasks pool
 export class Expression {
   #expression;
   #phrase;
@@ -11,7 +11,7 @@ export class Expression {
   #label;
   #note;
   #status;
-  #inPool;
+  #inQueue;
   constructor(expression) {
     this.#expression = expression.expression;
     this.#phrase = expression.phrase;
@@ -22,7 +22,7 @@ export class Expression {
     this.#label = expression.label;
     this.#note = expression.note;
     this.#status = expression.status || "new";
-    this.#inPool = !!expression.inPool;
+    this.#inQueue = !!expression.inQueue;
     if (expression.history === undefined) {
       this.#history = [];
       this.#history.push({ action: "add", date: new Date() });
@@ -31,6 +31,38 @@ export class Expression {
     else this.#history = JSON.parse(expression.history);
   }
 
+  #getHistoryEvent(key) {
+    const templates = {
+      readLate: "read late",
+      readByPlan: "read by the plan",
+      finished: "the training is completed",
+      paused: "paused by user",
+      resumeAndContinue: "resumed by user (continue)",
+      resumeAndNewTry: "resumed by user (new try)",
+      activated: "activated by user",
+    };
+
+    if (!templates[key]) {
+      throw new Error(`Unknown history event key: "${key}"`);
+    }
+
+    return {
+      action: templates[key],
+      date: Date.now(),
+    };
+  }
+
+  #gethistorySkipRow() {
+    const skipDays = this.exceededSkipsDays;
+    if (skipDays === 0) return "";
+    const ending = skipDays === 1 ? "" : "s";
+    return {
+      action: `${
+        skipDays > 2 ? "excessive skips" : " training skipped"
+      } (${skipDays} day${ending})`,
+      date: this.nextDate.getTime(),
+    };
+  }
   get expression() {
     return this.#expression;
   }
@@ -53,8 +85,8 @@ export class Expression {
   get status() {
     return this.#status;
   }
-  get inPool() {
-    return this.#inPool;
+  get inQueue() {
+    return this.#inQueue;
   }
   get historySort() {
     let history_ = this.#history;
@@ -76,7 +108,13 @@ export class Expression {
   }
 
   get exceededSkipsDays() {
-    if (!this.started || this.#stage === 9) return 0;
+    // if (!this.started || this.#stage === 9) return 0;
+    if (
+      !this.started ||
+      this.stage === 9 ||
+      (this.status !== "active" && this.status !== undefined)
+    )
+      return 0;
     let today = new Date();
     // let dt = this.#nextDate;
 
@@ -90,8 +128,13 @@ export class Expression {
   }
   get exceededSkipsCount() {
     let st = this.#stage;
-    if (!this.started || st === 9) return false;
-
+    // if (!this.started || st === 9) return false;
+    if (
+      !this.started ||
+      this.stage === 9 ||
+      (this.status !== "active" && this.status !== undefined)
+    )
+      return false;
     const diffInDays = this.exceededSkipsDays;
     switch (diffInDays) {
       case 0:
@@ -134,6 +177,9 @@ export class Expression {
     return !!this.stage;
   }
   get hintForReading() {
+    if (this.status !== "active") {
+      return ["⏸ Expression is not active", false, 0];
+    }
     let result;
     //checking the date and set a hint for user
     if (this.alreadyRead) {
@@ -149,7 +195,7 @@ export class Expression {
     ];
     //check the allert about late reading
 
-    if (this.exceededSkipsCount) {
+    if (this.exceededSkipsDays > 2) {
       result = [
         ` ☹ The number of deviations from the study plan has been exceeded. 
         The study will be started from the beginning! Read the text twice`,
@@ -179,31 +225,41 @@ export class Expression {
   get studyPlan() {
     try {
       let stage_ = this.#stage;
-      let nextDate_ = new Date(this.#nextDate);
       let result = [];
+      // let forceStartToday = this.#status === "new" || this.#status === "paused";
+      // Determine starting date
+      // let nextDate_ = forceStartToday ? new Date() : new Date(this.#nextDate);
+      let nextDate_ = new Date(this.#nextDate);
+      // let nextDate_ = new Date(this.#nextDate);
+      // If some stage is done, show read history
       if (stage_ > 0) {
         let history_ = this.historySort;
         let count = 0;
         for (let i = 0; i < history_.length; i++) {
           if (history_[i].action.includes("read")) {
             let day = new Date(history_[i].date).toString().slice(0, 10);
-            result.unshift(`Day ${stage_ - count}: ${day} ✔`);
+
+            result.unshift(`🟢: Day ${stage_ - count}: ${day} ✔`);
             count++;
           }
           if (count === stage_) break;
         }
       }
 
-      if (!this.started) nextDate_ = new Date();
+      if (!this.started || this.#status === "new" || this.#status === "paused")
+        nextDate_ = new Date();
+      // Adjust current day for scheduling
       let ShowDate = new Date(nextDate_);
       for (let i = stage_; i < 9; i++) {
         let nd = new Date().setHours(0, 0, 0, 0);
         let sd = new Date(ShowDate).setHours(0, 0, 0, 0);
+        const ico = stage_ - 1 >= i ? "🟢" : sd < nd ? "🔴" : "🔘";
         result.push(
-          `Day ${i + 1}: ${ShowDate.toString().slice(0, 10)} ${
+          `${ico}: Day ${i + 1}:${ShowDate.toString().slice(0, 10)} ${
             stage_ - 1 >= i ? "✔" : sd < nd ? "☹" : ""
-          }`
+          }${sd === nd ? ":Today" : ""}`
         );
+        // Advance to next date depending on stage
         ShowDate.setDate(ShowDate.getDate() + (i < 6 ? 1 : i < 7 ? 7 : 14));
       }
       return result;
@@ -217,67 +273,259 @@ export class Expression {
     nd.setHours(12, 0, 0, 0);
     return nd;
   }
+  //for auto change after training
   get setForUpdate() {
-    let expression = {
-      nextDate: this.nextDate,
-      stage: this.stage,
+    const updates = {
       id: this.id,
-      history: this.history,
+      stage: this.stage,
+      nextDate: this.nextDate,
+      history: this.history ? [...this.history] : [],
     };
-    const oneDayinMs = 1000 * 60 * 60 * 24;
-    let expressionNextDate = !expression.started
-      ? this.newDateFormat()
-      : this.newDateFormat(expression.nextDate);
 
-    let todayDate = this.newDateFormat();
-    let diffInDays = this.exceededSkipsDays;
-    if (this.exceededSkipsCount) {
-      //reset progress
-      expression.stage = 0;
-      expression.nextDate = todayDate;
-      expressionNextDate = this.newDateFormat();
-      expression.history.push({
-        action: `skipped training (${diffInDays} day${
-          diffInDays === 1 ? "" : "s"
-        })`,
-        date: this.nextDate.getTime(),
-      });
-      expression.history.push({
+    const oneDayMs = 1000 * 60 * 60 * 24;
+    const todayMs = new Date().setHours(12, 0, 0, 0);
+
+    const skipDays = this.exceededSkipsDays;
+
+    let wasLate = skipDays !== 0;
+    if (wasLate) {
+      updates.history.push(this.#gethistorySkipRow());
+    }
+    // if the expression is overdue and the number of passes is exceeded, we reset the progress.
+    if (skipDays > 3) {
+      updates.stage = 0;
+      wasLate = false;
+      updates.nextDate = todayMs;
+      updates.history.push({
         action: "new try",
-        date: new Date().getTime(),
+        date: Date.now(),
       });
-      diffInDays = 0;
+    }
+    updates.history.push(
+      this.#getHistoryEvent(wasLate ? "readLate" : "readByPlan")
+    );
+    // let action = wasLate ? "read late" : "read by the plan";
+    if (updates.stage === 8) {
+      updates.history.push(this.#getHistoryEvent("finished"));
+      // action += " FINISH!";
+      updates.status = "complite";
+    }
+    // updates.history.push({ action, date: Date.now() });
+
+    // next date based on a stage
+    let nextDate = new Date(todayMs);
+    if (updates.stage < 6) {
+      nextDate.setTime(nextDate.getTime() + oneDayMs);
+    } else if (updates.stage < 7) {
+      nextDate.setTime(nextDate.getTime() + 7 * oneDayMs);
+    } else if (updates.stage < 8) {
+      nextDate.setTime(nextDate.getTime() + 14 * oneDayMs);
     }
 
-    let act = diffInDays === 0 ? "read by the plan" : "read late";
-    if (expression.stage === 8) act = act + " FINISH!";
-    if (expression.history === undefined) {
-      expression.history = [];
-      expression.history.push({ action: "add", date: new Date().getTime() });
-    }
-    if (diffInDays !== 0)
-      expression.history.push({
-        action: `skipped training (${diffInDays} day${
-          diffInDays === 1 ? "" : "s"
-        })`,
-        date: this.nextDate.getTime(),
-      });
-    expression.history.push({ action: act, date: new Date().getTime() });
-    if (expression.stage < 6) {
-      expressionNextDate.setTime(expressionNextDate.getTime() + oneDayinMs);
-    } else if (expression.stage < 7) {
-      expressionNextDate.setTime(expressionNextDate.getTime() + 7 * oneDayinMs);
-    } else if (expression.stage < 8) {
-      expressionNextDate.setTime(
-        expressionNextDate.getTime() + 14 * oneDayinMs
-      );
-    }
+    updates.nextDate = nextDate.getTime();
+    updates.stage += 1;
 
-    expression.nextDate = expressionNextDate.getTime();
-    ++expression.stage;
-
-    return expression;
+    return updates;
   }
+
+  //compare the current instance properties with the new newData object and return the object only with the changed fields.
+  getUpdatedFields(newData) {
+    let changed = { id: this.id };
+    let statusChanged = false;
+    let statusData = {};
+
+    for (const key of Object.keys(newData)) {
+      if (key === "id") continue;
+      const oldVal = this[key];
+      const updatedData = newData[key];
+      if (key === "status" && oldVal !== updatedData) {
+        statusChanged = true;
+        statusData = this.setStatus(updatedData);
+        continue;
+      }
+
+      if (
+        JSON.stringify(oldVal) !== JSON.stringify(updatedData) &&
+        !["history", "nextDate", "stage"].includes(key)
+      ) {
+        changed[key] = updatedData;
+      }
+    }
+    if (statusChanged) {
+      return { ...changed, ...statusData };
+    }
+    // if (statusChanged) {
+    //   Object.entries(statusData).forEach(([key, value]) => {
+    //     if (key !== "id") {
+    //       changed[key] = value;
+    //     }
+    //   });
+    // }
+
+    return changed;
+  }
+
+  setStatus(newStatus) {
+    const updates = {
+      id: this.id,
+      status: newStatus,
+      history: [...this.history],
+    };
+
+    if (newStatus === "paused") {
+      const skipDays = this.exceededSkipsDays;
+      if (skipDays > 2 && this.stage > 0) {
+        updates.history.push(this.#gethistorySkipRow());
+        updates.stage = 0;
+      }
+      updates.history.push(this.#getHistoryEvent("paused"));
+      // updates.history.push({ action: "paused by user", date: Date.now() });
+    }
+
+    if (newStatus === "active" && this.status === "paused") {
+      updates.nextDate = new Date().setHours(12, 0, 0, 0);
+
+      updates.history.push(
+        this.#getHistoryEvent(
+          this.stage > 0 ? "resumeAndContinue" : "resumeAndNewTry"
+        )
+      );
+      // updates.history.push({
+      //   action: `${
+      //     this.stage > 0
+      //       ? "resumed by user (continue)"
+      //       : "resumed by user (new try)"
+      //   }`,
+      //   date: now,
+      // });
+
+      if (this.inQueue) updates["inQueue"] = false;
+    }
+    if (newStatus === "active" && this.status === "new") {
+      updates.nextDate = new Date().setHours(12, 0, 0, 0);
+      updates.history.push(this.#getHistoryEvent("activated"));
+      // updates.history.push({ action: "activated by user", date: Date.now() });
+      if (this.inQueue) updates["inQueue"] = false;
+    }
+    return updates;
+  }
+  // get setForUpdate() {
+  //   let expression = {
+  //     nextDate: this.nextDate,
+  //     stage: this.stage,
+  //     id: this.id,
+  //     history: this.history,
+  //   };
+  //   const oneDayinMs = 1000 * 60 * 60 * 24;
+  //   let expressionNextDate = !expression.started
+  //     ? this.newDateFormat()
+  //     : this.newDateFormat(expression.nextDate);
+
+  //   let todayDate = this.newDateFormat();
+  //   let diffInDays = this.exceededSkipsDays;
+  //   if (this.exceededSkipsCount) {
+  //     //reset progress
+  //     expression.stage = 0;
+  //     expression.nextDate = todayDate;
+  //     expressionNextDate = this.newDateFormat();
+  //     expression.history.push({
+  //       action: `skipped training (${diffInDays} day${
+  //         diffInDays === 1 ? "" : "s"
+  //       })`,
+  //       date: this.nextDate.getTime(),
+  //     });
+  //     expression.history.push({
+  //       action: "new try",
+  //       date: new Date().getTime(),
+  //     });
+  //     diffInDays = 0;
+  //   }
+
+  //   let act = diffInDays === 0 ? "read by the plan" : "read late";
+  //   if (expression.stage === 8) act = act + " FINISH!";
+  //   if (expression.history === undefined) {
+  //     expression.history = [];
+  //     expression.history.push({ action: "add", date: new Date().getTime() });
+  //   }
+  //   if (diffInDays !== 0)
+  //     expression.history.push({
+  //       action: `skipped training (${diffInDays} day${
+  //         diffInDays === 1 ? "" : "s"
+  //       })`,
+  //       date: this.nextDate.getTime(),
+  //     });
+  //   expression.history.push({ action: act, date: new Date().getTime() });
+  //   if (expression.stage < 6) {
+  //     expressionNextDate.setTime(expressionNextDate.getTime() + oneDayinMs);
+  //   } else if (expression.stage < 7) {
+  //     expressionNextDate.setTime(expressionNextDate.getTime() + 7 * oneDayinMs);
+  //   } else if (expression.stage < 8) {
+  //     expressionNextDate.setTime(
+  //       expressionNextDate.getTime() + 14 * oneDayinMs
+  //     );
+  //   }
+
+  //   expression.nextDate = expressionNextDate.getTime();
+  //   ++expression.stage;
+
+  //   return expression;
+  // }
+  //   get setForUpdate() {
+  //   const updates = {
+  //     id: this.id,
+  //     stage: this.stage,
+  //     nextDate: this.nextDate,
+  //     history: this.history ? [...this.history] : [],
+  //   };
+
+  //   const oneDayMs = 1000 * 60 * 60 * 24;
+  //   const todayMs = new Date().setHours(12, 0, 0, 0);
+
+  //   // if the expression is overdue and the number of passes is exceeded, we reset the progress.
+  //   if (this.exceededSkipsCount) {
+  //     updates.stage = 0;
+  //     updates.nextDate = todayMs;
+  //     updates.history.push({
+  //       action: `skipped training (${this.exceededSkipsDays} day${
+  //         this.exceededSkipsDays === 1 ? "" : "s"
+  //       })`,
+  //       date: this.nextDate.getTime(),
+  //     });
+  //     updates.history.push({
+  //       action: "new try",
+  //       date: Date.now(),
+  //     });
+  //   }
+
+  //   const wasLate = this.exceededSkipsDays !== 0;
+  //   if (wasLate) {
+  //     updates.history.push({
+  //       action: `skipped training (${this.exceededSkipsDays} day${
+  //         this.exceededSkipsDays === 1 ? "" : "s"
+  //       })`,
+  //       date: this.nextDate.getTime(),
+  //     });
+  //   }
+
+  //   let action = wasLate ? "read late" : "read by the plan";
+  //   if (updates.stage === 8) action += " FINISH!";
+  //   updates.history.push({ action, date: Date.now() });
+
+  //   // next date based on a stage
+  //   let nextDate = new Date(todayMs);
+  //   if (updates.stage < 6) {
+  //     nextDate.setTime(nextDate.getTime() + oneDayMs);
+  //   } else if (updates.stage < 7) {
+  //     nextDate.setTime(nextDate.getTime() + 7 * oneDayMs);
+  //   } else if (updates.stage < 8) {
+  //     nextDate.setTime(nextDate.getTime() + 14 * oneDayMs);
+  //   }
+
+  //   updates.nextDate = nextDate.getTime();
+  //   updates.stage += 1;
+
+  //   return updates;
+  // }
 }
 
 try {

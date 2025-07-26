@@ -31,7 +31,7 @@ const LoginBox = ({ setLoginMode }) => {
     try {
       let response = await BaseAPI.login(email, password);
       setUserAuth({ isAuth: true, role: response.role });
-      router(`/manager`);
+      router(`/training`);
     } catch (error) {
       alert(error);
 

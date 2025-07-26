@@ -7,9 +7,14 @@ import BaseAPI from "../../../API/BaseAPI";
 import ModalFileExpBtns from "./ModalFileExpBtns";
 import { usePopup } from "../../../hooks/usePopup";
 import NewExpressionsList from "./NewExpressionsList";
-
+import SelectLabel from "../../Labels/SelectLabel";
+import cl from "./addExpressions.module.scss";
 const ModalFileExp = ({ setVisible, setExpressions }) => {
   const [fileContent, setFileContent] = useState(null);
+  const [fileLabel, setFileLabel] = useState({
+    id: "",
+    name: "",
+  });
   const setPopup = usePopup();
   const inputFileName = useRef();
 
@@ -26,7 +31,16 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
   const addToColection = async () => {
     if (!fileContent) return;
     try {
-      await BaseAPI.createExpressionFromArray(fileContent);
+      const history = [{ action: "add", date: new Date() }];
+      const content = fileContent.map((el) => {
+        return {
+          ...el,
+          history: history,
+          ...(fileLabel.id && { labelid: fileLabel.id }),
+        };
+      });
+
+      await BaseAPI.createExpressionFromArray(content);
       let res = await BaseAPI.getTrainingListAll();
       setPopup.success("The changes have been saved");
       setExpressions(res);
@@ -46,21 +60,30 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       size="md"
       dialogClassName="h100"
       title={"Add new content from .txt file"}>
-      {" "}
       <div>
         <Popup />{" "}
       </div>
       <ModalFileExpBtns inputFileName={inputFileName} fileChange={fileChange} />
-      <div className="modal-h50">
+      <div className={["modal-h50", cl.fileModal].join(" ")}>
         {!!fileContent && (
           <>
-            <Button
-              size="lg"
-              className="mt-1"
-              variant="outline-secondary"
-              onClick={addToColection}>
-              Add the content
-            </Button>
+            <div className="d-flex justify-content-between align-items-end">
+              <Button
+                size="lg"
+                className="mt-1"
+                variant="outline-secondary"
+                onClick={addToColection}>
+                Add content
+              </Button>
+              <div className={cl.labelbox}>
+                <SelectLabel
+                  onSelect={setFileLabel}
+                  colCat={fileLabel}
+                  formForSet
+                  // lgSize
+                />
+              </div>
+            </div>
             <NewExpressionsList
               dataArr={fileContent}
               setDataArr={setFileContent}

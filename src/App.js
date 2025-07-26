@@ -7,6 +7,7 @@ import { AuthContext, PopupContext } from "./context";
 import BaseAPI from "./API/BaseAPI";
 import AppRouter from "./components/AppRouter";
 import { setTheme } from "./utils/colors";
+import Popup from "./components/UI/popup/Popup";
 
 function App() {
   const [userAuth, setUserAuth] = useState({
@@ -19,11 +20,12 @@ function App() {
   const checkUserAuth = async () => {
     try {
       const user = await BaseAPI.getUser();
+
       if (user)
         setUserAuth({
           isAuth: true,
           role: user.role,
-          set: JSON.parse(user.settings).theme,
+          set: user.settings.theme,
         });
       setTheme("", user.settings.theme);
     } catch (error) {}
@@ -38,6 +40,7 @@ function App() {
     <AuthContext.Provider value={{ userAuth, setUserAuth }}>
       <PopupContext.Provider value={{ popupSettings, setPopupSettings }}>
         <div className="App">
+          <Popup />
           <BrowserRouter>
             <AppRouter />
           </BrowserRouter>

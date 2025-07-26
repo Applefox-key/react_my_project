@@ -1,15 +1,14 @@
 import React, { useRef, useState } from "react";
-import cl from "./ExpressionsList.module.scss";
+import cl from "./ExpressionsEdit.module.scss";
 import { AiOutlineClear } from "react-icons/ai";
 import { TiArrowRightOutline } from "react-icons/ti";
-import VoiceBtns from "../../users/VoiceBtn/VoiceBtns";
-import ExprStatus from "./ExprStatus";
-import { statusArr } from "../../../constants/statusConst";
-import SoundBtn from "../../users/VoiceBtn/SoundBtn";
+import VoiceBtns from "../../../users/VoiceBtn/VoiceBtns";
+import ExprStatusAtr from "../ExprStatus/ExprStatusAtr";
+import SoundBtn from "../../../users/VoiceBtn/SoundBtn";
 
 const ExpressionBody = ({ smallSize = false, values, setters }) => {
-  const { phrase, expression, note } = values;
-  const { setPhrase, setNote, setExpression } = setters;
+  const { phrase, expression, note, inQueue, status } = values;
+  const { setPhrase, setNote, setExpression, setInQueue, setStatus } = setters;
   const [copyBtn, setCopyBtn] = useState("");
   //show or hide selection button
   const clickOnPhrase = (e) => {
@@ -25,10 +24,12 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
     setCopyBtn("");
   };
   const textRef = useRef();
+
   return (
     // <div className={[cl["expression-body-box"]]}>
     <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
-      <span className={cl.title}>Expression to memorize</span>
+      {!smallSize && <span className={cl.title}>Expression to memorize</span>}
+
       <div
         className={expression ? cl["expressionStr"] : cl["expressionStrEmpty"]}>
         {copyBtn && (
@@ -70,16 +71,20 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           </div>
         )}
       </div>
-      <ExprStatus
-        stat={statusArr[Math.floor(Math.random() * 4)]}
-        inPool={Math.floor(Math.random() * 2) % 2 === 0}
-      />{" "}
-      <span className={cl.title}>....write a pop-up note</span>
+      {!smallSize && (
+        <ExprStatusAtr
+          stat={status}
+          inQueue={inQueue}
+          onStatusChange={setStatus}
+          onTogglePool={setInQueue}
+        />
+      )}
+      {!smallSize && <span className={cl.title}>....write a pop-up note</span>}
       <input
         className={cl.note}
         title="pop-up note"
         placeholder="....write a pop-up note"
-        readOnly={typeof setPhrase !== "function"}
+        // readOnly={typeof setPhrase !== "function"}
         onChange={(e) => {
           if (typeof setNote !== "function") return;
           e.preventDefault();

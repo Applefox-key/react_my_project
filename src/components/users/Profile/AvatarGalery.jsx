@@ -8,7 +8,7 @@ import BaseAPI from "../../../API/BaseAPI";
 import MySpinner from "../../UI/MySpinner/MySpinner";
 import Form from "react-bootstrap/Form";
 import ProfileImg from "../../../img/profile.ico";
-import cl from "./users.module.css";
+import cl from "./users.module.scss";
 import { setImgToStorage } from "../../../utils/serverFireBaseHlp/fbHelpers";
 
 const AvatarGalery = ({ visible, setVisible, fileChange, userid }) => {

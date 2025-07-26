@@ -7,7 +7,7 @@ import LabelItems from "./LabelItems";
 import LabelLink from "./LabelLink";
 import cl from "./Labels.module.scss";
 
-const SelectLabelBody = ({ selected, isOne, onSelect, closeFn }) => {
+const SelectLabelBody = ({ selected, formForSet, onSelect, closeFn }) => {
   const [labels, setLabels] = useState([]);
   const [filter, setFilter] = useState("");
   const [getLabels, isLoadingCat] = useQuery(async () => {
@@ -38,7 +38,10 @@ const SelectLabelBody = ({ selected, isOne, onSelect, closeFn }) => {
           {!isLoadingCat && labels && (
             <div>
               {!filter && selected && (
-                <LabelLink onSelectItem={onSelectItem} isOne={isOne} />
+                <LabelLink
+                  onSelectItem={onSelectItem}
+                  formForSet={formForSet}
+                />
               )}
               <LabelItems
                 add={addUserLabel}

@@ -25,7 +25,11 @@ const MyCardExpress = ({ item, hint }) => {
             key="front">
             <div className={cl["card-front"]}>
               <div className={"relativeF"}>
-                {!item.expression ? item.phrase : addSpanToExpInPrase(item)}
+                {item
+                  ? !item.expression
+                    ? item.phrase
+                    : addSpanToExpInPrase(item)
+                  : null}
               </div>
             </div>
           </CSSTransition>

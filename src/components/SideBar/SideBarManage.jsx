@@ -7,7 +7,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import ExpModalCommand from "./ExpModalCommand";
 import cl from "./SideBar.module.scss";
 
-const SideBarManage = ({ expressionsActions }) => {
+const SideBarManage = ({ expressionActions }) => {
   const [mod, setMod] = useState(false);
   const modal = (el) => {
     setMod(el);
@@ -18,10 +18,10 @@ const SideBarManage = ({ expressionsActions }) => {
         <ExpModalCommand
           mod={mod}
           setMod={setMod}
-          setExpressions={expressionsActions.setExpressions}
+          setExpressions={expressionActions.setExpressions}
         />
       )}
-      <button title="add one" onClick={expressionsActions.addNew}>
+      <button title="add one" onClick={expressionActions.addNew}>
         <GoPlus /> ADD ONE PHRASE
       </button>
       <button title="add some" onClick={() => modal("list")}>
@@ -30,10 +30,10 @@ const SideBarManage = ({ expressionsActions }) => {
       <button title="Add from the file" onClick={() => modal("file")}>
         <FiUploadCloud /> ADD FROM FILE
       </button>
-      <button title="Delete" onClick={expressionsActions.deleteMode}>
+      <button title="Delete" onClick={expressionActions.deleteMode}>
         <AiOutlineDelete /> DELETE PRASES
       </button>{" "}
-      <button title="Download" onClick={expressionsActions.downloadMode}>
+      <button title="Download" onClick={expressionActions.downloadMode}>
         <FiDownloadCloud />
         DOWNLOAD PRASES
       </button>{" "}

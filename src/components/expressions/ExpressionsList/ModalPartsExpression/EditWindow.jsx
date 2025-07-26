@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import cl from "./ExpressionsList.module.scss";
+import cl from "./ExpressionsEdit.module.scss";
 import Draggable from "react-draggable";
 import ExpressionBody from "./ExpressionBody";
-import SoundBtn from "../../users/VoiceBtn/SoundBtn";
-import SelectLabel from "../../Labels/SelectLabel";
-import { statusArr } from "../../../constants/statusConst";
-import ExprStatus from "./ExprStatus";
+import SelectLabel from "../../../Labels/SelectLabel";
+import { Expression } from "../../../../classes/Expression";
+import Swal from "sweetalert2";
+import Plan from "../../PlanAndHistory/Plan";
 
-const EditWindow = ({ editMode, expressionsActions }) => {
+const EditWindow = ({ editMode, expressionActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
   const [phrase, setPhrase] = useState(editMode.editElem.phrase);
+  const [inQueue, setInQueue] = useState(editMode.editElem.inQueue);
+  const [status, setStatus] = useState(editMode.editElem.status);
   const [label, setLabel] = useState({
     id: editMode.editElem.labelid,
     name: editMode.editElem.label,
@@ -21,18 +23,37 @@ const EditWindow = ({ editMode, expressionsActions }) => {
     if (e) e.stopPropagation();
     if (copyBtn) setCopyBtn("");
 
-    expressionsActions.contentEdit(
+    expressionActions.contentEdit(
       editMode.editElem.id === "new" ? "newCancel" : ""
     );
+  };
+  const confirmChangeStatus = (newStatus) => {
+    if (newStatus === "paused") {
+      const exp = new Expression(editMode.editElem);
+      if (exp.exceededSkipsDays > 2)
+        Swal.fire({
+          title: "Apply action?",
+          text: "☹ The number of deviations from the study plan has been exceeded. The study will be started from the beginning after pause!",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+        }).then((result) => {
+          if (!result.isConfirmed) return;
+        });
+    }
+    setStatus(newStatus);
   };
   //save expression on Server
   const save = () => {
     if (copyBtn) setCopyBtn("");
-    expressionsActions.contentEdit({
+    expressionActions.contentEdit({
       ...editMode.editElem,
-      phrase: phrase,
-      expression: expression,
-      note: note,
+      phrase,
+      expression,
+      note,
+      inQueue,
+      status,
       labelid: label.id,
     });
     editMode.setEdit();
@@ -51,21 +72,28 @@ const EditWindow = ({ editMode, expressionsActions }) => {
         <div className={cl["modal-box"]}>
           <div className={["handle", cl["head-edit-box"]].join(" ")}>
             <div>EDIT PHRASE</div>
+            <Plan short expression={new Expression(editMode.editElem)} />
             <button
               className={cl["edit-close-btn"]}
               title="Clouse without changes"
               onClick={closeModal}>
               <IoMdClose />
             </button>
-          </div>{" "}
+          </div>
           <ExpressionBody
-            values={{ phrase, expression, note }}
-            setters={{ setPhrase, setNote, setExpression }}
+            values={{ phrase, expression, note, inQueue, status }}
+            setters={{
+              setPhrase,
+              setNote,
+              setExpression,
+              setInQueue,
+              setStatus: confirmChangeStatus,
+            }}
           />
           <div className={cl["footer-edit-box"]}>
             <div className={cl.label_wrap}>
               <SelectLabel
-                isOne={true}
+                addTitle
                 colCat={label}
                 onSelect={(val) =>
                   setLabel({

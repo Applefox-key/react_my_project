@@ -29,6 +29,11 @@
     caret-color: transparent;
     color: var(--color-card);
     // border-radius: 18px 18px 35px 35px;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--background-label);
+    ;
 
     .addingRowHead {
         width: 100%;
@@ -51,7 +56,7 @@
             width: fit-content;
             min-width: 3rem;
             text-align: center;
-            background-color: var(--color-marker);
+            // background-color: var(--color-marker);
             // border-radius: 50%;
             z-index: 5;
         }
@@ -67,15 +72,37 @@
 
         button {
             &:hover {
-                background-color: var(--background-card);
+                // background-color: var(--background-card);
+                color: orangered;
             }
         }
 
     }
 
+    &:hover {
+        border: 2px solid var(--background-sidebar);
+    }
 
 }
 
+.fileModal {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.labelbox {
+    max-width: 13rem;
+    margin-right: 1rem;
+
+    button {
+        width: 13rem;
+        background-color: var(--background-label);
+        color: var(--color-label);
+    }
+}
 
 .titleBtns {
     padding: 1rem 1rem;

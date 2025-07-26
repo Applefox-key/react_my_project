@@ -3,15 +3,14 @@ import { TbMoodConfuzed, TbMoodSad2 } from "react-icons/tb";
 
 export const expressionStateIcon = (item) => {
   let days = item.exceededSkipsDays;
-  let exceededSkipsCount = item.exceededSkipsCount;
   let result = <></>;
-  if (exceededSkipsCount)
+  if (days > 2)
     result = (
       <span title="you have deviated greatly from the plan">
         <TbMoodSad2 />
       </span>
     );
-  if (days > 0)
+  else if (days > 0)
     result = (
       <span title="you deviated from the plan">
         <TbMoodConfuzed />
@@ -21,10 +20,9 @@ export const expressionStateIcon = (item) => {
 };
 export const expressionState = (item) => {
   let days = item.exceededSkipsDays;
-  let exceededSkipsCount = item.exceededSkipsCount;
   let color = "colorBlue";
-  if (exceededSkipsCount) color = "colorRed";
-  if (days > 0) color = "colorOrange";
+  if (days > 2) color = "colorRed";
+  else if (days > 0) color = "colorOrange";
   return color;
 };
 
@@ -47,9 +45,31 @@ export const deleteSomeExpressions = async (idsArr = []) => {
   }
   return res;
 };
-export const setLabelToArr = async (expressionsArr, labelid) => {
+// export const updateLabelsForList = async (expressionsArr, labelid) => {
+//   let res = expressionsArr.length
+//     ? await BaseAPI.setLabelToExprArr(expressionsArr, labelid)
+//     : "";
+//   return res;
+// };
+export const setFieldArr = async (expressionsArr, field, fieldValue) => {
   let res = expressionsArr.length
-    ? await BaseAPI.setLabelToExprArr(expressionsArr, labelid)
+    ? await BaseAPI.setFieldValToExprArr(expressionsArr, field, fieldValue)
     : "";
   return res;
+};
+
+export const groupByLabel = (expressions) => {
+  const groups = {};
+  expressions.forEach((el) => {
+    const groupId = el.labelid || "no_label";
+    if (!groups[groupId]) {
+      groups[groupId] = {
+        labelid: groupId,
+        labelname: el.label || "No Label",
+        items: [],
+      };
+    }
+    groups[groupId].items.push(el);
+  });
+  return Object.values(groups);
 };

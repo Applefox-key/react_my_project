@@ -1,9 +1,14 @@
 import React from "react";
 import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
+import cl from "./BtnIsChecked.module.scss";
 const BtnIsChecked = ({ isChecked, onClick }) => {
   return (
     <button onClick={onClick}>
-      {isChecked ? <GrCheckboxSelected /> : <GrCheckbox />}
+      {isChecked ? (
+        <GrCheckboxSelected className={cl.checked} />
+      ) : (
+        <GrCheckbox />
+      )}
     </button>
   );
 };

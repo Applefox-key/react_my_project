@@ -1,4 +1,11 @@
 .planWrap {
+    .planshort {
+        display: flex;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+    }
+
     .plan {
         display: flex;
         color: var(--color-card);
@@ -7,11 +14,14 @@
             p {
                 margin: 0;
                 font-weight: 700;
+                width: fit-content;
+
             }
 
             display: flex;
             flex-direction: column;
-            margin: 1rem;
+            align-items: center; // margin: 1rem;
+            margin: 0.5rem;
 
             @media screen and (max-width:900px) {
                 margin: 0.4rem;
@@ -20,19 +30,15 @@
 
     }
 
-    // &::after {
-    //     content: "";
-    //     height: 5px;
-    //     width: 80%;
-    //     background-color: var(--background-label);
-    //     display: block;
-    //     text-align: center;
-    //     margin: auto;
-    //     border-radius: 3px;
-    // }
+    .today {
+        background-color: red;
+
+
+    }
+
 
     @media screen and (max-width:900px) {
-        font-size: 10px;
+        font-size: 17px;
     }
 
 }

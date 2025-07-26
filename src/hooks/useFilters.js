@@ -6,6 +6,8 @@ export const useFilters = () => {
     labelid: "",
     label: "",
     stage: null,
+    inQueue: null,
+    status: null,
   });
   const setFilter = (filterName, value) => {
     if (filterName === "label") {

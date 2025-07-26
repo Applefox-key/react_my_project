@@ -12,7 +12,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";
-import ProgressColumnFilter from "../UI/MyProgressBar/ProgressColumnFilter";
 import { RiFilterOffLine } from "react-icons/ri";
 
 const SideBarLabels = ({
@@ -54,15 +53,12 @@ const SideBarLabels = ({
   return (
     <div
       tabIndex={-1}
-      onBlur={(e) => {
-        if (!e.relatedTarget) setIsMenu("");
-      }}>
+      // onBlur={(e) => {
+      //   if (!e.relatedTarget) setIsMenu("");
+      // }}
+    >
       <div className={cl.subLine}>
-        <ProgressColumnFilter
-          stage={filters.stage}
-          filterChange={filterChange}
-        />
-        <h2>LABELS IN THE LIST</h2>
+        <h2>TAGS IN THE LIST</h2>
         <div className={cl.lblSide}>
           <button
             className={cl.btnPlus}
@@ -76,7 +72,7 @@ const SideBarLabels = ({
               setIsMenu(false);
             }}>
             <MdOutlineLabelOff />
-            Clear Tags
+            Unset tags
           </button>
           {!!filters.labelid && (
             <button
@@ -87,7 +83,7 @@ const SideBarLabels = ({
             </button>
           )}
         </div>{" "}
-        <h2>CHOOSE FOR FILTER OR EDIT</h2>
+        <h2>CHOOSE TAG TO FILTER OR EDIT</h2>
       </div>
 
       <LabelEdit
@@ -98,10 +94,10 @@ const SideBarLabels = ({
       />
       <div
         className={cl["link-box1"]}
-        onClick={(e) => selectFn({ name: "no label", id: "null" })}>
+        onClick={(e) => selectFn({ name: "no tag", id: "null" })}>
         <div>
           <span>✦</span>
-          no labels
+          no tag
         </div>
         {/* <CiMenuKebab /> */}
       </div>
@@ -120,6 +116,7 @@ const SideBarLabels = ({
               {el.name}
             </div>
             <button
+              className={cl["button-keb"]}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsMenu(isMenu ? "" : el.id);

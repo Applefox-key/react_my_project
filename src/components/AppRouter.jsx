@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MyNavbar from "./nav/MyNavbar";
-import Popup from "./UI/popup/Popup";
 import { useAuth } from "../hooks/useAuth";
 
 const AppRouter = () => {
@@ -10,7 +9,6 @@ const AppRouter = () => {
   return (
     <div>
       <MyNavbar />
-      <Popup />
       <div className="main_page">
         <Routes>
           {routesArr.map((item, i) => (

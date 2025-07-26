@@ -5,9 +5,12 @@ const History = ({ expression }) => {
   let history = expression.userHistory;
 
   const stylecss = (item) => {
-    if (item.includes("skipped")) return { color: "red", fontWeight: "600" };
+    if (item.includes("skip")) return { color: "red", fontWeight: "600" };
     if (item.includes("new try")) return { color: "green", fontWeight: "800" };
     if (item.includes("add")) return { color: "green", fontWeight: "800" };
+    if (item.includes("paused")) return { color: "orange", fontWeight: "800" };
+    if (item.includes("resumed"))
+      return { color: "lightgreen", fontWeight: "800" };
     return {};
   };
   return (

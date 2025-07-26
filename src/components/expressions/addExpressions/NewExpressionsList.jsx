@@ -1,11 +1,13 @@
 import React from "react";
 import cl from "./addExpressions.module.scss";
-import ExpressionBody from "../ExpressionsList/ExpressionBody";
+import ExpressionBody from "../ExpressionsList/ModalPartsExpression/ExpressionBody";
 
 const NewExpressionsList = ({ dataArr, setDataArr }) => {
-  const expressionSelect = (i, newV) => {
+  const expressionSelect = (i, updatedData) => {
     setDataArr(
-      dataArr.map((el, num) => (num === i ? { ...el, expression: newV } : el))
+      dataArr.map((el, num) =>
+        num === i ? { ...el, expression: updatedData } : el
+      )
     );
   };
 
@@ -32,7 +34,11 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
 
           <ExpressionBody
             smallSize
-            values={{ phrase: el.phrase, expression: el.expression }}
+            values={{
+              phrase: el.phrase,
+              expression: el.expression,
+              note: el.note || "",
+            }}
             setters={{ setExpression: (val) => expressionSelect(i, val) }}
           />
         </div>

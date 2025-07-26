@@ -12,7 +12,11 @@ export const useEditMode = () => {
         expression: content.expression,
         labelid: content.labelid,
         label: content.label,
+        history: content.history,
+        stage: content.stage,
         note: content.note,
+        inQueue: content.inQueue,
+        status: content.status,
       });
   };
   return { editElem, setEdit };

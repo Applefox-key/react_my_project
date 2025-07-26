@@ -11,8 +11,7 @@ const MainPage = () => {
   const [loginMode, setLoginMode] = useState(1);
   const scollToRef = useRef();
   return (
-    <>
-      {" "}
+    <div className={cl["about-wrap"]}>
       <div className={cl.text_container_public}>
         <div className={cl.text1}>Try the 90 seconds method</div>
         <div className={cl.text2}>Sign In to Learn Fast</div>
@@ -41,7 +40,7 @@ const MainPage = () => {
       <div className="w-10">
         <Logo />
       </div>
-    </>
+    </div>
   );
 };
 

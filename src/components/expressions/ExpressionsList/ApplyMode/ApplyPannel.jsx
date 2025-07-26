@@ -1,5 +1,5 @@
 import React from "react";
-import cl from "./ExpressionsList.module.scss";
+import cl from "../ExpressionsList.module.scss";
 import { TbListCheck } from "react-icons/tb";
 
 const ApplyPannel = ({ applyMode, checkAll }) => {

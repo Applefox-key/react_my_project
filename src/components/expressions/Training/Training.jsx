@@ -55,7 +55,7 @@ const Training = () => {
           <SelectLabel
             onSelect={selectLabel}
             colCat={defineLabel()}
-            isOne
+            formForSet
             lgSize
           />
         </div>

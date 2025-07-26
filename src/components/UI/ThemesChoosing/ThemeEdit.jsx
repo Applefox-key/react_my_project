@@ -23,7 +23,6 @@ const ThemeEdit = ({ callback, item, colors }) => {
     ["--background-info", "info background"],
     ["--color-info", "info text"],
   ];
-  console.log(item);
 
   return (
     <div className={cl.editColorsWrap}>

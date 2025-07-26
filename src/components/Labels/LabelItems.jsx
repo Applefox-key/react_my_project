@@ -19,7 +19,8 @@ const LabelItems = ({ list, add, selected, onSelect }) => {
           <DropdownItem
             key={item.id}
             className={classGenerator(item)}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               onSelect(item);
             }}>
             {item.name}
@@ -27,7 +28,7 @@ const LabelItems = ({ list, add, selected, onSelect }) => {
         ))
       ) : (
         <div className={cl["add-cat-btn"]} variant="light" onClick={add}>
-          + add new label
+          + add new tag
         </div>
       )}
     </>

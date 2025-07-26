@@ -6,7 +6,7 @@ import ProfileImg from "./ProfileImg";
 
 import ProfileData from "./ProfileData";
 
-import cl from "./users.module.css";
+import cl from "./users.module.scss";
 
 const UserProfile = ({ userData, onClick, btnName }) => {
   const [visible, setVisible] = useState(false);
@@ -15,12 +15,20 @@ const UserProfile = ({ userData, onClick, btnName }) => {
     email: "",
     img: imgProfile,
     password: "",
+    settings: {},
   });
 
   useEffect(() => {
     if (!userData) return;
-    const ud = userData.img ? userData.img : imgProfile;
-    setUserDataForm({ ...userData, "img": ud });
+
+    setUserDataForm({
+      ...userData,
+      img: userData.img || imgProfile,
+      settings: {
+        ...userData.settings,
+        dailyQueueLimit: userData.settings?.dailyQueueLimit ?? 0,
+      },
+    });
   }, [userData]);
 
   return (
@@ -37,16 +45,15 @@ const UserProfile = ({ userData, onClick, btnName }) => {
           visible={visible}
           setVisible={setVisible}
         />
-        <div>
-          <ProfileData
-            userDataForm={userDataForm}
-            setUserDataForm={setUserDataForm}
-            passRequired={btnName === "Sign up"}
-          />
-          {/* <AnimatedBtn type="submit" title={btnName} /> */}
 
-          {/* <Button as="input" type="submit" value={btnName} /> */}
-        </div>{" "}
+        <ProfileData
+          userDataForm={userDataForm}
+          setUserDataForm={setUserDataForm}
+          passRequired={btnName === "Sign up"}
+        />
+        {/* <AnimatedBtn type="submit" title={btnName} /> */}
+
+        {/* <Button as="input" type="submit" value={btnName} /> */}
       </div>
     </Form>
   );

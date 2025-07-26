@@ -1,23 +1,18 @@
 import React, { useMemo, useState } from "react";
 import { addSpanToExpInPrase } from "../../../utils/texts";
 import { expressionStateIcon } from "../../../utils/expressions";
-import EditWindow from "./EditWindow";
 import cl from "./ExpressionsList.module.scss";
-import InfoWindow from "./InfoWindow";
+import InfoWindow from "./ModalPartsExpression/InfoWindow";
 import SelectLabel from "../../Labels/SelectLabel";
 import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
-import { GrCheckbox, GrCheckboxSelected } from "react-icons/gr";
 import BtnIsChecked from "../../UI/Btns/BtnIsChecked";
-import ExprStatus from "./ExprStatus";
-import { statusArr } from "../../../constants/statusConst";
+import ExprStatusInf from "./ExprStatus/ExprStatusInf";
 
 const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
   const { editMode, applyMode } = modes;
-  console.log("num", num);
-  console.log("num j", (num % 4) + 1);
 
   // const [editMode, setEditMode] = useState(false);
-  const { expressionsActions, handleDrop } = actions;
+  const { expressionActions, handleDrop } = actions;
   const [elInfo, setElInfo] = useState(false);
   const isChecked = useMemo(() => {
     return applyMode.isOn && applyMode.isSelected(expression.id);
@@ -41,14 +36,14 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
 
   return (
     <>
-      {/* {editMode && (
-        <EditWindow
-          editMode={editMode}
-          expressionsActions={expressionsActions}
-        />
-      )} */}
       {elInfo && <InfoWindow setVisible={setElInfo} expression={expression} />}
-      <div className={cl["rowsContainer"]} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={cl["rowsContainer"]}
+        onClick={(e) => {
+          e.stopPropagation();
+
+          if (!applyMode.isOn) editMode.setEdit(expression);
+        }}>
         <div
           className={classGenerator()}
           key={"ex" + expression.id}
@@ -62,20 +57,25 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
               isChecked={isChecked}
               onClick={(e) => {
                 e.stopPropagation();
+
                 if (applyMode.isOn) addEl(expression);
               }}
             />
           )}
-          <div className="d-flex">
+          <div className={cl.expInfo}>
+            <ExprStatusInf
+              stat={expression.status}
+              inQueue={expression.inQueue}
+            />
+
             <div className={cl["exp-row-btns"]}>
               <div className={cl.label_wrap}>
                 <SelectLabel
-                  isOne={true}
                   id={"labelBox" + expression.id}
                   disabled={applyMode.isOn}
                   colCat={{ id: expression.labelid, name: expression.label }}
                   onSelect={(val) =>
-                    expressionsActions.contentEdit({
+                    expressionActions.contentQuickEdit({
                       id: expression.id,
                       labelid: val ? val.id : "",
                     })
@@ -83,12 +83,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
                 />
               </div>
             </div>
-            {/* <ExprStatus stat="new" inPool={false} /> */}
-            {/* <ExprStatus stat="active" inPool={true} /> */}
-            {/* <ExprStatus stat="paused" inPool={false} />*/}
-
             <div className={cl.atr}>
-              {/* <span>{expressionsActions.ordNumber(i + 1)}</span> */}
               <div
                 className={cl.progress}
                 onClick={(e) => {
@@ -102,6 +97,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
               </div>{" "}
             </div>
           </div>
+
           <div
             className={cl["rowPhrase"]}
             onClick={(e) => {
@@ -110,7 +106,6 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
             }}>
             {addSpanToExpInPrase(expression)}
           </div>
-          <ExprStatus short stat={statusArr[num % 4]} inPool={num % 2 === 0} />
         </div>
       </div>
     </>

@@ -222,6 +222,7 @@
     text-overflow: ellipsis;
     width: 11rem;
     overflow: hidden;
+    display: block;
 
 
 
@@ -243,7 +244,7 @@
     justify-content: space-around;
 
     &::after {
-        content: "pick a label";
+        content: "pick a tag";
         font-size: 12px;
 
         // color: var(--color-label);
@@ -252,10 +253,21 @@
 
 }
 
+.addtitle {
+    display: flex;
+
+    align-items: center;
+
+    &::before {
+        content: "TAG:";
+        margin-right: 5px;
+    }
+}
+
 .labeltextLg,
 .labelEmptyLg {
     font-size: 22px;
-    width: 14rem;
+    width: 12rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -267,12 +279,14 @@
     }
 
     @media screen and (max-width:900px) {
-        font-size: 12px;
-        width: 10rem;
+        // font-size: 12px;
+        // width: 10rem;
+        font-size: 25px;
+        width: 17rem;
 
         &::after {
 
-            font-size: 12px;
+            font-size: 25px;
 
         }
 

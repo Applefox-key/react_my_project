@@ -26,23 +26,23 @@ const LabelEdit = ({ callback, label = null }) => {
       {!label ? (
         <button className={cl.btnPlus} onClick={() => setIsEdit(true)}>
           <FaPlus />
-          ADD NEW LABEL
+          ADD NEW TAG
         </button>
       ) : (
         <button className={cl.btnEdit} onClick={() => setIsEdit(true)}>
-          <CiEdit /> edit label
+          <CiEdit /> edit tag
         </button>
       )}
       {isEdit && (
         <MyModal
           show={true}
           setshowmodal={setIsEdit}
-          title={label ? "EDIT LABEL" : "NEW LABEL"}
+          title={label ? "EDIT TAG" : "NEW TAG"}
           dialogClassName={cl.newLabel}>
           <div>
             <input
               autoFocus
-              placeholder="label's name"
+              placeholder="tag's name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}

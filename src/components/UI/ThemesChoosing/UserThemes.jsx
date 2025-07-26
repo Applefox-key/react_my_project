@@ -24,7 +24,7 @@ const UserThemes = () => {
 
   const gradient = (el) => {
     let gradientColors = [
-      "white" && userThemesList[el]["--background-card"],
+      "white" && (userThemesList[el]["--background-card"] || "grey"),
       "grey" && userThemesList[el]["--background-label"],
       "grey" && userThemesList[el]["--background-menu"],
       "grey" && userThemesList[el]["--background-sidebar"],

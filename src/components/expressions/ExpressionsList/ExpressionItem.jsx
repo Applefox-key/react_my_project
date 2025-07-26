@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { addSpanToExpInPrase } from "../../../utils/texts";
 import { expressionStateIcon } from "../../../utils/expressions";
-import EditWindow from "./EditWindow";
+
 import cl from "./ExpressionsList.module.scss";
-import InfoWindow from "./InfoWindow";
+import InfoWindow from "./ModalPartsExpression/InfoWindow";
 import SelectLabel from "../../Labels/SelectLabel";
 import ProgressColumn from "../../UI/MyProgressBar/ProgressColumn";
+import EditWindow from "./ModalPartsExpression/EditWindow";
 
 const ExpressionItem = ({ modes, actions, expressions }) => {
   const { editMode, view, applyMode } = modes;
-  const { expressionsActions, handleDrop } = actions;
+  const { expressionActions, handleDrop } = actions;
   const [elInfo, setElInfo] = useState("");
 
   const classGenerator = (el) => {
@@ -31,10 +32,7 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
   return (
     <>
       {editMode.editElem && (
-        <EditWindow
-          editMode={editMode}
-          expressionsActions={expressionsActions}
-        />
+        <EditWindow editMode={editMode} expressionActions={expressionActions} />
       )}
       {elInfo && <InfoWindow setVisible={setElInfo} expression={elInfo} />}
       <div
@@ -50,20 +48,8 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
             onDrop={(e) => handleDrop(e, el)}
             onClick={(e) => addEl(e, el)}>
             <div className={cl.atr}>
-              <span>{expressionsActions.ordNumber(i + 1)}</span>
-              {/* <div className={cl.label_wrap}>
-                <SelectLabel
-                  isOne={true}
-                  disabled={applyMode.isOn}
-                  colCat={{ id: el.labelid, name: el.label }}
-                  onSelect={(val) =>
-                    expressionsActions.contentEdit({
-                      id: el.id,
-                      labelid: val ? val.id : "",
-                    })
-                  }
-                />
-              </div> */}
+              <span>{expressionActions.ordNumber(i + 1)}</span>
+
               <div
                 className={cl.progress}
                 onClick={(e) => {
@@ -88,18 +74,17 @@ const ExpressionItem = ({ modes, actions, expressions }) => {
                   className={cl.btnClose}
                   onClick={(e) => {
                     e.stopPropagation();
-                    expressionsActions.expressionsDelete(el);
+                    expressionActions.expressionsDelete(el);
                   }}>
                   ❌
                 </button>
               )}
               <div className={cl.label_wrap}>
                 <SelectLabel
-                  isOne={true}
                   disabled={applyMode.isOn}
                   colCat={{ id: el.labelid, name: el.label }}
                   onSelect={(val) =>
-                    expressionsActions.contentEdit({
+                    expressionActions.contentEdit({
                       id: el.id,
                       labelid: val ? val.id : "",
                     })

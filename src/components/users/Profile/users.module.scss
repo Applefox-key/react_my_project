@@ -13,7 +13,7 @@
 
 }
 
-
+.box-profile-set {}
 
 @media screen and (min-width: 600px) {
   .avatarDiv {
@@ -34,6 +34,15 @@
 
   }
 
+}
+
+.box-profile-set {
+  display: flex;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+  }
 }
 
 .imgPreview {
@@ -71,4 +80,43 @@
   /* border: 2px solid  #888888; */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+}
+
+
+// .show {
+//   background: red;
+//   width: 15rem;
+// }
+
+// .avatardrop {
+//   z-index: 1500;
+
+//   a {
+//     font-size: 20px;
+//   }
+
+//   .dropdown-menu.show,
+//   .propMenu {
+//     width: 17rem;
+//     right: 5rem;
+//     top: 0rem;
+//   }
+
+
+
+// }
+
+.navAv {
+
+  width: 3rem;
+  height: 3rem;
+  z-index: 40000;
+  position: relative;
+
+  @media screen and (max-width: 900px) {
+    width: 4rem;
+    height: 4rem;
+  }
+
+
 }

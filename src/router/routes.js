@@ -1,15 +1,12 @@
 import Profile from "../components/users/Profile/Profile";
 
-// import ExpressionsList from "../components/expressions/ExpressionsList/ExpressionsListFolders";
-import ExpressionsList from "../components/expressions/ExpressionsList/ExpressionsList";
 import About from "../components/AboutPage/About";
 import MainPage from "../components/AboutPage/MainPage";
 import ForgotPassword from "../components/users/Login/ForgotPassword";
 import Training from "../components/expressions/Training/Training";
-import ExpressionsListFolders from "../components/expressions/ExpressionsList/ExpressionsListFolders";
+import ExpressionsListMain from "../components/expressions/ExpressionsList/ExpressionsListMain";
 
 export const publicRoutes = [
-  // { path: "/login", element: <Login />, nameNav: "Login" },
   { path: "/login/:email", element: <MainPage />, nameNav: "" },
   { path: "/*", element: <MainPage />, nameNav: "" },
   {
@@ -30,13 +27,8 @@ export const privateRoutes = [
 
   {
     path: "/expressions",
-    element: <ExpressionsList />,
-    nameNav: "Expressions",
-  },
-  {
-    path: "/folders",
-    element: <ExpressionsListFolders />,
-    nameNav: "Folders",
+    element: <ExpressionsListMain />,
+    nameNav: "expressions",
   },
   { path: "/*", element: <Training />, nameNav: "" },
 

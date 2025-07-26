@@ -6,7 +6,7 @@ import AboutBox from "./AboutBox";
 
 const About = () => {
   return (
-    <div>
+    <div className={cl["about-wrap"]}>
       <div className="color_container"></div>
       <div className={cl.text_container}>
         <div className={cl.text1}>Learn More </div>

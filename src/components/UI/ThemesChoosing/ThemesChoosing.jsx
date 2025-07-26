@@ -25,9 +25,7 @@ const ThemesChoosing = () => {
       themeArr[el]["--color-marker"],
     ];
 
-    // return `linear-gradient(90deg, ${gradientColors.join(", ")})`;
     return `linear-gradient(to bottom, ${gradientColors.join(", ")})`;
-    // return `radial-gradient(circle at center, ${gradientColors.join(", ")})`;
   };
 
   return (

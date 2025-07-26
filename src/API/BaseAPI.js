@@ -1,4 +1,6 @@
 import { Expression } from "../classes/Expression.js";
+import { SERVER_URL } from "../constants/serverConst.js";
+import { userRequestData } from "../userForm.js";
 import * as fbHelpers from "../utils/serverFireBaseHlp/fbHelpers";
 import axios from "axios";
 
@@ -10,16 +12,27 @@ const BaseAPI = {
       "Authorization": `Bearer ${token}`,
     };
   },
-  async serverReq(method, url, isHeader, data = "", params = "") {
+  async serverReq(
+    method,
+    url,
+    isHeader,
+    data = "",
+    params = "",
+    formData = ""
+  ) {
     let axiosConfig = {
       method: method,
-      url: "http://localhost:8000" + url,
+      url: SERVER_URL + url,
+      // url: "http://localhost:8000" + url,
+      // url: "http://192.168.0.5:8000" + url,
       // url: "http://34.214.160.243:8000" + url,
       // url: "https://api.learnapp.me" + url,
       // url: "https://api.learnapp.pro" + url,
     };
     if (params) axiosConfig.params = params;
-    if (data) axiosConfig.data = { data: data };
+    if (formData) {
+      axiosConfig.data = formData;
+    } else if (data) axiosConfig.data = { data: data };
     if (isHeader) axiosConfig.headers = await this.getAuthHeaders();
 
     try {
@@ -96,6 +109,8 @@ const BaseAPI = {
       !expressionN.hasOwnProperty("expression") &&
       !expressionN.hasOwnProperty("phrase") &&
       !expressionN.hasOwnProperty("labelid") &&
+      !expressionN.hasOwnProperty("status") &&
+      !expressionN.hasOwnProperty("inQueue") &&
       !expressionN.hasOwnProperty("note")
     )
       return { message: "nothing has changed" };
@@ -109,6 +124,11 @@ const BaseAPI = {
       throw new Error(result.error);
     }
     return result.data;
+  },
+  getToken() {
+    let token = JSON.parse(localStorage.getItem("tokenexpressions"));
+    if (!token) throw new Error("session not found");
+    return token;
   },
   async getTrainingListAll(filters = {}) {
     let reqParams = { ...filters };
@@ -126,6 +146,7 @@ const BaseAPI = {
   },
   async getTrainingListByFolders(filters = {}) {
     let reqParams = { ...filters };
+
     let result = await this.serverReq(
       "get",
       "/expressions/byfolders",
@@ -199,6 +220,15 @@ const BaseAPI = {
       labelid: labelid,
     });
   },
+  async setFieldValToExprArr(expArr, field, fieldValue) {
+    if (!expArr.length) return { message: "nothing has changed" };
+
+    return await this.serverReq("patch", "/expressions/onefield/", true, {
+      list: expArr,
+      field: field,
+      fieldValue: fieldValue,
+    });
+  },
   async setNewPassword(password, resetToken) {
     let reqData = { password: password, resetToken: resetToken };
     let result = await this.serverReq(
@@ -213,7 +243,13 @@ const BaseAPI = {
   async getUser() {
     let result = await this.serverReq("get", "/users", true);
     if (result.error) throw new Error(result.error);
-    let usrData = { ...result.data, password: "" };
+
+    let usrData = {
+      ...result.data,
+      password: "",
+      // settings: sss,
+      settings: result.data.settings ? JSON.parse(result.data.settings) : {},
+    };
     return usrData;
   },
   async login(login, passw) {
@@ -238,15 +274,31 @@ const BaseAPI = {
     return result;
   },
   async updateUser(ud) {
-    let reqData = ud.hasOwnProperty("settings")
-      ? { ...ud, settings: JSON.stringify(ud.settings) }
-      : { ...ud };
-    if (ud.img.includes("blob")) {
-      let img = await fbHelpers.setImgToStorage(ud.id, ud.file);
-      reqData = { ...ud, img: img };
-    }
+    let reqData = { ...ud };
+    // let reqData = ud.hasOwnProperty("settings")
+    //   ? { ...ud, settings: JSON.stringify(ud.settings) }
+    //   : { ...ud };
 
-    return await this.serverReq("patch", "/users", true, reqData);
+    // not real file - but url
+    // if (ud.img.includes("blob")) {
+    //   let img = await fbHelpers.setImgToStorage(ud.id, ud.file);
+    //   reqData = { ...ud, img: img };
+    // }
+
+    // delete reqData.file;
+
+    let formData = userRequestData(reqData);
+
+    const result = await this.serverReq(
+      "patch",
+      "/users",
+      true,
+      reqData,
+      "",
+      formData
+    );
+
+    return result;
   },
   async updateExpression(expressionBefore) {
     if (!expressionBefore)

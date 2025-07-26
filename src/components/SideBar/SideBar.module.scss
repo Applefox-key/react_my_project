@@ -16,6 +16,7 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 14px;
+    padding-top: 3rem;
 
     button {
         margin: 10px 0;
@@ -61,8 +62,6 @@
         }
 
         @media screen and (max-height:600px) {
-            width: 4rem;
-            height: 4rem;
             margin: 0;
         }
     }
@@ -71,11 +70,14 @@
         color: var(--color-marker);
         font-weight: 700;
 
+        background-color: var(--background-menu);
+        color: var(--color-menu);
 
         svg {
-            outline: 2px solid var(--color-marker);
-            background-color: var(--background-menu);
-            color: var(--color-menu);
+            // outline: 2px solid var(--color-marker);
+            // background-color: var(--background-menu);
+            // color: var(--color-menu);
+
         }
     }
 }
@@ -90,6 +92,10 @@
     padding-top: 1.5rem;
     color: var(--color-menu);
     transition: all 0.4s ease-in-out;
+
+    @media screen and (max-width:900px) {
+        padding-top: 0;
+    }
 
     h3 {
         margin: 0;
@@ -156,6 +162,7 @@
     text-shadow: 0px 0px 1px rgba(66, 68, 90, 1);
     position: relative;
     color: var(--color-card);
+
     cursor: pointer;
 
     span {
@@ -165,15 +172,20 @@
 
     button {
         color: var(--color-card);
+        background: inherit;
+        color: inherit;
 
         &:hover {
             background-color: var(--background-info);
             color: var(--color-info);
+
         }
     }
 
     &:hover {
         background-color: var(--color-info);
+        color: var(--background-info);
+
     }
 }
 
@@ -185,11 +197,22 @@
 .link-box-active {
     background-color: var(--color-info);
     color: var(--color-label);
+
+    .button-keb {
+        background: inherit;
+        color: inherit;
+
+        &:hover {
+            border: 1px solid var(--color-label);
+            background-color: inherit;
+        }
+    }
 }
 
 .miniMenu {
-    background-color: var(--color-info); // #d6d5d4;
-    color: var(--color-card);
+
+    color: var(--background-info); // #d6d5d4;
+    background-color: var(--color-card);
     position: absolute;
     top: 110%;
     right: 2px;
@@ -202,7 +225,7 @@
     border-radius: 5px;
 
     button {
-        color: var(--color-card);
+        color: var(--background-base);
         margin: 5px 10px;
         transition: all 0.2s ease-in-out;
         text-align: start;

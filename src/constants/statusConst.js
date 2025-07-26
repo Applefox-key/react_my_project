@@ -1,34 +1,35 @@
-import { MdOutlineFiberNew } from "react-icons/md";
-import { ImPlay2, ImPause, ImCircleDown } from "react-icons/im";
-import { CgRadioChecked } from "react-icons/cg";
-import { CgRadioCheck } from "react-icons/cg";
-
+import { GiSandsOfTime } from "react-icons/gi";
 export const statusArr = ["new", "active", "paused", "completed"];
 export const statusIcons = {
   "new": {
-    icon: <MdOutlineFiberNew />,
+    // icon: <MdOutlineFiberNew className="iconNew" />,
+    icon: <span className="textStat">new</span>,
     poolDisable: false,
     possible: ["active"],
     title: "expresion is recently added",
   },
   "active": {
-    icon: <ImPlay2 />,
+    // icon: <ImPlay2 className="iconStat" />,
+    icon: <span className="textStat">active</span>,
     poolDisable: true,
     possible: ["paused"],
     title: "expresion is active",
   },
   "paused": {
-    icon: <ImPause />,
+    // icon: <ImPause className="iconStat" />,
+    icon: <span className="textStat">paused</span>,
     poolDisable: false,
     possible: ["active"],
     title: "expresion is paused",
   },
   "completed": {
-    icon: <ImCircleDown />,
+    // icon: <ImCircleDown className="iconStat" />,
+    icon: <span className="textStat">complite</span>,
     poolDisable: false,
     possible: ["active"],
     title: "expresion is complite",
   },
 };
-export const inPoolIcons = [<CgRadioCheck />, <CgRadioChecked />];
-// export const inPoolIcons = ["⚪", "🟢"];
+export const inQueueIcons = ["", <GiSandsOfTime />];
+// [<CgRadioCheck />, <CgRadioChecked />];
+// export const inQueueIcons = ["⚪", "🟢"];

@@ -8,9 +8,9 @@ const SideBarSettings = () => {
   const [value, setValue] = useState(false);
 
   const setSett = (e) => {
-    const newV = !value;
-    setValue(newV);
-    setSettings("countBtn", newV);
+    const updatedData = !value;
+    setValue(updatedData);
+    setSettings("countBtn", updatedData);
   };
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const SideBarSettings = () => {
   }, []);
   return (
     <div className={"settings_bar"}>
-      <h2>SETTINGS</h2>
+      <h2>LOCAL SETTINGS</h2>
       <br />
       <div className={cl.checkbox_wrap}>
         <input

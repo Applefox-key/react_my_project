@@ -13,7 +13,12 @@ const Profile = () => {
   const setPopup = usePopup();
   const [getUserData, isLoading, error] = useQuery(async () => {
     const userData = await BaseAPI.getUser();
-    if (userData) setUserData(userData);
+
+    if (userData)
+      setUserData({
+        ...userData,
+        settings: userData.settings || {},
+      });
   });
 
   useEffect(() => {
@@ -30,6 +35,7 @@ const Profile = () => {
     setPopup.success("The changes have been saved");
     setUserData({ ...userData, ...data });
   };
+
   return (
     <div className="mt-4">
       {isLoading || !userData ? (

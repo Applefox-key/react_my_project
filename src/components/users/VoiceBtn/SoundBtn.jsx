@@ -5,22 +5,7 @@ import cl from "./VoiceBtns.module.scss";
 const SoundBtn = ({ text, className }) => {
   const [lang, setLang] = useState("en-US");
   const [langArr, setLangArr] = useState({ langs: [], voices: {} });
-  // const langArr = useMemo(() => {
-  //   const synth = window.speechSynthesis;
-  //   const arrV = ["en-US", "ru-RU"];
-  //   const voices = synth.getVoices();
-  //   // console.log(voices);
-  //   const voicesByLang = voices.reduce((acc, voice) => {
-  //     const { lang } = voice;
-  //     if (!acc[lang]) {
-  //       acc[lang] = [];
-  //     }
-  //     acc[lang].push(voice);
-  //     return acc;
-  //   }, {});
 
-  //   return { langs: Object.keys(voicesByLang), voices: voicesByLang };
-  // }, []);
   const btnRef = useRef(null);
   useEffect(() => {
     const synth = window.speechSynthesis;

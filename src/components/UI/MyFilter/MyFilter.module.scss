@@ -3,6 +3,11 @@
   height: 30px;
   width: 250px;
 
+
+
+  @media screen and (max-width:900px) {
+    margin-bottom: 7px;
+  }
 }
 
 
@@ -66,11 +71,112 @@
   transition: all 0.4s ease-in-out;
   color: var(--color-card);
   opacity: 0.8;
-
-
 }
 
 .btn:hover,
 .wrap:hover {
   scale: 1.5;
+}
+
+.short {
+  position: relative;
+
+
+
+  @media screen and (max-width:900px) {
+    border: none;
+
+    .container_input {
+      width: fit-content;
+      margin: 0;
+    }
+
+    button {
+      position: relative;
+      max-height: 4rem;
+      padding: 0;
+
+      svg {
+        font-size: 3rem;
+      }
+
+    }
+
+    .wrap,
+    input {
+      // background: red;
+      display: none;
+    }
+  }
+}
+
+// .short {
+//   position: relative;
+
+//   @media screen and (min-width:900px) {
+//     border: none;
+
+//     .wrap {
+//       display: none;
+
+//     }
+
+//     &:hover {
+//       outline: 1px solid var(--color-checked);
+//     }
+
+
+
+
+
+//   }
+
+
+
+//   @media screen and (max-width:900px) {
+
+
+//     // position: absolute;
+//     // top: -37px;
+//     // right: 95px;
+//     .container_input,
+//     .mainbox,
+//     .secondarybox {
+//       width: 35px;
+//       height: 35px;
+//       justify-content: space-around;
+//       border-radius: 160px;
+//       background: transparent;
+
+
+
+
+
+//       .icon {
+//         padding-right: 6px;
+//         left: -3px;
+//         position: relative;
+//       }
+
+//       input {
+//         width: 0;
+//         height: 0px;
+//         background: transparent;
+//       }
+//     }
+
+//     .secondarybox {
+//       .icon {
+//         padding: 0;
+//         position: relative;
+//         right: 2px;
+//       }
+//     }
+//   }
+
+// }
+
+.hideFilter {
+  visibility: hidden;
+  width: 0;
 }

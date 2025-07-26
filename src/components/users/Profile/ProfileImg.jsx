@@ -2,7 +2,8 @@ import React from "react";
 import AvatarGalery from "./AvatarGalery";
 
 import Image from "react-bootstrap/Image";
-import cl from "./users.module.css";
+import cl from "./users.module.scss";
+import { getAvatar } from "../../../utils/imagesSrv";
 
 const ProfileImg = (props) => {
   const changeAvatar = (url) => {
@@ -27,7 +28,7 @@ const ProfileImg = (props) => {
             props.setVisible(true);
           }}
           rounded
-          src={props.userDataForm.img}
+          src={getAvatar(props.userDataForm.img)}
           className={cl.avatarProfile}
         />
       </div>
