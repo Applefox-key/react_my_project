@@ -30,7 +30,10 @@ const SideBar = ({
   const router = useNavigate();
   return (
     <div className={cl["sideBar-wrap"]}>
-      <div className={cl["sideBar-narrow"]} onClick={check}>
+      <div
+        className={cl["sideBar-narrow"]}
+        id="side-bar-portal"
+        onClick={check}>
         <button
           onClick={() => showHide("manage")}
           className={sideBar && sideBar.name === "manage" ? cl.btnA : ""}>

@@ -52,6 +52,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
       <div className={cl.textVoice}>
         <textarea
           ref={textRef}
+          id="edit-phrase-area"
           onClick={clickOnPhrase}
           onTouchEnd={clickOnPhrase}
           placeholder="....write a phrase to remember"

@@ -415,6 +415,22 @@
             color: inherit;
             z-index: 3000;
 
+            svg path {
+                pointer-events: none;
+            }
+
+            @media screen and (max-width:900px) {
+                width: 5rem;
+                height: 5rem;
+
+                svg {
+                    pointer-events: none;
+
+                    height: 3rem;
+                    width: 3rem;
+                }
+            }
+
             &:hover {
                 color: var(--color-marker);
                 font-weight: 600;
@@ -468,25 +484,23 @@
             font-family: 'Inter';
             border-bottom: 2px solid grey;
             border-radius: 0;
-            // border: 1px solid transparent;
-            // width: 100%;
-            // padding: 0;
-            // padding-left: 10px;
-            // border-radius: 30px 30px 0 0;
-            // background-color: black;
-            // background-color: var(--background-card);
-            // background-color: var(--color-marker);
-            // color: var(--color-label);
-            // background-color: var(--background-label);
-            // min-height: 4rem;
-            // font-size: 18px;
-            // height: 4rem;
-            // cursor: move;
 
-            // display: flex;
-            // justify-content: space-between;
-            // align-items: center;
-            // padding-right: 5px;
+            @media screen and (max-width:900px) {
+                font-size: 2rem;
+
+                .editT {
+                    background-color: transparent;
+                }
+
+                p {
+                    font-size: 2rem;
+                }
+
+                button svg {
+                    width: 4rem;
+                    height: 4rem;
+                }
+            }
 
             span {
                 position: absolute;
@@ -555,14 +569,24 @@
             padding-right: 5px;
             margin-top: 20px;
             justify-content: space-between;
+
+            button {
+                @media screen and (max-width:900px) {
+                    font-size: 16px;
+                    height: 4rem;
+                }
+
+                span {
+                    width: 30rem;
+
+                    @media screen and (max-width:900px) {
+                        font-size: 20px;
+                        height: 4rem;
+                        width: 25rem;
+                    }
+                }
+            }
         }
-
-
-
-
-
-
-
     }
 
     .modal-info {
@@ -612,6 +636,7 @@
             margin-top: 6rem;
             flex-direction: column;
             justify-content: flex-start;
+            max-width: 95vw;
         }
 
         .history-status-box {
@@ -739,7 +764,13 @@
         font-size: 14px;
         padding: 10px;
         margin-top: 5px;
+
+        @media screen and (max-width:900px) {
+            font-size: 16px;
+        }
     }
+
+
 
     .title {
         width: 100%;
@@ -748,6 +779,10 @@
         // padding: 0 15px;
         opacity: 0.7;
         font-size: 15px;
+
+        @media screen and (max-width:900px) {
+            font-size: 20px;
+        }
 
     }
 
@@ -822,7 +857,13 @@
 
 
         }
+
+        @media screen and (max-width:900px) {
+            font-size: 20px;
+        }
     }
+
+
 
     .expressionStrEmpty {
         opacity: 0.7;
@@ -870,6 +911,12 @@
         margin: 10px 0px;
         width: 100%;
         text-align: start;
+
+        @media screen and (max-width:900px) {
+            textarea {
+                font-size: 20px;
+            }
+        }
     }
 
     .phrase-sounds {
@@ -910,6 +957,8 @@
         border-bottom: 1px solid grey;
         border-radius: 0;
         height: 2.5rem;
+
+
     }
 
     .note {

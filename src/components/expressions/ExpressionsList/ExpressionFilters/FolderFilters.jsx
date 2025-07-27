@@ -8,8 +8,10 @@ import FiltersSummary from "./FiltersSummary";
 import { HiOutlineFilter } from "react-icons/hi";
 import { statusArr } from "../../../../constants/statusConst";
 import DropDownList from "../../../UI/DropDownList/DropDownList";
-import { FaRegSquare, FaRegCheckSquare } from "react-icons/fa";
 
+import { BsFolder, BsFolderCheck } from "react-icons/bs";
+import MyPortal from "../../../UI/MyPortal/MyPortal";
+import useMediaQuery from "../../../../hooks/UseMediaQuery";
 const FolderFilters = ({
   filters,
   applyMode,
@@ -18,6 +20,7 @@ const FolderFilters = ({
   setByTags,
 }) => {
   const [showFilters, setShowFilters] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 900px)");
   const switchApplyMode = (e) => {
     e.stopPropagation();
     applyMode.applyOnOF({
@@ -53,14 +56,25 @@ const FolderFilters = ({
     <div className={cl.filtersLine}>
       <div className={cl["exressions-list-title"]}>
         <div>
-          <MyFilter filter={filters.filter} filterChange={filterChange} />
+          {isMobile ? (
+            <MyPortal containerId="side-bar-portal">
+              <MyFilter filter={filters.filter} filterChange={filterChange} />
+            </MyPortal>
+          ) : (
+            <MyFilter filter={filters.filter} filterChange={filterChange} />
+          )}
         </div>
 
         <div className={cl.btnsm}>
-          <button onClick={switchByTags} title="show by tags">
+          <button
+            onClick={switchByTags}
+            title="show by tags"
+            className={byTags ? cl.byTagBtn : ""}>
             {/* {`${byTags ? "🗹" : "☐"} show by tags`} */}
-            {byTags ? <FaRegCheckSquare /> : <FaRegSquare />} show by tags
+            {/* {byTags ? <FaRegCheckSquare /> : <FaRegSquare />} show by tags */}
+            {byTags ? <BsFolderCheck /> : <BsFolder />} show by tags
           </button>
+
           <button
             onClick={(e) => setShowFilters(!showFilters)}
             className={showFilters ? cl.activeFilterBtn : ""}

@@ -384,6 +384,7 @@ export const themeArr = {
     "--background-card": "#011e16",
     "--background-label": "#011e16",
     "--background-info": "#023432",
+    "--background-marker": "#0e2c26",
     "--color-marker": "#03645f",
     "--color-label": "#94979a",
     "--color-sidebar": "#94979a",

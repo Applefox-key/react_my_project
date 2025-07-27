@@ -20,7 +20,7 @@ const Plan = ({ expression, short }) => {
       <div className={short ? cl.planshort : cl.plan}>
         {studyPlan.map((item, i) =>
           short ? (
-            <p>{item[0]}</p>
+            <p key={i}>{item[0]}</p>
           ) : (
             <div key={i} className={cl.planDay}>
               {elem(item, i)}

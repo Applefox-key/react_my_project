@@ -20,7 +20,9 @@ const EditWindow = ({ editMode, expressionActions }) => {
   const [expression, setExpression] = useState(editMode.editElem.expression);
   const [note, setNote] = useState(editMode.editElem.note);
   const closeModal = (e) => {
-    if (e) e.stopPropagation();
+    // if (e) e.stopPropagation();
+    console.log(1111);
+
     if (copyBtn) setCopyBtn("");
 
     expressionActions.contentEdit(
@@ -68,10 +70,10 @@ const EditWindow = ({ editMode, expressionActions }) => {
         const selectedText = selection.toString();
         if (e.target === e.currentTarget && selectedText === "") closeModal();
       }}>
-      <Draggable handle=".handle">
+      <Draggable handle=".handle" cancel="button, textarea">
         <div className={cl["modal-box"]}>
           <div className={["handle", cl["head-edit-box"]].join(" ")}>
-            <div>EDIT PHRASE</div>
+            <div cl={cl.editT}>EDIT PHRASE</div>
             <Plan short expression={new Expression(editMode.editElem)} />
             <button
               className={cl["edit-close-btn"]}
@@ -79,7 +81,7 @@ const EditWindow = ({ editMode, expressionActions }) => {
               onClick={closeModal}>
               <IoMdClose />
             </button>
-          </div>
+          </div>{" "}
           <ExpressionBody
             values={{ phrase, expression, note, inQueue, status }}
             setters={{
