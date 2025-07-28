@@ -5,13 +5,14 @@ import NoWork from "./NoWork";
 import { getSettings, setSettings } from "../../../utils/settings";
 import CountBtns from "./CountBtn";
 import HintCount from "./HintCount";
+import SpecialEffect from "../../UI/SpecialEffect/SpecialEffect";
 
 const TrainingCards = ({ items = [], expressionUpdate }) => {
   const [num, setNum] = useState(0);
   const [direction, setDirection] = useState(0);
   const [anim, setShowAnim] = useState(false);
   const [showBtn, setshowBtn] = useState(getSettings("countBtn", 0));
-
+  const [showEffect, setShowEffect] = useState(false);
   const setSett = (e) => {
     setshowBtn(1 - showBtn);
     setSettings("countBtn", 1 - showBtn);
@@ -30,9 +31,19 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
   };
 
   const update = (expr) => {
+    if (expr.stage === 8) {
+      setShowEffect(true);
+    } else {
+      if (direction !== 2) setDirection(2);
+      setShowAnim(!anim);
+      expressionUpdate(expr);
+    }
+  };
+  const handleCloseEffect = () => {
+    setShowEffect(false);
     if (direction !== 2) setDirection(2);
+    expressionUpdate(items[num]);
     setShowAnim(!anim);
-    expressionUpdate(expr);
   };
   // const hintForUser = item[num] ? item[num].hintForReading : "";
   return (
@@ -55,12 +66,7 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
               setSett={setSett}
             />
 
-            <OneCardE
-              anim={anim}
-              dir={direction}
-              item={items[num]}
-              setSett={setSett}
-            />
+            <OneCardE anim={anim} dir={direction} item={items[num]} />
             <div className="training-btn">
               {" "}
               <Button onClick={prew} disabled={num === 0 || !items.length}>
@@ -83,7 +89,13 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
         ) : (
           <NoWork />
         )}
-      </div>
+      </div>{" "}
+      {showEffect && (
+        <SpecialEffect
+          message="Awesome! You reached the final stage! Keep it up!"
+          onClose={handleCloseEffect}
+        />
+      )}
     </>
   );
 };

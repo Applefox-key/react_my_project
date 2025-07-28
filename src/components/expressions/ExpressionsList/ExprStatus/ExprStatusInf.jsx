@@ -7,6 +7,7 @@ const ExprStatusInf = ({ stat = "new", inQueue, textForm, className }) => {
   const titlePool = inQueue
     ? "expresion is in the queue"
     : "expresion is out of the queue";
+
   return (
     <div
       className={[

@@ -9,31 +9,46 @@ import SoundBtn from "../../../users/VoiceBtn/SoundBtn";
 const ExpressionBody = ({ smallSize = false, values, setters }) => {
   const { phrase, expression, note, inQueue, status } = values;
   const { setPhrase, setNote, setExpression, setInQueue, setStatus } = setters;
-  const [copyBtn, setCopyBtn] = useState("");
+  const [copyBtn, setCopyBtn] = useState(false);
+  const textRef = useRef();
+  const popupRef = useRef();
+
   //show or hide selection button
   const clickOnPhrase = (e) => {
     e.stopPropagation();
-    const selection = window.getSelection();
-    const selectedText = selection.toString().trim();
-
-    if (selectedText === copyBtn) return;
-    setCopyBtn(selectedText);
-  }; //set selection as new expression
-  const setSelection = () => {
-    setExpression(copyBtn);
-    setCopyBtn("");
+    //checkSelection
+    const textarea = textRef.current;
+    if (!textarea) return;
+    const isSelection = textarea.selectionStart !== textarea.selectionEnd;
+    if (isSelection === copyBtn) return;
+    setCopyBtn(isSelection);
   };
-  const textRef = useRef();
 
+  const getSelectionFromTextarea = () => {
+    const textarea = textRef.current;
+    if (!textarea) return "";
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+
+    if (start === end) return ""; //
+    const selection = textarea.value.slice(start, end).trim();
+
+    setExpression(selection);
+    setCopyBtn(false);
+    // return textarea.value.slice(start, end).trim();
+  };
   return (
-    // <div className={[cl["expression-body-box"]]}>
     <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
       {!smallSize && <span className={cl.title}>Expression to memorize</span>}
 
       <div
         className={expression ? cl["expressionStr"] : cl["expressionStrEmpty"]}>
         {copyBtn && (
-          <button className={cl["popupBtn"]} onClick={setSelection}>
+          <button
+            ref={popupRef}
+            className={cl["popupBtn"]}
+            onClick={getSelectionFromTextarea}>
             set selection as expression
             <TiArrowRightOutline />
           </button>
@@ -49,14 +64,25 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           </button>
         )}
       </div>
+      {/* {copyBtn && (
+        <button className={cl["exprBtn"]} onClick={getSelectionFromTextarea}>
+          select part and click to save it as expression
+          <TiArrowRightOutline />
+        </button>
+      )} */}
       <div className={cl.textVoice}>
         <textarea
           ref={textRef}
           id="edit-phrase-area"
           onClick={clickOnPhrase}
           onTouchEnd={clickOnPhrase}
+          onKeyUp={clickOnPhrase}
+          onInput={clickOnPhrase}
           placeholder="....write a phrase to remember"
           autoFocus
+          // onBlur={(e) => {
+          //   if (e.relatedTarget !== popupRef.current) setCopyBtn(false);
+          // }}
           readOnly={typeof setPhrase !== "function"}
           onChange={(e) =>
             typeof setPhrase === "function" ? setPhrase(e.target.value) : ""
@@ -85,7 +111,6 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
         className={cl.note}
         title="pop-up note"
         placeholder="....write a pop-up note"
-        // readOnly={typeof setPhrase !== "function"}
         onChange={(e) => {
           if (typeof setNote !== "function") return;
           e.preventDefault();

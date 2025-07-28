@@ -69,6 +69,13 @@ button {
 
   button {
     height: 3.5rem;
+
+
+    span {
+      flex-direction: row-reverse;
+      width: fit-content;
+      justify-content: flex-end;
+    }
   }
 
   @media screen and (max-width:900px) {
@@ -78,6 +85,15 @@ button {
 
     button {
       height: 4rem;
+
+      span {
+        flex-direction: row-reverse;
+        width: fit-content;
+
+        &::after {
+          font-size: 19px;
+        }
+      }
 
     }
 
@@ -271,21 +287,7 @@ button {
   }
 }
 
-.hintSound {
-  position: absolute;
-  top: 25px;
 
-  @media screen and (max-width: 900px) {
-    top: -5px;
-    font-size: 24px;
-    scale: 1.5;
-    left: 50%;
-  }
-
-  .lang {
-    color: black;
-  }
-}
 
 .planFont {
   width: fit-content;
@@ -300,11 +302,9 @@ button {
   display: flex;
   margin: auto;
   height: 2.8vc;
-  // align-items: flex-end;
   color: var(--color-card);
   text-align: center;
   justify-content: space-between;
-  font-size: small;
   position: relative;
   z-index: 3;
   margin-top: 2rem;
@@ -313,8 +313,15 @@ button {
   align-items: center;
   align-content: center;
   background: var(--background-color-opacity50);
-  font-size: 19px;
+  font-size: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+  .hintText {
+    @media screen and (max-width: 900px) {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
 
   h5 {
     max-width: 85%;
@@ -470,27 +477,6 @@ button {
 
 
 
-.colorhint {
-  border: 3px solid var(--color-marker);
-  background-color: var(--color-marker);
-  color: var(--background-card);
-  width: fit-content;
-  margin: auto;
-  border-radius: 5px;
-  padding: 1px 1rem;
-  font-size: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-
-  @media screen and (max-width:900px) {
-    padding: 1px 1px;
-    width: fit-content;
-    margin: 0;
-    max-width: 160px;
-    // top: 35px;
-    // width: 100%;
-    // position: sticky;
-  }
-}
 
 .visibleO {
   overflow: visible !important;
@@ -588,19 +574,39 @@ button {
 }
 
 .training-field {
-  margin-top: 1rem;
+  // margin-top: 1rem;
 }
 
 .training-menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+  #dropdown-custom-components,
+  .dropdown-custom-components {
+    border: none;
+
+    span::after {
+      margin-right: 5px;
+    }
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
 
   // @media screen and (max-width:900px) {
   //   flex-direction: column-reverse;
 
   // }
-
+  @media screen and (max-width: 400px) {
+    width: 15rem;
+    height: 4rem;
+    align-items: flex-start;
+    // margin-left: 5px;
+  }
 }
 
 
@@ -614,7 +620,7 @@ button {
 .btn-back {
   width: 130px;
   padding: 0;
-  padding: 0 5px;
+  padding: 5px 0;
   height: 3rem;
 
   border-radius: 0 0 0.5rem 0.5rem;
@@ -622,8 +628,11 @@ button {
   line-height: 1.4;
 
 
-  background-color: var(--background-label);
-  color: var(--color-label);
+  // background-color: var(--background-label);
+  // color: var(--color-label);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   &:hover {
 
@@ -637,6 +646,8 @@ button {
     height: 4rem;
     // margin-left: 5px;
   }
+
+
 }
 
 #dropdown-custom-components,
@@ -790,6 +801,11 @@ button {
   background-color: var(--color-base);
 }
 
+.dropdown-item {
+  font-size: 16px;
+  min-width: 15rem;
+}
+
 .dropdown-item:active {
   // color: red;
   text-decoration: none;
@@ -841,7 +857,7 @@ button {
     height: 2rem;
 
     &:first-child {
-      width: 2rem;
+      width: fit-content;
       margin-left: 0rem;
     }
 
@@ -886,11 +902,88 @@ button {
 .textStat {
   font-size: 13px;
   font-family: fantasy;
-
+  text-wrap: nowrap;
 }
 
 .stat-inf {
   .textStat {
     font-size: 18px;
+  }
+}
+
+#training-menu-portal {
+  display: flex;
+  position: relative;
+  width: fit-content;
+
+  // @media screen and (max-width:400px) {
+  //   flex-direction: column;
+
+  // }
+
+}
+
+.hintSound {
+  position: relative;
+  z-index: 12;
+
+  @media screen and (max-width: 900px) {
+    position: absolute;
+    align-items: center;
+    top: 5rem;
+    margin-left: 20px;
+    left: 7rem;
+    // left: 0;
+  }
+
+  .lang {
+    color: black;
+  }
+}
+
+.trainingSound {
+
+  button {
+    position: relative;
+
+    svg {
+      width: 2.5rem;
+      height: 2.5rem;
+
+      // background: red;
+      @media screen and (max-width: 900px) {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+}
+
+.colorhint {
+  border: 3px solid var(--color-marker);
+  background-color: var(--color-marker);
+  color: var(--background-card);
+  width: fit-content;
+  margin: auto;
+  border-radius: 5px;
+  padding: 1px 1rem;
+  font-size: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  display: flex;
+  vertical-align: baseline;
+  align-items: center;
+
+  @media screen and (max-width:900px) {
+    padding: 1px 10px;
+    width: fit-content;
+    margin: 0;
+    // max-width: 160px;
+    min-width: 100px;
+    text-wrap: nowrap;
+    font-size: 2rem;
+
+    // top: 35px;
+    // width: 100%;
+    // position: sticky;
   }
 }

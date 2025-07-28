@@ -308,7 +308,7 @@ export class Expression {
     if (updates.stage === 8) {
       updates.history.push(this.#getHistoryEvent("finished"));
       // action += " FINISH!";
-      updates.status = "complite";
+      updates.status = "completed";
     }
     // updates.history.push({ action, date: Date.now() });
 

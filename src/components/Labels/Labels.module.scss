@@ -243,8 +243,18 @@
     align-items: center;
     justify-content: space-around;
 
+    svg {
+        width: 2rem;
+        height: 2rem;
+
+        @media screen and (max-width:900px) {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+
     &::after {
-        content: "pick a tag";
+        content: "NO TAG";
         font-size: 12px;
 
         // color: var(--color-label);
@@ -306,6 +316,7 @@
 
     svg {
         margin-right: 10px;
+        font-size: 20px;
     }
 
     &:hover {

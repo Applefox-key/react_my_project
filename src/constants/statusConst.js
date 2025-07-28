@@ -24,10 +24,10 @@ export const statusIcons = {
   },
   "completed": {
     // icon: <ImCircleDown className="iconStat" />,
-    icon: <span className="textStat">complite</span>,
+    icon: <span className="textStat">🎉completed</span>,
     poolDisable: false,
     possible: ["active"],
-    title: "expresion is complite",
+    title: "study completed",
   },
 };
 export const inQueueIcons = ["", <GiSandsOfTime />];

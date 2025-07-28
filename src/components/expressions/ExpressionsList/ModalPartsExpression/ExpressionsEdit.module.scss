@@ -279,6 +279,8 @@
                 }
             }
 
+
+
             .popupBtn {
                 margin-bottom: 1rem;
                 text-align: center;
@@ -733,6 +735,8 @@
         border-radius: 5px;
         outline: 0px none transparent;
         caret-color: var(--color-card);
+        background: var(--background-base);
+        color: var(--color-base);
     }
 
     textarea {
@@ -764,6 +768,7 @@
         font-size: 14px;
         padding: 10px;
         margin-top: 5px;
+        border: 1px solid;
 
         @media screen and (max-width:900px) {
             font-size: 16px;
@@ -786,6 +791,22 @@
 
     }
 
+    .exprBtn {
+        text-align: center;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        width: -moz-fit-content;
+        width: fit-content;
+        font-size: 1.4rem;
+        border: 1px solid var(--color-card);
+        color: var(--color-card);
+        background-color: var(--background-card);
+        opacity: 0.8;
+        height: 3rem;
+        border-radius: 5px;
+    }
+
     .expressionStr,
     .expressionStrEmpty {
         position: relative;
@@ -801,26 +822,23 @@
         border: 1px solid grey;
 
         .popupBtn {
-            // position: absolute;
             border: 1px solid var(--color-marker);
             box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
             display: block;
-            border-radius: 15px 15px 15px 0;
+            border-radius: 0 5px 5px 0;
             left: 0;
-            // top: 0;
             font-size: 12px;
             padding: 0 2px;
             padding-right: 5px;
+            width: -moz-fit-content;
             width: fit-content;
             text-wrap: nowrap;
-            // height: 100%;
             color: white;
             background-color: #3390FF;
-            height: auto;
+            height: 3rem;
             justify-content: space-between;
             position: absolute;
-            bottom: -26px;
-            // padding-right: 65px;
+            bottom: -30px;
 
             svg {
                 position: absolute;
@@ -855,8 +873,17 @@
                 }
             }
 
+            @media screen and (max-width:900px) {
+                top: -39px;
+                bottom: unset;
+                height: 4rem;
+                width: 100%;
+                font-size: 2rem;
+                border-radius: 0 15px 15px 0;
+            }
 
         }
+
 
         @media screen and (max-width:900px) {
             font-size: 20px;

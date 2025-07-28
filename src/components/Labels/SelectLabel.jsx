@@ -3,7 +3,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import cl from "./Labels.module.scss";
 import SelectLabelBody from "./SelectLabelBody";
 import { useOutsideClick } from "../../hooks/useOutSideClick";
-import { FaRegFolder } from "react-icons/fa";
+
+import { HiOutlineFolderRemove } from "react-icons/hi";
 
 const SelectLabel = ({
   onSelect,
@@ -45,7 +46,7 @@ const SelectLabel = ({
             </span>
           ) : (
             <span className={cl["labelEmpty" + (lgSize ? "Lg" : "")]}>
-              <FaRegFolder />
+              <HiOutlineFolderRemove />
             </span>
           )}
         </Dropdown.Toggle>

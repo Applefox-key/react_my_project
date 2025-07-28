@@ -43,6 +43,8 @@
             border: 1px solid grey;
             width: 100%;
             text-align: left;
+            background: var(--background-base);
+            color: var(--color-base);
 
         }
 
@@ -87,10 +89,10 @@
     position: relative;
     display: flex;
     margin: 10px 0px;
-    width: 6rem;
+    width: 8rem;
     // top: -16px;
     // left: -8px;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .status-wrap-txt {

@@ -17,8 +17,8 @@ const CountBtns = ({ doneFn, item }) => {
     <Draggable
       cancel="#cbtn"
       defaultPosition={{
-        x: window.visualViewport.width * 0.7,
-        y: window.visualViewport.height * 0.05,
+        x: window.visualViewport.width * 0.01,
+        y: window.visualViewport.height * 0.3,
       }}>
       <div className="countBtns">
         <div />

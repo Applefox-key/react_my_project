@@ -6,6 +6,7 @@ import TrainingCards from "./TrainingCards";
 import SelectLabel from "../../Labels/SelectLabel";
 import { useNavigate, useParams } from "react-router-dom";
 import MySpinner from "../../UI/MySpinner/MySpinner";
+import { IoMdArrowForward } from "react-icons/io";
 
 const Training = () => {
   const [list, setList] = useState();
@@ -59,14 +60,13 @@ const Training = () => {
             lgSize
           />
         </div>
-
-        <div className="colorhint">
-          you have {list ? list.length : 0} expressions to read{" "}
-          {label ? " (label " + label.name + ")" : ""}
-        </div>
-
+        <div id="training-menu-portal">
+          <div className="colorhint">
+            LEFT TO READ: {list ? list.length : 0}
+          </div>
+        </div>{" "}
         <button onClick={() => route("/expressions")} className="btn-back">
-          BACK
+          BACK <IoMdArrowForward />
         </button>
       </div>
 

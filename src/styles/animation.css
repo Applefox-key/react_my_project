@@ -100,7 +100,22 @@
      animation: fadeOut;
   animation-duration: 800ms;
   }
+ .lastTime-enter {
+  animation: rotateIn;
+;
+  animation-duration: 800ms;
+  }.lastTime-enter-active {
+     animation: rotateIn;
+  animation-duration: 800ms;
+  }
 
+  .lastTime-exit {
+      animation: fadeOut;
+  animation-duration: 800ms;
+  }.lastTime-exit-active {
+     animation: fadeOut;
+  animation-duration: 800ms;
+  }
 
   .card_left-enter {
     opacity: 0;

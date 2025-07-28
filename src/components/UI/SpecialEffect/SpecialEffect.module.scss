@@ -1,0 +1,37 @@
+.congrats {
+    font-size: 26px;
+    background-color: var(--background-card);
+    color: var(--color-card);
+
+    @media screen and (max-width:900px) {
+        font-size: 30px;
+    }
+
+    h2,
+    p,
+    button {
+        font-size: inherit;
+        font-weight: 900;
+
+    }
+
+    // h2 {
+    //     font-size: 26px;
+    // }
+
+    // p {
+    //     font-size: 26px;
+    // }
+
+    button {
+        width: 100%;
+
+        // background-color: var(--background-marker);
+        // color: var(--color-label);
+    }
+}
+
+canvas {
+    width: 100vw;
+    height: 100vh;
+}

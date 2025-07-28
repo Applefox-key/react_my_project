@@ -1,5 +1,6 @@
 import React from "react";
 import SoundBtn from "../../users/VoiceBtn/SoundBtn";
+import MyPortal from "../../UI/MyPortal/MyPortal";
 
 const HintCount = ({ hint, phrase, setSett }) => {
   const [hintForUser, od, count] = hint;
@@ -12,9 +13,11 @@ const HintCount = ({ hint, phrase, setSett }) => {
     <>
       <div className="hint1" onClick={setSett}>
         <div className="hintText">{hintForUser}</div>
-        <div className="hintSound">
-          <SoundBtn text={phrase} />
-        </div>
+        <MyPortal containerId="training-menu-portal">
+          <div className="hintSound">
+            <SoundBtn text={phrase} className="trainingSound" />
+          </div>
+        </MyPortal>
         <div className="d-flex circles-hint hintAnim">
           <div>{count} times</div>
           <div className="hint1-btn">

@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";
 import { RiFilterOffLine } from "react-icons/ri";
+import { HiOutlineFolderRemove } from "react-icons/hi";
 
 const SideBarLabels = ({
   filterChange,
@@ -71,7 +72,7 @@ const SideBarLabels = ({
               if (window.screen.availWidth < 900) showHide("labels");
               setIsMenu(false);
             }}>
-            <MdOutlineLabelOff />
+            <HiOutlineFolderRemove />
             Unset tags
           </button>
           {!!filters.labelid && (
@@ -82,7 +83,7 @@ const SideBarLabels = ({
               <RiFilterOffLine /> FILTER by "{filters.label}"
             </button>
           )}
-        </div>{" "}
+        </div>
         <h2>CHOOSE TAG TO FILTER OR EDIT</h2>
       </div>
 

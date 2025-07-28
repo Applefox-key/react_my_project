@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { FaPlus } from "react-icons/fa";
 import MyModal from "../UI/MyModal/MyModal";
 import cl from "./Labels.module.scss";
 import BaseAPI from "../../API/BaseAPI";
 import { CiEdit } from "react-icons/ci";
+import { HiOutlineFolderAdd } from "react-icons/hi";
 
 const LabelEdit = ({ callback, label = null }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -25,7 +25,7 @@ const LabelEdit = ({ callback, label = null }) => {
     <>
       {!label ? (
         <button className={cl.btnPlus} onClick={() => setIsEdit(true)}>
-          <FaPlus />
+          <HiOutlineFolderAdd />
           ADD NEW TAG
         </button>
       ) : (

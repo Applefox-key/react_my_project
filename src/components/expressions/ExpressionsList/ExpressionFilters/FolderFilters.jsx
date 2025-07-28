@@ -72,7 +72,7 @@ const FolderFilters = ({
             className={byTags ? cl.byTagBtn : ""}>
             {/* {`${byTags ? "🗹" : "☐"} show by tags`} */}
             {/* {byTags ? <FaRegCheckSquare /> : <FaRegSquare />} show by tags */}
-            {byTags ? <BsFolderCheck /> : <BsFolder />} show by tags
+            {byTags ? <BsFolderCheck /> : <BsFolder />}
           </button>
 
           <button

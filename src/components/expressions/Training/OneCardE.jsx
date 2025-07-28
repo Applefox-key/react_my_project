@@ -2,13 +2,12 @@ import React from "react";
 import MyCardExpress from "../../UI/CARDS/MyCardExpress";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 
-const OneCardE = ({ anim, dir, item, setSett }) => {
+const OneCardE = ({ anim, dir, item }) => {
   const hintForUser = item ? item.hintForReading : "";
 
   return (
     <>
       <div className="my-1">
-        {" "}
         <SwitchTransition
           mode="out-in"
           className="my-3"
