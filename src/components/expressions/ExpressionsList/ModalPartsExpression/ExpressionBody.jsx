@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import cl from "./ExpressionsEdit.module.scss";
 import { AiOutlineClear } from "react-icons/ai";
 import { TiArrowRightOutline } from "react-icons/ti";
-import VoiceBtns from "../../../users/VoiceBtn/VoiceBtns";
+import VoiceBtns from "../../../UI/VoiceBtn/VoiceBtns";
 import ExprStatusAtr from "../ExprStatus/ExprStatusAtr";
-import SoundBtn from "../../../users/VoiceBtn/SoundBtn";
+import SoundBtn from "../../../UI/VoiceBtn/SoundBtn";
 
 const ExpressionBody = ({ smallSize = false, values, setters }) => {
   const { phrase, expression, note, inQueue, status } = values;
@@ -103,7 +103,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           stat={status}
           inQueue={inQueue}
           onStatusChange={setStatus}
-          onTogglePool={setInQueue}
+          onToggleQueue={setInQueue}
         />
       )}
       {!smallSize && <span className={cl.title}>....write a pop-up note</span>}

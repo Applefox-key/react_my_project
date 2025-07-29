@@ -117,6 +117,24 @@ const BaseAPI = {
 
     return await this.serverReq("patch", "/expressions", true, expressionN);
   },
+  async editExpressionBatch(expressionN) {
+    // if (
+    //   !expressionN.hasOwnProperty("expression") &&
+    //   !expressionN.hasOwnProperty("phrase") &&
+    //   !expressionN.hasOwnProperty("labelid") &&
+    //   !expressionN.hasOwnProperty("status") &&
+    //   !expressionN.hasOwnProperty("inQueue") &&
+    //   !expressionN.hasOwnProperty("note")
+    // )
+    // return { message: "nothing has changed" };
+
+    return await this.serverReq(
+      "patch",
+      "/expressions/batch",
+      true,
+      expressionN
+    );
+  },
   async getLabelsList() {
     const result = await this.serverReq("get", "/labels", true);
 

@@ -27,8 +27,9 @@ const SpecialEffect = ({ message = "Great job! Keep it up!", onClose }) => {
         role="dialog"
         style={{ zIndex: 1051 }}
         aria-modal="true">
-        <Confetti numberOfPieces={300} recycle={false} />
+        <Confetti numberOfPieces={400} recycle={true} />
         <div className="modal-dialog modal-dialog-centered " role="document">
+          {/* <Confetti numberOfPieces={400} recycle={true} /> */}
           <div className="modal-content text-center p-4">
             <div className={cl.congrats}>
               <h2 className="text-success mb-3" style={{ fontWeight: "700" }}>

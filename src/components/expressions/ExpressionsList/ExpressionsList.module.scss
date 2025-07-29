@@ -64,13 +64,15 @@
         display: flex;
         align-items: center;
 
-        button {
+        .dropdown-toggle {
             width: 20rem;
 
             @media screen and (max-width:900px) {
                 width: 16rem;
             }
         }
+
+
 
         .exp-row-btns {
             margin-left: 1rem;
@@ -169,10 +171,11 @@
         button {
             font-size: 20px;
             opacity: .7;
+            margin: 0 5px;
 
             @media screen and (max-width:900px) {
                 font-size: 19px;
-
+                margin: 0 10px;
                 height: fit-content;
                 max-height: 4rem;
             }
@@ -820,7 +823,10 @@
     background: var(--background-menu);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
-    @media screen and (max-width:900px) {}
+    @media screen and (max-width:900px) {
+        font-size: 3rem;
+        top: 0;
+    }
 
     button {
 
@@ -876,14 +882,33 @@
 .applyManagerBtn {
     display: flex;
     align-items: center;
+
+    @media screen and (max-width:900px) {
+        flex-direction: column-reverse;
+
+        button {
+            font-size: 4rem;
+            height: 5rem;
+            max-height: 5rem;
+            width: 5rem;
+            line-height: 1;
+        }
+    }
+
 }
 
 .applyModeChildren {
     display: flex;
     width: 100%;
 
+
     @media screen and (max-width:900px) {
         flex-wrap: wrap;
+
+        button {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
     }
 
     button {
@@ -1030,11 +1055,23 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-
-
             flex-direction: column-reverse;
 
+            @media screen and (max-width:900px) {
+                border: 1px solid;
 
+                .btnChk {
+                    position: absolute;
+                    // top: 0px;
+                    // right: 0px;
+                    z-index: 2;
+                    border-radius: 5px;
+                    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+                    width: 4rem;
+                    height: 4rem;
+                    bottom: 6px;
+                }
+            }
 
             &:hover {
                 .exp-row-btns {
@@ -1043,11 +1080,7 @@
             }
 
             .rowPhrase {
-                display: flex;
-                // height: 100%;
-                align-content: center;
-                justify-content: center;
-                align-items: center;
+                text-align: start;
                 flex-wrap: wrap;
                 width: 100%;
                 justify-content: flex-start;
@@ -1065,6 +1098,15 @@
                 // right: 5px;
                 display: none;
             }
+
+        }
+
+        .no-div-event {
+            // background-color: red;
+
+            div {
+                pointer-events: none;
+            }
         }
     }
 }
@@ -1076,6 +1118,10 @@
 
     .folderName {
         justify-content: space-between;
+
+
+
+
     }
 
 }

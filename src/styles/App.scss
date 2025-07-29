@@ -846,6 +846,15 @@ button {
   justify-content: space-between;
   height: 10px;
 
+  div div {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  button {
+    border-radius: 5px;
+  }
+
   &:first-child {
     width: 22rem;
     margin-left: 1rem;
@@ -853,6 +862,7 @@ button {
 
   @media screen and (max-width:900px) {
     // width: fit-content;
+    flex-direction: row-reverse;
     width: 22rem;
     height: 2rem;
 
@@ -864,8 +874,8 @@ button {
 
 
     div div {
-      height: 2rem;
-      width: 2rem;
+      height: 2.5rem;
+      width: 2.5rem;
     }
   }
 

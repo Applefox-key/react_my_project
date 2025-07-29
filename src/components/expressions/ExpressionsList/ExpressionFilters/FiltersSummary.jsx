@@ -35,7 +35,7 @@ const FiltersSummary = ({ filters, filterChange }) => {
       {filters.inQueue !== null && (
         <button onClick={() => clearFn("inQueue")}>
           {<MdClear className="" />}
-          {filters.inQueue ? "in pool" : "not in pool"}
+          {filters.inQueue ? "in the queue" : "not in the queue"}
         </button>
       )}
     </div>

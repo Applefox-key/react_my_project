@@ -1,5 +1,5 @@
 import React from "react";
-import SoundBtn from "../../users/VoiceBtn/SoundBtn";
+import SoundBtn from "../../UI/VoiceBtn/SoundBtn";
 import MyPortal from "../../UI/MyPortal/MyPortal";
 
 const HintCount = ({ hint, phrase, setSett }) => {

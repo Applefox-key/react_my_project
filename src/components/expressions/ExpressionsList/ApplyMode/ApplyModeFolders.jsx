@@ -27,15 +27,7 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
       applyMode={applyMode}
       checkAll={() => applyMode.selectAllApply(expressions)}>
       <button onClick={() => callbackApply("deleteSome")}>delete</button>
-      <button
-        onClick={() =>
-          expressionActions.updateLabelsForList({
-            list: applyMode.list,
-            labelid: undefined,
-          })
-        }>
-        clear tags
-      </button>
+
       <button onClick={() => callbackApply("createFile")}>
         download phrases
       </button>
@@ -66,9 +58,17 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
             fieldValue: nv,
           })
         }
-        list={["add to pool", "remove from pool"]}
+        list={["add to queue", "remove from queue"]}
       />
-
+      <button
+        onClick={() =>
+          expressionActions.updateLabelsForList({
+            list: applyMode.list,
+            labelid: undefined,
+          })
+        }>
+        clear tags
+      </button>
       <div>
         <SelectLabel
           formForSet

@@ -4,7 +4,7 @@ import { inQueueIcons, statusIcons } from "../../../../constants/statusConst";
 
 const ExprStatusInf = ({ stat = "new", inQueue, textForm, className }) => {
   const current = statusIcons[stat];
-  const titlePool = inQueue
+  const titleQueue = inQueue
     ? "expresion is in the queue"
     : "expresion is out of the queue";
 
@@ -15,7 +15,7 @@ const ExprStatusInf = ({ stat = "new", inQueue, textForm, className }) => {
         className || "",
       ].join(" ")}>
       <span>{textForm ? current.title : current?.icon}</span>
-      <span>{textForm ? titlePool : inQueueIcons[+inQueue]}</span>
+      <span>{textForm ? titleQueue : inQueueIcons[+inQueue]}</span>
     </div>
   );
 };

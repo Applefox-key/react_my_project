@@ -61,7 +61,7 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
           .filter((el) => data.list.includes(el.id))
           .map((el) => el.setStatus(data.fieldValue));
 
-        await BaseAPI.editExpression(updated);
+        await BaseAPI.editExpressionBatch(updated);
         applyMode.applyOnOF();
         await this.fetchExpressions();
       } catch (error) {

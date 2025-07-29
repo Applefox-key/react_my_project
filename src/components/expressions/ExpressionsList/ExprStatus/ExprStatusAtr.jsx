@@ -9,7 +9,7 @@ const ExprStatusAtr = ({
   inQueue,
   short,
   onStatusChange,
-  onTogglePool,
+  onToggleQueue,
   className,
 }) => {
   const current = statusIcons[stat];
@@ -21,7 +21,7 @@ const ExprStatusAtr = ({
         className || "",
       ].join(" ")}>
       {/* inQueue toggle */}
-      <div className={cl["pool-box"]}>
+      <div className={cl["queue-box"]}>
         {short && (
           <div title={inQueue ? "Remove from the queue" : "Add to the queue"}>
             {inQueueIcons[+inQueue]}
@@ -31,14 +31,14 @@ const ExprStatusAtr = ({
           <>
             <p>{"Adding to the queue"}</p>
             <div
-              className={cl["pool-ico"]}
-              // onClick={() => onTogglePool && onTogglePool(!inQueue)}
+              className={cl["queue-ico"]}
+              // onClick={() => onToggleQueue && onToggleQueue(!inQueue)}
               title={inQueue ? "Remove from the queue  " : "Add to the queue"}>
               {inQueue ? "In the queue" : "Not in the queue"}
               <SwitchBtn
                 value={inQueue}
-                setValue={onTogglePool}
-                disabled={!!current?.poolDisable}
+                setValue={onToggleQueue}
+                disabled={!!current?.queueDisable}
               />
             </div>
           </>
@@ -56,7 +56,6 @@ const ExprStatusAtr = ({
               onValueChange={onStatusChange}
               list={allowedNext}
             />
-            {/* <ExprStatus stat={stat} onStatusChange={onStatusChange} /> */}
           </>
         )}
       </div>

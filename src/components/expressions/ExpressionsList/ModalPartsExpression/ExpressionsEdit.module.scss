@@ -383,6 +383,7 @@
     z-index: 1000;
     border-radius: 15px;
     font-family: 'Inter';
+    backdrop-filter: blur(6px);
 
     .modal-box,
     .modal-info {
@@ -392,19 +393,17 @@
         width: 550px;
         max-height: 95vh;
         height: fit-content;
-        border-radius: 30px;
         border-radius: 15px;
-        // padding: 10px;
-        // border: 2px solid var(--color-marker);
         background-color: var(--background-card);
-        padding: 15px;
+        padding: 20px;
 
         margin: auto;
         overflow: auto;
 
         @media screen and (max-width:900px) {
             width: 97vw;
-            // margin-top: 1rem;
+            border: 1px solid;
+
         }
 
 
@@ -718,11 +717,7 @@
 .phrase-box-sm {
     padding: 0 20px;
     font-size: 2rem;
-    // border: 1px solid transparent;
     background-color: var(--background-card);
-    // padding-top: 1rem;
-    // border-bottom-left-radius: 30px;
-    // border-bottom-right-radius: 30px;
     min-height: 50px;
     height: auto;
     text-align: center;

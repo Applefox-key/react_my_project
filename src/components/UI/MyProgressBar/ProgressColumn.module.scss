@@ -18,12 +18,18 @@
 }
 
 .wrapProgressSm {
-    width: 17rem;
+    width: fit-content;
     margin: auto;
     margin-top: 12px;
     height: 15px;
     position: relative;
     margin-bottom: 1rem;
+
+
+
+    @media screen and (max-width:900px) {
+        width: fit-content;
+    }
 }
 
 .oneStage,

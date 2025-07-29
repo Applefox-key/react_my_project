@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import cl from "./addExpressions.module.scss";
 import NewExpressionsList from "./NewExpressionsList";
-import VoiceBtns from "../../users/VoiceBtn/VoiceBtns";
+import VoiceBtns from "../../UI/VoiceBtn/VoiceBtns";
 
 const ModalPasteBody = ({ dataArr, dataStr, setDataStr, setDataArr }) => {
   const textRef = useRef();

@@ -22,6 +22,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
     let part1 = cl["oneItemRow2"];
     if (!isChecked) return part1;
     let part2 = cl["divIsChecked"];
+
     return [part1, part2].join(" ");
   };
 
@@ -41,23 +42,24 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
         className={cl["rowsContainer"]}
         onClick={(e) => {
           e.stopPropagation();
-
           if (!applyMode.isOn) editMode.setEdit(expression);
+          else addEl(expression);
         }}>
         <div
           className={classGenerator()}
           key={"ex" + expression.id}
           {...dropEventsPrevent}
           onDrop={(e) => {
+            if (applyMode.isOn) return;
             e.stopPropagation();
             handleDrop(e, expression);
           }}>
           {applyMode.isOn && (
             <BtnIsChecked
               isChecked={isChecked}
+              className={cl.btnChk}
               onClick={(e) => {
                 e.stopPropagation();
-
                 if (applyMode.isOn) addEl(expression);
               }}
             />
@@ -87,8 +89,9 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
               <div
                 className={cl.progress}
                 onClick={(e) => {
+                  if (applyMode.isOn) return;
+                  setElInfo(!elInfo);
                   e.stopPropagation();
-                  if (!applyMode.isOn) setElInfo(!elInfo);
                 }}>
                 <ProgressColumn
                   stage={expression.stage}
@@ -101,8 +104,9 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
           <div
             className={cl["rowPhrase"]}
             onClick={(e) => {
+              if (applyMode.isOn) return;
               e.stopPropagation();
-              if (!applyMode.isOn) editMode.setEdit(expression);
+              editMode.setEdit(expression);
             }}>
             {addSpanToExpInPrase(expression)}
           </div>

@@ -1,5 +1,5 @@
 // status	string	"new", "active", "paused", "completed"
-// inQueue	boolean	user added phrase to the potential tasks pool
+// inQueue	boolean	user added phrase to the potential tasks queue
 export class Expression {
   #expression;
   #phrase;

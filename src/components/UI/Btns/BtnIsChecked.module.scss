@@ -6,3 +6,13 @@
         stroke: black;
     }
 }
+
+.unchecked {
+
+    background-color: inherit;
+
+    path,
+    rect {
+        stroke: inherit;
+    }
+}
