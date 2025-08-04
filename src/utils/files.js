@@ -6,7 +6,8 @@ export const expressionsFromTxtFile = async (file, callbackForResult) => {
 
   const expressionArr = contArr.map((row) => {
     let [w, s, n] = row.replace(/  +/g, " ").split(";");
-    return { expression: w ? w : "", phrase: s ? s : "", note: n ? n : "" };
+    // return { expression: w ? w : "", phrase: s ? s : "", note: n ? n : "" };
+    return [w, s, n];
   });
 
   callbackForResult(expressionArr);

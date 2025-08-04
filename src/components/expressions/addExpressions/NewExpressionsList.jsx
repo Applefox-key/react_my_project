@@ -3,10 +3,10 @@ import cl from "./addExpressions.module.scss";
 import ExpressionBody from "../ExpressionsList/ModalPartsExpression/ExpressionBody";
 
 const NewExpressionsList = ({ dataArr, setDataArr }) => {
-  const expressionSelect = (i, updatedData) => {
+  const expressionSelect = (i, updatedData, field) => {
     setDataArr(
       dataArr.map((el, num) =>
-        num === i ? { ...el, expression: updatedData } : el
+        num === i ? { ...el, [field]: updatedData } : el
       )
     );
   };
@@ -39,7 +39,11 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
               expression: el.expression,
               note: el.note || "",
             }}
-            setters={{ setExpression: (val) => expressionSelect(i, val) }}
+            setters={{
+              setExpression: (val) => expressionSelect(i, val, "expression"),
+              setPhrase: (val) => expressionSelect(i, val, "phrase"),
+              setNote: (val) => expressionSelect(i, val, "note"),
+            }}
           />
         </div>
       ))}

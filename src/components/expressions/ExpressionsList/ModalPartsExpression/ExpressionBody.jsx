@@ -75,7 +75,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           onKeyUp={clickOnPhrase}
           onInput={clickOnPhrase}
           placeholder="....write a phrase to remember"
-          autoFocus
+          autoFocus={!smallSize}
           // onBlur={(e) => {
           //   if (e.relatedTarget !== popupRef.current) setCopyBtn(false);
           // }}

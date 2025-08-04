@@ -1028,3 +1028,18 @@ button {
 .my-icon {
   color: var(--color-base);
 }
+
+.border_r15 {
+  border-radius: 15px;
+  background-color: var(--background-base);
+  color: var(--color-base);
+
+  tr {
+
+
+    &:hover {
+      color: var(--background-base);
+      background-color: var(--color-base);
+    }
+  }
+}

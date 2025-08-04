@@ -9,8 +9,10 @@ import { usePopup } from "../../../hooks/usePopup";
 import NewExpressionsList from "./NewExpressionsList";
 import SelectLabel from "../../Labels/SelectLabel";
 import cl from "./addExpressions.module.scss";
+import NewExpressionsPrew from "./NewExpressionsPrew";
 const ModalFileExp = ({ setVisible, setExpressions }) => {
   const [fileContent, setFileContent] = useState(null);
+  const [contentPrew, setContentPrew] = useState(null);
   const [fileLabel, setFileLabel] = useState({
     id: "",
     name: "",
@@ -20,7 +22,8 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
 
   const fileChange = async (e) => {
     try {
-      await expressionsFromTxtFile(e.target.files[0], setFileContent);
+      await expressionsFromTxtFile(e.target.files[0], setContentPrew);
+      setFileContent(null);
     } catch (error) {
       inputFileName.current.value = "";
       setPopup.error(error.message);
@@ -44,6 +47,7 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       let res = await BaseAPI.getTrainingListAll();
       setPopup.success("The changes have been saved");
       setExpressions(res);
+      // setContentPrew(res);
       setVisible(false);
       setFileContent(null);
       inputFileName.current.value = "";
@@ -51,6 +55,15 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       setPopup.error(error.message);
       return;
     }
+  };
+  const contentFromPrew = (prew) => {
+    setContentPrew(null);
+    setFileContent(prew);
+  };
+  const back = () => {
+    const cont = fileContent.map((el) => [el.expression, el.phrase, el.note]);
+    setContentPrew(cont);
+    setFileContent(null);
   };
   return (
     <MyModal
@@ -61,13 +74,41 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
       dialogClassName="h100"
       title={"Add new content from .txt file"}>
       <div>
-        <Popup />{" "}
+        <Popup />
       </div>
-      <ModalFileExpBtns inputFileName={inputFileName} fileChange={fileChange} />
+      {!fileContent && (
+        <ModalFileExpBtns
+          inputFileName={inputFileName}
+          fileChange={fileChange}
+        />
+      )}
       <div className={["modal-h50", cl.fileModal].join(" ")}>
         {!!fileContent && (
           <>
-            <div className="d-flex justify-content-between align-items-end">
+            <div className={cl.fileModalBtns}>
+              <div>
+                <Button
+                  size="lg"
+                  className="mt-1"
+                  variant="outline-secondary"
+                  onClick={() => setVisible(false)}>
+                  Calcel
+                </Button>{" "}
+                <Button
+                  size="lg"
+                  className="mt-1"
+                  variant="outline-secondary"
+                  onClick={back}>
+                  Back
+                </Button>{" "}
+              </div>
+              <div className={cl.labelbox}>
+                <SelectLabel
+                  onSelect={setFileLabel}
+                  colCat={fileLabel}
+                  formForSet
+                />
+              </div>
               <Button
                 size="lg"
                 className="mt-1"
@@ -75,20 +116,21 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
                 onClick={addToColection}>
                 Add content
               </Button>
-              <div className={cl.labelbox}>
-                <SelectLabel
-                  onSelect={setFileLabel}
-                  colCat={fileLabel}
-                  formForSet
-                  // lgSize
-                />
-              </div>
             </div>
-            <NewExpressionsList
-              dataArr={fileContent}
-              setDataArr={setFileContent}
-            />
           </>
+        )}
+        {!!contentPrew && (
+          <NewExpressionsPrew
+            setSelectedContent={contentFromPrew}
+            dataArray={contentPrew}
+          />
+        )}
+        {!!fileContent && (
+          <NewExpressionsList
+            dataArr={fileContent}
+            setDataArr={setFileContent}
+            setVisible={setVisible}
+          />
         )}
       </div>
     </MyModal>

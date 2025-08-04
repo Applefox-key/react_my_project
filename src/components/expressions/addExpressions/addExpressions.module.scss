@@ -93,6 +93,14 @@
 
 }
 
+.fileModalBtns {
+    // d-flex justify-content-between align-items-end"
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .labelbox {
     max-width: 13rem;
     margin-right: 1rem;
