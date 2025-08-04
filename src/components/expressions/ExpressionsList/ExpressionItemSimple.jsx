@@ -68,6 +68,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
             <ExprStatusInf
               stat={expression.status}
               inQueue={expression.inQueue}
+              // notStarted={expression.notStartedActive}
             />
 
             <div className={cl["exp-row-btns"]}>

@@ -5,8 +5,9 @@ import Draggable from "react-draggable";
 import ExpressionBody from "./ExpressionBody";
 import SelectLabel from "../../../Labels/SelectLabel";
 import { Expression } from "../../../../classes/Expression";
-import Swal from "sweetalert2";
+
 import Plan from "../../PlanAndHistory/Plan";
+import { sAlert } from "../../../../utils/alert";
 
 const EditWindow = ({ editMode, expressionActions }) => {
   const [copyBtn, setCopyBtn] = useState("");
@@ -33,7 +34,7 @@ const EditWindow = ({ editMode, expressionActions }) => {
     if (newStatus === "paused") {
       const exp = new Expression(editMode.editElem);
       if (exp.exceededSkipsDays > 2)
-        Swal.fire({
+        sAlert({
           title: "Apply action?",
           text: "☹ The number of deviations from the study plan has been exceeded. The study will be started from the beginning after pause!",
           icon: "question",

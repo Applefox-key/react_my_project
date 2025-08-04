@@ -5,10 +5,7 @@ import BaseAPI from "../../API/BaseAPI";
 import { CiMenuKebab } from "react-icons/ci";
 import { TiDeleteOutline } from "react-icons/ti";
 import { BiCloset } from "react-icons/bi";
-import {
-  MdOutlineLabelOff,
-  MdOutlineSettingsBackupRestore,
-} from "react-icons/md";
+import { MdOutlineSettingsBackupRestore } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";

@@ -22,23 +22,8 @@ export const useApplyMode = () => {
       isOn: !!obj.btnName,
       ...obj,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // const selectAllApply = useCallback((expressions) => {
-  //   setApplyMode((prev) => {
-  //     const value = !prev.checkAll;
-  //     const newList = value
-  //       ? expressions[0].hasOwnProperty("items")
-  //         ? expressions.flatMap((la) => la.items.map((el) => el.id))
-  //         : expressions.map((el) => el.id)
-  //       : [];
-  //     return {
-  //       ...prev,
-  //       checkAll: value,
-  //       list: newList,
-  //     };
-  //   });
-  // }, []);
 
   const selectAllApply = useCallback((expressions) => {
     setApplyModeState((prev) => {

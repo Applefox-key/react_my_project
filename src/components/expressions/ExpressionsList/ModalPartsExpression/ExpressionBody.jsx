@@ -38,6 +38,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
     setCopyBtn(false);
     // return textarea.value.slice(start, end).trim();
   };
+
   return (
     <div className={smallSize ? cl["phrase-box-sm"] : cl["phrase-box"]}>
       {!smallSize && <span className={cl.title}>Expression to memorize</span>}
@@ -64,12 +65,7 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
           </button>
         )}
       </div>
-      {/* {copyBtn && (
-        <button className={cl["exprBtn"]} onClick={getSelectionFromTextarea}>
-          select part and click to save it as expression
-          <TiArrowRightOutline />
-        </button>
-      )} */}
+
       <div className={cl.textVoice}>
         <textarea
           ref={textRef}

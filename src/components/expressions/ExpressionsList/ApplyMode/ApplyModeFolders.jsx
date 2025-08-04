@@ -4,11 +4,12 @@ import DropDownList from "../../../UI/DropDownList/DropDownList";
 import { statusArr } from "../../../../constants/statusConst";
 import { validateAndApplyStatusChange } from "../../../../utils/validation";
 import SelectLabel from "../../../Labels/SelectLabel";
-import Swal from "sweetalert2";
+
+import { sAlert } from "../../../../utils/alert.js";
 
 const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
   const callbackApply = (fnName, param) => {
-    Swal.fire({
+    sAlert({
       title: "Apply action?",
       text: "Action will be apply for all selected items",
       icon: "question",
@@ -55,7 +56,7 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
         onValueChange={(nv) =>
           callbackApply("updateFieldForList", {
             field: "inQueue",
-            fieldValue: nv,
+            fieldValue: nv === "add to queue" || 1 ? 1 : 0,
           })
         }
         list={["add to queue", "remove from queue"]}

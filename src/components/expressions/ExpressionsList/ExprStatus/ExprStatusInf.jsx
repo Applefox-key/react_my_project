@@ -2,7 +2,13 @@ import React from "react";
 import cl from "./ExprStatus.module.scss";
 import { inQueueIcons, statusIcons } from "../../../../constants/statusConst";
 
-const ExprStatusInf = ({ stat = "new", inQueue, textForm, className }) => {
+const ExprStatusInf = ({
+  stat = "new",
+  inQueue,
+  textForm,
+  className,
+  // notStarted,
+}) => {
   const current = statusIcons[stat];
   const titleQueue = inQueue
     ? "expresion is in the queue"
@@ -15,6 +21,7 @@ const ExprStatusInf = ({ stat = "new", inQueue, textForm, className }) => {
         className || "",
       ].join(" ")}>
       <span>{textForm ? current.title : current?.icon}</span>
+      {/* <span>{notStarted ? "*" : ""}</span> */}
       <span>{textForm ? titleQueue : inQueueIcons[+inQueue]}</span>
     </div>
   );

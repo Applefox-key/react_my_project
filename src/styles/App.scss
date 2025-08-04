@@ -997,3 +997,34 @@ button {
     // position: sticky;
   }
 }
+
+
+// popup: "my-popup",
+// title: "my-title",
+// confirmButton: "my-confirm-btn",
+// cancelButton: "my-cancel-btn",
+
+//SWEETALERTs
+.my-popup {
+  background-color: var(--background-base);
+  color: var(--color-base);
+}
+
+.my-title {
+  background-color: var(--background-base);
+  color: var(--color-base);
+}
+
+.my-confirm-btn {
+  background-color: var(--background-marker);
+  color: var(--color-base);
+}
+
+.my-cancel-btn {
+  background-color: var(--background-marker);
+  color: var(--color-base);
+}
+
+.my-icon {
+  color: var(--color-base);
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cl from "./MyFilter.module.scss";
 import { CgSearch } from "react-icons/cg";
-import Swal from "sweetalert2";
+import { sAlert } from "../../../utils/alert";
 
 const MyFilter = ({ filter, filterChange }) => {
   const [value, setValue] = useState(filter);
@@ -18,7 +18,7 @@ const MyFilter = ({ filter, filterChange }) => {
     if (window.screen.availWidth <= 600) {
       // const textInp = prompt("what do you want to find?", "");
       // if (textInp) filterChange(textInp);
-      const { value: textInp } = await Swal.fire({
+      const { value: textInp } = await sAlert({
         title: "What do you want to find?",
         input: "text",
         inputPlaceholder: "please print your text...",

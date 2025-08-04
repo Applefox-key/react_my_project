@@ -97,6 +97,7 @@ export class Expression {
     });
     return history_;
   }
+
   get phrase() {
     return this.#phrase;
   }
@@ -221,7 +222,16 @@ export class Expression {
       return result;
     }
   }
+  get notStartedActive() {
+    const stat = this.status === "active";
+    if (!stat) return false;
+    return !this.#stage;
+    // const st = this.stage === 0;
+    // // debugger;
+    // console.log(stat && st);
 
+    // return true;
+  }
   get studyPlan() {
     try {
       let stage_ = this.#stage;
