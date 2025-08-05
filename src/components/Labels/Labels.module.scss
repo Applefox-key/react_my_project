@@ -229,7 +229,9 @@
 }
 
 .labelEmpty,
-.labelEmptyLg {
+.labelEmptyLg,
+.labelEmptyFilter,
+.labelEmptyFilterLg {
     font-size: 12px;
     width: 11rem;
     height: 3rem;
@@ -263,6 +265,15 @@
 
 }
 
+.labelEmptyFilter,
+.labelEmptyFilterLg {
+    &::after {
+        content: "ALL TAGS";
+
+    }
+
+}
+
 .addtitle {
     display: flex;
 
@@ -275,7 +286,8 @@
 }
 
 .labeltextLg,
-.labelEmptyLg {
+.labelEmptyLg,
+.labelEmptyFilterLg {
     font-size: 22px;
     width: 12rem;
     display: flex;

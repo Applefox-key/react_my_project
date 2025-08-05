@@ -125,6 +125,11 @@ const ExpressionsListMain = () => {
               ))
             ) : (
               <div className={cl.oneFolder}>
+                {" "}
+                <div className={cl.folderName}>
+                  <span>ALL EXPRESSIONS</span>
+                  {listToRender.length}
+                </div>
                 {listToRender.map((ex, j) => (
                   <ExpressionItemSimple
                     key={ex.id}

@@ -3,6 +3,7 @@ import cl from "./addExpressions.module.scss";
 import { usePopup } from "../../../hooks/usePopup";
 import DropDownList from "../../UI/DropDownList/DropDownList";
 import { Button, Table } from "react-bootstrap";
+import { sAlert } from "../../../utils/alert";
 
 const NewExpressionsPrew = (props) => {
   const [numbers, setNumbers] = useState({
@@ -44,6 +45,23 @@ const NewExpressionsPrew = (props) => {
 
     props.setSelectedContent(res);
   };
+
+  const expressionDelete = (inum) => {
+    // if (!window.confirm("Delete the phrase?")) return false;
+
+    const result = sAlert({
+      title: "Delete this phrase?",
+      text: "This action cannot be undone.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return false;
+
+    props.changeDataArr(props.dataArray.filter((el, i) => i !== inum));
+  };
   const rowC = (row) => {
     let maxJ = 0;
     const res = props.dataArray.map((row, i) => {
@@ -55,7 +73,18 @@ const NewExpressionsPrew = (props) => {
           </td>
         );
       });
-      return <tr>{columns}</tr>;
+      return (
+        <tr>
+          {columns}{" "}
+          <td>
+            <button
+              className={cl.deleteBtn}
+              onClick={() => expressionDelete(i)}>
+              ✕
+            </button>
+          </td>
+        </tr>
+      );
     });
     const firstRow = Array.from({ length: maxJ + 1 }, (_, i) => {
       const selectedField =

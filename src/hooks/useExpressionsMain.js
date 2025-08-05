@@ -28,11 +28,15 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
         setIsLoading(false);
       }
     },
-
-    async updateFieldForList(data) {
-      setFieldArr(data.list, data.field, data.fieldValue);
+    async applyModeOff() {
       applyMode.applyOnOF();
       await this.fetchExpressions();
+    },
+    async updateFieldForList(data) {
+      setFieldArr(data.list, data.field, data.fieldValue);
+      await this.applyModeOff();
+      // applyMode.applyOnOF();
+      // await this.fetchExpressions();
     },
 
     async updateLabelsForList(data) {
@@ -41,8 +45,7 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
         "labelid",
         data.hasOwnProperty("label") ? data.label.id : data.labelid
       );
-      applyMode.applyOnOF();
-      await this.fetchExpressions();
+      await this.applyModeOff();
     },
 
     async changeExpressionLabels(value) {
@@ -62,8 +65,8 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
           .map((el) => el.setStatus(data.fieldValue));
 
         await BaseAPI.editExpressionBatch(updated);
-        applyMode.applyOnOF();
-        await this.fetchExpressions();
+
+        await this.applyModeOff();
       } catch (error) {
         setPopup.error("Failed to change status: " + error.message);
       }
@@ -119,6 +122,7 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
       }
       const newList = expressions.filter((el) => !ids.includes(el.id));
       setExpressions(newList);
+      applyMode.applyOnOF();
     },
 
     async expressionsDelete(expression = "") {
@@ -129,6 +133,7 @@ export const useExpressionsMain = (applyMode, editMode, filters) => {
       }
       const newList = expressions.filter((el) => el.id !== expression.id);
       setExpressions(newList);
+      applyMode.applyOnOF();
     },
     //edit from list
     async contentQuickEdit(updatedData) {

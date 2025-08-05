@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import cl from "./Labels.module.scss";
-const LabelLink = ({ onSelectItem, formForSet }) => {
+const LabelLink = ({ onSelectItem, link }) => {
   return (
     <Dropdown.Item
       className={cl.link}
@@ -10,7 +10,7 @@ const LabelLink = ({ onSelectItem, formForSet }) => {
       onClick={() => {
         onSelectItem();
       }}>
-      {!formForSet ? "...set no tag ❌" : "...show all tags ♾️"}
+      {link}
     </Dropdown.Item>
   );
 };

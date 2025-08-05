@@ -20,11 +20,12 @@ const ApplyMode = ({ applyMode, checkAll, children }) => {
       </div>
       {applyMode.btnFn && <div>{applyMode.title}</div>}
       <div className={cl.applyManagerBtn}>
+        {applyMode.list.length}
         <button
           className={cl["selectAll" + applyMode.checkAll]}
           onClick={checkAll}>
           <TbListCheck />
-        </button>{" "}
+        </button>
         <button onClick={applyMode.applyOnOF}>
           <IoMdClose />
         </button>

@@ -111,7 +111,7 @@ const FolderFilters = ({
             <div className={cl["exp-row-btns"]}>
               <div className={cl.label_wrap}>
                 <SelectLabel
-                  formForSet
+                  selectForm="filter"
                   disabled={applyMode.isOn}
                   colCat={filters.label}
                   onSelect={onSelect}
@@ -128,12 +128,10 @@ const FolderFilters = ({
           </div>
         </div>
       )}
+
       {Object.values(filters).some((val) => val !== null && val !== "") && (
         <FiltersSummary filterChange={filterChange} filters={filters} />
-      )}{" "}
-      {/* <div>
-        <FilterLS filter={filters.filter} filterChange={filterChange} />
-      </div> */}
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import cl from "./addExpressions.module.scss";
 import ExpressionBody from "../ExpressionsList/ModalPartsExpression/ExpressionBody";
+import { sAlert } from "../../../utils/alert";
 
 const NewExpressionsList = ({ dataArr, setDataArr }) => {
   const expressionSelect = (i, updatedData, field) => {
@@ -12,7 +13,19 @@ const NewExpressionsList = ({ dataArr, setDataArr }) => {
   };
 
   const expressionDelete = (inum) => {
-    if (!window.confirm("Delete the phrase?")) return false;
+    // if (!window.confirm("Delete the phrase?")) return false;
+
+    const result = sAlert({
+      title: "Delete this phrase?",
+      text: "This action cannot be undone.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return false;
+
     setDataArr(dataArr.filter((el, i) => i !== inum));
   };
 

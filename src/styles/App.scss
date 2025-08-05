@@ -233,9 +233,12 @@ button {
 
   &:not([data-note="emptynull"])::before {
     content: "✦";
+    // content: "💡";
+    // content: "❢";
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: -10px;
+    height: 100%;
     width: fit-content;
     transition: all 0.2s ease-in-out;
     font-size: 12px;
@@ -248,7 +251,7 @@ button {
       content: attr(data-note);
       font-size: 15px;
       top: 0px;
-      left: 0px;
+      left: -10px;
       width: fit-content;
       border-radius: 5px;
       padding: 2px 5px;
@@ -256,6 +259,10 @@ button {
       color: var(--background-card);
       background-color: var(--color-marker);
       z-index: 700;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
     }
   }
 
@@ -574,7 +581,26 @@ button {
 }
 
 .training-field {
-  // margin-top: 1rem;
+  .expression {
+
+    &:not([data-note="emptynull"])::before {
+      content: "💡";
+      height: fit-content;
+      top: 0px;
+      left: 0px;
+
+    }
+
+    &:hover {
+      &:not([data-note="emptynull"])::before {
+        content: attr(data-note);
+        top: 0px;
+        left: 0px;
+      }
+    }
+
+  }
+
 }
 
 .training-menu {
@@ -1016,13 +1042,17 @@ button {
 }
 
 .my-confirm-btn {
+  // background-color: var(--background-marker);
+  // color: var(--color-base);
+  color: var(--color-marker);
   background-color: var(--background-marker);
-  color: var(--color-base);
 }
 
 .my-cancel-btn {
-  background-color: var(--background-marker);
-  color: var(--color-base);
+  // background-color: var(--background-marker);
+  // color: var(--color-base);
+  background-color: var(--color-marker);
+  color: var(--background-marker);
 }
 
 .my-icon {

@@ -20,12 +20,15 @@ const ExpressionGroupBlock = ({
       <div>
         {isShown ? <FaRegFolderOpen /> : <FaRegFolder />} {group.labelname}
       </div>
-      {modes.applyMode.isOn && (
-        <BtnIsChecked
-          isChecked={modes.applyMode.isSelectedGr(group.labelid)}
-          onClick={(e) => onCheck(e, group)}
-        />
-      )}
+      <div>
+        ({group.items.length || ""})
+        {modes.applyMode.isOn && (
+          <BtnIsChecked
+            isChecked={modes.applyMode.isSelectedGr(group.labelid)}
+            onClick={(e) => onCheck(e, group)}
+          />
+        )}
+      </div>
     </div>
     {isShown && (
       <CSSTransition

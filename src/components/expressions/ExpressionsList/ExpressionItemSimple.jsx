@@ -45,6 +45,16 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
           if (!applyMode.isOn) editMode.setEdit(expression);
           else addEl(expression);
         }}>
+        {!applyMode.isOn && (
+          <button
+            className={cl.btnSimpleClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              expressionActions.expressionsDelete(expression);
+            }}>
+            ❌
+          </button>
+        )}
         <div
           className={classGenerator()}
           key={"ex" + expression.id}

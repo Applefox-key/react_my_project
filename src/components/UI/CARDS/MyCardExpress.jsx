@@ -14,40 +14,42 @@ const MyCardExpress = ({ item, hint }) => {
 
   return (
     <div>
-      <div className={cl["card-container"]}>
-        <button
-          className={cl["card-button"]}
-          onClick={() => setFlipped(!flipped)}>
-          <CSSTransition
-            in={!flipped}
-            timeout={1000}
-            classNames="cardFront"
-            key="front">
-            <div className={cl["card-front"]}>
-              <div className={"relativeF"}>
-                {item
-                  ? !item.expression
-                    ? item.phrase
-                    : addSpanToExpInPrase(item)
-                  : null}
+      {!!item && (
+        <div className={cl["card-container"]}>
+          <button
+            className={cl["card-button"]}
+            onClick={() => setFlipped(!flipped)}>
+            <CSSTransition
+              in={!flipped}
+              timeout={1000}
+              classNames="cardFront"
+              key="front">
+              <div className={cl["card-front"]}>
+                <div className={"relativeF"}>
+                  {item
+                    ? !item.expression
+                      ? item.phrase
+                      : addSpanToExpInPrase(item)
+                    : null}
+                </div>
               </div>
-            </div>
-          </CSSTransition>
-          <CSSTransition
-            in={flipped}
-            timeout={1000}
-            classNames="cardBack"
-            key="back">
-            <div className={cl["card-back"]}>
-              <h1 className="plan-back">Study plan</h1>
-              <div className={cl.back}>
-                <Plan expression={item} />
+            </CSSTransition>
+            <CSSTransition
+              in={flipped}
+              timeout={1000}
+              classNames="cardBack"
+              key="back">
+              <div className={cl["card-back"]}>
+                <h1 className="plan-back">Study plan</h1>
+                <div className={cl.back}>
+                  <Plan expression={item} />
+                </div>
+                <div className="back-hint">{hint}</div>
               </div>
-              <div className="back-hint">{hint}</div>
-            </div>
-          </CSSTransition>
-        </button>
-      </div>
+            </CSSTransition>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

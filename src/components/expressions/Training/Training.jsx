@@ -53,12 +53,7 @@ const Training = () => {
     <div className="training-field">
       <div className="training-menu">
         <div className="training-label">
-          <SelectLabel
-            onSelect={selectLabel}
-            colCat={defineLabel()}
-            formForSet
-            lgSize
-          />
+          <SelectLabel onSelect={selectLabel} colCat={defineLabel()} lgSize />
         </div>
         <div id="training-menu-portal">
           <div className="colorhint">

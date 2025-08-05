@@ -1,5 +1,6 @@
 import BaseAPI from "../API/BaseAPI";
 import { TbMoodConfuzed, TbMoodSad2 } from "react-icons/tb";
+import { sAlert } from "./alert";
 
 export const expressionStateIcon = (item) => {
   let days = item.exceededSkipsDays;
@@ -28,11 +29,22 @@ export const expressionState = (item) => {
 
 export const deleteExpressions = async (expression = "") => {
   let res;
+  const result = sAlert({
+    title: expression ? "Delete the expression?" : "Delete all expressions?",
+    text: "This action cannot be undone.",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete.",
+    cancelButtonText: "Cancel",
+  });
+
+  if (!result.isConfirmed) return false;
+
   if (expression) {
-    if (!window.confirm("Delete the expression?")) return false;
+    // if (!window.confirm("Delete the expression?")) return false;
     res = await BaseAPI.deleteExpression(expression.id);
   } else {
-    if (!window.confirm("Delete all expressions?")) return false;
+    // if (!window.confirm("Delete all expressions?")) return false;
     res = await BaseAPI.deleteAllExpressions();
   }
   return res;
@@ -40,7 +52,17 @@ export const deleteExpressions = async (expression = "") => {
 export const deleteSomeExpressions = async (idsArr = []) => {
   let res;
   if (idsArr.length) {
-    if (!window.confirm("Delete the expressions?")) return false;
+    // if (!window.confirm("Delete the expressions?")) return false;
+    const result = sAlert({
+      title: "Delete all expressions?",
+      text: "This action cannot be undone.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete.",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return false;
     res = await BaseAPI.deleteSomeExpressions(idsArr);
   }
   return res;

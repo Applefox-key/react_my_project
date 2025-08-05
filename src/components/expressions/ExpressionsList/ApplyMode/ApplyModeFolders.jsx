@@ -19,6 +19,7 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         expressionActions[fnName]({ list: applyMode.list, ...param });
+        applyMode.applyOnOF();
       }
     });
   };
@@ -53,12 +54,12 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
       />
       <DropDownList
         val={"Queue manage"}
-        onValueChange={(nv) =>
-          callbackApply("updateFieldForList", {
+        onValueChange={(nv) => {
+          return callbackApply("updateFieldForList", {
             field: "inQueue",
-            fieldValue: nv === "add to queue" || 1 ? 1 : 0,
-          })
-        }
+            fieldValue: nv === "add to queue" || nv === 1 ? 1 : 0,
+          });
+        }}
         list={["add to queue", "remove from queue"]}
       />
       <button
@@ -72,7 +73,6 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
       </button>
       <div>
         <SelectLabel
-          formForSet
           onSelect={(nv) =>
             callbackApply("updateLabelsForList", {
               list: applyMode.list,

@@ -103,11 +103,7 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
                 </Button>{" "}
               </div>
               <div className={cl.labelbox}>
-                <SelectLabel
-                  onSelect={setFileLabel}
-                  colCat={fileLabel}
-                  formForSet
-                />
+                <SelectLabel onSelect={setFileLabel} colCat={fileLabel} />
               </div>
               <Button
                 size="lg"
@@ -123,6 +119,8 @@ const ModalFileExp = ({ setVisible, setExpressions }) => {
           <NewExpressionsPrew
             setSelectedContent={contentFromPrew}
             dataArray={contentPrew}
+            changeDataArr={setContentPrew}
+            setVisible={setVisible}
           />
         )}
         {!!fileContent && (

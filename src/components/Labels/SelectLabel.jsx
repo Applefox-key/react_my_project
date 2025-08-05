@@ -5,18 +5,34 @@ import SelectLabelBody from "./SelectLabelBody";
 import { useOutsideClick } from "../../hooks/useOutSideClick";
 
 import { HiOutlineFolderRemove } from "react-icons/hi";
+import { TbFolders } from "react-icons/tb";
 
 const SelectLabel = ({
   onSelect,
   colCat = "",
-  formForSet,
   disabled,
   addTitle,
   lgSize = false,
+  selectForm = "one",
 }) => {
   const [selected, setSelected] = useState(colCat);
   const [mode, setMode] = useState(false);
+  //   {!formForSet ? "...set no tag ❌" : "...show all tags ♾️"}
+  const labelForms = {
+    "one": {
+      link: "...clear tag ❌",
+      noTag: false,
+      emptyclassName: cl["labelEmpty" + (lgSize ? "Lg" : "")],
+      emptyIcon: <HiOutlineFolderRemove />,
+    },
 
+    "filter": {
+      link: "...clear filter ❌",
+      noTag: true,
+      emptyclassName: cl["labelEmptyFilter" + (lgSize ? "Lg" : "")],
+      emptyIcon: <TbFolders />,
+    },
+  };
   const onSelectLabel = (value = "") => {
     if (selected.id === value.id) return;
     onSelect(value);
@@ -45,8 +61,8 @@ const SelectLabel = ({
               {selected.name}
             </span>
           ) : (
-            <span className={cl["labelEmpty" + (lgSize ? "Lg" : "")]}>
-              <HiOutlineFolderRemove />
+            <span className={labelForms[selectForm].emptyclassName}>
+              {labelForms[selectForm].emptyIcon}
             </span>
           )}
         </Dropdown.Toggle>
@@ -54,8 +70,8 @@ const SelectLabel = ({
           <SelectLabelBody
             selected={selected}
             onSelect={onSelectLabel}
-            formForSet={formForSet}
             closeFn={setMode}
+            selectFormVal={labelForms[selectForm]}
           />
         )}
       </Dropdown>

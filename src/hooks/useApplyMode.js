@@ -15,6 +15,28 @@ export const useApplyMode = () => {
   }, []);
   const [applyModeState, setApplyModeState] = useState(defaultState);
 
+  // const updateAvailableList = useCallback((expressions) => {
+  //   setApplyModeState((prev) => {
+  //     const allIds = expressions[0]?.hasOwnProperty("items")
+  //       ? expressions.flatMap((la) => la.items.map((el) => el.id))
+  //       : expressions.map((el) => el.id);
+
+  //     const filteredList = prev.list.filter((id) => allIds.includes(id));
+
+  //     const filteredGroups =
+  //       expressions[0]?.hasOwnProperty("items") && prev.selectedGroups.length
+  //         ? expressions
+  //             .filter((gr) => prev.selectedGroups.includes(gr.labelid))
+  //             .map((gr) => gr.labelid)
+  //         : [];
+
+  //     return {
+  //       ...prev,
+  //       list: filteredList,
+  //       selectedGroups: filteredGroups,
+  //     };
+  //   });
+  // }, []);
   const applyOnOF = useCallback((obj = {}) => {
     setApplyModeState((prev) => ({
       ...prev,

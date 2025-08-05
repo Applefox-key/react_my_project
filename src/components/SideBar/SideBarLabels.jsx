@@ -11,6 +11,7 @@ import LabelEdit from "../Labels/LabelEdit";
 import MySpinner from "../UI/MySpinner/MySpinner";
 import { RiFilterOffLine } from "react-icons/ri";
 import { HiOutlineFolderRemove } from "react-icons/hi";
+import { sAlert } from "../../utils/alert";
 
 const SideBarLabels = ({
   filterChange,
@@ -39,7 +40,17 @@ const SideBarLabels = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const deleteOne = async (element) => {
-    if (!window.confirm("Delete this label?")) return;
+    const result = await sAlert({
+      title: "Delete this tag?",
+      text: "Only the tag will be removed. The linked expressions will remain unchanged.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return;
+
     await BaseAPI.deleteLabel(element.id);
     let arr = labels.filter((elem) => elem.id !== element.id);
     setLabels(arr);
@@ -81,7 +92,7 @@ const SideBarLabels = ({
             </button>
           )}
         </div>
-        <h2>CHOOSE TAG TO FILTER OR EDIT</h2>
+        <h2>EDIT OR FILTER BY TAG</h2>
       </div>
 
       <LabelEdit

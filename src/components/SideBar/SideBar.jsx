@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cl from "./SideBar.module.scss";
 import SideBarLabels from "./SideBarLabels";
-import { RiArrowGoBackLine, RiListSettingsLine } from "react-icons/ri";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 import SideBarSettings from "./SideBarSettings";
 import { CSSTransition } from "react-transition-group";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { GoPlus } from "react-icons/go";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FaRegFolder } from "react-icons/fa";
+import { IoColorPaletteOutline } from "react-icons/io5";
 
 const SideBar = ({
   applyMode,
@@ -51,7 +52,8 @@ const SideBar = ({
         <button
           onClick={() => showHide("settings")}
           className={sideBar && sideBar.name === "settings" ? cl.btnA : ""}>
-          <RiListSettingsLine />
+          {/* <RiListSettingsLine /> */}
+          <IoColorPaletteOutline />
         </button>{" "}
         <button title="Back to training" onClick={() => router("/training")}>
           <RiArrowGoBackLine />

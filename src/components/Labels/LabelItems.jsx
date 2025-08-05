@@ -1,8 +1,9 @@
 import React from "react";
 import cl from "./Labels.module.scss";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import { HiOutlineFolderRemove } from "react-icons/hi";
 
-const LabelItems = ({ list, add, selected, onSelect }) => {
+const LabelItems = ({ noTag, list, add, selected, onSelect }) => {
   const classGenerator = (item) => {
     const active_id = !selected ? "" : selected.id;
     const item_id = item.id;
@@ -14,6 +15,20 @@ const LabelItems = ({ list, add, selected, onSelect }) => {
 
   return (
     <>
+      {noTag && (
+        <div
+          className={classGenerator({ name: "no tag", id: "null" })}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect({ name: "no tag", id: "null" });
+          }}>
+          <div>
+            <HiOutlineFolderRemove />
+            no tag
+          </div>
+        </div>
+      )}
+
       {list.length ? (
         list.map((item) => (
           <DropdownItem

@@ -39,11 +39,12 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
       expressionUpdate(expr);
     }
   };
-  const handleCloseEffect = () => {
+  const handleCloseEffect = (expr) => {
     setShowEffect(false);
     if (direction !== 2) setDirection(2);
-    expressionUpdate(items[num]);
     setShowAnim(!anim);
+    expressionUpdate(expr);
+    if (items.length > num) setNum(0);
   };
   // const hintForUser = item[num] ? item[num].hintForReading : "";
   return (
@@ -93,7 +94,7 @@ const TrainingCards = ({ items = [], expressionUpdate }) => {
       {showEffect && (
         <SpecialEffect
           message="Awesome! You reached the final stage! Keep it up!"
-          onClose={handleCloseEffect}
+          onClose={() => handleCloseEffect(items[num])}
         />
       )}
     </>

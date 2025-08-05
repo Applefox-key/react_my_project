@@ -29,7 +29,7 @@ const ModalPasteBtns = ({ dataArray, read, add, back, setDataArr }) => {
       ) : (
         <div className={cl.titleBtns}>
           <div className={cl.lbl}>
-            <SelectLabel formForSet onSelect={labelSelect} colCat={label} />
+            <SelectLabel onSelect={labelSelect} colCat={label} />
           </div>{" "}
           <div>
             <Button size="lg" className="m-2" onClick={back}>
