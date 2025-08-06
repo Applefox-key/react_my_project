@@ -593,6 +593,7 @@
     .modal-info {
 
         font-size: 14px;
+        max-height: 90vh;
 
         .modal-plan {
 
@@ -643,7 +644,8 @@
         .history-status-box {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            // align-items: flex-end;
+            align-items: flex-start;
 
             @media screen and (max-width:900px) {
 
@@ -660,12 +662,10 @@
 
 
         .history-box {
-            // width: 89%;
-            // width: 30%;
-            // height: 80%;
             overflow: auto;
-            // height: 17rem;
             text-align: left;
+            margin: 10px 0;
+            border-top: 1px solid;
 
             @media screen and (max-width:900px) {
                 font-size: 16px;

@@ -22,7 +22,9 @@ const Plan = ({ expression, short }) => {
           short ? (
             <p key={i}>{item[0]}</p>
           ) : (
-            <div key={i} className={cl.planDay}>
+            <div
+              key={i}
+              className={item.length === 4 ? cl.planDaytoday : cl.planDay}>
               {elem(item, i)}
             </div>
           )

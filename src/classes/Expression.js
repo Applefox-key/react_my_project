@@ -249,7 +249,14 @@ export class Expression {
           if (history_[i].action.includes("read")) {
             let day = new Date(history_[i].date).toString().slice(0, 10);
 
-            result.unshift(`🟢: Day ${stage_ - count}: ${day} ✔`);
+            result.unshift(
+              `🟢: Day ${stage_ - count}: ${day} ✔${
+                new Date().setHours(0, 0, 0, 0) ===
+                new Date(history_[i].date).setHours(0, 0, 0, 0)
+                  ? ":Today"
+                  : ""
+              }`
+            );
             count++;
           }
           if (count === stage_) break;

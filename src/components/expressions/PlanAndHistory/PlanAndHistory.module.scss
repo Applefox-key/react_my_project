@@ -12,7 +12,8 @@
         display: flex;
         color: var(--color-card);
 
-        .planDay {
+        .planDay,
+        .planDaytoday {
             p {
                 margin: 0;
                 font-weight: 700;
@@ -30,6 +31,10 @@
             }
         }
 
+        .planDaytoday {
+            border: 2px solid var(--color-card);
+            border-radius: 5px;
+        }
     }
 
     .today {

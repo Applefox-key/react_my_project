@@ -102,7 +102,11 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    // top: -16px;
-    // left: -8px;
     opacity: 0.5;
+    border-top: 1px solid;
+
+    span {
+        display: list-item;
+        color: var(--color-card);
+    }
 }
