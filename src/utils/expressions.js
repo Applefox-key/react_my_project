@@ -29,7 +29,7 @@ export const expressionState = (item) => {
 
 export const deleteExpressions = async (expression = "") => {
   let res;
-  const result = sAlert({
+  const result = await sAlert({
     title: expression ? "Delete the expression?" : "Delete all expressions?",
     text: "This action cannot be undone.",
     icon: "question",
@@ -37,7 +37,6 @@ export const deleteExpressions = async (expression = "") => {
     confirmButtonText: "Yes, delete.",
     cancelButtonText: "Cancel",
   });
-
   if (!result.isConfirmed) return false;
 
   if (expression) {
@@ -94,4 +93,10 @@ export const groupByLabel = (expressions) => {
     groups[groupId].items.push(el);
   });
   return Object.values(groups);
+};
+
+export const gerFirstRoute = async () => {
+  const data = await BaseAPI.getUnreadExpressions();
+
+  return data && data.length ? `/training` : `/expressions`;
 };

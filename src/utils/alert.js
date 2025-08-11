@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export const sAlert = (config) => {
+export const sAlert = async (config) => {
   return Swal.fire({
     ...config,
     customClass: {

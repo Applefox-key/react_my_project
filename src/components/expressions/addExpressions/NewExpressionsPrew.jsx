@@ -46,10 +46,10 @@ const NewExpressionsPrew = (props) => {
     props.setSelectedContent(res);
   };
 
-  const expressionDelete = (inum) => {
+  const expressionDelete = async (inum) => {
     // if (!window.confirm("Delete the phrase?")) return false;
 
-    const result = sAlert({
+    const result = await sAlert({
       title: "Delete this phrase?",
       text: "This action cannot be undone.",
       icon: "question",

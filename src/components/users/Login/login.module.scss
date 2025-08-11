@@ -1,4 +1,5 @@
-.login_block {
+.login_block,
+.login_block_short {
     width: 350px;
     padding: 20px;
     background: #fff;
@@ -59,6 +60,12 @@
         }
 
     }
+}
+
+.login_block_short {
+    margin: 0;
+    text-align: left;
+
 }
 
 .err {

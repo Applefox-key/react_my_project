@@ -33,7 +33,6 @@ const ExpressionBody = ({ smallSize = false, values, setters }) => {
 
     if (start === end) return ""; //
     const selection = textarea.value.slice(start, end).trim();
-
     setExpression(selection);
     setCopyBtn(false);
     // return textarea.value.slice(start, end).trim();

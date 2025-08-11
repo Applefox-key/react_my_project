@@ -8,7 +8,7 @@ import SelectLabel from "../../../Labels/SelectLabel";
 import { sAlert } from "../../../../utils/alert.js";
 
 const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
-  const callbackApply = (fnName, param) => {
+  const callbackApply = async (fnName, param) => {
     sAlert({
       title: "Apply action?",
       text: "Action will be apply for all selected items",

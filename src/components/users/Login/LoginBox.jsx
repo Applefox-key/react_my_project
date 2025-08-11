@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import cl from "./login.module.scss";
 import AnimatedBtn from "../../UI/AnimatedBtn/AnimatedBtn";
 import { isEmailValid } from "../../../utils/validation";
+import { gerFirstRoute } from "../../../utils/expressions";
 
 const LoginBox = ({ setLoginMode }) => {
   const router = useNavigate();
@@ -31,7 +32,9 @@ const LoginBox = ({ setLoginMode }) => {
     try {
       let response = await BaseAPI.login(email, password);
       setUserAuth({ isAuth: true, role: response.role });
-      router(`/training`);
+      const firstRoute = await gerFirstRoute();
+
+      router(firstRoute);
     } catch (error) {
       alert(error);
 
