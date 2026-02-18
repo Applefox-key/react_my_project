@@ -59,6 +59,13 @@
         &:hover {
             background-color: var(--background-menu);
             color: var(--color-menu);
+
+            @media screen and (max-width:900px) {
+
+                scale: unset;
+                border-radius: unset;
+            }
+
         }
 
         @media screen and (max-height:600px) {

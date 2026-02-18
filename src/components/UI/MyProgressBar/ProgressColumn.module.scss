@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     height: 10px;
+
+    @media screen and (max-width:600px) {
+        margin-bottom: 0;
+    }
 }
 
 .wrapProgressLG {

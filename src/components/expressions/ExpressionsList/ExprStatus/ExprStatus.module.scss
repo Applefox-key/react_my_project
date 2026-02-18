@@ -22,6 +22,10 @@
     p {
         font-weight: 600;
         position: relative;
+
+        @media screen and (max-width:600px) {
+            margin: 0;
+        }
     }
 
     .status-box {
@@ -35,6 +39,14 @@
         // d-flex align-items-center gap-1
         @media screen and (max-width:900px) {
             font-size: 20px;
+        }
+
+        @media screen and (max-width:600px) {
+            font-size: 14px;
+
+            p {
+                font-size: 12px;
+            }
         }
 
         button,
@@ -65,6 +77,14 @@
             font-size: 20px;
         }
 
+        @media screen and (max-width:600px) {
+            font-size: 14px;
+
+            p {
+                font-size: 12px;
+            }
+        }
+
         .queue-ico {
             // position: absolute;
             // text-align: end;
@@ -76,6 +96,11 @@
 
             @media screen and (max-width:900px) {
                 width: 200px;
+                justify-content: flex-start;
+
+                label {
+                    margin-left: 10px;
+                }
             }
         }
 
@@ -93,6 +118,11 @@
     // top: -16px;
     // left: -8px;
     opacity: 0.7;
+
+    @media screen and (max-width:600px) {
+        margin-bottom: 0;
+    }
+
 }
 
 .status-wrap-txt {

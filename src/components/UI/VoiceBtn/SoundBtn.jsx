@@ -45,10 +45,14 @@ const SoundBtn = ({ text, className }) => {
   };
   const onHandleClick = (e) => {
     e.stopPropagation();
+
     const synth = window.speechSynthesis;
+    synth.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
 
     utterance.lang = lang;
+    const voices = synth.getVoices();
+    utterance.voice = voices.find((v) => v.lang === lang) || voices[0];
     synth.speak(utterance);
   };
 

@@ -1,11 +1,6 @@
 import { Fragment } from "react";
 
-export const expressionsFromText = async (
-  text,
-  callbackForResult,
-  setPopupAdvise,
-  separator = ";"
-) => {
+export const expressionsFromText = async (text, callbackForResult, setPopupAdvise, separator = ";") => {
   if (!text) {
     setPopupAdvise("please paste:  expression; phrase ");
     return;
@@ -31,11 +26,7 @@ export const expressionsFromText = async (
     return;
   }
 };
-export const phrasessFromText = async (
-  text,
-  callbackForResult,
-  setPopupAdvise
-) => {
+export const phrasessFromText = async (text, callbackForResult, setPopupAdvise) => {
   if (!text) {
     setPopupAdvise("please paste: phrase ");
     return;
@@ -58,26 +49,19 @@ export const phrasessFromText = async (
     return;
   }
 };
-export const addSpanToExpInPrase = (item) => {
-  if (!item.expression || !item.phrase.includes(item.expression))
-    return <>{item.phrase}</>;
+export const addSpanToExpInPrase = (item, spanClass = null) => {
+  if (!item.expression || !item.phrase.includes(item.expression)) return <>{item.phrase}</>;
   let phrase = item.phrase;
   let expression = item.expression;
   const regexPatternExp = expression.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
-  const repT = phrase.replace(
-    new RegExp(regexPatternExp, "gim"),
-    "Span#%!#" + item.expression + "Span#%!#"
-  );
+  const repT = phrase.replace(new RegExp(regexPatternExp, "gim"), "Span#%!#" + item.expression + "Span#%!#");
 
   let arr = repT.split("Span#%!#");
   let result = (
     <>
       {arr.map((el, i) => {
         return el === item.expression ? (
-          <mark
-            key={"ph" + i}
-            className="expression"
-            data-note={item.note ? item.note : "emptynull"}>
+          <mark key={"ph" + i} className={spanClass || "expression"} data-note={item.note ? item.note : "emptynull"}>
             {item.expression}
           </mark>
         ) : (

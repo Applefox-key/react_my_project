@@ -19,11 +19,14 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
   }, [applyMode, expression]);
   const classGenerator = () => {
     // let part1 = view === 1 ? cl["oneItemCard"] : cl["oneItemRow" + view];
-    let part1 = cl["oneItemRow2"];
-    if (!isChecked) return part1;
-    let part2 = cl["divIsChecked"];
+    let arrStyle = [cl["oneItemRow2"]];
+    // let part0 = cl["oneItemRow2"];
+    if (applyMode.isOn) arrStyle.push(isChecked ? cl["divIsChecked"] : cl["divIsUnchecked"]);
 
-    return [part1, part2].join(" ");
+    // if (!isChecked) return part1;
+    // let part2 = cl["divIsChecked"];
+
+    return arrStyle.join(" ");
   };
 
   const dropEventsPrevent = {
@@ -104,10 +107,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
                   setElInfo(!elInfo);
                   e.stopPropagation();
                 }}>
-                <ProgressColumn
-                  stage={expression.stage}
-                  icon={expressionStateIcon(expression)}
-                />
+                <ProgressColumn stage={expression.stage} icon={expressionStateIcon(expression)} />
               </div>{" "}
             </div>
           </div>
@@ -119,7 +119,7 @@ const ExpressionItemSimple = ({ actions, expression, modes, num }) => {
               e.stopPropagation();
               editMode.setEdit(expression);
             }}>
-            {addSpanToExpInPrase(expression)}
+            {addSpanToExpInPrase(expression, applyMode.isOn ? "simplebold" : "")}
           </div>
         </div>
       </div>

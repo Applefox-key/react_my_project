@@ -68,6 +68,7 @@
   padding-right: 2rem;
   background-color: var(--background-color-base);
   justify-content: space-between;
+  
 }
 @media screen and (max-width: 900px) {
   .nav-top-string {

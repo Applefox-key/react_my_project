@@ -14,6 +14,7 @@ const MyFilter = ({ filter, filterChange }) => {
     filterChange({ value: val, filterName: "filter" });
   };
   const showHide = async (e, value) => {
+    debugger;
     e.stopPropagation();
     if (window.screen.availWidth <= 600) {
       // const textInp = prompt("what do you want to find?", "");

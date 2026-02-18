@@ -23,15 +23,18 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
       }
     });
   };
-
-  return (
-    <ApplyMode
-      applyMode={applyMode}
-      checkAll={() => applyMode.selectAllApply(expressions)}>
+  const actionButtons = (
+    <>
       <button onClick={() => callbackApply("deleteSome")}>delete</button>
-
-      <button onClick={() => callbackApply("createFile")}>
-        download phrases
+      <button onClick={() => callbackApply("createFile")}>download phrases</button>{" "}
+      <button
+        onClick={() =>
+          expressionActions.updateLabelsForList({
+            list: applyMode.list,
+            labelid: undefined,
+          })
+        }>
+        clear tags
       </button>
       <DropDownList
         val={"set status"}
@@ -43,12 +46,7 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
               fieldValue: nv,
               list: nl,
             });
-          validateAndApplyStatusChange(
-            nv,
-            applyMode.list,
-            expressions,
-            callback
-          );
+          validateAndApplyStatusChange(nv, applyMode.list, expressions, callback);
         }}
         list={[...statusArr]}
       />
@@ -62,15 +60,6 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
         }}
         list={["add to queue", "remove from queue"]}
       />
-      <button
-        onClick={() =>
-          expressionActions.updateLabelsForList({
-            list: applyMode.list,
-            labelid: undefined,
-          })
-        }>
-        clear tags
-      </button>
       <div>
         <SelectLabel
           onSelect={(nv) =>
@@ -81,6 +70,11 @@ const ApplyModeFolders = ({ applyMode, expressionActions, expressions }) => {
           }
         />
       </div>
+    </>
+  );
+  return (
+    <ApplyMode applyMode={applyMode} checkAll={() => applyMode.selectAllApply(expressions)}>
+      {!!applyMode.list.length && actionButtons}
     </ApplyMode>
   );
 };

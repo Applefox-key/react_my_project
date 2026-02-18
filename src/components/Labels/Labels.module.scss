@@ -253,6 +253,11 @@
             width: 4rem;
             height: 4rem;
         }
+
+        @media screen and (max-width:600px) {
+            width: 2rem;
+            height: 2rem;
+        }
     }
 
     &::after {
@@ -265,13 +270,39 @@
 
 }
 
+.labelEmpty {
+    // background-color: red;
+
+    @media screen and (max-width:600px) {
+        justify-content: flex-start;
+
+        svg {
+
+            height: 20px;
+        }
+    }
+}
+
 .labelEmptyFilter,
 .labelEmptyFilterLg {
     &::after {
         content: "ALL TAGS";
 
+        @media screen and (max-width:600px) {
+            content: "all (tags)";
+
+        }
+
     }
 
+    @media screen and (max-width:600px) {
+
+        justify-content: flex-start;
+
+        svg {
+            margin-right: 5px;
+        }
+    }
 }
 
 .addtitle {
@@ -307,13 +338,18 @@
         width: 17rem;
 
         &::after {
-
             font-size: 25px;
-
         }
-
     }
 }
+
+.labeltextLg {
+    @media screen and (max-width:600px) {
+
+        font-size: 14px;
+    }
+}
+
 
 .btnPlus {
     // width: 4rem;
