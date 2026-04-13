@@ -20,11 +20,7 @@ const ExpressionsListMain = () => {
   const { filters, setFilters } = useFilters();
   const [show, setShow] = useState([]);
   const [byTags, setByTags] = useState(false);
-  const { expressions, expressionActions, isLoading } = useExpressionsMain(
-    applyMode,
-    editMode,
-    filters
-  );
+  const { expressions, expressionActions, isLoading } = useExpressionsMain(applyMode, editMode, filters);
 
   useEffect(() => {
     expressionActions.fetchExpressions();
@@ -56,9 +52,7 @@ const ExpressionsListMain = () => {
 
   const switchFolder = (e, lb) => {
     e.stopPropagation();
-    const updatedData = show.includes(lb.labelid)
-      ? show.filter((el) => el !== lb.labelid)
-      : [...show, lb.labelid];
+    const updatedData = show.includes(lb.labelid) ? show.filter((el) => el !== lb.labelid) : [...show, lb.labelid];
     setShow(updatedData);
   };
 
@@ -68,10 +62,7 @@ const ExpressionsListMain = () => {
   };
 
   // tag groups
-  const grouped = useMemo(
-    () => (byTags ? groupByLabel(expressions) : []),
-    [expressions, byTags]
-  );
+  const grouped = useMemo(() => (byTags ? groupByLabel(expressions) : []), [expressions, byTags]);
 
   const listToRender = byTags ? grouped : expressions;
 
@@ -85,32 +76,21 @@ const ExpressionsListMain = () => {
         filters={filters}
       />
       <div className={cl["sideWrap"]}>
-        {applyMode.isOn ? (
-          <ApplyModeFolders
-            {...{
-              applyMode,
-              expressionActions,
-              expressions,
-            }}
-          />
-        ) : (
-          <FolderFilters
-            {...{ filters, applyMode, filterChange, byTags, setByTags }}
-          />
-        )}
-        {editMode.editElem !== null && (
-          <EditWindow
-            editMode={editMode}
-            expressionActions={expressionActions}
-          />
-        )}
+        <div className={cl.filtersLine}>
+          <FolderFilters {...{ filters, applyMode, filterChange, byTags, setByTags, count: expressions.length }} />
+          {applyMode.isOn && (
+            <ApplyModeFolders
+              {...{
+                applyMode,
+                expressionActions,
+                expressions,
+              }}
+            />
+          )}
+        </div>
+        {editMode.editElem !== null && <EditWindow editMode={editMode} expressionActions={expressionActions} />}
         {!isLoading ? (
-          <div
-            className={
-              applyMode.isOn
-                ? [cl.listContainer, cl.listApply].join(" ")
-                : cl.listContainer
-            }>
+          <div className={applyMode.isOn ? [cl.listContainer, cl.listApply].join(" ") : cl.listContainer}>
             {byTags ? (
               listToRender.map((lb) => (
                 <ExpressionGroupBlock
@@ -126,10 +106,10 @@ const ExpressionsListMain = () => {
             ) : (
               <div className={cl.oneFolder}>
                 {" "}
-                <div className={cl.folderName}>
+                {/* <div className={cl.folderName}>
                   <span>ALL EXPRESSIONS</span>
                   {listToRender.length}
-                </div>
+                </div> */}
                 {listToRender.map((ex, j) => (
                   <ExpressionItemSimple
                     key={ex.id}

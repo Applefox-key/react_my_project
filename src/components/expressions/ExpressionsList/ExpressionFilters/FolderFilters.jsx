@@ -12,13 +12,7 @@ import DropDownList from "../../../UI/DropDownList/DropDownList";
 import { BsFolder, BsFolderCheck } from "react-icons/bs";
 import MyPortal from "../../../UI/MyPortal/MyPortal";
 import useMediaQuery from "../../../../hooks/UseMediaQuery";
-const FolderFilters = ({
-  filters,
-  applyMode,
-  filterChange,
-  byTags,
-  setByTags,
-}) => {
+const FolderFilters = ({ filters, applyMode, filterChange, byTags, setByTags, count }) => {
   const [showFilters, setShowFilters] = useState(false);
   const isMobile = useMediaQuery("(max-width: 900px)");
   const switchApplyMode = (e) => {
@@ -53,9 +47,22 @@ const FolderFilters = ({
       filterName: "inQueue",
     });
   return (
-    <div className={cl.filtersLine}>
+    <>
       <div className={cl["exressions-list-title"]}>
-        <div>
+        {" "}
+        <div className="d-flex">
+          <div className={cl.btnsm}>
+            <button onClick={switchByTags} title="show by tags" className={byTags ? cl.byTagBtn : ""}>
+              {/* {`${byTags ? "🗹" : "☐"} show by tags`} */}
+              {/* {byTags ? <FaRegCheckSquare /> : <FaRegSquare />} show by tags */}
+              {byTags ? <BsFolderCheck /> : <BsFolder />}
+            </button>
+
+            <button onClick={switchApplyMode} title="select expressions">
+              <TbListCheck />
+            </button>
+          </div>
+
           {isMobile ? (
             <MyPortal containerId="side-bar-portal">
               <MyFilter filter={filters.filter} filterChange={filterChange} />
@@ -64,40 +71,23 @@ const FolderFilters = ({
             <MyFilter filter={filters.filter} filterChange={filterChange} />
           )}
         </div>
-
         <div className={cl.btnsm}>
-          <button
-            onClick={switchByTags}
-            title="show by tags"
-            className={byTags ? cl.byTagBtn : ""}>
-            {/* {`${byTags ? "🗹" : "☐"} show by tags`} */}
-            {/* {byTags ? <FaRegCheckSquare /> : <FaRegSquare />} show by tags */}
-            {byTags ? <BsFolderCheck /> : <BsFolder />}
-          </button>
-
+          {" "}
+          {count}
           <button
             onClick={(e) => setShowFilters(!showFilters)}
             className={showFilters ? cl.activeFilterBtn : ""}
             title="open filter">
             <HiOutlineFilter />
           </button>
-          <button onClick={switchApplyMode} title="select expressions">
-            <TbListCheck />
-          </button>
         </div>
-      </div>
+      </div>{" "}
       {showFilters && (
         <div className={cl.filtersBox}>
           <div className={cl.filterStatus}>
             <DropDownList
               className="me-3"
-              val={
-                filters.inQueue === null
-                  ? "all (queue)"
-                  : filters.inQueue
-                  ? "in the queue"
-                  : "not in the queue"
-              }
+              val={filters.inQueue === null ? "all (queue)" : filters.inQueue ? "in the queue" : "not in the queue"}
               onValueChange={inQueueFilter}
               list={["all (queue)", "in the queue", "not in the queue"]}
             />
@@ -107,32 +97,23 @@ const FolderFilters = ({
               list={["all (status)", ...statusArr]}
             />
           </div>
+
           <div className={cl.filterInfo}>
             <div className={cl["exp-row-btns"]}>
               <div className={cl.label_wrap}>
-                <SelectLabel
-                  selectForm="filter"
-                  disabled={applyMode.isOn}
-                  colCat={filters.label}
-                  onSelect={onSelect}
-                />
+                <SelectLabel selectForm="filter" disabled={applyMode.isOn} colCat={filters.label} onSelect={onSelect} />
               </div>
             </div>
             <div>
-              <ProgressColumnFilter
-                stage={filters.stage}
-                filterChange={filterChange}
-                small
-              />
+              <ProgressColumnFilter stage={filters.stage} filterChange={filterChange} small />
             </div>
           </div>
         </div>
       )}
-
       {Object.values(filters).some((val) => val !== null && val !== "") && (
         <FiltersSummary filterChange={filterChange} filters={filters} />
       )}
-    </div>
+    </>
   );
 };
 
