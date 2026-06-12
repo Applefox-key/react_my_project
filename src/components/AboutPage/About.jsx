@@ -13,9 +13,7 @@ const About = () => {
         <div className={cl.text1}>Learn More </div>
         <div className={cl.text2}>
           about the 90 seconds method or{" "}
-          <a
-            href={`http://learnapp.pro/about`}
-            className={cl.text2 + " " + cl.btn}>
+          <a href={`http://learnypie.com/about`} className={cl.text2 + " " + cl.btn}>
             try flash cards methods
           </a>
         </div>

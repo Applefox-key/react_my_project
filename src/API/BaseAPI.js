@@ -12,14 +12,7 @@ const BaseAPI = {
       "Authorization": `Bearer ${token}`,
     };
   },
-  async serverReq(
-    method,
-    url,
-    isHeader,
-    data = "",
-    params = "",
-    formData = ""
-  ) {
+  async serverReq(method, url, isHeader, data = "", params = "", formData = "") {
     let axiosConfig = {
       method: method,
       url: SERVER_URL + url,
@@ -27,7 +20,7 @@ const BaseAPI = {
       // url: "http://192.168.0.5:8000" + url,
       // url: "http://34.214.160.243:8000" + url,
       // url: "https://api.learnapp.me" + url,
-      // url: "https://api.learnapp.pro" + url,
+      // url: "https://api.learnypie.com" + url,
     };
     if (params) axiosConfig.params = params;
     if (formData) {
@@ -65,8 +58,7 @@ const BaseAPI = {
   },
   async createExpressionFromArray(arr) {
     arr.forEach((element, i) => {
-      if (!element.expression || !element.phrase)
-        throw new Error("you cannot add an empty value ....row " + (i + 1));
+      if (!element.expression || !element.phrase) throw new Error("you cannot add an empty value ....row " + (i + 1));
     });
     let reqData = { list: arr };
     return await this.serverReq("post", "/expressions", true, reqData);
@@ -128,12 +120,7 @@ const BaseAPI = {
     // )
     // return { message: "nothing has changed" };
 
-    return await this.serverReq(
-      "patch",
-      "/expressions/batch",
-      true,
-      expressionN
-    );
+    return await this.serverReq("patch", "/expressions/batch", true, expressionN);
   },
   async getLabelsList() {
     const result = await this.serverReq("get", "/labels", true);
@@ -150,13 +137,7 @@ const BaseAPI = {
   },
   async getTrainingListAll(filters = {}) {
     let reqParams = { ...filters };
-    let result = await this.serverReq(
-      "get",
-      "/expressions",
-      true,
-      "",
-      reqParams
-    );
+    let result = await this.serverReq("get", "/expressions", true, "", reqParams);
     if (result.error) throw new Error(result.error);
 
     let expressions_ = result.data.map((item) => new Expression(item));
@@ -165,13 +146,7 @@ const BaseAPI = {
   async getTrainingListByFolders(filters = {}) {
     let reqParams = { ...filters };
 
-    let result = await this.serverReq(
-      "get",
-      "/expressions/byfolders",
-      true,
-      "",
-      reqParams
-    );
+    let result = await this.serverReq("get", "/expressions/byfolders", true, "", reqParams);
     if (result.error) throw new Error(result.error);
 
     let expressions_ = result.data.map((group) => ({
@@ -183,13 +158,7 @@ const BaseAPI = {
   async getTrainingListOnePage(limit, page, filters = {}) {
     let reqParams = { page: page, limit: limit, ...filters };
 
-    let result = await this.serverReq(
-      "get",
-      "/expressions/page/" + page,
-      true,
-      "",
-      reqParams
-    );
+    let result = await this.serverReq("get", "/expressions/page/" + page, true, "", reqParams);
     if (result.error) throw new Error(result.error);
     let expressions_ = result.data.list.map((item) => new Expression(item));
     return [expressions_, Math.ceil(result.data.total[0].total / limit)];
@@ -197,13 +166,7 @@ const BaseAPI = {
   async getUnreadExpressions(labelid = "") {
     let reqParams = { offset_ms: new Date().getTimezoneOffset() * 60 * 1000 };
     if (labelid) reqParams.labelid = labelid;
-    let result = await this.serverReq(
-      "get",
-      "/expressions/unread",
-      true,
-      "",
-      reqParams
-    );
+    let result = await this.serverReq("get", "/expressions/unread", true, "", reqParams);
     if (result.error) throw new Error(result.error);
     let expressions_ = result.data.map((item) => new Expression(item));
 
@@ -220,13 +183,7 @@ const BaseAPI = {
   async CheckResetToken(resetToken) {
     let reqParams = { resetToken: resetToken };
 
-    let result = await this.serverReq(
-      "get",
-      "/resetpassword",
-      false,
-      "",
-      reqParams
-    );
+    let result = await this.serverReq("get", "/resetpassword", false, "", reqParams);
     if (result.error) throw new Error(result.error);
     return { status: true };
   },
@@ -249,12 +206,7 @@ const BaseAPI = {
   },
   async setNewPassword(password, resetToken) {
     let reqData = { password: password, resetToken: resetToken };
-    let result = await this.serverReq(
-      "patch",
-      "/resetpassword",
-      false,
-      reqData
-    );
+    let result = await this.serverReq("patch", "/resetpassword", false, reqData);
     if (result.error) throw new Error(result.error);
     return { status: true };
   },
@@ -307,20 +259,12 @@ const BaseAPI = {
 
     let formData = userRequestData(reqData);
 
-    const result = await this.serverReq(
-      "patch",
-      "/users",
-      true,
-      reqData,
-      "",
-      formData
-    );
+    const result = await this.serverReq("patch", "/users", true, reqData, "", formData);
 
     return result;
   },
   async updateExpression(expressionBefore) {
-    if (!expressionBefore)
-      return { status: false, error: "expression's not selected" };
+    if (!expressionBefore) return { status: false, error: "expression's not selected" };
 
     let expression = expressionBefore.setForUpdate;
 
